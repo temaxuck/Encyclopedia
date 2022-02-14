@@ -1,7 +1,7 @@
 from flask import render_template, request, url_for, redirect, session, flash
 from flask_login import login_user, current_user, logout_user, login_required
 from encyclopedia.models import User, Pyramid, relations
-from encyclopedia.Forms import LoginForm, SignupForm
+from encyclopedia.forms import LoginForm, SignupForm
 from encyclopedia import app, db, hasher
 from encyclopedia.modules.PyramidsSystem2 import *
 
