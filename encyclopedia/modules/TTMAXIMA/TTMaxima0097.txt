@@ -1,0 +1,2 @@
+Tuu0097(n,m,k):=4^(n+m)*binomial(n+m,n)*binomial(n+m+k/2-1,n+m)
+

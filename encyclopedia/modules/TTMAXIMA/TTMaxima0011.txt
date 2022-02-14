@@ -1,0 +1,2 @@
+Tuu0011(n,m,k):=(k*binomial(m+k,m)*binomial(m+k,n))/(m+k)
+

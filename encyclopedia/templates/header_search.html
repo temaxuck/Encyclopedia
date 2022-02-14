@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/header_search.css') }}"/>
+
+<span class="search-span">
+    <form method="post" class="search-form">
+        <div class="search-wrapper">
+            <div class="input-wrapper">
+                <input type="text" name="pyramidinput" class="question"
+                    id="pyramidinput" required autocomplete="off" />
+                <label for="pyramidinput" class="questionlabel"><span>Pyramid expression</span></label>
+            </div>
+            <button type="submit" class="questionbtn"><span class="material-icons">search</span></button>
+        </div>
+    </form>
+</span>

@@ -1,0 +1,2 @@
+Tuu0726(n,m,k):=binomial(n+k-1,n)*binomial(n+3*k,m)
+

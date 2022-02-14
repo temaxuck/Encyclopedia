@@ -1,0 +1,2 @@
+Tuu0417(n,m,k):=binomial(m+2*k-1,m)*binomial(n+k-1,n)
+

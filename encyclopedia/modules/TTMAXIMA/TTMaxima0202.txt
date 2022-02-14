@@ -1,0 +1,2 @@
+Tuu0202(n,m,k):=binomial(k,m)*binomial(4*m-k,n)*(-1)^(n+m)
+

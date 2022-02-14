@@ -1,0 +1,2 @@
+UU0296(x,y):=(sqrt(3)*sqrt(x)-sqrt(3*x-8*sqrt(3)*sin(asin((3^(3/2)*sqrt(x))/2)/3)*sqrt(x)*y))/(2*sqrt(3)*sqrt(x)*y)
+

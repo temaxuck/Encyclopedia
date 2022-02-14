@@ -1,0 +1,22 @@
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.notfound {
+    font-size: 48px;
+    display: flex;
+    flex-direction: column;
+}
+
+.notfound > span > a {
+    text-decoration: none;
+    margin: 0;
+    letter-spacing: 1px;
+    display: inline-block;
+    color: #0074d9;
+}

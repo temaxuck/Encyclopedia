@@ -1,0 +1,6 @@
+<a href="pyramid?q=124">Reciprocal:      124</a>
+<a href="pyramid?q=111">Right on x:      111</a>
+<a href="pyramid?q=107">Left on y:       107</a>
+<a href="pyramid?q=114">Change x y:      114</a>
+OEIS: <a href="https://oeis.org/A108198">A108198</a> 
+

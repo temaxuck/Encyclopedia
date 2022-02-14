@@ -1,0 +1,2 @@
+Tuu0060(n,m,k):=(k*binomial(n+k,m)*binomial(2*n-2*m+2*k,n))/(n+k)
+

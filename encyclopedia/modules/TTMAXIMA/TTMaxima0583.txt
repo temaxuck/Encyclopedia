@@ -1,0 +1,2 @@
+Tuu0583(n,m,k):=4^m*binomial(n+k-1,n)*binomial((n+k)/2+n+m-1,m)
+

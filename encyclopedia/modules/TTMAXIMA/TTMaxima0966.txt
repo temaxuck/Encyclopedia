@@ -1,0 +1,2 @@
+Tuu0966(n,m,k):=binomial(k,n-m)*binomial(n-m,m)
+

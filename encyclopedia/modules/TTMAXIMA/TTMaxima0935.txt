@@ -1,0 +1,2 @@
+Tuu0935(n,m,k):=if n=0 and m=0 then 1 else k/(m+k)*binomial(k+m,n)*Tsqrt2(m,n);
+

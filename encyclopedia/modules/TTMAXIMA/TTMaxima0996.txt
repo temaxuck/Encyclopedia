@@ -1,0 +1,2 @@
+Tuu0996(n,m,k):=TA000984(m,k)*binomial(m-k,n);
+

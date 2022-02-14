@@ -1,0 +1,2 @@
+Tuu0819(n,m,k):=Tsqrt(m,n)*binomial(n+k-1,n);
+

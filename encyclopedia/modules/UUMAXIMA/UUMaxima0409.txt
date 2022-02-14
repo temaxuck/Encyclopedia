@@ -1,0 +1,2 @@
+UU0409(x,y):=(2*sin(asin((3^(3/2)*sqrt(y))/2)/3))/(3^(3/2)*sqrt(y))+(4*sin(asin((3^(3/2)*sqrt(y))/2)/3)^2)/(27*((sin(asin((3^(3/2)*sqrt(y))/2)/3)*sqrt(x*((16*sin(asin((3^(3/2)*sqrt(y))/2)/3)^2)/(3*y)+27*x)))/(9*sqrt(y))+(x*sin(asin((3^(3/2)*sqrt(y))/2)/3))/(sqrt(3)*sqrt(y))+(8*sin(asin((3^(3/2)*sqrt(y))/2)/3)^3)/(3^(9/2)*y^(3/2)))^(1/3)*y)+((sin(asin((3^(3/2)*sqrt(y))/2)/3)*sqrt(x*((16*sin(asin((3^(3/2)*sqrt(y))/2)/3)^2)/(3*y)+27*x)))/(9*sqrt(y))+(x*sin(asin((3^(3/2)*sqrt(y))/2)/3))/(sqrt(3)*sqrt(y))+(8*sin(asin((3^(3/2)*sqrt(y))/2)/3)^3)/(3^(9/2)*y^(3/2)))^(1/3)
+

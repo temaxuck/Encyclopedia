@@ -1,0 +1,2 @@
+Tuu0112(n,m,k):=if n=0 and m=0 then 1 else (k*(binomial(n+m,n))*(binomial(2*n+m+k-1,n-1)))/(n+m)
+

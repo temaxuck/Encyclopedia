@@ -1,0 +1,6 @@
+<a href="pyramid?q=124">Reversion on x:  124</a>
+<a href="pyramid?q=108">Left on x:       108</a>
+<a href="pyramid?q=109">Left on y:       109</a>
+<a href="pyramid?q=112">Change x y:      112</a>
+OEIS: <a href="https://oeis.org/A033282">A033282</a> <a href="https://oeis.org/A086810">A086810</a> 
+

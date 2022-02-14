@@ -1,0 +1,2 @@
+Tuu0695(n,m,k):=binomial(n+k-1,n)*binomial(2*n+m-1,m)
+

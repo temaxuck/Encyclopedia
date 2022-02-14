@@ -1,0 +1,111 @@
+{% extends 'base.html' %} {% block head %}
+<link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/pyramidstyle.css') }}">
+<script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"]}};</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script>
+<title>Pyramid {{ Pyramid.pyr }} </title>
+{% endblock %} {% block header %}
+{% include 'header_search.html' %}
+{% endblock %} {% block body %}
+<main>
+    <!-- <div class="content-wrapper" style="padding: 0; margin: 0;">
+        <span class="title"> Pyramid №{{ pyramidnumber }} </span>
+    </div> -->
+
+    <div class="content-wrapper"> <!-- Generating function -->
+        <div class="pyramid_navigation">
+            <div class="relatedlinks nav">
+                {% if Pyramid.pyr > 1 %}
+                    <a href="{{ url_for('pyramid', q=Pyramid.pyr-1) }}">Pyramid #{{ Pyramid.pyr - 1 }}</a>
+                {% endif %}
+            </div>            
+            <span class="pnum"> Pyramid #{{ Pyramid.pyr }} </span>
+            <div class="relatedlinks nav">
+                {% if Pyramid.pyr < 1001 %}
+                <a href="{{ url_for('pyramid', q=Pyramid.pyr+1) }}">Pyramid #{{ Pyramid.pyr + 1 }}</a>
+                {% endif %}
+            </div>
+            
+        </div>        
+        <span class="title"> Generating function </span>
+        {{ Pyramid.uumml|safe }}
+    </div>
+
+    <div class="content-wrapper"> <!-- Explicit Formula -->
+        <span class="title"> Explicit formula </span>
+        {{ Pyramid.smml|safe }}
+
+    </div>
+
+    <div class="content-wrapper">
+        <table>
+            <caption>Data table</caption>
+            <tbody>
+                {% for i in range(7) %}
+                    <tr>
+                        {% for j in range(7) %}
+                            <td> {{ Pyramid.pyramid_as_list[(i*7) + j] }} </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="title">Related</div>
+        <div class="relatedlinks">
+            {% for relation in relations %} 
+                {{ relation|safe }}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="title">Export</div>
+        <div class="exportbtn-wrapper">
+            <button class="exportbtn" id="maximabtn">Export as Maxima</button>
+            <button class="exportbtn" id="mathematicabtn">Export as Mathematica</button>
+            <button class="exportbtn" id="latexbtn">Export as LaTEX</button>
+
+            <div class="modalwindow" id="maximacode" onclick="close_modal(event)"> <!-- Maxima -->
+                <div class="exportcode-wrapper">
+                    <div class="exportcode-header">
+                        <div class="title">Export as Maxima</div>
+                        <div class="closebtn"><span class="material-icons">close</span></div>
+                    </div>
+                    <textarea class="exportcode" readonly>{{ Pyramid.UUMaxima[0] }}{{ Pyramid.UUMaxima[1] }}</textarea>
+                    <div class="exportcopybtn-wrapper">
+                        <button class="copybtn" onclick="copy()">Copy</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modalwindow" id="mathematicacode" onclick="close_modal(event)"> <!-- Mathematica -->
+                <div class="exportcode-wrapper">
+                    <div class="exportcode-header">
+                        <div class="title">Export as Mathematica</div> <div class="closebtn"><span class="material-icons">close</span></div>
+                    </div>
+                    <textarea class="exportcode" readonly>{{ Pyramid.UUMaxima[2] }}{{ Pyramid.UUMaxima[3] }}</textarea>
+                    <div class="exportcopybtn-wrapper"> <button class="copybtn" onclick="copy()">Copy</button> </div>
+                </div>
+            </div>
+
+            <div class="modalwindow" id="latexcode" onclick="close_modal(event)"> <!-- LaTEX -->
+                <div class="exportcode-wrapper">
+                    <div class="exportcode-header">
+                        <div class="title">Export as LaTEX</div> 
+                        <div class="closebtn"><span class="material-icons">close</span></div>
+                    </div>
+                    <textarea class="exportcode" readonly>{{ latex[0] }}&#10;{{ latex[1] }}</textarea>
+                    <div class="exportcopybtn-wrapper"> <button class="copybtn" onclick="copy()">Copy</button> </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</main>
+
+<script src="/static/js/export.js"></script>
+
+{% endblock %}

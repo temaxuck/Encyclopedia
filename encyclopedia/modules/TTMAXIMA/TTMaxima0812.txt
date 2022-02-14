@@ -1,0 +1,2 @@
+Tuu0812(n,m,k):=if 2*n+2*m-k <= 0 then 0 else (k*binomial(k,m)*binomial(3*(n+m)-2*k-1,n+m-k))/(2*n+2*m-k)
+

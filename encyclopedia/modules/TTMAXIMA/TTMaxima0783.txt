@@ -1,0 +1,2 @@
+Tuu0783(n,m,k):=(k^2*binomial(2*m+2*k,m)*binomial(3*n+2*k-1,n))/((m+k)*(n+k))
+

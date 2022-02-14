@@ -1,0 +1,2 @@
+Tuu0455(n,m,k):=if n<k then 0 else -(binomial(k-n-1,n-1))*(binomial(k-3*n,m))*k/(n);
+

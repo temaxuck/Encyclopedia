@@ -1,0 +1,2 @@
+Tuu0133(n,m,k):=kron_delta(2*k,n+m)*binomial(n+m,m)
+

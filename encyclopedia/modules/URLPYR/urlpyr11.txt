@@ -1,0 +1,7 @@
+<a href="pyramid?q=265">Reciprocal:      265</a>
+<a href="pyramid?q=15">Reversion on y:  15</a>
+<a href="pyramid?q=14">Right on x:      14</a>
+<a href="pyramid?q=13">Right on y:      13</a>
+<a href="pyramid?q=10">Left on y:       10</a>
+<a href="pyramid?q=12">Change x y:      12</a>
+

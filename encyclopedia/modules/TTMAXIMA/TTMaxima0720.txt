@@ -1,0 +1,2 @@
+Tuu0720(n,m,k):=k/(2*n+k)*Tsqrt(m,2*n+k)*TLeftA271825(n,k+2*n);
+

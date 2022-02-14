@@ -1,0 +1,30 @@
+main {
+    flex-direction: column;
+    align-items: normal;
+    justify-content: flex-start;
+}
+
+.media {
+    display: flex;
+
+}
+
+.userinfo {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+}
+
+.userimage > img{
+    border-radius: 5px;
+}
+
+.username {
+    flex-grow: 1;
+    font-size: 3rem;
+    margin-bottom: 12px;
+}
+
+.email {
+    flex-grow: 1;
+}

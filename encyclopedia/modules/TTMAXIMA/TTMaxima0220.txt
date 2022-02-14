@@ -1,0 +1,2 @@
+Tuu0220(n,m,k):=(k*binomial(m+k,m)*binomial(2*n+2*(m+k),n))/(n+m+k)
+

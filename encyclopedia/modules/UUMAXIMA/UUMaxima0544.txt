@@ -1,0 +1,2 @@
+UU0544(x,y):=(4*sin(asin((3^(3/2)*sqrt(x))/2)/3)*sin(asin((3^(3/2)*sqrt(y))/2)/3))/(3*sqrt(x)*sqrt(y))
+

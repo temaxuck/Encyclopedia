@@ -1,0 +1,73 @@
+
+/* Search form */
+
+.search-span {
+    display: flex;
+    width: 70%;
+    text-align: center;
+    justify-content: center;
+    height: 50px;
+}
+
+.input-wrapper {
+    border-radius: 5px;
+    height: 30px;
+    margin-left: 40px;
+}
+
+.search-form {
+    width: 100%;
+    height: 4px;
+}
+
+input.question,
+.questionlabel > span,
+.questionlabel,
+.questionbtn {
+    font-size: 20px;
+}
+
+input.question {
+    font-size: 24px;
+    transition: none;
+    width: 92%;
+}
+
+input.question + label > span {
+    font-size: 24px;
+    top: -40px;
+}
+
+input.question:focus + label > span {
+    font-size: 20px;
+    opacity: 0;
+}
+
+textarea.question:focus + label > span{
+    font-size: 20px;
+}
+
+input.question:focus,
+input.question:valid {
+    padding-top: 0px;
+}
+
+.questionbtn > span {
+    font-size: 24px;
+}
+
+input.question:valid ~ .questionbtn {
+    -webkit-animation: none;
+    animation: none;
+}
+
+input.question + .questionlabel {
+    border: none;
+    -webkit-transition: none;
+    transition: none;
+}
+
+input.question + label > span{
+    -webkit-transition: none;
+    transition: none;
+}

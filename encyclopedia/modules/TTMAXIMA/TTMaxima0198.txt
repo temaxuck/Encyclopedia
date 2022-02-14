@@ -1,0 +1,2 @@
+Tuu0198(n,m,k):=binomial(k,m)*binomial(3*m-k,n)*(-1)^n
+

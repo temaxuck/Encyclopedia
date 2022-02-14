@@ -1,0 +1,2 @@
+Tuu0167(n,m,k):=binomial(m+k-1,m)*binomial(2*m+k,n)
+

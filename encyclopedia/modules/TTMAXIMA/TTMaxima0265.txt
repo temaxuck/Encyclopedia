@@ -1,0 +1,2 @@
+Tuu0265(n,m,k):=binomial(k,m)*(-1)^(n+m)*binomial(n-m+k-1,n)
+

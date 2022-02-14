@@ -1,0 +1,2 @@
+Tuu0381(n,m,k):=(k*(-1)^(n+m+k)*binomial(n+m-1,m)*binomial(2*n+k-1,n))/(n+k)
+

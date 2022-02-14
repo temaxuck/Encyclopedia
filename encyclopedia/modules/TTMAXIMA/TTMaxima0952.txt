@@ -1,0 +1,2 @@
+Tuu0952(n,m,k):=binomial(k,m)*binomial(3*k,n+m-k)
+

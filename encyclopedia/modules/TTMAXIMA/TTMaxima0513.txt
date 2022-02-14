@@ -1,0 +1,2 @@
+Tuu0513(n,m,k):=binomial(k,n)*binomial(k-3*n,m)
+

@@ -1,0 +1,2 @@
+Tuu0248(n,m,k):=(kron_delta(k,n/2+m)*binomial(n/2+m,m)*((-1)^n+1))/2
+

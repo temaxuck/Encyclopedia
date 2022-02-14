@@ -1,0 +1,126 @@
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mi>G</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mfrac>
+      <mrow class="MJX-TeXAtom-ORD">
+        <mn>2</mn>
+        <mspace width="thinmathspace" />
+        <mi>sin</mi>
+        <mo>&#x2061;<!-- ? --></mo>
+        <mrow>
+          <mo>(</mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mfrac>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>arcsin</mi>
+                <mo>&#x2061;<!-- ? --></mo>
+                <mrow>
+                  <mo>(</mo>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mfrac>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <msup>
+                          <mn>3</mn>
+                          <mrow class="MJX-TeXAtom-ORD">
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <mfrac>
+                                <mrow class="MJX-TeXAtom-ORD">
+                                  <mn>3</mn>
+                                </mrow>
+                                <mrow class="MJX-TeXAtom-ORD">
+                                  <mn>2</mn>
+                                </mrow>
+                              </mfrac>
+                            </mrow>
+                          </mrow>
+                        </msup>
+                        <mspace width="thinmathspace" />
+                        <msqrt>
+                          <mi>y</mi>
+                        </msqrt>
+                      </mrow>
+                      <mrow class="MJX-TeXAtom-ORD">
+                        <mn>2</mn>
+                      </mrow>
+                    </mfrac>
+                  </mrow>
+                  <mo>)</mo>
+                </mrow>
+              </mrow>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mn>3</mn>
+              </mrow>
+            </mfrac>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+      <mrow class="MJX-TeXAtom-ORD">
+        <msqrt>
+          <mn>3</mn>
+        </msqrt>
+        <mspace width="thinmathspace" />
+        <msqrt>
+          <mi>y</mi>
+        </msqrt>
+      </mrow>
+    </mfrac>
+  </mrow>
+</math>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+
+  <msub>
+    <mi>U</mi>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mn>489</mn>
+    </mrow>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mfrac>
+      <mrow class="MJX-TeXAtom-ORD">
+        <msqrt>
+          <mn>4</mn>
+          <mspace width="thinmathspace" />
+          <mi>G</mi>
+          <mo stretchy="false">(</mo>
+          <mi>y</mi>
+          <mo stretchy="false">)</mo>
+          <mspace width="thinmathspace" />
+          <mi>x</mi>
+          <mo>+</mo>
+          <mi>G</mi>
+          <mo stretchy="false">(</mo>
+          <mi>y</mi>
+          <msup>
+            <mo stretchy="false">)</mo>
+            <mn>2</mn>
+          </msup>
+        </msqrt>
+        <mo>+</mo>
+        <mn>2</mn>
+        <mspace width="thinmathspace" />
+        <mi>x</mi>
+        <mo>+</mo>
+        <mi>G</mi>
+        <mo stretchy="false">(</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mrow>
+      <mrow class="MJX-TeXAtom-ORD">
+        <mn>2</mn>
+      </mrow>
+    </mfrac>
+  </mrow>
+</math>

@@ -1,0 +1,2 @@
+Tuu0205(n,m,k):=if n=0 and m=0 and k=0 then 1 else if k=0 then 0 else binomial(n+2*k-1,n)*(k)*binomial(2*(m)+k-1,m)/(m+k)
+

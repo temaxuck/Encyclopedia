@@ -1,0 +1,2 @@
+Tuu0262(n,m,k):=if k < m then 0 else binomial(k,m)*TA000984(n,k-m)
+

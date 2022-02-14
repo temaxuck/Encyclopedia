@@ -1,0 +1,2 @@
+Tuu0719(n,m,k):=k/(n+k)*Tsqrt(m,n+k)*TLeftA271825(n,k+n);
+

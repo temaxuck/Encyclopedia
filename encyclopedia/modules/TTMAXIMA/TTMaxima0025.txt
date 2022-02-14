@@ -1,0 +1,2 @@
+Tuu0025(n,m,k):=(k*binomial(n+k,m)*binomial(n+k,n-m))/(n+k)
+

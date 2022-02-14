@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/accountstyle.css') }}">
+<title>User {{ current_user.username.capitalize() }}</title>
+{% endblock %} {% block header %} 
+    {% include 'header_search.html' %}
+{% endblock %} {% block body %}
+<main>
+    <div class="content-wrapper">
+        <div class="media">
+            <div class="userimage">
+                <img 
+                src="{{ imagesrc }}" 
+                alt="" class="profile" width="128" height="128">
+            </div>
+            <div class="userinfo">
+                <div class="username"> {{ current_user.username.capitalize() }} </div>
+                <div class="email"> {{ current_user.email.capitalize() }} </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

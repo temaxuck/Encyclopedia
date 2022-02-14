@@ -1,0 +1,2 @@
+Tuu0607(n,m,k):=(k*4^m*binomial((k-n)/2+m-1,m)*binomial(2*n+k-1,n))/(n+k)
+

@@ -1,0 +1,2 @@
+Tuu0442(n,m,k):=(k*binomial(2*(m+k),m)*binomial(n+2*(m+k)-1,n))/(m+k)
+

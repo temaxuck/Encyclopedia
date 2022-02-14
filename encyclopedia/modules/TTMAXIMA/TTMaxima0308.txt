@@ -1,0 +1,2 @@
+Tuu0308(n,m,k):=if m=0 then binomial(n+k-1,n) else ((binomial(n-m-k-1,m-1))*(-1)^(m-1)*(k-n)*(binomial(n+k-1,n)))/m
+

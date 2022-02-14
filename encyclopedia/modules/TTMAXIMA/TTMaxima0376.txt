@@ -1,0 +1,2 @@
+Tuu0376(n,m,k):=(k*4^m*binomial((k-2*n)/2+m-1,m)*(-1)^(n-1)*binomial(n-k-1,n-1))/n
+

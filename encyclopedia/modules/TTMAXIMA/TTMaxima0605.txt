@@ -1,0 +1,2 @@
+Tuu0605(n,m,k):=if n<k then 0 else if m=0 then -k*(binomial(k-n-1,n-1))/n else -(k*(binomial(k-n-1,n-1))/n*((k-4*n)*((binomial(2*m+4*n-k-1,m-1))*(-1)^(m-1))))/m
+

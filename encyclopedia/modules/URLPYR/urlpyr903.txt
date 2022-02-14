@@ -1,0 +1,2 @@
+<a href="pyramid?q=16">Reciprocal:      16</a>
+

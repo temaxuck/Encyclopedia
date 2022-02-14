@@ -1,0 +1,2 @@
+Tuu0635(n,m,k):=(k*binomial(2*m+2*k,m)*4^n*binomial(n+k/2-1,n))/(m+k)
+

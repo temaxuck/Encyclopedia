@@ -1,0 +1,2 @@
+Tuu0970(n,m,k):=Tsqrt(n,k)*TA271825(m,n);
+

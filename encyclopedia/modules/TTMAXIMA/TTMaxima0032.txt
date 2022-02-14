@@ -1,0 +1,2 @@
+Tuu0032(n,m,k):=(k*binomial(m+k,m)*binomial(n+3*m+k-1,n))/(m+k)
+

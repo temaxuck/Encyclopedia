@@ -1,0 +1,2 @@
+Tuu0839(n,m,k):=binomial(k,n)*binomial((-n)+m+3*k-1,m)
+

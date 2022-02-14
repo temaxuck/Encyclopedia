@@ -1,0 +1,148 @@
+/* main */
+
+main {
+    flex-direction: column;
+}
+
+/* form */
+
+.form {
+    display: flex; 
+
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 4px;
+    box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px; 
+}
+
+.groups {
+    padding: 50px 50px;
+    /* height: calc(70vh*0.8); */
+    width: calc(25vw*0.8);
+    display: flex;
+
+    flex-direction: column;
+    justify-content: space-between;
+
+    border: none;
+}
+
+/* form-group */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin: 5px 0;
+    height: 33%;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    font-size: 32px;
+    cursor: default;
+
+    margin-bottom: 20px;
+}
+
+.signup-form > .groups > .title {
+    justify-content: center;
+}
+
+/* Group element */
+
+.groupelement-input {
+    font-size: 16px;
+    line-height: 28px;
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+    min-height: 40px;
+    border: unset;
+    border-radius: 4px;
+    outline-color: #002A55;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+    rgba(60, 66, 87, 0.16) 0px 0px 0px 1px, 
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+}
+
+.groupelement-label {
+    font-size: 18px;
+    line-height: 28px;
+}
+
+
+/* Remember me */
+
+.remember {
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+.remember_me-label {
+    font-size: 18px;
+    user-select: none;
+    margin-left: 10px;
+}
+
+/* Submit button */
+.sumbitbtn {
+    background-color: #0076ef;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, 
+                rgb(84, 105, 212) 0px 0px 0px 1px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}
+
+.sumbitbtn:active {
+    background-color: #002A55;
+}
+
+.form-submit {
+    margin-top: 30px;
+}
+
+/* invalid */
+
+.invalid {
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+    rgba(255, 0, 0, 1) 0px 0px 0px 1px, 
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+}
+
+.invalid-feedback {
+    font-size: 14px;
+    color:rgba(255, 0, 0, 1)
+}
+/* Already/Dont have an acc */
+
+.already {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.signlink {
+    text-decoration: none;
+    color: #0076ef;
+}

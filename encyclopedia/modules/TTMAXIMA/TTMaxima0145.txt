@@ -1,0 +1,2 @@
+Tuu0145(n,m,k):=binomial(k,n)*binomial(n+k,m)
+

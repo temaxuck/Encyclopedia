@@ -1,0 +1,2 @@
+Tuu0121(n,m,k):=(k*binomial((m+k)/2,n)*binomial(2*m+k-1,m)*4^n)/(m+k)
+

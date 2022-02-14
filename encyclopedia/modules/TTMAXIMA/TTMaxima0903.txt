@@ -1,0 +1,2 @@
+Tuu0903(n,m,k):=if 2*n-k=0 then if m=0 then 2 else 0 else (-k*(binomial(2*n-k,m))*(binomial(2*n-k,n)))/(2*n-k);
+

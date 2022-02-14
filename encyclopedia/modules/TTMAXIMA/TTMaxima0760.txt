@@ -1,0 +1,2 @@
+Tuu0760(n,m,k):=(3*k*(n+k)*binomial(n+2*m+k-1,m)*binomial(2*n+3*k,n))/((n+m+k)*(2*n+3*k))
+

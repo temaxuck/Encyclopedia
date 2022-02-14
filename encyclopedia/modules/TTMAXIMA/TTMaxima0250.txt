@@ -1,0 +1,2 @@
+Tuu0250(n,m,k):=(binomial(n/2+m,m)*binomial(n/2+m+k-1,n/2+m)*((-1)^n+1))/2
+

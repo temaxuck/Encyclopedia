@@ -1,0 +1,2 @@
+UU0652(x,y):=((sqrt(4*x+1)+1)*sin(asin((3^(3/2)*sqrt(y))/2)/3))/(sqrt(3)*sqrt(y))
+

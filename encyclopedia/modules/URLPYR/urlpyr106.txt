@@ -1,0 +1,3 @@
+<a href="pyramid?q=116">Change x y:      116</a>
+OEIS: <a href="https://oeis.org/A281260">A281260</a> 
+

@@ -1,0 +1,2 @@
+Tuu0972(n,m,k):=binomial(n+k-1,n)*Tsqrt(m,3*n);
+

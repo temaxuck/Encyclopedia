@@ -1,0 +1,2 @@
+Tuu0484(n,m,k):=if n=0 then binomial(2*k,m) else 2*k*(binomial(2*k-2*n-1,n-1))/n*(binomial(2*k-4*n,m))
+

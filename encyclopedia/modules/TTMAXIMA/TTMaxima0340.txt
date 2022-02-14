@@ -1,0 +1,2 @@
+Tuu0340(n,m,k):=(k*binomial(2*(m+k),n)*binomial((-n)+m+k,m))/(m+k)
+

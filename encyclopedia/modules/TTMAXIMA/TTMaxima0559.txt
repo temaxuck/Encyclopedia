@@ -1,0 +1,2 @@
+Tuu0559(n,m,k):=(k*binomial(2*n+k,n)*binomial(8*n+2*k,m))/(2*n+k)
+

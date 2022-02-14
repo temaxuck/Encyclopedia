@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/not_foundstyle.css') }}">
+<title>{{ user_input }}</title>
+{% endblock %} {% block body %}
+<main>
+    <form action="getfile" method="POST" enctype="multipart/form-data">
+        Project file path: <input type="file" name="myfile"><br>
+        <input type="submit" value="Submit">
+    </form>
+</main>
+{% endblock %}

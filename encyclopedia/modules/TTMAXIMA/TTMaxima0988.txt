@@ -1,0 +1,2 @@
+Tuu0988(n,m,k):=binomial(n-2*k,m)*binomial(n+k-1,n)
+

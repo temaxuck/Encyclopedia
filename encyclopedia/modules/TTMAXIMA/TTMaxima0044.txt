@@ -1,0 +1,2 @@
+Tuu0044(n,m,k):=binomial(m+k-1,m)*binomial(n+k-1,n)
+

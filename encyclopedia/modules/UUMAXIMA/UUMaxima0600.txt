@@ -1,0 +1,2 @@
+UU0600(x,y):=(sin(asin((3^(3/2)*sqrt(x))/2)/3)*(sqrt(4*y+1)+1))/(sqrt(3)*sqrt(x))
+

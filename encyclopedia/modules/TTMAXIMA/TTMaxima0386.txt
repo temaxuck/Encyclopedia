@@ -1,0 +1,2 @@
+Tuu0386(n,m,k):=binomial(k,n)*binomial(2*k,m)
+

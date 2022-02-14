@@ -1,0 +1,2 @@
+Tuu0510(n,m,k):=(k*(3*n+k)*binomial(2*n+k,n)*binomial(2*(2*n+k)+2*n+2*m,m))/((2*n+k)*(3*n+m+k))
+

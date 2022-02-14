@@ -1,0 +1,2 @@
+Tuu0200(n,m,k):=binomial(k,m)*binomial(n+2*m-k-1,n)
+

@@ -1,0 +1,5 @@
+<a href="pyramid?q=491">Right on x:      491</a>
+<a href="pyramid?q=145">Left on x:       145</a>
+<a href="pyramid?q=167">Change x y:      167</a>
+OEIS: <a href="https://oeis.org/A034871">A034871</a> 
+

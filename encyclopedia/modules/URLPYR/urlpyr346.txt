@@ -1,0 +1,3 @@
+<a href="pyramid?q=347">Left on x:       347</a>
+<span>Symmetric</span>
+

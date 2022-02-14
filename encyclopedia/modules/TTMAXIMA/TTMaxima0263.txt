@@ -1,0 +1,2 @@
+Tuu0263(n,m,k):=(binomial(m+k-1,m)*binomial(n+(k-1)/2,n)*binomial(2*n+k-1,n+(k-1)/2))/binomial(k-1,(k-1)/2)
+

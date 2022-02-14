@@ -1,0 +1,2 @@
+UU0534(x,y):=(sin(asin((3^(3/2)*sqrt(x))/2)/3)*(1-sqrt(1-4*y)))/(sqrt(3)*sqrt(x)*y)
+

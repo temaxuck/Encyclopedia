@@ -1,0 +1,182 @@
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mi>G</mi>
+  <mo stretchy="false">(</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mi>y</mi>
+  <mo>+</mo>
+  <mn>1</mn>
+</math>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <msup>
+    <mrow>
+      <mo>(</mo>
+      <mrow class="MJX-TeXAtom-ORD">
+        <mfrac>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>G</mi>
+            <mo stretchy="false">(</mo>
+            <mi>y</mi>
+            <mo stretchy="false">)</mo>
+            <mspace width="thinmathspace" />
+            <msqrt>
+              <mi>x</mi>
+              <mspace width="thinmathspace" />
+              <mrow>
+                <mo>(</mo>
+                <mn>27</mn>
+                <mspace width="thinmathspace" />
+                <mi>x</mi>
+                <mo>+</mo>
+                <mn>4</mn>
+                <mspace width="thinmathspace" />
+                <mi>G</mi>
+                <mo stretchy="false">(</mo>
+                <mi>y</mi>
+                <msup>
+                  <mo stretchy="false">)</mo>
+                  <mn>2</mn>
+                </msup>
+                <mo>)</mo>
+              </mrow>
+            </msqrt>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>2</mn>
+            <mo>&#x22C5;<!-- ? --></mo>
+            <mspace width="thinmathspace" />
+            <msup>
+              <mn>3</mn>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mfrac>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mn>3</mn>
+                    </mrow>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mn>2</mn>
+                    </mrow>
+                  </mfrac>
+                </mrow>
+              </mrow>
+            </msup>
+          </mrow>
+        </mfrac>
+      </mrow>
+      <mo>+</mo>
+      <mrow class="MJX-TeXAtom-ORD">
+        <mfrac>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>G</mi>
+            <mo stretchy="false">(</mo>
+            <mi>y</mi>
+            <mo stretchy="false">)</mo>
+            <mspace width="thinmathspace" />
+            <mi>x</mi>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>2</mn>
+          </mrow>
+        </mfrac>
+      </mrow>
+      <mo>+</mo>
+      <mrow class="MJX-TeXAtom-ORD">
+        <mfrac>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>G</mi>
+            <mo stretchy="false">(</mo>
+            <mi>y</mi>
+            <msup>
+              <mo stretchy="false">)</mo>
+              <mn>3</mn>
+            </msup>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>27</mn>
+          </mrow>
+        </mfrac>
+      </mrow>
+      <mo>)</mo>
+    </mrow>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mrow class="MJX-TeXAtom-ORD">
+        <mfrac>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>1</mn>
+          </mrow>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>3</mn>
+          </mrow>
+        </mfrac>
+      </mrow>
+    </mrow>
+  </msup>
+</math>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <msub>
+    <mi>U</mi>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mn>382</mn>
+    </mrow>
+  </msub>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mfrac>
+      <mrow class="MJX-TeXAtom-ORD">
+        <mi>G</mi>
+        <mo stretchy="false">(</mo>
+        <mi>y</mi>
+        <msup>
+          <mo stretchy="false">)</mo>
+          <mn>2</mn>
+        </msup>
+      </mrow>
+      <mrow class="MJX-TeXAtom-ORD">
+        <mn>9</mn>
+        <mspace width="thinmathspace" />
+        <mi>V</mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mrow>
+    </mfrac>
+  </mrow>
+  <mo>+</mo>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mfrac>
+      <mrow class="MJX-TeXAtom-ORD">
+        <mi>G</mi>
+        <mo stretchy="false">(</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+      </mrow>
+      <mrow class="MJX-TeXAtom-ORD">
+        <mn>3</mn>
+      </mrow>
+    </mfrac>
+  </mrow>
+  <mo>+</mo>
+  <mi>V</mi>
+  <mo stretchy="false">(</mo>
+  <mi>x</mi>
+  <mo>,</mo>
+  <mi>y</mi>
+  <mo stretchy="false">)</mo>
+</math>

@@ -1,0 +1,2 @@
+Tuu0800(n,m,k):=(2*k*(-1)^(n-1)*binomial(n,m)*binomial(2*(n-k)-1,n-1))/n
+
