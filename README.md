@@ -1,2 +1,2 @@
 # Encyclopedia
- Flask based webapplication
+    Flask based webapplication used to provide number pyramids.
