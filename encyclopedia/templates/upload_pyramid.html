@@ -1,0 +1,79 @@
+{% extends 'base.html' %} {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/accountstyle.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/forms__style.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/update_profilestyle.css') }}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+<title>Upload pyramid</title>
+{% endblock %} {% block header %} 
+    {% include 'header_search.html' %}
+{% endblock %} {% block body %}
+<main>
+    <div class="update_profile-content">
+        <form action="" method="post" class="form update-form" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            
+            <fieldset class="groups">
+                <div class="form-group title">Upload pyramid</div>
+                <div class="form-group">
+                    {{ form.sequenceNumber.label(class="groupelement-label") }}
+                        {% if form.sequenceNumber.errors %}
+                        {{ form.sequenceNumber(class="groupelement-input invalid") }}
+
+                        <div class="invalid-feedback">
+                            {% for error in form.sequenceNumber.errors%}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                    {% else %}
+                        {{ form.sequenceNumber(class="groupelement-input") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.generatingFunction.label(class="groupelement-label") }}
+                    {% if form.generatingFunction.errors %}
+                        {{ form.generatingFunction(class="groupelement-input invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.generatingFunction.errors%}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.generatingFunction(class="groupelement-input") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.explicitFormula.label(class="groupelement-label") }}
+                    {% if form.explicitFormula.errors %}
+                        {{ form.explicitFormula(class="groupelement-input invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.explicitFormula.errors%}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.explicitFormula(class="groupelement-input") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.relations.label(class="groupelement-label") }}
+                    {% if form.relations.errors %}
+                        {{ form.relations(class="groupelement-input invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.relations.errors%}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.relations(class="groupelement-input") }}
+                    {% endif %}
+                </div>
+                <div class="form-group form-submit">
+                    {{ form.submit(class="sumbitbtn groupelement-input") }}
+                    <a href="{{ url_for('account', username=current_user.username) }}" class="link cancelbtn">Cancel</a>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</main>
+{% endblock %}

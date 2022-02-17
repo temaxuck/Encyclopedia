@@ -5,8 +5,8 @@ from flask_login import UserMixin
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-relations = db.Table('relations',
-    db.Column('linked_pyramid_id', db.Integer, db.ForeignKey('pyramid.id')),
+relations = db.Table('relations',                                               # Many to many relation (Pyramid object
+    db.Column('linked_pyramid_id', db.Integer, db.ForeignKey('pyramid.id')),    # being linked with another Pyramid object)
     db.Column('relatedto_pyramid_id', db.Integer, db.ForeignKey('pyramid.id'))
 )
 
@@ -42,4 +42,12 @@ class Pyramid(db.Model):
         self.explicit_formula = explicit_formula
     
     def __repr__(self):
-        return f'Pyramid({self.id}, {self.sequence_number}, "{self.generating_function}", "{self.explicit_formula})"'
+        return f'Pyramid({self.id}, {self.sequence_number}, "{self.generating_function}", "{self.explicit_formula}")'
+
+    def isLinked(self, pyramid):
+        return self.relations.filter(relations.c.relatedto_pyramid_id == pyramid.id).count() > 0
+
+    def add_relation(self, pyramid):
+        if not self.isLinked(pyramid) and not pyramid.isLinked(self):
+            self.relations.append(pyramid)
+            pyramid.relations.append(self)

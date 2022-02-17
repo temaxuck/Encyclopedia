@@ -88,12 +88,20 @@ main {
     flex-direction: row;
     justify-content: left;
     align-items: center;
+
+    cursor: pointer;
 }
 
 .remember_me-label {
     font-size: 18px;
     user-select: none;
     margin-left: 10px;
+
+    cursor: pointer;
+}
+
+.remember_me-input {
+    cursor: pointer;
 }
 
 /* Submit button */
@@ -107,6 +115,7 @@ main {
                 rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
                 rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
     font-weight: 600;
+    font-family: 'Jura', sans-serif;
     color: white;
     cursor: pointer;
 }

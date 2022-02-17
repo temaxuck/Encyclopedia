@@ -10,13 +10,18 @@
             <div class="userimage">
                 <img 
                 src="{{ imagesrc }}" 
-                alt="" class="profile" width="128" height="128">
+                alt="" class="profile-image" width="128" height="128">
             </div>
             <div class="userinfo">
-                <div class="username"> {{ current_user.username.capitalize() }} </div>
-                <div class="email"> {{ current_user.email.capitalize() }} </div>
+                <div class="username"> {{ user.username.capitalize() }} </div>
+                <div class="email"> {{ user.email.capitalize() }} </div>
             </div>
         </div>
+            
+            {% if current_user.id == user.id %}
+                <a href="{{ url_for('update_profile', id=user.id) }}" class="link edit_profile"> 
+                    <span class="material-icons">mode</span> Edit profile</a>
+            {% endif %}
     </div>
 </main>
 {% endblock %}
