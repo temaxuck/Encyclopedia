@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MathJax Test Page</title>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [
+                    ['$', '$'],
+                    ['\\(', '\\)']
+                ]
+            },
+            svg: {
+                fontCache: 'global',
+            }
+        };
+    </script>
+    
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <!-- <script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"]}};</script> -->
+    <!-- <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script> -->
+
+</head>
+
+<body>
+    \[a^2\] $ G(y) = \frac {1} {(1 - y)^2} $ <br> $ V(x,y) = (\frac {\sqrt{x} \cdot G(y) ^ {3}} {(1 - y)^2})$
+    <br>$ \delta_{k, n+m} $
+
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+        <!-- <mrow class="MJX-TeXAtom-ORD">  -->
+            <apply><plus/><ci>x</ci><ci>y</ci></apply>
+         <!-- </mrow> -->
+    </math> 
+        
+
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mfrac>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mn>2</mn>
+              <mspace width="thinmathspace" />
+              <mi>sin</mi>
+              <mo>&#x2061;<!-- ? --></mo>
+              <mrow>
+                <mo>(</mo>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mfrac>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mi>arcsin</mi>
+                      <mo>&#x2061;<!-- ? --></mo>
+                      <mrow>
+                        <mo>(</mo>
+                        <mrow class="MJX-TeXAtom-ORD">
+                          <mfrac>
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <msup>
+                                <mn>3</mn>
+                                <mrow class="MJX-TeXAtom-ORD">
+                                  <mrow class="MJX-TeXAtom-ORD">
+                                    <mfrac>
+                                      <mrow class="MJX-TeXAtom-ORD">
+                                        <mn>3</mn>
+                                      </mrow>
+                                      <mrow class="MJX-TeXAtom-ORD">
+                                        <mn>2</mn>
+                                      </mrow>
+                                    </mfrac>
+                                  </mrow>
+                                </mrow>
+                              </msup>
+                              <mspace width="thinmathspace" />
+                              <msqrt>
+                                <mi>y</mi>
+                                <mo>+</mo>
+                                <mi>x</mi>
+                              </msqrt>
+                            </mrow>
+                            <mrow class="MJX-TeXAtom-ORD">
+                              <mn>2</mn>
+                            </mrow>
+                          </mfrac>
+                        </mrow>
+                        <mo>)</mo>
+                      </mrow>
+                    </mrow>
+                    <mrow class="MJX-TeXAtom-ORD">
+                      <mn>3</mn>
+                    </mrow>
+                  </mfrac>
+                </mrow>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+            <mrow class="MJX-TeXAtom-ORD">
+              <msqrt>
+                <mn>3</mn>
+              </msqrt>
+              <mspace width="thinmathspace" />
+              <msqrt>
+                <mi>y</mi>
+                <mo>+</mo>
+                <mi>x</mi>
+              </msqrt>
+            </mrow>
+          </mfrac>
+        </mrow>
+      </math>
+
+    <style>
+        .MathJax {
+            font-size: 2em;
+        }
+    </style>
+
+
+</body>
+
+</html>

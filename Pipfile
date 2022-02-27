@@ -15,6 +15,14 @@ Werkzeug = "==2.0.2"
 WTForms = "==3.0.1"
 email-validator = "*"
 flask-migrate = "*"
+pyparsing = "*"
+lxml = "*"
+asciimathml = "==0.9.5.1"
+markdown = "*"
+redis = "*"
+flask-caching = "*"
+python-redis-cache = "*"
+jsonpickle = "*"
 
 [dev-packages]
 
