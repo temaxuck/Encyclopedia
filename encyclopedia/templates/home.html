@@ -1,19 +1,24 @@
 {% extends 'base.html' %} {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/homestyle.css') }}">
 <title>Home</title>
-{% endblock %} {% block header %} 
-    <div style="width: 70%;"></div>
+{% endblock %} {% block header %}
+<div style="width: 70%;"></div>
 {% endblock %} {% block body %}
 <main>
+    <div class="btns">
+        {% if current_user.is_authenticated and current_user.moderator %}
+        <a href="{{ url_for('upload_pyramid') }}" class="link UploadPyr"> Upload pyramid </a> {% endif %}
+    </div>
     <form method="post" class="search-form">
         <div class="search-wrapper">
             <div class="input-wrapper">
-                <input type="text" name="pyramidinput" class="question" id="pyramidinput" required autocomplete="off" />
                 <label for="pyramidinput" class="questionlabel">
-                    <span>Pyramid expression</span>
+                <input type="text" name="pyramidinput" class="question" id="pyramidinput" required autocomplete="off" />
+                    <span class="spanholder">Pyramid expression</span>
+                    <span class="underline"></span>
                 </label>
+                <button type="submit" class="questionbtn"> <span class="material-icons">search</span> </button>
             </div>
-            <button type="submit" class="questionbtn"> <span class="material-icons">search</span> </button>
         </div>
     </form>
 </main>

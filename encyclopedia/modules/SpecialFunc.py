@@ -5,8 +5,8 @@ from math import *
 
 def kron_delta(n,k):
     if n==k:
-        return True
-    return False
+        return 1
+    return 0
 
 def evenp(n):
     if n%2==0:

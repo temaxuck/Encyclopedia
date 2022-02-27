@@ -695,6 +695,7 @@ def get_user_input(_input_):
     if UI.GetCmd() == 1: # Generating function
         sfunc = str(UI.GetExpr())
         M = GetCoeffsFunc2(sfunc)
+        print(M)
         r = FindFuncPyr(M)
         if r == 0:
             ErrorMessage("Nothing of find for "+sfunc)

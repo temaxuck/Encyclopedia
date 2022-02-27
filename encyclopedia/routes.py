@@ -1,7 +1,7 @@
 from flask import render_template, request, url_for, redirect, session, flash
 from flask_login import login_user, current_user, logout_user, login_required
-from encyclopedia.models import User, Pyramid, relations
-from encyclopedia.forms import LoginForm, SignupForm, UpdateProfileForm, UploadPyramidForm
+from encyclopedia.models import User, Pyramid, relations, GeneratingFunction, Formula, ExplicitFormula
+from encyclopedia.forms import LoginForm, SignupForm, UpdateProfileForm, UploadPyramidForm, GeneratingFunctionForm
 from encyclopedia import app, db, hasher
 from encyclopedia.modules.PyramidsSystem2 import *
 
@@ -210,25 +210,58 @@ def upload_file(form_file, user_id):
 
 
 @app.route('/upload_pyramid', methods=['POST', 'GET'])
+@login_required
 def upload_pyramid():
     if request.method == 'POST':
         user_input = request.form.get('pyramidinput')
         if user_input:
             return redirect(url_for("pyramid", q=user_input))
-    
+
+    if not current_user.moderator:
+        flash("You have no access to this page", "danger")
+        return redirect(url_for("home"))
+        
+
     form = UploadPyramidForm()
+    g_form = GeneratingFunctionForm()
 
     if form.validate_on_submit():
-        pyramid = Pyramid(form.sequenceNumber.data, form.generatingFunction.data, form.explicitFormula.data)
+        pyramid = Pyramid(form.sequenceNumber.data)
+        
         rels = form.relations.data
+        
+        for i, gf in enumerate(form.generatingFunction):
+            isMain = False
+            if gf.f_name.data == 'U' or gf.f_name.data == 'u' or i == len(form.generatingFunction) - 1:
+                isMain = True
+            pyramid.add_generating_function(gf.f_name.data, gf.f_vars.data, gf.f_expr.data, isMain)
+        
+        for ef in form.explicitFormula:
+            pyramid.add_explicit_formula(form.ef_vars.data, ef.f_expr.data, ef.f_condition.data)
 
-        for rel in rels.split(','):
-            try:
-                rel = int(rel)
-            except Exception:
-                print(f'Could not convert Pyramid #{pyramid.sequence_number} relation {rel} to int...')
-                ...
+        pyramid.init_special_value()
+        # print(pyramid.init_special_value)
+        alreadyExist = Pyramid.query.filter_by(__special_hashed_value__=pyramid.__special_hashed_value__).count() > 0
+        
+        if alreadyExist:
+            flash(f'Such pyramid already exists', 'danger')
+            return redirect(url_for('upload_pyramid'))
+
         db.session.add(pyramid)
+
+        if rels != '':
+            for rel in rels.split(','):
+                try:
+                    rel = int(rel)
+                    related_pyramid = Pyramid.query.filter_by(sequence_number = rel).first()
+                    if related_pyramid is None:
+                        flash(f'Could not get Pyramid#{rel}', 'danger')
+                    else:
+                        pyramid.add_relation(related_pyramid)
+                except ValueError:
+                    flash(f'Could not convert Pyramid #{pyramid.sequence_number} relation {rel} to int', 'danger')
+
+        current_user.add_pyramid(pyramid)
         db.session.commit()
         flash('The pyramid has been added!', 'success')
 

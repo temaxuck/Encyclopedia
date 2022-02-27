@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, EmailField, IntegerField
-from wtforms.validators import InputRequired, Email, Length, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, EmailField, IntegerField, FieldList, FormField, Form
+from wtforms.validators import InputRequired, Email, Length, EqualTo, ValidationError, NumberRange
 
 from encyclopedia.models import User, Pyramid 
 from flask_login import current_user
@@ -51,10 +51,23 @@ class UpdateProfileForm(FlaskForm):
             if user:
                 raise ValidationError('User with such email already exists.')
 
+class GeneratingFunctionForm(Form):
+    f_name = StringField('Function name', validators=[InputRequired()])
+    f_vars = StringField('Function variables', validators=[InputRequired()])
+    f_expr = StringField('Expression', validators=[InputRequired()])
+
+class ExplicitFormula(Form):
+    f_expr = StringField('Expression', validators=[InputRequired()])
+    f_condition = StringField('Condition')
+
+
 class UploadPyramidForm(FlaskForm):
-    sequenceNumber = IntegerField('Sequence number', validators=[InputRequired()])
-    generatingFunction = StringField('Generating function', validators=[InputRequired()])
-    explicitFormula = StringField('Explicit formula', validators=[InputRequired()])
+    sequenceNumber = IntegerField('Sequence number', validators=[InputRequired(), NumberRange(min=0)])
+    generatingFunction = FieldList(FormField(GeneratingFunctionForm), min_entries=1)
+    explicitFormula = FieldList(FormField(ExplicitFormula), min_entries=1)
+    ef_name = StringField('Formula name', validators=[InputRequired()], default="T")
+    ef_vars = StringField('Formula variables', validators=[InputRequired()], default="n, m, k")
+    # explicitFormula = StringField('Explicit formula', validators=[InputRequired()])
     relations = StringField('Relations with another pyramids', validators=[])
 
     submit = SubmitField('Upload pyramid')
@@ -63,3 +76,8 @@ class UploadPyramidForm(FlaskForm):
         pyramid = Pyramid.query.filter_by(sequence_number=sequenceNumber.data).first()
         if pyramid:
             raise ValidationError('Pyramid with such sequence number already exists.')
+        if sequenceNumber.data < 1:
+            raise ValidationError("Pyramid's sequence number cannot be negative or equal to 0.")
+
+    def validate_generatingFunction(self, generatingFunction):
+        ...
