@@ -1,2 +1,0 @@
-Tuu0925(n,m,k):=k/(n+k)*binomial(n+k,n)*Tsqrt2(m,n+k);
-

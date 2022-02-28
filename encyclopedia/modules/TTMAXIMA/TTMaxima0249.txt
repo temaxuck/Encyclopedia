@@ -1,2 +1,0 @@
-Tuu0249(n,m,k):=(((-1)^m+1)*binomial(n+m/2,n)*binomial(n+m/2+k-1,n+m/2))/2
-

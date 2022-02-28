@@ -1,2 +1,0 @@
-Tuu0955(n,m,k):=if evenp(n+m) then binomial(n+m,m)*binomial((n+m)/2+2*k-1,(n+m)/2) else 0;
-

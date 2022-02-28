@@ -1,2 +1,0 @@
-Tuu0587(n,m,k):=(binomial(k,n)*(2*n+k)*binomial(2*n+3*m+k-1,m))/(2*n+2*m+k)
-

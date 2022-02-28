@@ -1,2 +1,0 @@
-Tuu0826(n,m,k):=kron_delta(m,n)*binomial(n+k-1,n)
-

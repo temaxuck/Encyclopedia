@@ -1,2 +1,0 @@
-Tuu0717(n,m,k):=k/(n+k)*Tsqrt(m,2*n+k)*binomial(n+k,n);
-

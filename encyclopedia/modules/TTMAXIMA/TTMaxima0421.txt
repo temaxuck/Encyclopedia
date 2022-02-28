@@ -1,2 +1,0 @@
-Tuu0421(n,m,k):=if n=0 then (binomial(m+(k)/2-1,m))*4^m else (k*4^m*(binomial((k-2*n)/2+m-1,m))*(binomial(k-n-1,n-1)))/(n);
-

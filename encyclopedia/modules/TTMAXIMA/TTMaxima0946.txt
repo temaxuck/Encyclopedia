@@ -1,2 +1,0 @@
-Tuu0946(n,m,k):=if n+m < 3*k then 0 else binomial(3*k,m)*binomial(n+m-k-1,n+m-3*k)
-

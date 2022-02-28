@@ -273,6 +273,10 @@ table th {
     font-size: 1.5em;
 }
 
+.latex {
+    font-size: 1.5em;
+}
+
 @media screen and (max-width: 600px) {
     .btn-radio {
         display: block;
@@ -303,4 +307,5 @@ table th {
         width: 300px;
     }
 }
+
 

@@ -1,2 +1,0 @@
-Tuu0104(n,m,k):=(k*4^n*binomial((n+k)/2,(k-n)/2)*binomial(n+m+k-1,m))/(n+k)
-

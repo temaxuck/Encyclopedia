@@ -1,2 +1,0 @@
-Tuu0086(n,m,k):=binomial(k,m)*4^n*binomial(n+k/2-1,n)
-
