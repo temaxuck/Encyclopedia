@@ -65,30 +65,28 @@ def home():
 
 @app.route('/pyramid/<snid>', methods=['POST', 'GET'])
 def pyramid(snid: int):
+    pyramid = Pyramid.query.filter_by(sequence_number=snid).first()
+
     if request.method == 'POST':
         return redirect(url_for('search', q=request.form.get('pyramidinput')))
-
-    pyramid = Pyramid.query.filter_by(sequence_number=snid).first()
 
     return render_template('pyramid.html', pyramid=pyramid, PyramidModel=Pyramid)
 
 @app.route('/400',  methods=['POST', 'GET'])
 def not_found():
-    if request.method == 'POST':
-        return redirect(url_for('search', q=request.form.get('pyramidinput')))
-
     query = request.args.get('q')
     if not query:
         return redirect(url_for("home", is_empty=1))
+
+    if request.method == 'POST':
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
+    
     return render_template('not_found.html', user_input=query)
 
 # User Authentication System
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    if request.method == 'POST':
-        return redirect(url_for('search', q=request.form.get('pyramidinput')))
-    
     if current_user.is_authenticated:
         flash(f'You already have been logged in!', 'info')
         return redirect(url_for('home'))
@@ -108,13 +106,13 @@ def login():
         else:
             flash(f'Login unsuccessful. Please check email/username and password', 'danger')
 
+    if request.method == 'POST':
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
+
     return render_template('login.html', form=form)
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
-    if request.method == 'POST':
-        return redirect(url_for('search', q=request.form.get('pyramidinput')))
-    
     if current_user.is_authenticated:
         flash(f'You already have been logged in!', 'danger')
         return redirect(url_for('home'))
@@ -130,6 +128,9 @@ def signup():
         flash(f'Your account has been created! You are now able to log in!', 'success')
         return redirect(url_for('login'))
 
+    if request.method == 'POST':
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
+    
     return render_template('signup.html', form=form)
 
 @app.route('/logout')
@@ -141,9 +142,6 @@ def logout():
 @app.route('/users/<username>', methods=['POST', 'GET'])
 @login_required
 def account(username: str):
-    if request.method == 'POST':
-        return redirect(url_for('search', q=request.form.get('pyramidinput')))
-
     user_account = User.query.filter_by(username=username).first() # user passed as an argument
 
     if not user_account:
@@ -151,14 +149,15 @@ def account(username: str):
         return redirect(url_for('account', username=current_user.username))
     
     imagesrc = url_for('static', filename=f'profile_pictures/{user_account.profile_imagefile}')
+
+    if request.method == 'POST':
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
+
     return render_template('account.html', user=user_account, imagesrc=imagesrc)
 
 @app.route('/users/edit/<id>', methods=['POST', 'GET'])
 @login_required
 def update_profile(id: int):
-    if request.method == 'POST':
-        return redirect(url_for('search', q=request.form.get('pyramidinput')))
-
     user_account = User.query.filter_by(id=id).first() # user passed as an argument
     form = UpdateProfileForm()
 
@@ -184,6 +183,10 @@ def update_profile(id: int):
         form.email.data = current_user.email.capitalize()
 
     imagesrc = url_for('static', filename=f'profile_pictures/{user_account.profile_imagefile}')
+
+    if request.method == 'POST':
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
+
     return render_template('update_profile.html', imagesrc=imagesrc, form=form)
 
 def upload_file(form_file, user_id):
@@ -206,9 +209,6 @@ def upload_file(form_file, user_id):
 @app.route('/upload_pyramid', methods=['POST', 'GET'])
 @login_required
 def upload_pyramid():
-    if request.method == 'POST':
-        return redirect(url_for('search', q=request.form.get('pyramidinput')))
-
     if not current_user.moderator:
         flash("You have no access to this page", "danger")
         return redirect(url_for("home"))
@@ -258,5 +258,8 @@ def upload_pyramid():
         flash('The pyramid has been added!', 'success')
 
         return redirect(url_for('home', username=current_user.username))
-
+    
+    if request.method == 'POST':
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
+    
     return render_template('upload_pyramid.html', form=form)
