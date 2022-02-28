@@ -1,4 +1,0 @@
-<a href="pyramid?q=332">Right on x:      332</a>
-<a href="pyramid?q=334">Left on x:       334</a>
-OEIS: <a href="https://oeis.org/A176239">A176239</a> 
-

@@ -1,2 +1,0 @@
-Tuu0944(n,m,k):=binomial(k,n+m-4*k)*binomial(4*k,m)
-

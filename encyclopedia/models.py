@@ -66,7 +66,7 @@ class Pyramid(db.Model):
     def __repr__(self):
         return f'Pyramid({self.id}, {self.sequence_number}, {self.generating_function}, {self.explicit_formula})'
 
-    # Linking pyramids with each other:
+    # Relations methods
     def isLinked(self, pyramid):
         return True if self.relations.filter_by(sequence_number=pyramid.sequence_number).count() > 0 else False
 
@@ -75,6 +75,9 @@ class Pyramid(db.Model):
             self.relations.append(pyramid)
             pyramid.relations.append(self)
     
+    def get_relations_as_str(self):
+        return [relation.sequence_number for relation in self.relations ]
+
     # Generating function methods
     def add_generating_function(self, funciton_name, variables, expression, isMain):
         formula = GeneratingFunction(funciton_name, variables, expression, isMain)
@@ -117,9 +120,16 @@ class Pyramid(db.Model):
         return None
 
     def get_gf_latex(self):
-        latexrepr = []
-        for formula in self.generating_function:
-            latexrepr.append(formula.get_latex)
+        latexrepr = '$'
+
+        for (loop, formula) in enumerate(self.generating_function):
+            latexrepr += formula.get_latex()
+            if loop != 1-len(self.generating_function):
+                latexrepr += '\\\\'
+        
+        latexrepr += '$'
+
+        return latexrepr
 
     # Explicit formula methods
     def add_explicit_formula(self, variables, expression, limitation=''):
@@ -143,8 +153,10 @@ class Pyramid(db.Model):
         return answer
     
     def get_ef_latex(self):
-        latexrepr = f'{self.explicit_formula[0].function_name}_{{{self.sequence_number}}} \
-({self.explicit_formula[0].get_variables_as_str()}) = \\begin{{cases}}' 
+        latexrepr = f'${self.explicit_formula[0].function_name}_{{{self.sequence_number}}}\
+({self.explicit_formula[0].get_variables_as_str()}) ='
+        if len(self.explicit_formula) > 1:
+            latexrepr += '\\begin{{cases}}' 
 
         for loopid, formula in enumerate(self.explicit_formula):
             latexrepr += formula.get_latex()
@@ -152,7 +164,11 @@ class Pyramid(db.Model):
                 latexrepr +=  f'&\\text{{if {formula.limitation}}} '
             if loopid != len(self.explicit_formula) - 1:
                 latexrepr += ',\\\\'
-        latexrepr += ' \\end{cases}'
+
+        if len(self.explicit_formula) > 1:
+            latexrepr += ' \\end{cases} '
+
+        latexrepr += '$'
 
         return latexrepr
 
@@ -253,7 +269,7 @@ class GeneratingFunction(Formula):
 
 
     def get_latex(self):
-        latexexpr = sp.latex(sp.sympify(self.expression))
+        latexrepr = sp.latex(sp.sympify(self.expression))
         function_declaration = self.function_name
         function_declaration += '_{' + str(self.pyramid.sequence_number) + '}' if self.isMain else ''
 
@@ -263,8 +279,7 @@ class GeneratingFunction(Formula):
         variables_declaration = variables_declaration[:-2]
         variables_declaration += ')'
 
-
-        return function_declaration + variables_declaration + ' = ' + latexexpr
+        return function_declaration + variables_declaration + ' = ' + latexrepr
     
     def init_f_evaluation(self):
         self.other_func_calls = 0
@@ -297,9 +312,9 @@ class ExplicitFormula(Formula):
         self.limitation_to_eval = self.limitation_to_eval.replace('=', '==')
 
     def get_latex(self):
-        latexexpr = sp.latex(sp.sympify(self.expression))
+        latexrepr = sp.latex(sp.sympify(self.expression))
         
-        return latexexpr
+        return latexrepr
 
     __mapper_args__ = {
         'polymorphic_identity': 'generatingfunction',

@@ -1,4 +1,0 @@
-<a href="pyramid?q=48">Right on y:      48</a>
-<a href="pyramid?q=53">Left on y:       53</a>
-<a href="pyramid?q=495">Change x y:      495</a>
-

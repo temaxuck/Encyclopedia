@@ -1,2 +1,0 @@
-Tuu0243(n,m,k):=if n+m<2*k then 0 else (((-1)^m+1)*(binomial(k,k-m/2))*(binomial(n+m-k-1,n+m-2*k)))/2;
-

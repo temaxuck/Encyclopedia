@@ -1,2 +1,0 @@
-Tuu0947(n,m,k):=if n+m<4*k then 0 else binomial(4*k,m)*binomial(n+m-k-1,n+m-4*k);
-

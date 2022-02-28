@@ -1,2 +1,0 @@
-Tuu0722(n,m,k):=k/(4*n+k)*Tsqrt(m,4*n+k)*TLeftA271825(n,k+4*n);
-

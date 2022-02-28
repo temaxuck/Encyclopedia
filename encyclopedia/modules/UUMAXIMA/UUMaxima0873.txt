@@ -1,2 +1,0 @@
-UU0873(x,y):=(2*sin(asin((3^(3/2)*sqrt(x/sqrt(1-4*y)))/2)/3))/(sqrt(3)*sqrt(x/sqrt(1-4*y)))
-

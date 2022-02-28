@@ -4,7 +4,6 @@ from encyclopedia.models import User, Pyramid, relations, GeneratingFunction, Fo
 from encyclopedia.forms import LoginForm, SignupForm, UpdateProfileForm, UploadPyramidForm, GeneratingFunctionForm
 from encyclopedia import app, db, hasher\
     # , es
-from encyclopedia.modules.PyramidsSystem2 import *
 
 import os
 import datetime
@@ -23,34 +22,38 @@ def search():
             query = user_input
 
         pyramid = Pyramid.query.filter_by(sequence_number=query).first()
-        return redirect(url_for("pyramid", q=user_input))
+        if pyramid:
+            return redirect(url_for("pyramid", snid=pyramid.sequence_number))
 
         if not pyramid: # if not by sequence_number then by generating function
             pyramid = Pyramid.query.filter(Pyramid.generating_function.contains(GeneratingFunction.query.filter_by(expression=query).first())).first()
-            return redirect(url_for("pyramid", q=user_input))
+            if pyramid:
+                return redirect(url_for("pyramid", snid=pyramid.sequence_number))
 
         if not pyramid: # if not by generating function then by explicit formula
             pyramid = Pyramid.query.filter(Pyramid.explicit_formula.contains(ExplicitFormula.query.filter_by(expression=query).first())).first()
-            return redirect(url_for("pyramid", q=user_input))
+            if pyramid:
+                return redirect(url_for("pyramid", snid=pyramid.sequence_number))
 
         if not pyramid:
             try:
                 query = query.split(',')
                 query = list(map(int, query))
             except:
-                print('hehe')
                 return redirect(url_for("not_found", q=query))
             for pyr in Pyramid.query.all():
                 try:
                     data = pyr.get_data_by_ef(7, 7, 1)
                     n = len(query)
                     if any(query == data[i:i + n] for i in range(len(data)-n + 1)):
-                        pyramid = pyr
-                        return redirect(url_for("pyramid", q=user_input))
+                        return redirect(url_for("pyramid", snid=pyr.sequence_number))
                 except:
                     return redirect(url_for("not_found", q=query))
 
         return redirect(url_for("pyramid", q=user_input))
+    
+    flash('Empty request', 'danger')
+    return redirect(url_for("home"))
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
@@ -60,48 +63,14 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/pyramid', methods=['POST', 'GET'])
-def pyramid():
+@app.route('/pyramid/<snid>', methods=['POST', 'GET'])
+def pyramid(snid: int):
     if request.method == 'POST':
         return redirect(url_for('search', q=request.form.get('pyramidinput')))
 
-    query = request.args.get('q')
-    try:
-        Pyramid = get_user_input(query)
-    except Exception as e:
-        with open(os.path.join(script_path, 'bin', 'errorlog'), 'a') as f:
-            print(f'[{datetime.datetime.now()}] {e}', file=f)
-        if not query:
-            flash(f'Pyramid expression cannot be empty!', 'danger')
-            return redirect(url_for("home"))
-        else:
-            return redirect(url_for("not_found", q=query))
+    pyramid = Pyramid.query.filter_by(sequence_number=snid).first()
 
-
-    try:
-        rels = Pyramid.url.split('\n')
-    except:
-        rels = []
-
-    for i in range(len(Pyramid.UUMaxima)):
-        if Pyramid.UUMaxima[i] == 'Error convert': Pyramid.UUMaxima[i] = ''
-    
-    latexrepresenation = [latex(Pyramid.GeneratingFunction), latex(Pyramid.ExplicitFormula)]
-    if Pyramid.GeneratingFunction != '':
-        latexrepresenation[0] = 'UU' + str(Pyramid.spyr) + '(x,y) = ' + latexrepresenation[0]
-    else:
-        latexrepresenation[1] = 'LaTEX representation of Generating funciton is not ready yet...'
-    
-    if Pyramid.ExplicitFormula != '':
-        latexrepresenation[1] = 'T_{' + str(Pyramid.pyr) + '}(n,m,k)=' + latexrepresenation[1]
-    else:
-        latexrepresenation[1] = 'LaTEX representation of Explicit formula is not ready yet...'
-
-    return render_template('pyramid.html',
-        Pyramid=Pyramid,
-        relations=rels,
-        latex=latexrepresenation
-    )
+    return render_template('pyramid.html', pyramid=pyramid, PyramidModel=Pyramid)
 
 @app.route('/400',  methods=['POST', 'GET'])
 def not_found():
@@ -171,7 +140,7 @@ def logout():
 
 @app.route('/users/<username>', methods=['POST', 'GET'])
 @login_required
-def account(username):
+def account(username: str):
     if request.method == 'POST':
         return redirect(url_for('search', q=request.form.get('pyramidinput')))
 
@@ -186,7 +155,7 @@ def account(username):
 
 @app.route('/users/edit/<id>', methods=['POST', 'GET'])
 @login_required
-def update_profile(id):
+def update_profile(id: int):
     if request.method == 'POST':
         return redirect(url_for('search', q=request.form.get('pyramidinput')))
 

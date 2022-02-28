@@ -1,2 +1,0 @@
-OEIS: <a href="https://oeis.org/A089732">A089732</a> 
-

@@ -1,2 +1,0 @@
-Tuu0923(n,m,k):=if n=0 then (-1)^m*binomial(m+2*k-1,m) else (-k*binomial(2*n-2*k,m)*binomial(2*n-k-1,n-1))/(n);
-
