@@ -156,7 +156,7 @@ class Pyramid(db.Model):
 
         return latexrepr
 
-    def get_data(self, n, m, k):
+    def get_data_by_ef(self, n, m, k):
         data = []
         for i in range(n):
             for j in range(m):
