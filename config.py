@@ -6,3 +6,5 @@ class Config(object):
     # CACHE_TYPE = "RedisCache"
     # CACHE_REDIS_HOST = "0.0.0.0"
     # CACHE_REDIS_PORT = "5555"
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+    

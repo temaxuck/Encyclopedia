@@ -2,7 +2,8 @@ from flask import render_template, request, url_for, redirect, session, flash
 from flask_login import login_user, current_user, logout_user, login_required
 from encyclopedia.models import User, Pyramid, relations, GeneratingFunction, Formula, ExplicitFormula
 from encyclopedia.forms import LoginForm, SignupForm, UpdateProfileForm, UploadPyramidForm, GeneratingFunctionForm
-from encyclopedia import app, db, hasher
+from encyclopedia import app, db, hasher\
+    # , es
 from encyclopedia.modules.PyramidsSystem2 import *
 
 import os
@@ -12,13 +13,49 @@ from werkzeug.utils import secure_filename
 
 script_path = os.path.dirname(__file__)  # absolute dir the script is in
 
+@app.route('/search', methods=['POST', 'GET'])
+def search():
+    user_input = request.args.get('q')
+    if user_input:
+        try:
+            query = int(user_input)
+        except:
+            query = user_input
+
+        pyramid = Pyramid.query.filter_by(sequence_number=query).first()
+        return redirect(url_for("pyramid", q=user_input))
+
+        if not pyramid: # if not by sequence_number then by generating function
+            pyramid = Pyramid.query.filter(Pyramid.generating_function.contains(GeneratingFunction.query.filter_by(expression=query).first())).first()
+            return redirect(url_for("pyramid", q=user_input))
+
+        if not pyramid: # if not by generating function then by explicit formula
+            pyramid = Pyramid.query.filter(Pyramid.explicit_formula.contains(ExplicitFormula.query.filter_by(expression=query).first())).first()
+            return redirect(url_for("pyramid", q=user_input))
+
+        if not pyramid:
+            try:
+                query = query.split(',')
+                query = list(map(int, query))
+            except:
+                print('hehe')
+                return redirect(url_for("not_found", q=query))
+            for pyr in Pyramid.query.all():
+                try:
+                    data = pyr.get_data_by_ef(7, 7, 1)
+                    n = len(query)
+                    if any(query == data[i:i + n] for i in range(len(data)-n + 1)):
+                        pyramid = pyr
+                        return redirect(url_for("pyramid", q=user_input))
+                except:
+                    return redirect(url_for("not_found", q=query))
+
+        return redirect(url_for("pyramid", q=user_input))
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
     if request.method == 'POST':
-        user_input = request.form.get('pyramidinput')
-        if user_input:
-            return redirect(url_for("pyramid", q=user_input))
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
 
     return render_template('home.html')
 
@@ -26,9 +63,7 @@ def home():
 @app.route('/pyramid', methods=['POST', 'GET'])
 def pyramid():
     if request.method == 'POST':
-        user_input = request.form.get('pyramidinput')
-        if user_input:
-            return redirect(url_for("pyramid", q=user_input))
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
 
     query = request.args.get('q')
     try:
@@ -71,9 +106,7 @@ def pyramid():
 @app.route('/400',  methods=['POST', 'GET'])
 def not_found():
     if request.method == 'POST':
-        user_input = request.form.get('pyramidinput')
-        if user_input:
-            return redirect(url_for("pyramid", q=user_input))
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
 
     query = request.args.get('q')
     if not query:
@@ -85,9 +118,7 @@ def not_found():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        user_input = request.form.get('pyramidinput')
-        if user_input:
-            return redirect(url_for("pyramid", q=user_input))
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
     
     if current_user.is_authenticated:
         flash(f'You already have been logged in!', 'info')
@@ -113,9 +144,7 @@ def login():
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
-        user_input = request.form.get('pyramidinput')
-        if user_input:
-            return redirect(url_for("pyramid", q=user_input))
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
     
     if current_user.is_authenticated:
         flash(f'You already have been logged in!', 'danger')
@@ -144,9 +173,7 @@ def logout():
 @login_required
 def account(username):
     if request.method == 'POST':
-        user_input = request.form.get('pyramidinput')
-        if user_input:
-            return redirect(url_for("pyramid", q=user_input))
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
 
     user_account = User.query.filter_by(username=username).first() # user passed as an argument
 
@@ -161,9 +188,7 @@ def account(username):
 @login_required
 def update_profile(id):
     if request.method == 'POST':
-        user_input = request.form.get('pyramidinput')
-        if user_input:
-            return redirect(url_for("pyramid", q=user_input))
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
 
     user_account = User.query.filter_by(id=id).first() # user passed as an argument
     form = UpdateProfileForm()
@@ -213,9 +238,7 @@ def upload_file(form_file, user_id):
 @login_required
 def upload_pyramid():
     if request.method == 'POST':
-        user_input = request.form.get('pyramidinput')
-        if user_input:
-            return redirect(url_for("pyramid", q=user_input))
+        return redirect(url_for('search', q=request.form.get('pyramidinput')))
 
     if not current_user.moderator:
         flash("You have no access to this page", "danger")
