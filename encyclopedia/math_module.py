@@ -42,3 +42,10 @@
 
 def kron_delta(a, b):
     return 1 if a == b else 0
+
+def custom_sqrt(value):
+    if value < 0:
+        return -1
+    else:
+        import math
+        return math.sqrt(value)

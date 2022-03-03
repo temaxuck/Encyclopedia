@@ -1,11 +1,11 @@
 from encyclopedia import db, login_manager
 from flask_login import UserMixin
-from encyclopedia.math_module import kron_delta
+from encyclopedia.math_module import kron_delta, custom_sqrt
 
 import sympy as sp
 import re
 from copy import deepcopy
-from math import sqrt
+import math
 # from encyclopedia.math_module import delta
 
 @login_manager.user_loader
@@ -21,6 +21,7 @@ relations = db.Table('relations',
 
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
+    __searchable__ = ["username"]
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -46,6 +47,7 @@ class User(db.Model, UserMixin):
 
 class Pyramid(db.Model):
     __tablename__ = 'pyramid'
+    __searchable__ = ["sequence_number"]
     id = db.Column(db.Integer, primary_key=True)
     sequence_number = db.Column(db.Integer, unique=True, nullable=False)
     generating_function = db.relationship("GeneratingFunction", backref="pyramid", lazy=True)
@@ -94,10 +96,10 @@ class Pyramid(db.Model):
             if formula.isMain:
                 self.main_gf = formula
 
-    def evaluate_certain_gf(self, function_name, values:dict[str:float]):
+    def evaluate_certain_gf(self, function_name:str, values:dict[str:float], sqrt={'sqrt': math.sqrt}):
         values['__builtins__'] = None
         if (self.gf_dict[function_name].other_func_calls == 0):
-            return eval(self.gf_dict[function_name].expression, values, {'sqrt': sqrt})
+            return eval(self.gf_dict[function_name].expression, values, sqrt)
         
         other_funcs = deepcopy(self.gf_dict[function_name].other_func)
         to_be_evaluated = self.gf_dict[function_name].__expr__
@@ -106,12 +108,15 @@ class Pyramid(db.Model):
             other_funcs[i] = self.evaluate_certain_gf(other_funcs[i], values)
             to_be_evaluated = re.sub("_TBR_", f"({str(other_funcs[i])})", to_be_evaluated, count=1)
         
-        return eval(to_be_evaluated, values, {'sqrt': sqrt})
+        return eval(to_be_evaluated, values, sqrt)
 
     def evaluate_gf_at(self, *args):
         if self.main_gf is None or not gf_dict:
             self.init_gf_evaluation()
-        return self.evaluate_certain_gf(self.main_gf.function_name, dict(zip(self.main_gf.__get_variables_str__(), args)))
+        try:
+            return self.evaluate_certain_gf(self.main_gf.function_name, dict(zip(self.main_gf.__get_variables_str__(), args)))
+        except ValueError:
+            return self.evaluate_certain_gf(self.main_gf.function_name, dict(zip(self.main_gf.__get_variables_str__(), args)), sqrt={'sqrt': custom_sqrt})
     
     def get_main_gf(self):
         for formula in self.generating_function:
@@ -190,10 +195,18 @@ class Pyramid(db.Model):
         for i in range(len(self.explicit_formula[0].variables)):
             ef_point.append(30 + i + 1)
 
-        a = self.evaluate_gf_at(*gf_point)
-        b = self.evaluate_ef_at(*ef_point)
-        # print(a, b)
+        try:
+            a = self.evaluate_gf_at(*gf_point)
+        except ValueError:
+            a = 'Undefined'
+        
+        try:
+            b = self.evaluate_ef_at(*ef_point)
+        except ValueError:
+            b = 'Undefined'
+
         s = f'{a}_{b}'
+        print(s)
         self.__special_hashed_value__ = hashlib.sha256(s.encode()).hexdigest()
 
 class Formula(db.Model):
@@ -236,6 +249,8 @@ class Formula(db.Model):
                 s += ', '
         return s
 
+    def change_formula(self, *args):
+        ...
 
 class Variable(db.Model):
     __tablename__ = 'variable'
@@ -291,9 +306,16 @@ class GeneratingFunction(Formula):
         self.__expr__ = re.sub('[A-Z]?\((\w|, )*\)','_TBR_', self.expression) # _TBR_ is being replaced later 
         self.other_func = other_func # other functions in chronological order
 
+    def change_formula(self, function_name=None, variables=None, expression=None, main=None):
+        self.function_name = function_name if not function_name==None else self.function_name
+        self.variables = variables if not variables==None else self.variables
+        self.expression = expression if not expression==None else self.expression
+        self.isMain = main if not main==None else self.isMain
+
     __mapper_args__ = {
         'polymorphic_identity': 'generatingfunction',
     }
+
 
 
 class ExplicitFormula(Formula):
@@ -313,13 +335,13 @@ class ExplicitFormula(Formula):
 
     def get_latex(self):
         latexrepr = sp.latex(sp.sympify(self.expression))
-        
         return latexrepr
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'generatingfunction',
-    }
-
+    def change_formula(self, variables=None, expression=None, limitation=None):
+        self.variables = variables if not variables==None else self.variables
+        self.expression = expression if not expression==None else self.expression
+        self.limitation = limitation if not expression==None else self.limitation
+    
     __mapper_args__ = {
         'polymorphic_identity': 'explicitformula',
     }

@@ -5,10 +5,9 @@
 <div style="width: 70%;"></div>
 {% endblock %} {% block body %}
 <main>
-    <div class="btns">
-        {% if current_user.is_authenticated and current_user.moderator %}
-        <a href="{{ url_for('upload_pyramid') }}" class="link UploadPyr"> Upload pyramid </a> {% endif %}
-    </div>
+    {% if current_user.is_authenticated and current_user.moderator %}
+        <a href="{{ url_for('upload_pyramid') }}" class="link UploadPyr"> Upload pyramid </a>
+    {% endif %}
     <form method="post" class="search-form">
         <div class="search-wrapper">
             <div class="input-wrapper">
