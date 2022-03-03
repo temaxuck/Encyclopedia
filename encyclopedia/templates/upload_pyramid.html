@@ -15,11 +15,22 @@
             {{ form.hidden_tag() }}
             
             <fieldset class="groups">
-                <div class="form-group title">Upload pyramid</div>
-                <div class="form-group">
+                <div class="form-group title">
+                {% if pyramid %} 
+                    Edit
+                {% else %}
+                    Upload
+                {% endif %}
+                    pyramid</div>
+
+                <div class="form-group"> <!-- Sequence Number field -->
                     {{ form.sequenceNumber.label(class="groupelement-label") }}
-                        {% if form.sequenceNumber.errors %}
-                        {{ form.sequenceNumber(class="groupelement-input invalid", placeholder="Sequence number") }}
+                    {% if form.sequenceNumber.errors %}
+                        {% if pyramid %} 
+                            {{ form.sequenceNumber(class="groupelement-input invalid", placeholder="Sequence number", value=pyramid.sequence_number) }}
+                        {% else %}
+                            {{ form.sequenceNumber(class="groupelement-input invalid", placeholder="Sequence number") }}
+                        {% endif %}
 
                         <div class="invalid-feedback">
                             {% for error in form.sequenceNumber.errors%}
@@ -28,12 +39,17 @@
                         </div>
 
                     {% else %}
-                        {{ form.sequenceNumber(class="groupelement-input", placeholder="Sequence number") }}
+                        {% if pyramid %} 
+                            {{ form.sequenceNumber(class="groupelement-input", placeholder="Sequence number", value=pyramid.sequence_number) }}
+                        {% else %}
+                            {{ form.sequenceNumber(class="groupelement-input", placeholder="Sequence number") }}
+                        {% endif %}
                     {% endif %}
                 </div>
-                <div class="form-group">
-                    <!-- {{ form.generatingFunction.label(class="groupelement-label") }} -->
+
+                <div class="form-group">  <!-- Generating function field -->
                     <label for="" class="groupelement-label">Generating function</label>
+                    
                     {% for g_field in form.generatingFunction %}
                         <div class="form-group-gf">
                             {% if form.generatingFunction.errors %}
@@ -51,6 +67,7 @@
                         </div>
                     {% endfor %}
                 </div>
+
                 <div class="form-group">
                     <label for="" class="groupelement-label">Explicit formula</label>
                     <div class="form-group-ef">
