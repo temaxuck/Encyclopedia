@@ -3,7 +3,7 @@ from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, EmailField, IntegerField, FieldList, FormField, Form
 from wtforms.validators import InputRequired, Email, Length, EqualTo, ValidationError, NumberRange
 
-from encyclopedia.models import User, Pyramid 
+from encyclopedia.models import User, Pyramid, Formula, GeneratingFunction, ExplicitFormula
 from flask_login import current_user
 
 class LoginForm(FlaskForm):

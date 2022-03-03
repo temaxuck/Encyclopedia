@@ -1,13 +1,11 @@
 main {
     display: flex;
     flex-grow: 1;
-    align-items: flex-end;
 
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
 }
 
 .UploadPyr {
-    padding: 0 10px;
-    width: auto;
+    margin-left: auto;
 }
