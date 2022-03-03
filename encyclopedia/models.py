@@ -161,17 +161,17 @@ class Pyramid(db.Model):
         latexrepr = f'${self.explicit_formula[0].function_name}_{{{self.sequence_number}}}\
 ({self.explicit_formula[0].get_variables_as_str()}) ='
         if len(self.explicit_formula) > 1:
-            latexrepr += '\\begin{{cases}}' 
+            latexrepr += '\begin{cases}' 
 
         for loopid, formula in enumerate(self.explicit_formula):
             latexrepr += formula.get_latex()
             if formula.limitation:
-                latexrepr +=  f'&\\text{{if {formula.limitation}}} '
+                latexrepr +=  f'&\text{{if {formula.limitation}}} '
             if loopid != len(self.explicit_formula) - 1:
-                latexrepr += ',\\\\'
+                latexrepr += ',\\'
 
         if len(self.explicit_formula) > 1:
-            latexrepr += ' \\end{cases} '
+            latexrepr += ' \end{cases} '
 
         latexrepr += '$'
 
@@ -183,7 +183,7 @@ class Pyramid(db.Model):
             for j in range(m):
                 data.append(self.evaluate_ef_at(i, j, k))
         return data
-
+# '=\\begin{{cases}}{\\binom{k + n - 1}{n}}&\\text{if m=0} ,\\\\\\frac{\\left(- 2 k + n\\right) {\\binom{k + n - 1}{n}} {\\binom{- 2 k + 2 m + n - 1}{m - 1}}}{m}&\\text{if m>0}  \\end{cases} $'
     # Special hashed value methods
     def init_special_value(self):
         import hashlib
