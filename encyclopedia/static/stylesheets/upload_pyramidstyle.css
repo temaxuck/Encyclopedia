@@ -224,10 +224,6 @@ main {
   gap: 10px;
 }
 
-.f_condition {
-  display: none;
-}
-
 .e_fields .brace-left {
   top: 0;
   left: 0;

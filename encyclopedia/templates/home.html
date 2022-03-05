@@ -2,13 +2,13 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/homestyle.css') }}">
 <title>Home</title>
 {% endblock %} {% block header %}
-<div style="width: 70%;"></div>
+{% include 'header_search.html' %}
 {% endblock %} {% block body %}
 <main>
     {% if current_user.is_authenticated and current_user.moderator %}
         <a href="{{ url_for('upload_pyramid') }}" class="link UploadPyr"> Upload pyramid </a>
     {% endif %}
-    <form method="post" class="search-form">
+    <!-- <form method="post" class="search-form">
         <div class="search-wrapper">
             <div class="input-wrapper">
                 <label for="pyramidinput" class="questionlabel">
@@ -19,6 +19,37 @@
                 <button type="submit" class="questionbtn"> <span class="material-icons">search</span> </button>
             </div>
         </div>
-    </form>
+    </form> -->
+
+    <div class="pyramids">
+        {% for pyramid in pyramids %}
+            <div class="pyramid_brief">
+                <div class="pyramid_title textlinks">
+                    <a href="{{ url_for('pyramid', snid=pyramid.sequence_number) }}">Pyramid {{ pyramid.sequence_number }}</a>   
+                </div>
+
+                <div class="data">
+                    <span class="unit-description"><i>Preview</i></span>
+                    <a href="{{ url_for('pyramid', snid=pyramid.sequence_number) }}">{{ pyramid.get_gf_latex() }}</a>
+                </div>   
+
+                <div class="author">
+                    <span class="unit-description"><i>Author</i></span>
+                    <div class="author-credits textlinks">
+                        <a href="{{ url_for('account', username=pyramid.author.username) }}" class="authorlink">
+                            <img
+                            src="{{ url_for('static', filename='profile_pictures/' + pyramid.author.profile_imagefile|safe )}}"
+                            alt="{{ current_user.username.capitalize() }}"
+                            title="{{ current_user.username.capitalize() }}"
+                            width="40" height="40"
+                            class="profile_img">
+                       </a>
+                        <a href="{{ url_for('account', username=pyramid.author.username) }}">{{ pyramid.author.username.capitalize() }} </a>
+                    </div>
+                </div>
+            </div>
+            
+        {% endfor %}
+    </div>
 </main>
 {% endblock %}

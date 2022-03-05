@@ -5,7 +5,13 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 <script src="/static/js/upload_pyramid_handler.js"></script>
 
-<title>Upload pyramid</title>
+<title>
+    {% if pyramid %}
+        Edit pyramid #{{ pyramid.sequence_number }}
+    {% else %}
+        Upload pyramid
+    {% endif %}
+</title>
 {% endblock %} {% block header %} 
     {% include 'header_search.html' %}
 {% endblock %} {% block body %}
@@ -16,21 +22,16 @@
             
             <fieldset class="groups">
                 <div class="form-group title">
-                {% if pyramid %} 
-                    Edit
-                {% else %}
-                    Upload
-                {% endif %}
-                    pyramid</div>
-
-                <div class="form-group"> <!-- Sequence Number field -->
+                    {% if pyramid %}
+                        Edit pyramid #{{ pyramid.sequence_number }}
+                    {% else %}
+                        Upload pyramid
+                    {% endif %}
+                </div>
+                <div class="form-group">
                     {{ form.sequenceNumber.label(class="groupelement-label") }}
-                    {% if form.sequenceNumber.errors %}
-                        {% if pyramid %} 
-                            {{ form.sequenceNumber(class="groupelement-input invalid", placeholder="Sequence number", value=pyramid.sequence_number) }}
-                        {% else %}
-                            {{ form.sequenceNumber(class="groupelement-input invalid", placeholder="Sequence number") }}
-                        {% endif %}
+                        {% if form.sequenceNumber.errors %}
+                        {{ form.sequenceNumber(class="groupelement-input invalid", placeholder="Sequence number") }}
 
                         <div class="invalid-feedback">
                             {% for error in form.sequenceNumber.errors%}
@@ -39,17 +40,12 @@
                         </div>
 
                     {% else %}
-                        {% if pyramid %} 
-                            {{ form.sequenceNumber(class="groupelement-input", placeholder="Sequence number", value=pyramid.sequence_number) }}
-                        {% else %}
-                            {{ form.sequenceNumber(class="groupelement-input", placeholder="Sequence number") }}
-                        {% endif %}
+                        {{ form.sequenceNumber(class="groupelement-input", placeholder="Sequence number") }}
                     {% endif %}
                 </div>
-
-                <div class="form-group">  <!-- Generating function field -->
+                <div class="form-group">
+                    <!-- {{ form.generatingFunction.label(class="groupelement-label") }} -->
                     <label for="" class="groupelement-label">Generating function</label>
-                    
                     {% for g_field in form.generatingFunction %}
                         <div class="form-group-gf">
                             {% if form.generatingFunction.errors %}
@@ -59,15 +55,14 @@
                                     {% endfor %}
                                 </div>
                             {% endif %}
-                            {{ g_field.form.f_name(class="groupelement-input shrinkable f_name", value="U", placeholder="Function") }}
-                            {{ g_field.form.f_vars(class="groupelement-input shrinkable f_vars", value="x, y", placeholder="Variables") }}
+                                {{ g_field.form.f_name(class="groupelement-input shrinkable f_name", placeholder="Function") }}
+                                {{ g_field.form.f_vars(class="groupelement-input shrinkable f_vars", placeholder="Variables") }}
                             <div class="f_operator">=</div>
                             {{ g_field.f_expr(class="groupelement-input growable f_expr", placeholder="Expression") }}
                             <button class="group_operate_gf" onclick="add_gf_input(this)" type="button">+</button>
                         </div>
                     {% endfor %}
                 </div>
-
                 <div class="form-group">
                     <label for="" class="groupelement-label">Explicit formula</label>
                     <div class="form-group-ef">
@@ -79,8 +74,8 @@
                             </div>
                         {% endif %}
                         <div class="ef_declaration">
-                            {{ form.ef_name(class="groupelement-input shrinkable f_name", value="T", placeholder="Formula name", ) }}
-                            {{ form.ef_vars(class="groupelement-input shrinkable f_vars", value="n, m, k", placeholder="Variables")}}
+                            {{ form.ef_name(class="groupelement-input shrinkable f_name", placeholder="Formula name", ) }}
+                            {{ form.ef_vars(class="groupelement-input shrinkable f_vars", placeholder="Variables")}}
                             <div class="f_operator">=</div>
                         </div>
                         <div class="e_fields">
@@ -111,12 +106,21 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.relations(class="groupelement-input", placeholder="Relations") }}
+                    
+                    {{ form.relations(class="groupelement-input", placeholder="Relations") }}
                     {% endif %}
                 </div>
                 <div class="form-group form-submit">
-                    {{ form.submit(class="sumbitbtn groupelement-input upload_pyramidbtn") }}
-                    <a href="{{ url_for('account', username=current_user.username) }}" class="link cancelbtn">Cancel</a>
+                    {% if pyramid %}
+                        {{ form.submit(class="sumbitbtn groupelement-input upload_pyramidbtn", value="Confirm") }}
+                    {% else %}
+                        {{ form.submit(class="sumbitbtn groupelement-input upload_pyramidbtn") }}
+                    {% endif %}
+                    {% if pyramid %}
+                        <a href="{{ url_for('pyramid', snid=pyramid.sequence_number) }}" class="link cancelbtn">Cancel</a>
+                    {% else %}
+                        <a href="{{ url_for('home') }}" class="link cancelbtn">Cancel</a>
+                    {% endif %}
                 </div>
             </fieldset>
         </form>
