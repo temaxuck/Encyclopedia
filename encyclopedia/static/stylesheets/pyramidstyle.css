@@ -102,39 +102,7 @@ table th {
     }
 }
 
-/* related links */
-
-.relatedlinks {
-    display: flex;
-    width: 90%;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.relatedlinks > a {
-    text-decoration: none;
-    color: #0074d9;
-    position: relative;
-}
-
-.relatedlinks > a::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 0;
-    height: 1px;
-    background-color: #0074d9;
-    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .relatedlinks > a:hover::before {
-        left: 0;
-        right: auto;
-        width: 100%;
-    }
-}
+/*  */
 
 /* Modal window */
 
@@ -264,6 +232,8 @@ table th {
 
 .nav {
     width: 33%;
+    display: flex;
+    justify-content: center;
 }
 
 .pnum {
@@ -308,4 +278,6 @@ table th {
     }
 }
 
-
+.edit_pyramid {
+    margin-left: auto;
+}

@@ -5,15 +5,19 @@
 {% include 'header_search.html' %}
 {% endblock %} {% block body %}
 <main>
+    {% if current_user.is_authenticated and current_user.moderator  %}
+        <a href="{{ url_for('edit_pyramid', snid=pyramid.sequence_number) }}" class="link edit_pyramid"> Edit pyramid </a>
+    {% endif %}
+
     <div class="content-wrapper"> <!-- Generating function -->
         <div class="pyramid_navigation">
-            <div class="relatedlinks nav">
+            <div class="textlinks nav">
                 {% if PyramidModel.query.filter_by(sequence_number=pyramid.sequence_number-1).count() > 0 %}
                     <a href="{{ url_for('pyramid', snid=pyramid.sequence_number-1) }}">Pyramid #{{ pyramid.sequence_number - 1 }}</a>
                 {% endif %}
             </div>            
             <span class="pnum"> Pyramid #{{ pyramid.sequence_number }} </span>
-            <div class="relatedlinks nav">
+            <div class="textlinks nav">
                 {% if PyramidModel.query.filter_by(sequence_number=pyramid.sequence_number+1).count() > 0 %}
                 <a href="{{ url_for('pyramid', snid=pyramid.sequence_number+1) }}">Pyramid #{{ pyramid.sequence_number + 1 }}</a>
                 {% endif %}
@@ -55,8 +59,8 @@
 
     <div class="content-wrapper">
         <div class="title">Related</div>
-        <div class="relatedlinks">
-            {% for relation in pyramid.get_relations_as_str() %} 
+        <div class="textlinks">
+            {% for relation in pyramid.__get_relations_str__() %} 
                 <a href="{{ url_for('pyramid', snid=relation) }}"> {{ relation }} </a>
             {% endfor %}
         </div>

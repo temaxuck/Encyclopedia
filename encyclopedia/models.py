@@ -57,7 +57,6 @@ class Pyramid(db.Model):
         secondaryjoin=(relations.c.relatedto_pyramid_id == id),
     backref=db.backref('linked', lazy='dynamic'), lazy='dynamic')
     __special_hashed_value__ = db.Column(db.String(120))
-    # datalist = 
 
     gf_dict = {} # needed to evaluate generating_function
     main_gf = None # needed to evaluate generating_function 
@@ -77,8 +76,24 @@ class Pyramid(db.Model):
             self.relations.append(pyramid)
             pyramid.relations.append(self)
     
-    def get_relations_as_str(self):
+    def delete_relation(self, pyramid):
+        if self.isLinked(pyramid) and pyramid.isLinked(self):
+            self.relations.remove(pyramid)
+            pyramid.relations.remove(self)
+
+    
+    def __get_relations_str__(self):
         return [relation.sequence_number for relation in self.relations ]
+    
+    def get_relations_as_str(self):
+        s = ''
+
+        for loopid, relation in enumerate(self.relations):
+            s += str(relation.sequence_number)
+            if loopid != len(self.relations.all()) - 1:
+                s += ', '
+        
+        return s
 
     # Generating function methods
     def add_generating_function(self, funciton_name, variables, expression, isMain):
@@ -125,14 +140,10 @@ class Pyramid(db.Model):
         return None
 
     def get_gf_latex(self):
-        latexrepr = '$'
+        latexrepr = ''
 
         for (loop, formula) in enumerate(self.generating_function):
-            latexrepr += formula.get_latex()
-            if loop != 1-len(self.generating_function):
-                latexrepr += '\\\\'
-        
-        latexrepr += '$'
+            latexrepr += r' $$' + formula.get_latex() + r'$$ '
 
         return latexrepr
 
@@ -161,17 +172,17 @@ class Pyramid(db.Model):
         latexrepr = f'${self.explicit_formula[0].function_name}_{{{self.sequence_number}}}\
 ({self.explicit_formula[0].get_variables_as_str()}) ='
         if len(self.explicit_formula) > 1:
-            latexrepr += '\begin{cases}' 
+            latexrepr += r'\begin{cases}' 
 
         for loopid, formula in enumerate(self.explicit_formula):
             latexrepr += formula.get_latex()
             if formula.limitation:
-                latexrepr +=  f'&\text{{if {formula.limitation}}} '
+                latexrepr +=  f'&\\text{{if {formula.limitation}}} '
             if loopid != len(self.explicit_formula) - 1:
-                latexrepr += ',\\'
+                latexrepr += r',\ \\'
 
         if len(self.explicit_formula) > 1:
-            latexrepr += ' \end{cases} '
+            latexrepr += r' \end{cases} '
 
         latexrepr += '$'
 
@@ -183,7 +194,7 @@ class Pyramid(db.Model):
             for j in range(m):
                 data.append(self.evaluate_ef_at(i, j, k))
         return data
-# '=\\begin{{cases}}{\\binom{k + n - 1}{n}}&\\text{if m=0} ,\\\\\\frac{\\left(- 2 k + n\\right) {\\binom{k + n - 1}{n}} {\\binom{- 2 k + 2 m + n - 1}{m - 1}}}{m}&\\text{if m>0}  \\end{cases} $'
+
     # Special hashed value methods
     def init_special_value(self):
         import hashlib
@@ -194,6 +205,7 @@ class Pyramid(db.Model):
             gf_point.append(30 + i + 1)
         for i in range(len(self.explicit_formula[0].variables)):
             ef_point.append(30 + i + 1)
+
 
         try:
             a = self.evaluate_gf_at(*gf_point)
@@ -206,7 +218,6 @@ class Pyramid(db.Model):
             b = 'Undefined'
 
         s = f'{a}_{b}'
-        print(s)
         self.__special_hashed_value__ = hashlib.sha256(s.encode()).hexdigest()
 
 class Formula(db.Model):
@@ -308,9 +319,15 @@ class GeneratingFunction(Formula):
 
     def change_formula(self, function_name=None, variables=None, expression=None, main=None):
         self.function_name = function_name if not function_name==None else self.function_name
-        self.variables = variables if not variables==None else self.variables
         self.expression = expression if not expression==None else self.expression
         self.isMain = main if not main==None else self.isMain
+        if variables != self.get_variables_as_str() and variables != None:
+            used_vars = Variable.query.filter_by(formula_id = self.id)
+            used_vars.delete(synchronize_session=False)
+            for var in variables.split(','):
+                var = var.replace(' ', '')
+                var = Variable(var, self.id)
+                self.variables.append(var)
 
     __mapper_args__ = {
         'polymorphic_identity': 'generatingfunction',
@@ -338,10 +355,16 @@ class ExplicitFormula(Formula):
         return latexrepr
 
     def change_formula(self, variables=None, expression=None, limitation=None):
-        self.variables = variables if not variables==None else self.variables
         self.expression = expression if not expression==None else self.expression
         self.limitation = limitation if not expression==None else self.limitation
-    
+        if variables != self.get_variables_as_str() and variables != None:
+            used_vars = Variable.query.filter_by(formula_id = self.id)
+            used_vars.delete(synchronize_session=False)
+            for var in variables.split(','):
+                var = var.replace(' ', '')
+                var = Variable(var, self.id)
+                self.variables.append(var)
+
     __mapper_args__ = {
         'polymorphic_identity': 'explicitformula',
     }

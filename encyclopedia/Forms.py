@@ -52,11 +52,11 @@ class UpdateProfileForm(FlaskForm):
                 raise ValidationError('User with such email already exists.')
 
 class GeneratingFunctionForm(Form):
-    f_name = StringField('Function name', validators=[InputRequired()])
-    f_vars = StringField('Function variables', validators=[InputRequired()])
+    f_name = StringField('Function name', validators=[InputRequired()], default="U")
+    f_vars = StringField('Function variables', validators=[InputRequired()], default="x, y")
     f_expr = StringField('Expression', validators=[InputRequired()])
 
-class ExplicitFormula(Form):
+class ExplicitFormulaForm(Form):
     f_expr = StringField('Expression', validators=[InputRequired()])
     f_condition = StringField('Condition')
 
@@ -64,20 +64,20 @@ class ExplicitFormula(Form):
 class UploadPyramidForm(FlaskForm):
     sequenceNumber = IntegerField('Sequence number', validators=[InputRequired(), NumberRange(min=0)])
     generatingFunction = FieldList(FormField(GeneratingFunctionForm), min_entries=1)
-    explicitFormula = FieldList(FormField(ExplicitFormula), min_entries=1)
+    explicitFormula = FieldList(FormField(ExplicitFormulaForm), min_entries=1)
     ef_name = StringField('Formula name', validators=[InputRequired()], default="T")
     ef_vars = StringField('Formula variables', validators=[InputRequired()], default="n, m, k")
-    # explicitFormula = StringField('Explicit formula', validators=[InputRequired()])
-    relations = StringField('Relations with another pyramids', validators=[])
+    relations = StringField('Relations with another pyramids')
+
+    def validate_relations(self, relations):
+        try:
+            if relations.data:
+                for rel in relations.data.split(','):
+                    rel = int(rel)
+                    Pyramid.query.filter_by(sequence_number=rel).one()
+        except:
+            raise ValidationError('Incorrect relations field')
 
     submit = SubmitField('Upload pyramid')
-    
-    def validate_sequenceNumber(self, sequenceNumber):
-        pyramid = Pyramid.query.filter_by(sequence_number=sequenceNumber.data).first()
-        if pyramid:
-            raise ValidationError('Pyramid with such sequence number already exists.')
-        if sequenceNumber.data < 1:
-            raise ValidationError("Pyramid's sequence number cannot be negative or equal to 0.")
 
-    def validate_generatingFunction(self, generatingFunction):
-        ...
+    

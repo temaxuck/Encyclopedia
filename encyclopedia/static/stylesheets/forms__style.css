@@ -67,13 +67,7 @@ main {
     border-radius: 4px;
     outline-color: #002A55;
     background-color: white;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-    rgba(60, 66, 87, 0.16) 0px 0px 0px 1px, 
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow: rgba(60, 66, 87, 0.16) 0px 0px 0px 1px;
 }
 
 .groupelement-label {
@@ -107,12 +101,7 @@ main {
 /* Submit button */
 .sumbitbtn {
     background-color: #0076ef;
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-                rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, 
-                rgb(84, 105, 212) 0px 0px 0px 1px, 
-                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-                rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, 
                 rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
     font-weight: 600;
     font-family: 'Jura', sans-serif;
@@ -131,13 +120,7 @@ main {
 /* invalid */
 
 .invalid {
-    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-    rgba(255, 0, 0, 1) 0px 0px 0px 1px, 
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
-    rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+    box-shadow: rgba(255, 0, 0, 1) 0px 0px 0px 1px, 
 }
 
 .invalid-feedback {

@@ -16,6 +16,8 @@ migrations = Migrate(app, db)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
-# es = Elasticsearch()
+app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']],
+        basic_auth=(app.config["ELASTIC_USER"], app.config["ELASTIC_PASSWORD"]),
+        ca_certs=False, verify_certs=False) if app.config['ELASTICSEARCH_URL'] else None
 
 from encyclopedia import routes

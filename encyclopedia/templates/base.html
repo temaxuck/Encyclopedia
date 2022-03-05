@@ -43,7 +43,12 @@
         <div class="btns">
             {% if current_user.is_authenticated %}
             <a href="{{ url_for('account', username=current_user.username) }}" class="account">
-                <img src="{{ url_for('static', filename='profile_pictures/' + current_user.profile_imagefile|safe )}}" alt="{{ current_user.username.capitalize() }}" title="{{ current_user.username.capitalize() }}" width="40" height="40">
+                <img
+                src="{{ url_for('static', filename='profile_pictures/' + current_user.profile_imagefile|safe )}}"
+                alt="{{ current_user.username.capitalize() }}"
+                title="{{ current_user.username.capitalize() }}"
+                width="40" height="40"
+                class="profile_img">
             </a>
             <a href="{{ url_for('logout')}}" class="link logout">Log out</a> {% else %}
             <a href="{{ url_for('login')}}" class="link login">Log in</a>

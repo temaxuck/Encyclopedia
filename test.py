@@ -1,5 +1,5 @@
 import sympy as sp
-from sympy.abc import *
+# from sympy.abc import *
 # from sympy.utilities.lambdify import implemented_function, lambdify
 from sympy.parsing.sympy_parser  import parse_expr
 import time
@@ -82,5 +82,12 @@ from encyclopedia import db
 # pyr2 = Pyramid.query.filter_by(sequence_number=2).first()
 # print(pyr2.evaluate_gf_at(30, 30))
 
-for pyramid in Pyramid.query.all():
-    pyramid.init_special_value()
+# for pyramid in Pyramid.query.all():
+#     pyramid.init_special_value()
+
+def testfunc(a=1,b=2, c=3):
+    print(a,b,c)
+
+l = {'a': 2, 'b':2, 'c':2}
+testfunc(*list(zip(l, l.values())))
+# print(zip([a, b, c], [2, 3, 4]))
