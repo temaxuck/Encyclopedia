@@ -15,6 +15,7 @@ hasher = Bcrypt(app)
 migrations = Migrate(app, db)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
+login_manager.login_message = 'Please log in to access this page'
 login_manager.login_message_category = 'info'
 app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']],
         basic_auth=(app.config["ELASTIC_USER"], app.config["ELASTIC_PASSWORD"]),

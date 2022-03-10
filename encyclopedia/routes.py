@@ -2,8 +2,7 @@ from flask import render_template, request, url_for, redirect, session, flash
 from flask_login import login_user, current_user, logout_user, login_required
 from encyclopedia.models import User, Pyramid, relations, GeneratingFunction, Formula, ExplicitFormula
 from encyclopedia.forms import LoginForm, SignupForm, UpdateProfileForm, UploadPyramidForm, GeneratingFunctionForm, ExplicitFormulaForm
-from encyclopedia import app, db, hasher\
-    # , es
+from encyclopedia import app, db, hasher
 
 import os
 import datetime
@@ -11,49 +10,6 @@ import secrets
 from werkzeug.utils import secure_filename
 
 script_path = os.path.dirname(__file__)  # absolute dir the script is in
-
-@app.route('/search', methods=['POST', 'GET'])
-def search():
-    user_input = request.args.get('q')
-    if user_input:
-        try:
-            query = int(user_input)
-        except:
-            query = user_input
-
-        pyramid = Pyramid.query.filter_by(sequence_number=query).first()
-        if pyramid:
-            return redirect(url_for("pyramid", snid=pyramid.sequence_number))
-
-        if not pyramid: # if not by sequence_number then by generating function
-            pyramid = Pyramid.query.filter(Pyramid.generating_function.contains(GeneratingFunction.query.filter_by(expression=query).first())).first()
-            if pyramid:
-                return redirect(url_for("pyramid", snid=pyramid.sequence_number))
-
-        if not pyramid: # if not by generating function then by explicit formula
-            pyramid = Pyramid.query.filter(Pyramid.explicit_formula.contains(ExplicitFormula.query.filter_by(expression=query).first())).first()
-            if pyramid:
-                return redirect(url_for("pyramid", snid=pyramid.sequence_number))
-
-        if not pyramid:
-            try:
-                query = query.split(',')
-                query = list(map(int, query))
-            except:
-                return redirect(url_for("not_found", q=query))
-            for pyr in Pyramid.query.all():
-                try:
-                    data = pyr.get_data_by_ef(7, 7, 1)
-                    n = len(query)
-                    if any(query == data[i:i + n] for i in range(len(data)-n + 1)):
-                        return redirect(url_for("pyramid", snid=pyr.sequence_number))
-                except:
-                    return redirect(url_for("not_found", q=query))
-
-        return redirect(url_for("pyramid", q=user_input))
-    
-    flash('Something went wrong', 'danger')
-    return redirect(url_for("home"))
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
@@ -294,7 +250,7 @@ def edit_pyramid(snid: int):
                         expression=gf.f_expr.data, 
                     )
             except IndexError:
-                pyramid.add_generating_function(gf.f_name.data, gf.f_vars.dat7a, gf.f_expr.data, isMain)
+                pyramid.add_generating_function(gf.f_name.data, gf.f_vars.data, gf.f_expr.data, isMain)
         
         for i, ef in enumerate(form.explicitFormula):
             try:
@@ -353,3 +309,48 @@ def edit_pyramid(snid: int):
     #     return redirect(url_for('search', q=request.form.get('pyramidinput')))
     
     return render_template('upload_pyramid.html', form=form, pyramid=pyramid)
+
+@app.route('/search', methods=['POST', 'GET'])
+def search():
+    user_input = request.args.get('q')
+    # pyramids, total = Pyramid.search(user_input)
+    # print(pyramids)
+    if user_input:
+        try:
+            query = int(user_input)
+        except:
+            query = user_input
+
+        pyramid = Pyramid.query.filter_by(sequence_number=query).first()
+        if pyramid:
+            return redirect(url_for("pyramid", snid=pyramid.sequence_number))
+
+        if not pyramid: # if not by sequence_number then by generating function
+            pyramid = Pyramid.query.filter(Pyramid.generating_function.contains(GeneratingFunction.query.filter_by(expression=query).first())).first()
+            if pyramid:
+                return redirect(url_for("pyramid", snid=pyramid.sequence_number))
+
+        if not pyramid: # if not by generating function then by explicit formula
+            pyramid = Pyramid.query.filter(Pyramid.explicit_formula.contains(ExplicitFormula.query.filter_by(expression=query).first())).first()
+            if pyramid:
+                return redirect(url_for("pyramid", snid=pyramid.sequence_number))
+
+        if not pyramid:
+            try:
+                query = query.split(',')
+                query = list(map(int, query))
+            except:
+                return redirect(url_for("not_found", q=query))
+            for pyr in Pyramid.query.all():
+                try:
+                    data = pyr.get_data_by_ef(7, 7, 1)
+                    n = len(query)
+                    if any(query == data[i:i + n] for i in range(len(data)-n + 1)):
+                        return redirect(url_for("pyramid", snid=pyr.sequence_number))
+                except:
+                    return redirect(url_for("not_found", q=query))
+
+        return redirect(url_for("pyramid", q=user_input))
+    
+    flash('Something went wrong', 'danger')
+    return redirect(url_for("home"))

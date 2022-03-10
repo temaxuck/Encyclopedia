@@ -2,6 +2,7 @@
 html {
     font-family: 'Jura', sans-serif;
     height: 100%;
+    scroll-behavior: smooth;
     /* overflow-x: hidden; */
 }
 
@@ -156,6 +157,7 @@ footer {
 .btns {
     display: inline-flex;
     justify-content: space-between;
+    align-items: self-end;
     gap: 12px;
 }
 
@@ -210,6 +212,34 @@ footer {
 .profile_img {
     /* border: solid black 1px; */
     border-radius: 3px;
+}
+
+/* Go top */
+
+.go-top {
+    position: fixed; 
+    right: 2.5vw;
+    bottom: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+
+    background-color: white;
+    border: solid 2px #333;
+    border-radius: 50%;
+    text-decoration: none;
+
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+}
+
+
+.go-top > span {
+    color: #333;
+    display: inline-block;
 }
 
 @keyframes appear {
