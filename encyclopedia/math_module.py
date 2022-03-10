@@ -40,6 +40,16 @@
 #     # print(GetCoeff2(Polyn,x,y))
 #     return (GetCoeff2(Polyn, x, y))
 
+OPERATIONS = {
+    'parity': {
+        'even': '% 2 == 0',
+        'uneven': '% 2 == 1',
+        'odd': '% 2 == 1',
+    },
+    'separators': { ',': ' and ' },
+    'equal': { '=': '==' }
+}
+
 def kron_delta(a, b):
     return 1 if a == b else 0
 

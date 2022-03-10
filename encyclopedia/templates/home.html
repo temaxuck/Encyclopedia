@@ -5,22 +5,6 @@
 {% include 'header_search.html' %}
 {% endblock %} {% block body %}
 <main>
-    {% if current_user.is_authenticated and current_user.moderator %}
-        <a href="{{ url_for('upload_pyramid') }}" class="link UploadPyr"> Upload pyramid </a>
-    {% endif %}
-    <!-- <form method="post" class="search-form">
-        <div class="search-wrapper">
-            <div class="input-wrapper">
-                <label for="pyramidinput" class="questionlabel">
-                <input type="text" name="pyramidinput" class="question" id="pyramidinput" required autocomplete="off" />
-                    <span class="spanholder">Pyramid expression</span>
-                    <span class="underline"></span>
-                </label>
-                <button type="submit" class="questionbtn"> <span class="material-icons">search</span> </button>
-            </div>
-        </div>
-    </form> -->
-
     <div class="pyramids">
         {% for pyramid in pyramids %}
             <div class="pyramid_brief">
@@ -39,8 +23,8 @@
                         <a href="{{ url_for('account', username=pyramid.author.username) }}" class="authorlink">
                             <img
                             src="{{ url_for('static', filename='profile_pictures/' + pyramid.author.profile_imagefile|safe )}}"
-                            alt="{{ current_user.username.capitalize() }}"
-                            title="{{ current_user.username.capitalize() }}"
+                            alt="{{ pyramid.author.username.capitalize() }}"
+                            title="{{ pyramid.author.username.capitalize() }}"
                             width="40" height="40"
                             class="profile_img">
                        </a>

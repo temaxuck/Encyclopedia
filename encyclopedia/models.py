@@ -1,25 +1,69 @@
 from encyclopedia import db, login_manager
 from flask_login import UserMixin
-from encyclopedia.math_module import kron_delta, custom_sqrt
+from encyclopedia.math_module import kron_delta, custom_sqrt, OPERATIONS
+from encyclopedia.search import add_to_index, remove_from_index, query_index
 
 import sympy as sp
 import re
 from copy import deepcopy
 import math
-# from encyclopedia.math_module import delta
+
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
 # Many to many relation (Pyramid object being linked to another Pyramid object)
-relations = db.Table('relations',                                               
+relations = db.Table(
+    'relations',                                               
     db.Column('linked_pyramid_id', db.Integer, db.ForeignKey('pyramid.id')), # another pyramid, linked to _self_   
     db.Column('relatedto_pyramid_id', db.Integer, db.ForeignKey('pyramid.id')) # another pyramid, _self_ pyramid is related to 
 )
 
+class SearchableMixin(object):
+    @classmethod
+    def search(cls, sequence_number):
+        ids, total = query_index(cls.__tablename__, sequence_number)
+        if total == 0:
+            return cls.query.filter_by(id = 0), 0
+        when = []
+        for i in range(len(ids)):
+            when.append((ids[i], i))
+        return cls.query.filter(cls.id.in_(ids)).order_by(
+            db.case(when, value = cls.id)), total
 
-class User(db.Model, UserMixin):
+    @classmethod
+    def before_commit(cls, session):
+        session._changes = {
+            'add': list(session.new),
+            'update': list(session.dirty),
+            'delete': list(session.deleted)
+        }
+
+    @classmethod
+    def after_commit(cls, session):
+        for obj in session._changes['add']:
+            if isinstance(obj, SearchableMixin):
+                add_to_index(obj.__tablename__, obj)
+        for obj in session._changes['update']:
+            if isinstance(obj, SearchableMixin):
+                add_to_index(obj.__tablename__, obj)
+        for obj in session._changes['delete']:
+            if isinstance(obj, SearchableMixin):
+                remove_from_index(obj.__tablename__, obj)
+        session._changes = None
+
+    @classmethod
+    def reindex(cls):
+        for obj in cls.query:
+            add_to_index(cls.__tablename__, obj)
+
+
+db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
+db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
+
+
+class User(db.Model, UserMixin, SearchableMixin):
     __tablename__ = 'user'
     __searchable__ = ["username"]
     id = db.Column(db.Integer, primary_key=True)
@@ -45,7 +89,7 @@ class User(db.Model, UserMixin):
         pyramid.user_id = self.id
     
 
-class Pyramid(db.Model):
+class Pyramid(db.Model, SearchableMixin):
     __tablename__ = 'pyramid'
     __searchable__ = ["sequence_number"]
     id = db.Column(db.Integer, primary_key=True)
@@ -108,13 +152,16 @@ class Pyramid(db.Model):
                 self.gf_dict.update({formula.function_name : formula})
             else:
                 self.gf_dict[formula.function_name] = formula
-            if formula.isMain:
-                self.main_gf = formula
+        
+        self.main_gf = self.get_main_gf()
+
+        if not self.main_gf:
+            self.main_gf = self.generating_function[0]
 
     def evaluate_certain_gf(self, function_name:str, values:dict[str:float], sqrt={'sqrt': math.sqrt}):
         values['__builtins__'] = None
         if (self.gf_dict[function_name].other_func_calls == 0):
-            return eval(self.gf_dict[function_name].expression, values, sqrt)
+            return eval(self.gf_dict[function_name].__expr__, values, sqrt)
         
         other_funcs = deepcopy(self.gf_dict[function_name].other_func)
         to_be_evaluated = self.gf_dict[function_name].__expr__
@@ -126,7 +173,7 @@ class Pyramid(db.Model):
         return eval(to_be_evaluated, values, sqrt)
 
     def evaluate_gf_at(self, *args):
-        if self.main_gf is None or not gf_dict:
+        if self.main_gf is None or not self.gf_dict:
             self.init_gf_evaluation()
         try:
             return self.evaluate_certain_gf(self.main_gf.function_name, dict(zip(self.main_gf.__get_variables_str__(), args)))
@@ -161,10 +208,11 @@ class Pyramid(db.Model):
 
             if not formula.limitation:
                 answer = eval(formula.expression, values, {'binomial': sp.binomial, 'delta': kron_delta})
-                continue
+                return answer
 
             if eval(formula.limitation_to_eval, values):
                 answer = eval(formula.expression, values, {'binomial': sp.binomial, 'delta': kron_delta})
+                return answer
         
         return answer
     
@@ -260,7 +308,7 @@ class Formula(db.Model):
                 s += ', '
         return s
 
-    def change_formula(self, *args):
+    def change_formula(self, *args): # Abstract function
         ...
 
 class Variable(db.Model):
@@ -314,7 +362,8 @@ class GeneratingFunction(Formula):
             if ord(i) in range(ord("A"), ord("Z") + 1):
                 self.other_func_calls += 1
                 other_func.append(i)
-        self.__expr__ = re.sub('[A-Z]?\((\w|, )*\)','_TBR_', self.expression) # _TBR_ is being replaced later 
+        self.__expr__ = re.sub('\^','**', self.expression) # _TBR_ is being replaced later 
+        self.__expr__ = re.sub('[A-Z]?\((\w|, )*\)','_TBR_', self.__expr__) # _TBR_ is being replaced later 
         self.other_func = other_func # other functions in chronological order
 
     def change_formula(self, function_name=None, variables=None, expression=None, main=None):
@@ -347,8 +396,17 @@ class ExplicitFormula(Formula):
 
     def init_f_evaluation(self):
         self.limitation_to_eval = self.limitation
-        self.limitation_to_eval = self.limitation_to_eval.replace(',', ' and ')
-        self.limitation_to_eval = self.limitation_to_eval.replace('=', '==')
+        
+        for key, value in OPERATIONS['equal'].items(): 
+            self.limitation_to_eval = re.sub(fr'([^=]){key}([^=])', fr'\1{value}\2', self.limitation_to_eval)
+
+        for key, value in OPERATIONS['separators'].items(): 
+            self.limitation_to_eval = re.sub(key, value, self.limitation_to_eval)
+
+        for key, value in OPERATIONS['parity'].items():
+            key.encode('unicode_escape')
+            value.encode('unicode_escape')
+            self.limitation_to_eval = re.sub(r'\b'+key, value, self.limitation_to_eval)
 
     def get_latex(self):
         latexrepr = sp.latex(sp.sympify(self.expression))
