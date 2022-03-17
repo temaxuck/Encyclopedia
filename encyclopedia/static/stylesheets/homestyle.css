@@ -57,3 +57,29 @@ main {
     align-items: baseline;
     gap: 10px;
 }
+
+.page_nav {
+    align-self: flex-end;
+    margin: 20px;
+    font-size: 1.45em;
+
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.page_nav-element {
+    display: flex;
+    width: 50px;
+    height: 50px;
+
+    border: 1px solid rgba(60, 66, 87, 0.16) ;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.page_nav-element:hover {
+    border-color: rgba(60, 66, 87, 0.46);
+
+}
