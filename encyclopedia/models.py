@@ -1,7 +1,6 @@
 from encyclopedia import db, login_manager
 from flask_login import UserMixin
 from encyclopedia.math_module import kron_delta, custom_sqrt, OPERATIONS
-from encyclopedia.search import add_to_index, remove_from_index, query_index
 
 import sympy as sp
 import re
@@ -20,52 +19,8 @@ relations = db.Table(
     db.Column('relatedto_pyramid_id', db.Integer, db.ForeignKey('pyramid.id')) # another pyramid, _self_ pyramid is related to 
 )
 
-class SearchableMixin(object):
-    @classmethod
-    def search(cls, sequence_number):
-        ids, total = query_index(cls.__tablename__, sequence_number)
-        if total == 0:
-            return cls.query.filter_by(id = 0), 0
-        when = []
-        for i in range(len(ids)):
-            when.append((ids[i], i))
-        return cls.query.filter(cls.id.in_(ids)).order_by(
-            db.case(when, value = cls.id)), total
-
-    @classmethod
-    def before_commit(cls, session):
-        session._changes = {
-            'add': list(session.new),
-            'update': list(session.dirty),
-            'delete': list(session.deleted)
-        }
-
-    @classmethod
-    def after_commit(cls, session):
-        for obj in session._changes['add']:
-            if isinstance(obj, SearchableMixin):
-                add_to_index(obj.__tablename__, obj)
-        for obj in session._changes['update']:
-            if isinstance(obj, SearchableMixin):
-                add_to_index(obj.__tablename__, obj)
-        for obj in session._changes['delete']:
-            if isinstance(obj, SearchableMixin):
-                remove_from_index(obj.__tablename__, obj)
-        session._changes = None
-
-    @classmethod
-    def reindex(cls):
-        for obj in cls.query:
-            add_to_index(cls.__tablename__, obj)
-
-
-db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
-db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
-
-
-class User(db.Model, UserMixin, SearchableMixin):
+class User(db.Model, UserMixin):
     __tablename__ = 'user'
-    __searchable__ = ["username"]
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -89,9 +44,8 @@ class User(db.Model, UserMixin, SearchableMixin):
         pyramid.user_id = self.id
     
 
-class Pyramid(db.Model, SearchableMixin):
+class Pyramid(db.Model):
     __tablename__ = 'pyramid'
-    __searchable__ = ["sequence_number"]
     id = db.Column(db.Integer, primary_key=True)
     sequence_number = db.Column(db.Integer, unique=True, nullable=False)
     generating_function = db.relationship("GeneratingFunction", backref="pyramid", lazy=True)
