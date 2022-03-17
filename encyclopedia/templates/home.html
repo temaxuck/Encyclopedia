@@ -35,5 +35,79 @@
             
         {% endfor %}
     </div>
+
+    <div class="page_nav textlinks">
+        {% set left_b = page - 3 %}
+        {% set right_b = page + 3 %}
+        {% if left_b < 1 %}
+            {% set left_b = 1 %}    
+        {% endif %}
+        {% if right_b > pages_in_total %}
+            {% set right_b = pages_in_total %}    
+        {% endif %}
+        {% if pages_in_total != 1 %}
+            <span>Page:</span>
+            {% if page - 4 > 1 %}
+                <a href="{{ url_for('home', page=1) }}" class="page_nav-element">{{ 1 }}</a>
+                <span>...</span>
+            {% elif page - 4 == 1 %}
+                <a href="{{ url_for('home', page=1) }}" class="page_nav-element">{{ 1 }}</a>
+            {% endif %}
+            
+
+            {% for page_id in range(left_b, right_b+1) %}
+                {% if page_id != page %}
+                    <a href="{{ url_for('home', page=page_id) }}" class="page_nav-element">{{ page_id }}</a>
+                {% else %}
+                    <span class="page_nav-element">{{ page_id }}</span>
+                {% endif %}
+            {% endfor %}
+
+            {% if page + 4 < pages_in_total %}
+                <span>...</span>
+                <a href="{{ url_for('home', page=pages_in_total) }}" class="page_nav-element">{{ pages_in_total }}</a>
+            {% elif page + 4 == pages_in_total %}
+                <a href="{{ url_for('home', page=pages_in_total) }}" class="page_nav-element">{{ pages_in_total }}</a>
+            {% endif %}
+
+
+        {% endif %}
+        <!-- {% if page-5 >= 1 %}
+            <a href="{{ url_for('home', page=1) }}">1</a>
+            <a href="{{ url_for('home', page=2) }}">2</a>
+        {% endif %} 
+        {% if 2-page!=0 %}
+            <span>...</span>
+        {% endif %}
+        <a href="{{ url_for('home', page=page-1) }}">{{page-1}}</a>
+        <span>{{page}}</span>
+        {% if pages_in_total-page!=0 %}
+            {% if pages_in_total-4-page > 0 %}
+                <span>...</span>
+                <a href="{{ url_for('home', page=pages_in_total-1) }}">{{pages_in_total-1}}</a>
+                <a href="{{ url_for('home', page=pages_in_total) }}">{{ pages_in_total }}</a>
+            {% else %}
+                {% for page_id in range(page+1, pages_in_total) %}
+                    <a href="{{ url_for('home', page=page_id) }}">{{page_id}}</a>
+                    
+                {% endfor %}
+            {% endif %}
+        {% endif %} -->
+        
+        <!-- {% for page_id in range(page-5, page) %}
+            {% if page_id + 1 == page %}
+            {% else %}
+                <a href="{{ url_for('home', page=page_id + 1) }}">{{page_id + 1}}</a>
+            {% endif %}    
+        {% endfor %}
+        {% if pages_in_total > 5 %}
+            {% if condition %}
+                
+            {% endif %}    
+        <span>...</span>
+        {% endif %}
+         -->
+
+    </div>
 </main>
 {% endblock %}
