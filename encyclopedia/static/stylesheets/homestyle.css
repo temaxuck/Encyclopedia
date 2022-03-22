@@ -58,11 +58,17 @@ main {
     gap: 10px;
 }
 
-.page_nav {
+.nav_wrapper {
     align-self: flex-end;
     margin: 20px;
     font-size: 1.45em;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 
+}
+
+.page_nav {
     display: flex;
     gap: 15px;
     align-items: center;
@@ -77,9 +83,48 @@ main {
     justify-content: center;
     align-items: center;
     text-align: center;
+
+    border-radius: 5px;
 }
 
 .page_nav-element:hover {
     border-color: rgba(60, 66, 87, 0.46);
+}
 
+
+.pagenum {
+    font-family: 'Jura', sans-serif;
+    outline: none;
+    font-size: 1em;
+    background-color: white;
+    width: 100%;
+    cursor: pointer;
+    transition: all 150ms ease;
+    padding-right: 1em;
+
+    -moz-appearance: none;
+}
+
+.manual_page_input {
+    position: relative;
+    
+}
+
+.manual_page_input::after {
+    content: '\e5cf';
+    font: 1em 'Material Icons';
+    color: #333;
+    /*Adjust for position however you want*/
+    
+    top: calc(25px - 0.5em);
+    right: 0.25em;
+    /*left line */
+    
+    position: absolute;
+    pointer-events: none;
+  
+}
+
+.manual_page_input:hover::after {
+    color: #005fc0;
 }
