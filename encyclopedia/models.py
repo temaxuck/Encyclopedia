@@ -316,7 +316,7 @@ class GeneratingFunction(Formula):
             if ord(i) in range(ord("A"), ord("Z") + 1):
                 self.other_func_calls += 1
                 other_func.append(i)
-        self.__expr__ = re.sub('\^','**', self.expression) # _TBR_ is being replaced later 
+        self.__expr__ = re.sub('\^','**', self.expression) # people often use caret to do exponential math, but python should interpret it as ** operator 
         self.__expr__ = re.sub('[A-Z]?\((\w|, )*\)','_TBR_', self.__expr__) # _TBR_ is being replaced later 
         self.other_func = other_func # other functions in chronological order
 
