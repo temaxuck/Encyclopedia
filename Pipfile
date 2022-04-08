@@ -25,6 +25,11 @@ Flask-Caching = "*"
 elasticsearch = "*"
 flask-whooshalchemy = "*"
 flask-whooshalchemy3 = "*"
+flask-msearch = "*"
+whoosh = "*"
+blinker = "*"
+sqlathanor = "*"
+jieba = "*"
 
 [dev-packages]
 

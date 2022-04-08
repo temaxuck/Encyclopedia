@@ -60,7 +60,7 @@
                 </div>
                 <div class="form-group form-submit">
                     {{ form.submit(class="sumbitbtn groupelement-input") }}
-                    <a href="{{ url_for('account', username=current_user.username) }}" class="link cancelbtn">Cancel</a>
+                    <a href="{{ url_for('account.account', username=current_user.username) }}" class="link cancelbtn">Cancel</a>
                 </div>
             </fieldset>
             

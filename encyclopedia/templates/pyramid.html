@@ -6,34 +6,34 @@
 {% endblock %} {% block body %}
 <main>
     {% if current_user.is_authenticated and current_user.moderator  %}
-        <a href="{{ url_for('edit_pyramid', snid=pyramid.sequence_number) }}" class="link edit_pyramid"> Edit pyramid </a>
+        <a href="{{ url_for('pyramid.edit_pyramid', snid=pyramid.sequence_number) }}" class="link edit_pyramid"> Edit pyramid </a>
     {% endif %}
 
     <div class="content-wrapper"> <!-- Generating function -->
         <div class="pyramid_navigation">
             <div class="textlinks nav">
                 {% if PyramidModel.query.filter_by(sequence_number=pyramid.sequence_number-1).count() > 0 %}
-                    <a href="{{ url_for('pyramid', snid=pyramid.sequence_number-1) }}">Pyramid #{{ pyramid.sequence_number - 1 }}</a>
+                    <a href="{{ url_for('pyramid.pyramid', snid=pyramid.sequence_number-1) }}">Pyramid #{{ pyramid.sequence_number - 1 }}</a>
                 {% endif %}
             </div>            
             <span class="pnum"> Pyramid #{{ pyramid.sequence_number }} </span>
             <div class="textlinks nav">
                 {% if PyramidModel.query.filter_by(sequence_number=pyramid.sequence_number+1).count() > 0 %}
-                <a href="{{ url_for('pyramid', snid=pyramid.sequence_number+1) }}">Pyramid #{{ pyramid.sequence_number + 1 }}</a>
+                <a href="{{ url_for('pyramid.pyramid', snid=pyramid.sequence_number+1) }}">Pyramid #{{ pyramid.sequence_number + 1 }}</a>
                 {% endif %}
             </div>
             
         </div>        
         <span class="title"> Generating function </span>
         <div class="latex">
-            {{ pyramid.get_gf_latex()|safe }}
+            {{ pyramid.gf_latex|safe }}
         </div>
     </div>
 
     <div class="content-wrapper"> <!-- Explicit Formula -->
         <span class="title"> Explicit formula </span>
         <div class="latex">
-            {{ pyramid.get_ef_latex()|safe }}
+            {{ pyramid.ef_latex|safe }}
         </div>
 
     </div>
@@ -61,7 +61,7 @@
         <div class="title">Related</div>
         <div class="textlinks">
             {% for relation in pyramid.__get_relations_str__() %} 
-                <a href="{{ url_for('pyramid', snid=relation) }}"> {{ relation }} </a>
+                <a href="{{ url_for('pyramid.pyramid', snid=relation) }}"> {{ relation }} </a>
             {% endfor %}
         </div>
     </div>
@@ -81,7 +81,7 @@
                         <div class="title">Export as LaTEX</div> 
                         <div class="closebtn"><span class="material-icons">close</span></div>
                     </div>
-                    <textarea class="exportcode" readonly>{{ pyramid.get_gf_latex().replace("$","")|safe }}&#13;&#10;{{ pyramid.get_ef_latex().replace("$","")|safe }}</textarea>
+                    <textarea class="exportcode" readonly>{{ pyramid.gf_latex.replace("$","")|safe }}&#13;&#10;{{ pyramid.ef_latex.replace("$","")|safe }}</textarea>
                     <div class="exportcopybtn-wrapper"> <button class="copybtn" onclick="copy()">Copy</button> </div>
                 </div>
             </div>
@@ -90,7 +90,8 @@
         </div>
     </div>
 </main>
+{% endblock %}
 
-<script src="/static/js/export.js"></script>
-
+{% block afterscripts %}
+    <script src="/static/js/export.js"></script>
 {% endblock %}
