@@ -1,2 +1,0 @@
-Tuu0716(n,m,k):=Tsqrt(m,n)*TA000984(m,k);
-

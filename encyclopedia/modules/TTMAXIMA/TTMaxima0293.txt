@@ -1,2 +1,0 @@
-Tuu0293(n,m,k):=if m=0 then binomial(k,n) else if 2*m+k-n=0 then 0 else binomial(k,n)*((binomial(3*m+k-n-1,m))*(k-n))/(2*m+k-n)
-

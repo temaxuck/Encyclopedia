@@ -1,2 +1,0 @@
-Tuu0120(n,m,k):=if n=0 and m=0 then 1 else (k*4^n*(binomial(n+k,m))*(binomial((n-m+k)/2,n)))/(n+k)
-

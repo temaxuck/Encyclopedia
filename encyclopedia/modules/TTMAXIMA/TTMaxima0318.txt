@@ -1,2 +1,0 @@
-Tuu0318(n,m,k):=binomial(k,n)*binomial(2*(k-2*n)+m-1,m)
-

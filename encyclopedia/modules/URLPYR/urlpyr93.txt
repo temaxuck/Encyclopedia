@@ -1,3 +1,0 @@
-<span>Symmetric</span>
-OEIS: <a href="https://oeis.org/A085880">A085880</a> 
-

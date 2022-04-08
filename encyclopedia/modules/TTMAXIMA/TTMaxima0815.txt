@@ -1,2 +1,0 @@
-Tuu0815(n,m,k):=T984(m,n)*binomial(2*k,n);
-

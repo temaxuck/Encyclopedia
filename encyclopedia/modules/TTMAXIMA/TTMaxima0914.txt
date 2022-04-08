@@ -1,2 +1,0 @@
-Tuu0914(n,m,k):=if m=0 then binomial(k,n) else binomial(k-m-1,m-1)*binomial(k-m,n)*2^m*k/(m);
-

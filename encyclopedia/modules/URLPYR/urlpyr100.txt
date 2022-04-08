@@ -1,2 +1,0 @@
-<a href="pyramid?q=99">Change x y:      99</a>
-

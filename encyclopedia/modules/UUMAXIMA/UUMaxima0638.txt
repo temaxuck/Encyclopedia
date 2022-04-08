@@ -1,2 +1,0 @@
-UU0638(x,y):=(2*sin(asin((3^(3/2)*sqrt(y))/2)/3))/(sqrt(3)*sqrt(1-4*x)*sqrt(y))
-

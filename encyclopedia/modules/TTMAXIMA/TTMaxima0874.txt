@@ -1,2 +1,0 @@
-Tuu0874(n,m,k):=(k*TA000984(m,n+k)*(binomial(3*n+k-1,n)))/(2*n+k);
-
