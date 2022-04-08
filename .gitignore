@@ -1,0 +1,5 @@
+.history/
+_.swp
+db_transfer_pyramids.py
+encyclopedia/static/src/expand_icon.svg
+migrations/
