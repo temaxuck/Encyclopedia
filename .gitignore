@@ -1,0 +1,10 @@
+*\*\*.pyc
+testtest.py
+_.swp
+encyclopedia.db
+encyclopedia/encyclopedia.db
+encyclopedia/static
+test.html
+migrations
+db_transfer_pyramids.py
+.history
