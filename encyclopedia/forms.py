@@ -1,10 +1,17 @@
 from flask_wtf import FlaskForm
+<<<<<<< HEAD
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, EmailField, IntegerField, FieldList, FormField, Form
 from wtforms.validators import InputRequired, Email, Length, EqualTo, ValidationError, NumberRange
 
 from encyclopedia.models import User, Pyramid, Formula, GeneratingFunction, ExplicitFormula
 from flask_login import current_user
+=======
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, EmailField
+from wtforms.validators import InputRequired, Email, Length, EqualTo, ValidationError
+
+from encyclopedia.models import User 
+>>>>>>> main
 
 class LoginForm(FlaskForm):
     email = StringField('Username or Email', validators=[InputRequired(), Length(min=5, max=30)])
@@ -31,6 +38,7 @@ class SignupForm(FlaskForm):
         user = User.query.filter_by(email=email.data.lower()).first()
         if user:
             raise ValidationError('User with such email already exists.')
+<<<<<<< HEAD
 
 class UpdateProfileForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired(), Length(min=5, max=30)])
@@ -80,4 +88,6 @@ class UploadPyramidForm(FlaskForm):
 
     submit = SubmitField('Upload pyramid')
 
+=======
+>>>>>>> main
     
