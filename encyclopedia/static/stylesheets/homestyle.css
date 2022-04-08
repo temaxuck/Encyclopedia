@@ -10,7 +10,7 @@ main {
     margin-left: auto;
 }
 
-.pyramids {
+.results {
     display: flex;
     margin-top: 40px;
     min-width: 50%;
@@ -19,7 +19,7 @@ main {
     flex-wrap: wrap;
 }
 
-.pyramid_brief {
+.result_brief {
     padding: 20px;
     background-color: rgb(250, 250, 250);
     box-shadow: rgba(60, 66, 87, 0.16) 0px 0px 0px 1px;
@@ -27,11 +27,16 @@ main {
     border-radius: 5px;
 }
 
-.pyramid_brief > .pyramid_title {
+.user_brief {
+    display: flex;
+    gap: 2.5%;
+}
+
+.result_brief > .result_title {
     font-size: 2em;
 }
 
-.pyramid_brief > .data {
+.result_brief > .data {
     display: flex;
     justify-items: center;
     align-items: baseline;
@@ -127,4 +132,16 @@ main {
 
 .manual_page_input:hover::after {
     color: #005fc0;
+}
+
+.MJX-TEX, .katex {
+    font-size: 1.2em;
+    font-family: MJXZERO, MJXTEX;
+}
+
+
+.katex-html > .base {
+    margin: 1em 0;
+    padding: 0;
+    font-size: 104.4%;
 }

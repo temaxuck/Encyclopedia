@@ -19,7 +19,7 @@
         </div>
             
             {% if current_user.id == user.id %}
-                <a href="{{ url_for('update_profile', id=user.id) }}" class="link edit_profile"> 
+                <a href="{{ url_for('account.update_profile', id=user.id) }}" class="link edit_profile"> 
                     <span class="material-icons">mode</span> Edit profile</a>
             {% endif %}
     </div>
