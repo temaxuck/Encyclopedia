@@ -1,2 +1,0 @@
-Tuu0122(n,m,k):=binomial(m+k/2-1,m)*4^(n+m)*binomial(n+k/2-1,n)
-

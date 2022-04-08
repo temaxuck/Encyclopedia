@@ -1,2 +1,0 @@
-Tuu0375(n,m,k):=4^m*binomial((k-n)/2+m-1,m)*binomial(n+k-1,n)
-

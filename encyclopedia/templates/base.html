@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/basestyle.css') }}"> {% block head %} {% endblock %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/basestyle.css') }}">
+    {% block head %} {% endblock %}
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class=flashes>
@@ -20,35 +22,80 @@
             <script src="/static/js/notifications.js"></script>
         {% endif %}
     {% endwith %}
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [
+                    ['$', '$'],
+                    ['\\(', '\\)']
+                ]
+            },
+            svg: {
+                fontCache: 'global',
+            },
+            startup: {
+                ready: () => {
+                    MathJax.startup.defaultReady();
+                    MathJax.startup.promise.then(() => {
+                        console.log('MathJax initial typesetting complete');
+                    });
+                }
+            },
+            tex2jax: {
+                preview: "none"
+            }
+        };
+    </script> 
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
-<body>
+<body onscroll="gotop()">
     <header>
         <span class="header_name">
             <a href="/">Online encyclopedia of Number Pyramids</a>
         </span> {% block header %} {% endblock %}
-
+        
         <div class="btns">
             {% if current_user.is_authenticated %}
-                <a href="{{ url_for('account', username=current_user.username) }}" class="account">
-                    <img src="{{ url_for('static', filename='profile_pictures/' + current_user.profile_imagefile)}}"
-                    alt="" width="40" height="40"> 
-                </a>
-                <a href="{{ url_for('logout')}}" class="link logout">Log out</a>
+            {% if current_user.moderator %}
+            <a href="{{ url_for('pyramid.upload_pyramid') }}" class="link"> Upload pyramid </a>
+            {% endif %}
+            
+            <a href="{{ url_for('account.account', username=current_user.username) }}" class="account">
+                <img
+                src="{{ url_for('static', filename='profile_pictures/' + current_user.profile_imagefile|safe )}}"
+                alt="{{ current_user.username.capitalize() }}"
+                title="{{ current_user.username.capitalize() }}"
+                width="40" height="40"
+                class="profile_img">
+            </a>
+            <a href="{{ url_for('account.logout')}}" class="link logout">Log out</a>
             {% else %}
-                <a href="{{ url_for('login')}}" class="link login">Log in</a>
-                <a href="{{ url_for('signup')}}" class="link signup">Sign up</a>
+            <a href="{{ url_for('account.login')}}" class="link login">Log in</a>
+            <a href="{{ url_for('account.signup')}}" class="link signup">Sign up</a>
             {% endif %}
         </div>
         
     </header>
     <div class="site-wrapper">
         
-
+        
         {% block body %} {% endblock %}
-
+        
     </div>
-    <footer>Noname team</footer>
+    
+    <a href="#" class="go-top">
+        <span class="material-icons-outlined go-arrow top-arrow">expand_less</span>
+    </a>
+    
+    <footer>
+        <div class="credits">
+            Fullstack temax co.
+        </div>
+    </footer>
 </body>
 
+{% block afterscripts %}{% endblock %}
+<script src="/static/js/topdown-navigation.js"></script>
 </html>

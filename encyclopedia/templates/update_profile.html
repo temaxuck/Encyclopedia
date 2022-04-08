@@ -1,0 +1,74 @@
+{% extends 'base.html' %} {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/accountstyle.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/forms__style.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/update_profilestyle.css') }}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+<title>User {{ current_user.username.capitalize() }} - Edit</title>
+{% endblock %} {% block header %} 
+    {% include 'header_search.html' %}
+{% endblock %} {% block body %}
+<main>
+
+    <div class="update_profile-content">
+        <form action="" method="post" class="form update-form" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            
+            <fieldset class="groups">
+                <div class="form-group title">Edit your profile</div>
+                <div class="form-group">
+                    {{ form.username.label(class="groupelement-label") }}
+                        {% if form.username.errors %}
+                        {{ form.username(class="groupelement-input invalid") }}
+
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors%}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                    {% else %}
+                        {{ form.username(class="groupelement-input") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="groupelement-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="groupelement-input invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors%}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="groupelement-input") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.picture.label(class="groupelement-label") }}
+                    <img src="{{ imagesrc }}" 
+                    alt="" class="profile-image" width="128" height="128">
+                    {{ form.picture(class="groupelement-file", onchange="sub(this)") }}
+                    <label for="picture" class="picture-label"><span class="material-icons-outlined">file_upload</span></label>
+                    <span class="filename">Uploaded file: </span>
+                    {% if form.picture.errors %}
+                    <div class="invalid-feedback picture-feedback">
+                        {% for error in form.picture.errors%}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-group form-submit">
+                    {{ form.submit(class="sumbitbtn groupelement-input") }}
+                    <a href="{{ url_for('account.account', username=current_user.username) }}" class="link cancelbtn">Cancel</a>
+                </div>
+            </fieldset>
+            
+    
+            
+        </form>
+    </div>
+</main>
+
+<script src="/static/js/profileimage.js"></script>
+{% endblock %}

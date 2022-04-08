@@ -1,2 +1,0 @@
-Tuu0010(n,m,k):=binomial(k,m)*binomial(k,n)
-

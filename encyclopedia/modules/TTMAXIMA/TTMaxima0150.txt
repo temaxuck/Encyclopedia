@@ -1,2 +1,0 @@
-Tuu0150(n,m,k):=if m+n<k or m+n=0 then 0 else k/(m+n)*binomial(m+n,n)*binomial(2*n,m+n-k)
-

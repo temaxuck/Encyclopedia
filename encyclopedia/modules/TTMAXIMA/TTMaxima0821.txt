@@ -1,2 +1,0 @@
-Tuu0821(n,m,k):=Tsqrt(m,n)*binomial(2*k,n);
-

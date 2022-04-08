@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MathJax Test Page</title>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [
+                    ['$', '$'],
+                    ['\\(', '\\)']
+                ]
+            },
+            svg: {
+                fontCache: 'global',
+            }
+        };
+    </script>
+    
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <!-- <script>window.MathJax = { MathML: { extensions: ["mml3.js", "content-mathml.js"]}};</script> -->
+    <!-- <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=MML_HTMLorMML"></script> -->
+
+</head>
+
+<body>
+    <!-- \[a^2\] $ G(y) = \frac {1} {(1 - y)^2} $ <br> $ V(x,y) = (\frac {\sqrt{x} \cdot G(y) ^ {3}} {(1 - y)^2})$
+    <br>$ \delta_{k, n+m} $
+    <br> $ U_{3}(x, y) = y \left(x + 1\right) $ -->
+
+    <!-- $T_{1001}(n, m, k) = \begin {cases} \binom{k+n-1}{n} & \text{if n=0} \\ 2 \\ 3 \end {cases}$ -->
+    $$ U_{420}(x, y) = \frac{G^{2}{\left(y \right)}}{9 V{\left(x,y \right)}} + V{\left(x,y \right)} $$ $$ G(y) = 1 - y $$ $$  V(x, y) = \frac{x G{\left(y \right)}}{3} $$
+
+    <style>
+        .MathJax {
+            font-size: 2em;
+        }
+    </style>
+
+
+</body>
+
+</html>
+
+<!-- Shoulda keep! -->
+<!-- <div class="modalwindow" id="maximacode" onclick="close_modal(event)"> Maxima
+                <div class="exportcode-wrapper">
+                    <div class="exportcode-header">
+                        <div class="title">Export as Maxima</div>
+                        <div class="closebtn"><span class="material-icons">close</span></div>
+                    </div>
+                    <textarea class="exportcode" readonly>{{ Pyramid.UUMaxima[0] }}{{ Pyramid.UUMaxima[1] }}</textarea>
+                    <div class="exportcopybtn-wrapper">
+                        <button class="copybtn" onclick="copy()">Copy</button>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- <div class="modalwindow" id="mathematicacode" onclick="close_modal(event)"> Mathematica
+                <div class="exportcode-wrapper">
+                    <div class="exportcode-header">
+                        <div class="title">Export as Mathematica</div> <div class="closebtn"><span class="material-icons">close</span></div>
+                    </div>
+                    <textarea class="exportcode" readonly>{{ Pyramid.UUMaxima[2] }}{{ Pyramid.UUMaxima[3] }}</textarea>
+                    <div class="exportcopybtn-wrapper"> <button class="copybtn" onclick="copy()">Copy</button> </div>
+                </div>
+            </div> -->
+

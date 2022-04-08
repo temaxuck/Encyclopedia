@@ -1,9 +1,0 @@
-<a href="pyramid?q=182">Reciprocal:      182</a>
-<a href="pyramid?q=184">Reversion on x:  184</a>
-<a href="pyramid?q=183">Reversion on y:  183</a>
-<a href="pyramid?q=22">Right on x:      22</a>
-<a href="pyramid?q=21">Right on y:      21</a>
-<a href="pyramid?q=17">Left on x:       17</a>
-<a href="pyramid?q=35">Left on y:       35</a>
-<span>Symmetric</span>
-

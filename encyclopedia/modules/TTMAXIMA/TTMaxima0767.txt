@@ -1,2 +1,0 @@
-Tuu0767(n,m,k):=TLeftA271825(n,2*k)*Tsqrt(m,k);
-

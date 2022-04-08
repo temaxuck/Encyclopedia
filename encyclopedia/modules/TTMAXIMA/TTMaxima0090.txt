@@ -1,2 +1,0 @@
-Tuu0090(n,m,k):=if n=0 and m=0 then 0 else binomial(n+m,m)*binomial(n+m-1,n+m-k)
-

@@ -1,2 +1,0 @@
-Tuu0066(n,m,k):=if n=0 and m=0 then 1 else if k=0 then 0 else (k*(binomial(n+k,n))*(binomial(n+2*m+k-1,m)))/(n+m+k)
-

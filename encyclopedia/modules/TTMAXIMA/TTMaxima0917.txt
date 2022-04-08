@@ -1,2 +1,0 @@
-Tuu0917(n,m,k):=binomial(k,n)*2^m*binomial(m+k-1,m)
-
