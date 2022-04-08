@@ -1,12 +1,14 @@
 from encyclopedia import db, login_manager
-from flask_login import UserMixin
 from encyclopedia.math_module import kron_delta, custom_sqrt, OPERATIONS
 
+import math
 import sympy as sp
 import re
 from copy import deepcopy
-import math
-
+from flask_login import UserMixin
+# from sqlathanor import declarative_base, Column, relationship, AttributeConfiguration
+# from jieba.analyse import ChineseAnalyzer
+import json
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -21,6 +23,7 @@ relations = db.Table(
 
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
+    __searchable__ = 'username'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -39,31 +42,48 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f'User("{self.username}", "{self.email}", "{self.profile_imagefile}", moderator={self.moderator})'
 
+    def toJSON(self):
+        return json.dumps({
+            'username': self.username,
+            'profile_image': self.profile_imagefile,
+            })
+    
     def add_pyramid(self, pyramid):
         self.posts.append(pyramid)
         pyramid.user_id = self.id
     
-
 class Pyramid(db.Model):
     __tablename__ = 'pyramid'
+    __searchable__ = ['sequence_number', 'generating_function.expression']
+    
     id = db.Column(db.Integer, primary_key=True)
     sequence_number = db.Column(db.Integer, unique=True, nullable=False)
     generating_function = db.relationship("GeneratingFunction", backref="pyramid", lazy=True)
     explicit_formula = db.relationship("ExplicitFormula", backref="pyramid", lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     relations = db.relationship('Pyramid', secondary = relations, primaryjoin=(relations.c.linked_pyramid_id == id),
-        secondaryjoin=(relations.c.relatedto_pyramid_id == id),
-    backref=db.backref('linked', lazy='dynamic'), lazy='dynamic')
+                                secondaryjoin=(relations.c.relatedto_pyramid_id == id),
+                                backref=db.backref('linked', lazy='dynamic'), lazy='dynamic')
     __special_hashed_value__ = db.Column(db.String(120))
 
     gf_dict = {} # needed to evaluate generating_function
     main_gf = None # needed to evaluate generating_function 
 
-    def __init__(self, sequence_number):
+    def __init__(self, sequence_number: int):
         self.sequence_number = sequence_number
     
     def __repr__(self):
         return f'Pyramid({self.id}, {self.sequence_number}, {self.generating_function}, {self.explicit_formula})'
+    
+    def toJSON(self):
+        return json.dumps({
+            'id': self.id,
+            'sequence_number': self.sequence_number,
+            'generating_function': self.gf_latex,
+            'author': json.loads(self.author.toJSON())
+        })
+    # def as_dict(self):
+    #     return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     # Relations methods
     def isLinked(self, pyramid):
@@ -111,11 +131,15 @@ class Pyramid(db.Model):
 
         if not self.main_gf:
             self.main_gf = self.generating_function[0]
-
-    def evaluate_certain_gf(self, function_name:str, values:dict[str:float], sqrt={'sqrt': math.sqrt}):
+    
+    def evaluate_certain_gf(self, function_name:str, values:dict[str:float], sqrt=None):
         values['__builtins__'] = None
+        
+        if sqrt:
+            OPERATIONS['math']['sqrt'] = sqrt
+        
         if (self.gf_dict[function_name].other_func_calls == 0):
-            return eval(self.gf_dict[function_name].__expr__, values, sqrt)
+            return eval(self.gf_dict[function_name].__expr__, values, OPERATIONS['math'])
         
         other_funcs = deepcopy(self.gf_dict[function_name].other_func)
         to_be_evaluated = self.gf_dict[function_name].__expr__
@@ -123,12 +147,13 @@ class Pyramid(db.Model):
         for i in range(len(other_funcs)):
             other_funcs[i] = self.evaluate_certain_gf(other_funcs[i], values)
             to_be_evaluated = re.sub("_TBR_", f"({str(other_funcs[i])})", to_be_evaluated, count=1)
-        
-        return eval(to_be_evaluated, values, sqrt)
+        print(OPERATIONS['math'])
+        return eval(to_be_evaluated, values, OPERATIONS['math'])
 
     def evaluate_gf_at(self, *args):
-        if self.main_gf is None or not self.gf_dict:
+        if not self.main_gf or not self.gf_dict:
             self.init_gf_evaluation()
+            
         try:
             return self.evaluate_certain_gf(self.main_gf.function_name, dict(zip(self.main_gf.__get_variables_str__(), args)))
         except ValueError:
@@ -140,7 +165,8 @@ class Pyramid(db.Model):
                 return formula
         return None
 
-    def get_gf_latex(self):
+    @property
+    def gf_latex(self):
         latexrepr = ''
 
         for (loop, formula) in enumerate(self.generating_function):
@@ -161,18 +187,23 @@ class Pyramid(db.Model):
             formula.init_f_evaluation()
 
             if not formula.limitation:
-                answer = eval(formula.expression, values, {'binomial': sp.binomial, 'delta': kron_delta})
+                answer = eval(formula.expression, values, OPERATIONS['combinatorics'])
+                try: answer = int(answer)
+                except: ...
                 return answer
 
             if eval(formula.limitation_to_eval, values):
-                answer = eval(formula.expression, values, {'binomial': sp.binomial, 'delta': kron_delta})
+                answer = eval(formula.expression, values, OPERATIONS['combinatorics'])
+                try: answer = int(answer)
+                except: ...
                 return answer
         
         return answer
     
-    def get_ef_latex(self):
-        latexrepr = f'${self.explicit_formula[0].function_name}_{{{self.sequence_number}}}\
-({self.explicit_formula[0].get_variables_as_str()}) ='
+    @property
+    def ef_latex(self):
+        latexrepr = f'$${self.explicit_formula[0].function_name}_{{{self.sequence_number}}}\
+                      ({self.explicit_formula[0].get_variables_as_str()}) ='
         if len(self.explicit_formula) > 1:
             latexrepr += r'\begin{cases}' 
 
@@ -186,7 +217,7 @@ class Pyramid(db.Model):
         if len(self.explicit_formula) > 1:
             latexrepr += r' \end{cases} '
 
-        latexrepr += '$'
+        latexrepr += '$$'
 
         return latexrepr
 
@@ -223,6 +254,9 @@ class Pyramid(db.Model):
         self.__special_hashed_value__ = hashlib.sha256(s.encode()).hexdigest()
 
 class Formula(db.Model):
+    __tablename__ = 'formula'
+    __searchable__ = 'expression'
+    
     id = db.Column(db.Integer, primary_key=True)
     function_name = db.Column(db.String(20), nullable=False)
     variables = db.relationship('Variable', backref='formula', lazy=True) 
@@ -261,9 +295,15 @@ class Formula(db.Model):
             if loopid != len(self.variables) - 1:
                 s += ', '
         return s
-
-    def change_formula(self, *args): # Abstract function
+    
+    def get_latex(self): # Abstract method
         ...
+
+    def change_formula(self, *args): # Abstract method
+        ...
+        
+    
+        
 
 class Variable(db.Model):
     __tablename__ = 'variable'
@@ -282,16 +322,16 @@ class Variable(db.Model):
     def __repr__(self):
         return f"{self.variable_name}"
 
-
 class GeneratingFunction(Formula):
     __tablename__ = 'generatingfunction'
+    
     id = db.Column(db.Integer, db.ForeignKey('formula.id'), primary_key=True)
     isMain = db.Column(db.Boolean, nullable=False)
     other_func_calls = 0
     other_func = []
     __expr__ = ""
     
-    def __init__(self, funciton_name, variables, expression, main=False):
+    def __init__(self, funciton_name: str, variables: str, expression: str, main: bool = False):
         super().__init__(funciton_name, variables, expression)
         self.isMain = main
 
@@ -336,8 +376,6 @@ class GeneratingFunction(Formula):
         'polymorphic_identity': 'generatingfunction',
     }
 
-
-
 class ExplicitFormula(Formula):
     __tablename__ = 'explicitformula'
     id = db.Column(db.Integer, db.ForeignKey('formula.id'), primary_key=True)
@@ -380,3 +418,6 @@ class ExplicitFormula(Formula):
     __mapper_args__ = {
         'polymorphic_identity': 'explicitformula',
     }
+    
+# from encyclopedia import search
+# search.create_index(Pyramid)

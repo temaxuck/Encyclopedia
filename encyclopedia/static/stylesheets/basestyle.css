@@ -97,8 +97,8 @@ footer {
 
 .flashes {
     position: fixed;
-    bottom: 0.5rem;
-    right: 1rem;
+    bottom: 1vh;
+    right: 1vw;
     /* align the content to the rigth */
     display: flex;
     flex-direction: column;
@@ -193,6 +193,11 @@ footer {
     background-color: #002A55;
 }
 
+.account {
+    width: 40px;
+    height: 40px;
+}
+
 .account>img {
     border-radius: 3px;
 }
@@ -218,8 +223,8 @@ footer {
 
 .go-top {
     position: fixed; 
-    right: 2.5vw;
-    bottom: 5vh;
+    right: 1vw;
+    bottom: 9vh;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,3 +1,51 @@
+import math
+import sympy
+
+def kron_delta(a, b):
+    return 1 if a == b else 0
+
+def custom_sqrt(value):
+    if value < 0:
+        return -1
+    else:
+        return math.sqrt(value)
+    
+def cotan(x):
+    return (1/math.tan(x))
+
+def arccotan(x):
+    return (math.acos(x)/ math.asin(x))
+
+OPERATIONS = {
+    'parity': {
+        'even': '% 2 == 0',
+        'uneven': '% 2 == 1',
+        'odd': '% 2 == 1',
+    },
+    'separators': { ',': ' and ' },
+    'equal': { '=': '==' },
+    'math': {
+        'sqrt': math.sqrt,
+        'sin': math.sin,
+        'cos': math.cos,
+        'arcsin': math.asin,
+        'arccos': math.acos,
+        'tan': math.tan,
+        'tg': math.tan,
+        'cotan': cotan,
+        'ctg': cotan,
+        'arctg': math.atan,
+        'arctan': math.atan,
+        'arccotan': arccotan,
+        'arccot': arccotan
+    },
+    'combinatorics': {
+        'delta': kron_delta,
+        'binomial': sympy.binomial
+    }
+}
+
+
 # def Taylor_polynomial_sympy(function_expression, variable_list, evaluation_point, degree):
 #     from sympy import factorial, Matrix, prod
 #     import itertools
@@ -39,23 +87,3 @@
 #     Proto("Polyn", str(Polyn))
 #     # print(GetCoeff2(Polyn,x,y))
 #     return (GetCoeff2(Polyn, x, y))
-
-OPERATIONS = {
-    'parity': {
-        'even': '% 2 == 0',
-        'uneven': '% 2 == 1',
-        'odd': '% 2 == 1',
-    },
-    'separators': { ',': ' and ' },
-    'equal': { '=': '==' }
-}
-
-def kron_delta(a, b):
-    return 1 if a == b else 0
-
-def custom_sqrt(value):
-    if value < 0:
-        return -1
-    else:
-        import math
-        return math.sqrt(value)
