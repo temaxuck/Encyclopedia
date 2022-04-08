@@ -1,2 +1,0 @@
-Tuu0135(n,m,k):=kron_delta(4*k,n+m)*binomial(n+m,m)
-

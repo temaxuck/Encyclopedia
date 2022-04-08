@@ -1,8 +1,0 @@
-<a href="pyramid?q=182">Reversion on x:  182</a>
-<a href="pyramid?q=921">Reversion on y:  921</a>
-<a href="pyramid?q=20">Right on y:      20</a>
-<a href="pyramid?q=19">Left on x:       19</a>
-<a href="pyramid?q=36">Left on y:       36</a>
-<a href="pyramid?q=21">Change x y:      21</a>
-OEIS: <a href="https://oeis.org/A060693">A060693</a> 
-

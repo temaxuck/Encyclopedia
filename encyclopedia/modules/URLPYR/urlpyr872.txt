@@ -1,3 +1,0 @@
-<a href="pyramid?q=921">Reversion on x:  921</a>
-<a href="pyramid?q=36">Left on x:       36</a>
-

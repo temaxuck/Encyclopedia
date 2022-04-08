@@ -1,2 +1,0 @@
-UU0322(x,y):=(sin(asin((3^(3/2)*sqrt(x))/2)/3)-sqrt(3*x*y+sin(asin((3^(3/2)*sqrt(x))/2)/3)^2))/(sqrt(3)*sqrt(x))
-

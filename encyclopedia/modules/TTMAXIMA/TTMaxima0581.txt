@@ -1,2 +1,0 @@
-Tuu0581(n,m,k):=if n=0 then 4^m*(binomial(m+(k+n)/2-1,m))*k/(k+n) else 4^m*binomial(m+(k+n)/2-1,m)*(k*((binomial(2*n-k-1,n-1))*(-1)^(n-1)))/n
-

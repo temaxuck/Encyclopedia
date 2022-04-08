@@ -1,2 +1,0 @@
-Tuu0700(n,m,k):=(n*binomial(n+k-1,n)*binomial(2*n+2*m,m))/(n+m)
-

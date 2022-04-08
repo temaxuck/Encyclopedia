@@ -1,2 +1,0 @@
-Tuu0274(n,m,k):=kron_delta(0,mod(m,3))*binomial(k,m/3)*binomial(k-m/3,n+m/3-k)
-

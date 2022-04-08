@@ -1,12 +1,16 @@
 main {
     flex-direction: column;
-    align-items: normal;
     justify-content: flex-start;
+}
+
+.content-wrapper {
+    display: flex;
+    width: 100%;
 }
 
 .media {
     display: flex;
-
+    flex-grow: 1;
 }
 
 .userinfo {
@@ -15,7 +19,7 @@ main {
     margin-left: 12px;
 }
 
-.userimage > img{
+.profile-image {
     border-radius: 5px;
 }
 
@@ -27,4 +31,10 @@ main {
 
 .email {
     flex-grow: 1;
+}
+
+.edit_profile {
+    width: auto;
+    padding: 0 10px;
+    gap: 5px;
 }

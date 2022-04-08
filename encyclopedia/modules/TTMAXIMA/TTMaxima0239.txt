@@ -1,2 +1,0 @@
-Tuu0239(n,m,k):=binomial(k,m)*binomial(n+k-1,n+m-k)
-

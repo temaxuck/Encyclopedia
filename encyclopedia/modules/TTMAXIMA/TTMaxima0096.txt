@@ -1,2 +1,0 @@
-Tuu0096(n,m,k):=9^(n+m-k)*binomial(n+m,m)*binomial(n+m-(2*k)/3-1,n+m-k)
-

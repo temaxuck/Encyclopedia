@@ -1,2 +1,0 @@
-Tuu0261(n,m,k):=if k<n then 0 else TA000984(m,k-n)*binomial(k,n)
-

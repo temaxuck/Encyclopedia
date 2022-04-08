@@ -1,0 +1,129 @@
+{% extends 'base.html' %} {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/accountstyle.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/forms__style.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/upload_pyramidstyle.css') }}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+<script src="/static/js/upload_pyramid_handler.js"></script>
+
+<title>
+    {% if pyramid %}
+        Edit pyramid #{{ pyramid.sequence_number }}
+    {% else %}
+        Upload pyramid
+    {% endif %}
+</title>
+{% endblock %} {% block header %} 
+    {% include 'header_search.html' %}
+{% endblock %} {% block body %}
+<main>
+    <div class="update_profile-content">
+        <form action="" method="post" class="form update-form" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            
+            <fieldset class="groups">
+                <div class="form-group title">
+                    {% if pyramid %}
+                        Edit pyramid #{{ pyramid.sequence_number }}
+                    {% else %}
+                        Upload pyramid
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.sequenceNumber.label(class="groupelement-label") }}
+                        {% if form.sequenceNumber.errors %}
+                        {{ form.sequenceNumber(class="groupelement-input invalid", placeholder="Sequence number") }}
+
+                        <div class="invalid-feedback">
+                            {% for error in form.sequenceNumber.errors%}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                    {% else %}
+                        {{ form.sequenceNumber(class="groupelement-input", placeholder="Sequence number") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <!-- {{ form.generatingFunction.label(class="groupelement-label") }} -->
+                    <label for="" class="groupelement-label">Generating function</label>
+                    {% for g_field in form.generatingFunction %}
+                        <div class="form-group-gf">
+                            {% if form.generatingFunction.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.generatingFunction.errors %}
+                                        <span> {{ error }} </span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                                {{ g_field.form.f_name(class="groupelement-input shrinkable f_name", placeholder="Function") }}
+                                {{ g_field.form.f_vars(class="groupelement-input shrinkable f_vars", placeholder="Variables") }}
+                            <div class="f_operator">=</div>
+                            {{ g_field.f_expr(class="groupelement-input growable f_expr", placeholder="Expression") }}
+                            <button class="group_operate_gf" onclick="add_gf_input(this)" type="button">+</button>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="" class="groupelement-label">Explicit formula</label>
+                    <div class="form-group-ef">
+                        {% if form.explicitFormula.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.generatingFunction.errors %}
+                                    <span> {{ error }} </span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <div class="ef_declaration">
+                            {{ form.ef_name(class="groupelement-input shrinkable f_name", placeholder="Formula name", ) }}
+                            {{ form.ef_vars(class="groupelement-input shrinkable f_vars", placeholder="Variables")}}
+                            <div class="f_operator">=</div>
+                        </div>
+                        <div class="e_fields">
+                            <div class="brace-left">
+                                <div class="brace-top"></div>
+                                <div class="brace-bottom"></div>
+                            </div>
+                            
+                            <div class="content">
+                                {% for e_field in form.explicitFormula %}
+                                    <div class="e_field">
+                                        {{ e_field.f_expr(class="groupelement-input growable f_expr", placeholder="Expression") }}
+                                        {{ e_field.f_condition(class="groupelement-input growable f_condition", placeholder="Condition") }}
+                                        <button class="group_operate_gf" onclick="add_ef_input(this)" type="button">+</button>
+                                    </div>
+                                {% endfor %}                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form.relations.label(class="groupelement-label") }}
+                    {% if form.relations.errors %}
+                        {{ form.relations(class="groupelement-input invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.relations.errors%}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                    
+                    {{ form.relations(class="groupelement-input", placeholder="Relations") }}
+                    {% endif %}
+                </div>
+                <div class="form-group form-submit">
+                    {% if pyramid %}
+                        {{ form.submit(class="sumbitbtn groupelement-input upload_pyramidbtn", value="Confirm") }}
+                    {% else %}
+                        {{ form.submit(class="sumbitbtn groupelement-input upload_pyramidbtn") }}
+                    {% endif %}
+                    {% if pyramid %}
+                        <a href="{{ url_for('pyramid.pyramid', snid=pyramid.sequence_number) }}" class="link cancelbtn">Cancel</a>
+                    {% else %}
+                        <a href="{{ url_for('general.home') }}" class="link cancelbtn">Cancel</a>
+                    {% endif %}
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</main>
+{% endblock %}

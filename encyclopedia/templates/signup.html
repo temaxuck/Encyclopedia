@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/login_signup_style.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/forms__style.css') }}"/>
 <title>Sign up</title>
 {% endblock %} {% block header %} 
 {% include 'header_search.html' %}
@@ -75,7 +75,7 @@
 
     <div class="already">
         <small class="">
-            Already have an account? <a href="{{ url_for('login') }}" class="signlink">Log in</a> 
+            Already have an account? <a href="{{ url_for('account.login') }}" class="signlink">Log in</a> 
         </small>
     </div>
 </main>

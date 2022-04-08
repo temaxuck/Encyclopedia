@@ -1,0 +1,304 @@
+main {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.groupelement-input {
+  color: #333;
+}
+
+.groupelement-input:focus,
+.groupelement-input:hover {
+  background-color: rgba(51, 51, 51, 0.06);
+}
+
+.update_profile-content {
+  width: 75%;
+}
+
+.update-form {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: unset;
+      -ms-flex-align: unset;
+          align-items: unset;
+}
+
+.groups {
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  width: auto;
+}
+
+.groups > .title {
+  -webkit-box-align: unset;
+      -ms-flex-align: unset;
+          align-items: unset;
+}
+
+.sumbitbtn {
+  width: auto;
+  font-weight: 100;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  color: white;
+  background-color: #2390ff;
+  /* width: 130px; */
+}
+
+.sumbitbtn:hover,
+.sumbitbtn:focus {
+  background-color: #0076ef;
+}
+
+.sumbitbtn:active {
+  background-color: #002A55;
+}
+
+.cancelbtn {
+  font-weight: 100;
+  padding: 0 16px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  /* width: 130px; */
+  /* flex-grow: 1; */
+  border: 1px solid #0076ef;
+  background: transparent;
+  color: #0076ef;
+}
+
+.cancelbtn:hover {
+  background: rgba(0, 118, 239, 0.1);
+}
+
+.form-submit {
+  width: 30%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 40px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  /* gap: 100px; */
+}
+
+/* addbtn */
+.form-group-gf {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  gap: 10px;
+  height: 40px;
+}
+
+.group_operate_gf {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 420;
+  font-size: 1.75vw;
+  color: #8F8F8F;
+  font-family: 'Jura', sans-serif;
+  padding: 0 16px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  min-height: 40px;
+  border: unset;
+  border-radius: 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+          box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+}
+
+.group_operate_gf:hover,
+.group_operate_gf:active {
+  color: #333;
+  background-color: rgba(51, 51, 51, 0.06);
+}
+
+/* Shrinkable */
+.f_name {
+  width: 3vw;
+}
+
+.shrinkable {
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  /* max-width: 150px; */
+  text-align: center;
+}
+
+.growable {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+/* vars */
+.f_vars {
+  border-radius: 10px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-left: 2px solid rgba(0, 0, 0, 0.4);
+  border-right: 2px solid rgba(0, 0, 0, 0.4);
+  width: 7.5vw;
+  outline: none;
+}
+
+.vars:hover,
+.vars:focus {
+  border-left-color: #333;
+  border-right-color: #333;
+}
+
+.f_operator {
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 40px;
+  color: #333;
+}
+
+.form-group {
+  height: auto;
+  gap: 10px;
+}
+
+/* explicit formula */
+.form-group-ef {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+
+.ef_declaration {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.e_field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  gap: 10px;
+}
+
+.e_fields {
+  position: relative;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+
+.e_fields .brace-left {
+  top: 0;
+  left: 0;
+  float: left;
+  width: 20px;
+  height: 100%;
+  display: none;
+}
+
+.e_fields .brace-left .brace-top,
+.e_fields .brace-left .brace-bottom {
+  position: absolute;
+  width: 10px;
+  height: 50%;
+  left: 10px;
+}
+
+.e_fields .brace-left .brace-top {
+  top: 0;
+}
+
+.e_fields .brace-left .brace-bottom {
+  top: 50%;
+}
+
+.e_fields .brace-left .brace-top:before,
+.e_fields .brace-left .brace-top:after,
+.e_fields .brace-left .brace-bottom:before,
+.e_fields .brace-left .brace-bottom:after {
+  content: "";
+  height: 50%;
+  width: 10px;
+  display: block;
+  position: absolute;
+}
+
+.e_fields .brace-left .brace-top:before {
+  top: 0;
+  left: 0;
+  border-left: 3px solid #333;
+  border-top-left-radius: 10px;
+}
+
+.e_fields .brace-left .brace-top:after {
+  bottom: 0;
+  left: -10px;
+  border-right: 3px solid #333;
+  border-bottom-right-radius: 10px;
+}
+
+.e_fields .brace-left .brace-bottom:before {
+  top: 0;
+  left: -10px;
+  border-right: 3px solid #333;
+  border-top-right-radius: 10px;
+}
+
+.e_fields .brace-left .brace-bottom:after {
+  bottom: 0;
+  left: 0;
+  border-left: 3px solid #333;
+  border-bottom-left-radius: 10px;
+}
+
+.e_fields .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+/*# sourceMappingURL=upload_pyramidstyle.css.map */

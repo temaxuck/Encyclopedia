@@ -1,2 +1,0 @@
-Tuu0526(n,m,k):=binomial(k,n)*binomial((-3*n)+m+k-1,m)
-

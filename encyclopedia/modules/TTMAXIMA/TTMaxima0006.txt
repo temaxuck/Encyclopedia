@@ -1,2 +1,0 @@
-Tuu0006(n,m,k):=binomial(k,n)*binomial(2*n+m-k-1,n+m-k)
-

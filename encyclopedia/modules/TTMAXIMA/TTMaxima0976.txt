@@ -1,2 +1,0 @@
-Tuu0976(n,m,k):=(k*(binomial(3*n+k-1,n)))/(2*n+k)*Tsqrt(m,n);
-

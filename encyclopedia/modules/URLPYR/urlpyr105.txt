@@ -1,3 +1,0 @@
-<span>Symmetric</span>
-OEIS: <a href="https://oeis.org/A145596">A145596</a> <a href="https://oeis.org/A145598">A145598</a> 
-

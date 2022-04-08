@@ -1,2 +1,0 @@
-Tuu0324(n,m,k):=if n < k then 0 else (k*(-1)^n*binomial(3*n,m)*binomial(2*n-k-1,n-1))/n
-
