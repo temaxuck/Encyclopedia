@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/not_foundstyle.css') }}">
+<title>Page not found</title>
+{% endblock %} {% block header %}
+    {% include 'header_search.html' %}
+{% endblock %} {% block body %}
+<main>
+    <div class="notfound">
+        <span>Sorry, there's no such page. You can try going <a href="/">home</a> and explore the pyramid.</span>
+    </div>
+</main>
+{% endblock %}
