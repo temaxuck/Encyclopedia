@@ -30,6 +30,7 @@ whoosh = "*"
 blinker = "*"
 sqlathanor = "*"
 jieba = "*"
+flask-redis = "*"
 
 [dev-packages]
 

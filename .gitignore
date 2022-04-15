@@ -1,15 +1,9 @@
 .history/
 _.swp
-db_transfer_pyramids.py
-encyclopedia/static/src/expand_icon.svg
-migrations/
-*\*\*.pyc
-testtest.py
+database
 _.swp
 encyclopedia.db
-encyclopedia/encyclopedia.db
 encyclopedia/static
 test.html
 migrations
-db_transfer_pyramids.py
-.history
+tempCodeRunnerFile.py
