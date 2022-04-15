@@ -23,7 +23,7 @@ relations = db.Table(
 
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
-    __searchable__ = 'username'
+    __searchable__ = ['username']
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -54,7 +54,7 @@ class User(db.Model, UserMixin):
     
 class Pyramid(db.Model):
     __tablename__ = 'pyramid'
-    __searchable__ = ['sequence_number', 'generating_function.expression']
+    __searchable__ = ['sequence_number']
     
     id = db.Column(db.Integer, primary_key=True)
     sequence_number = db.Column(db.Integer, unique=True, nullable=False)

@@ -1,18 +1,15 @@
-import sympy as sp
 # from sympy.abc import *
 # from sympy.utilities.lambdify import implemented_function, lambdify
-from sympy.parsing.sympy_parser  import parse_expr
 import time
 # G = Function('G')
 # x, y = symbols('x y')
 # V = sympify('(sqrt(x*(4*(G(y))**3 + 27*x)) / (2 * 3**(3/2)) + (G(y)**3)/27 + x/2)**(1/3)', )
 # print(latex(V, mul_symbol='dot'))
+from encyclopedia import db
 
 from encyclopedia.models import User, Pyramid \
     ,Formula, Variable, GeneratingFunction, ExplicitFormula
     
-from encyclopedia import db
-
 # db.drop_all()
 # User.query.all()[0].moderator = True
 # db.session.commit()
@@ -60,18 +57,7 @@ from encyclopedia import db
 # g = Formula('1 / ((1 - y)**2)')
 # db.session.add(g)
 # db.session.commit()
-# started_at = time.time()
-# print(pyr420.get_data(7,7,1))
-# pyr420.init_gf_evaluation()
-# pyr420.evaluate_certain_gf("U", {"x":2, "y": 3})
-# for _ in range(49):
-    # pyr420.evaluate_gf_at(2, 3)
-# pyr420.init_ef_evaluation()
-# print('answer is', pyr420.evaluate_ef_at(2, 0, 4))
-# print(Pyramid)
-# ended_at = time.time()
 
-# print(f'Execution time: {ended_at - started_at}')
 
 # print(pyr420.generating_function.append(Formula.query.first()))
 
@@ -79,15 +65,34 @@ from encyclopedia import db
 #     print(formula.get_latex())
 # print(pyr420)
 
+
+
 # pyr2 = Pyramid.query.filter_by(sequence_number=2).first()
 # print(pyr2.evaluate_gf_at(30, 30))
 
 # for pyramid in Pyramid.query.all():
 #     pyramid.init_special_value()
 
-def testfunc(a=1,b=2, c=3):
-    print(a,b,c)
+# def testfunc(a=1,b=2, c=3):
+#     print(a,b,c)
 
-l = {'a': 2, 'b':2, 'c':2}
-testfunc(*list(zip(l, l.values())))
+# l = {'a': 2, 'b':2, 'c':2}
+# testfunc(*list(zip(l, l.values())))
 # print(zip([a, b, c], [2, 3, 4]))
+
+pyr = Pyramid.query.filter_by(sequence_number=420).first()
+import time
+started_at = time.time()
+for _ in range(49):
+    pyr.evaluate_gf_at(2, 3)
+
+
+ended_at = time.time()
+print(f'Execution time: {ended_at - started_at}')
+
+# print(pyr.get_data(7,7,1))
+# pyr.init_gf_evaluation()
+# pyr.evaluate_certain_gf("U", {"x":2, "y": 3})
+# pyr.init_ef_evaluation()
+# print('answer is', pyr.evaluate_ef_at(2, 0, 4))
+# print(Pyramid)
