@@ -50,7 +50,7 @@ def search():
             results = json.loads(redis_client.get(user_input))
             return render_template('search.html', results=results, q=user_input)
         except TypeError:
-            pyramid_results = Pyramid.query.msearch(user_input, fields=['sequence_number'], limit=50).all()
+            pyramid_results = Pyramid.query.msearch(user_input, fields=['sequence_number']).order_by(Pyramid.sequence_number.asc()).limit(50).all()
             gf_results = GeneratingFunction.query.msearch(user_input, fields=['expression'], limit=50).all()
             ef_results = ExplicitFormula.query.msearch(user_input, fields=['expression'], limit=50).all()
             user_results = User.query.msearch(user_input, fields=['username'], limit=50).all()
