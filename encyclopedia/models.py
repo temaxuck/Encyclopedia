@@ -181,24 +181,27 @@ class Pyramid(db.Model):
         formula.pyramid_id = self.id
     
     def evaluate_ef_at(self, *args):
-        values = dict(zip(self.explicit_formula[0].__get_variables_str__(), args))
-        answer = None
-        for formula in self.explicit_formula:
-            formula.init_f_evaluation()
+        try:
+            values = dict(zip(self.explicit_formula[0].__get_variables_str__(), args))
+            answer = None
+            for formula in self.explicit_formula:
+                formula.init_f_evaluation()
 
-            if not formula.limitation:
-                answer = eval(formula.expression, values, OPERATIONS['combinatorics'])
-                try: answer = int(answer)
-                except: ...
-                return answer
+                if not formula.limitation:
+                    answer = eval(formula.expression, values, OPERATIONS['combinatorics'])
+                    try: answer = int(answer)
+                    except: ...
+                    return answer
 
-            if eval(formula.limitation_to_eval, values):
-                answer = eval(formula.expression, values, OPERATIONS['combinatorics'])
-                try: answer = int(answer)
-                except: ...
-                return answer
-        
-        return answer
+                if eval(formula.limitation_to_eval, values):
+                    answer = eval(formula.expression, values, OPERATIONS['combinatorics'])
+                    try: answer = int(answer)
+                    except: ...
+                    return answer
+            
+            return answer
+        except:
+            return None
     
     @property
     def ef_latex(self):

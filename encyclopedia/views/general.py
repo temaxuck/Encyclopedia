@@ -45,11 +45,11 @@ def search():
     if request.method == 'POST':
         return redirect(url_for('general.search', q=request.form.get('pyramidinput')))
     user_input = request.args.get('q')
-    try:
-        results = json.loads(redis_client.get(user_input))
-        return render_template('search.html', results=results, q=user_input)
-    except TypeError:
-        if user_input:
+    if user_input:
+        try:
+            results = json.loads(redis_client.get(user_input))
+            return render_template('search.html', results=results, q=user_input)
+        except TypeError:
             pyramid_results = Pyramid.query.msearch(user_input, fields=['sequence_number'], limit=50).all()
             gf_results = GeneratingFunction.query.msearch(user_input, fields=['expression'], limit=50).all()
             ef_results = ExplicitFormula.query.msearch(user_input, fields=['expression'], limit=50).all()
@@ -64,10 +64,14 @@ def search():
 
             if not results:
                 return redirect(url_for("general.not_found", q=user_input))
-            
+                
             redis_client.set(user_input, json.dumps(results))
             redis_client.expire(user_input, 3600)
             return render_template('search.html', results=results, q=user_input)
-    
-        flash('Something went wrong', 'danger')
-        return redirect(url_for("general.home"))
+        # except:
+        #     flash('Something went wrong', 'danger')
+        #     return redirect(url_for("general.home"))
+            
+    flash('Something went wrong', 'danger')
+    return redirect(url_for("general.home"))
+        
