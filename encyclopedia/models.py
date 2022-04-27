@@ -340,7 +340,12 @@ class GeneratingFunction(Formula):
 
 
     def get_latex(self):
-        latexrepr = sp.latex(sp.sympify(self.expression))
+        latexrepr = ''
+
+        try:
+            latexrepr = sp.latex(sp.sympify(self.expression))
+        except:
+            latexrepr = f'{self.expression}'+ r'\\ \text{[Error occured, during parsing the expression]}'
         function_declaration = self.function_name
         function_declaration += '_{' + str(self.pyramid.sequence_number) + '}' if self.isMain else ''
 
@@ -404,7 +409,10 @@ class ExplicitFormula(Formula):
             self.limitation_to_eval = re.sub(r'\b'+key, value, self.limitation_to_eval)
 
     def get_latex(self):
-        latexrepr = sp.latex(sp.sympify(self.expression))
+        try:
+            latexrepr = sp.latex(sp.sympify(self.expression))
+        except: #sympy.core.sympify.SympifyError
+            latexrepr = self.expression
         return latexrepr
 
     def change_formula(self, variables=None, expression=None, limitation=None):
