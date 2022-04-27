@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+
+  app:
+    build: ./app
+    container_name: encyclopedia-deployment
+    command: gunicorn --workers 2 --bind 0.0.0.0:8080 wsgi:app
+    restart: always
+    environment:
+      - APP_NAME=Encyclopedia
+    expose:
+      - 8080
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - app
+
+  # nginx:
+  #   build: ./nginx
+  #   container_name: nginx
+  #   restart: always
+  #   ports:
+  #     - "80:80"

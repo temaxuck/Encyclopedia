@@ -1,0 +1,8 @@
+.history/
+_.swp
+database
+encyclopedia.db
+encyclopedia/static
+test.html
+migrations
+tempCodeRunnerFile.py

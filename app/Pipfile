@@ -31,6 +31,8 @@ blinker = "*"
 sqlathanor = "*"
 jieba = "*"
 flask-redis = "*"
+python-dotenv = "*"
+gunicorn = "*"
 
 [dev-packages]
 

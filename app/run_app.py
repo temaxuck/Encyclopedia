@@ -4,7 +4,8 @@ from encyclopedia.models import User, Pyramid, GeneratingFunction, ExplicitFormu
 app = create_app()
 
 if __name__ == '__main__':
-    app.run(debug=True, host="192.168.0.5", port=5000)
+    # app.run(debug=True, host="0,0,0,0", port=5000)
+    app.run(port=8080)
 
 def get_pyramid(query, filter_by=1):
     # Get pyramid right from db
