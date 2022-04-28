@@ -1,6 +1,6 @@
 .history/
 _.swp
-database
+database/encyclopedia.db
 _.swp
 encyclopedia.db
 encyclopedia/static
