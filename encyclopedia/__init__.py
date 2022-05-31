@@ -10,13 +10,13 @@ from config import Config
 
 db = SQLAlchemy()
 hasher = Bcrypt()
+search = Search()
 migrations = Migrate()
+redis_client = FlaskRedis()
 login_manager = LoginManager()
 login_manager.login_view = 'account.login'
 login_manager.login_message = 'Please log in to access this page'
 login_manager.login_message_category = 'info'
-search = Search()
-redis_client = FlaskRedis()
 
 def create_app():
     app = Flask(__name__)

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, EmailField, IntegerField, FieldList, FormField, Form
-from wtforms.validators import InputRequired, Email, Length, EqualTo, ValidationError, NumberRange
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, EmailField, IntegerField, FieldList, SelectField, FormField, Form
+from wtforms.validators import InputRequired, Email, Length, EqualTo, ValidationError, NumberRange, Optional
 
 from encyclopedia.models import User, Pyramid, Formula, GeneratingFunction, ExplicitFormula
 from flask_login import current_user
@@ -60,6 +60,18 @@ class ExplicitFormulaForm(Form):
     f_expr = StringField('Expression', validators=[InputRequired()])
     f_condition = StringField('Condition')
 
+class RelationForm(Form):
+    TAG_CHOICES = [
+        ('Reciprocal', 'Reciprocal'),
+        ('Reversion on y', 'Reversion on y'),
+        ('Right on x', 'Right on x'),
+        ('Right on y', 'Right on y'),
+        ('Left on x', 'Left on x'),
+        ('Right on x', 'Right on x'),
+        ('Change x y', 'Change x y')
+    ]
+    relatedto_pyramid = IntegerField('Related to pyramid #', validators=[NumberRange(min=0), Optional()])
+    tag = SelectField('Tag', choices=TAG_CHOICES)
 
 class UploadPyramidForm(FlaskForm):
     sequenceNumber = IntegerField('Sequence number', validators=[InputRequired(), NumberRange(min=0)])
@@ -67,7 +79,7 @@ class UploadPyramidForm(FlaskForm):
     explicitFormula = FieldList(FormField(ExplicitFormulaForm), min_entries=1)
     ef_name = StringField('Formula name', validators=[InputRequired()], default="T")
     ef_vars = StringField('Formula variables', validators=[InputRequired()], default="n, m, k")
-    relations = StringField('Relations with another pyramids')
+    relations = FieldList(FormField(RelationForm), validators=[Optional()], min_entries=1)
 
     def validate_relations(self, relations):
         try:

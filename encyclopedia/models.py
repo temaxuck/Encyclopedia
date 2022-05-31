@@ -14,11 +14,13 @@ import json
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# Many to many relation (Pyramid object being linked to another Pyramid object)
+# Many to many relation (Pyramid object is being linked to another Pyramid object)
+# linked_pyramid_id -> relatedto_pyramid_id
 relations = db.Table(
     'relations',                                               
-    db.Column('linked_pyramid_id', db.Integer, db.ForeignKey('pyramid.id')), # another pyramid, linked to _self_   
-    db.Column('relatedto_pyramid_id', db.Integer, db.ForeignKey('pyramid.id')) # another pyramid, _self_ pyramid is related to 
+    db.Column('tag', db.String(30), nullable=True), # original pyramid
+    db.Column('linked_pyramid_id', db.Integer, db.ForeignKey('pyramid.id')), # original pyramid
+    db.Column('relatedto_pyramid_id', db.Integer, db.ForeignKey('pyramid.id')) # pyramid, to which original one is linked
 )
 
 class User(db.Model, UserMixin):
@@ -82,8 +84,6 @@ class Pyramid(db.Model):
             'generating_function': self.gf_latex,
             'author': json.loads(self.author.toJSON())
         })
-    # def as_dict(self):
-    #     return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     # Relations methods
     def isLinked(self, pyramid):
@@ -114,8 +114,8 @@ class Pyramid(db.Model):
         return s
 
     # Generating function methods
-    def add_generating_function(self, funciton_name, variables, expression, isMain):
-        formula = GeneratingFunction(funciton_name, variables, expression, isMain)
+    def add_generating_function(self, funciton_name, variables, expression, ismain):
+        formula = GeneratingFunction(funciton_name, variables, expression, ismain)
         self.generating_function.append(formula)
         formula.pyramid_id = self.id
     
@@ -161,7 +161,7 @@ class Pyramid(db.Model):
     
     def get_main_gf(self):
         for formula in self.generating_function:
-            if formula.isMain:
+            if formula.ismain:
                 return formula
         return None
 
@@ -329,14 +329,14 @@ class GeneratingFunction(Formula):
     __tablename__ = 'generatingfunction'
     
     id = db.Column(db.Integer, db.ForeignKey('formula.id'), primary_key=True)
-    isMain = db.Column(db.Boolean, nullable=False)
+    ismain = db.Column(db.Boolean, nullable=False)
     other_func_calls = 0
     other_func = []
     __expr__ = ""
     
     def __init__(self, funciton_name: str, variables: str, expression: str, main: bool = False):
         super().__init__(funciton_name, variables, expression)
-        self.isMain = main
+        self.ismain = main
 
 
     def get_latex(self):
@@ -347,7 +347,7 @@ class GeneratingFunction(Formula):
         except:
             latexrepr = f'{self.expression}'+ r'\\ \text{[Error occured, during parsing the expression]}'
         function_declaration = self.function_name
-        function_declaration += '_{' + str(self.pyramid.sequence_number) + '}' if self.isMain else ''
+        function_declaration += '_{' + str(self.pyramid.sequence_number) + '}' if self.ismain else ''
 
         variables_declaration = '('
         for var in self.variables:
@@ -371,7 +371,7 @@ class GeneratingFunction(Formula):
     def change_formula(self, function_name=None, variables=None, expression=None, main=None):
         self.function_name = function_name if not function_name==None else self.function_name
         self.expression = expression if not expression==None else self.expression
-        self.isMain = main if not main==None else self.isMain
+        self.ismain = main if not main==None else self.ismain
         if variables != self.get_variables_as_str() and variables != None:
             used_vars = Variable.query.filter_by(formula_id = self.id)
             used_vars.delete(synchronize_session=False)
