@@ -28,8 +28,6 @@ def upload_pyramid():
             return redirect(url_for('pyramid.upload_pyramid'))
 
         pyramid = Pyramid(form.sequenceNumber.data)
-        
-
 
         rels = form.relations.data
         
@@ -43,7 +41,6 @@ def upload_pyramid():
             pyramid.add_explicit_formula(form.ef_vars.data, ef.f_expr.data, ef.f_condition.data)
 
         pyramid.init_special_value()
-        # print(pyramid.init_special_value)
         alreadyExist = Pyramid.query.filter_by(__special_hashed_value__=pyramid.__special_hashed_value__).count() > 0
         
         if alreadyExist:
@@ -52,17 +49,17 @@ def upload_pyramid():
 
         db.session.add(pyramid)
 
-        if rels != '':
-            for rel in rels.split(','):
-                try:
-                    rel = int(rel)
-                    related_pyramid = Pyramid.query.filter_by(sequence_number = rel).first()
-                    if related_pyramid is None:
-                        flash(f'Could not get Pyramid#{rel}', 'danger')
-                    else:
-                        pyramid.add_relation(related_pyramid)
-                except ValueError:
-                    flash(f'Could not convert Pyramid #{pyramid.sequence_number} relation {rel} to int', 'danger')
+        # if rels:
+        #     for rel in rels.split(','):
+        #         try:
+        #             rel = int(rel)
+        #             related_pyramid = Pyramid.query.filter_by(sequence_number = rel).first()
+        #             if related_pyramid is None:
+        #                 flash(f'Could not get Pyramid#{rel}', 'danger')
+        #             else:
+        #                 pyramid.add_relation(related_pyramid)
+        #         except ValueError:
+        #             flash(f'Could not convert Pyramid #{pyramid.sequence_number} relation {rel} to int', 'danger')
 
         current_user.add_pyramid(pyramid)
         db.session.commit()
@@ -129,6 +126,7 @@ def edit_pyramid(snid: int):
     
     elif request.method == 'GET':
         form.sequenceNumber.data = pyramid.sequence_number
+        
         form.generatingFunction[0].f_name.data = pyramid.generating_function[0].function_name
         form.generatingFunction[0].f_vars.data = pyramid.generating_function[0].get_variables_as_str()
         form.generatingFunction[0].f_expr.data = pyramid.generating_function[0].expression
@@ -138,6 +136,9 @@ def edit_pyramid(snid: int):
         form.explicitFormula[0].f_expr.data = pyramid.explicit_formula[0].expression
         form.explicitFormula[0].f_condition.data = pyramid.explicit_formula[0].limitation
 
+        # form.relations[0].relatedto_pyramid.data = pyramid.relations[0].sequence_number if pyramid.relations else ''
+        # form.relations[0].tag.data = 'Reciprocal' if pyramid.relations else ''
+  
         for i in range(len(pyramid.generating_function) - 1):
             gf = pyramid.generating_function[i+1]
             gform = GeneratingFunctionForm()
@@ -152,8 +153,23 @@ def edit_pyramid(snid: int):
             eform.f_expr=ef.expression
             eform.f_condition=ef.limitation
             form.explicitFormula.append_entry(eform)
+            
+        if pyramid.relations.all():
+            form.relations[0].relatedto_pyramid.data = pyramid.relations[0].sequence_number
+            form.relations[0].tag.data = 2 
+        else:
+            form.relations[0].relatedto_pyramid.data = ''
+            form.relations[0].tag.data = '' 
+            print(form.relations[0].tag.data)
 
-        form.relations.data = pyramid.get_relations_as_str()
+  		# for i in range(len(pyramid.explicit_formula) - 1):
+        #     ef = pyramid.explicit_formula[i+1]
+        #     eform = ExplicitFormulaForm()
+        #     eform.f_expr=ef.expression
+        #     eform.f_condition=ef.limitation
+        #     form.explicitFormula.append_entry(eform)
+            
+        # form.relations.choices = pyramid.get_relations_as_str()
     
     if request.method == 'POST':
         return redirect(url_for('general.search', q=request.form.get('pyramidinput')))

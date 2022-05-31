@@ -31,6 +31,7 @@ blinker = "*"
 sqlathanor = "*"
 jieba = "*"
 flask-redis = "*"
+psycopg2 = "*"
 
 [dev-packages]
 

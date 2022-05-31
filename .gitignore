@@ -1,6 +1,5 @@
+Pipfile.lock
 .history/
-_.swp
-database/encyclopedia.db
 _.swp
 encyclopedia.db
 encyclopedia/static
@@ -8,3 +7,5 @@ test.html
 migrations
 tempCodeRunnerFile.py
 Dockerfile
+.env
+database/

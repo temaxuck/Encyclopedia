@@ -2,7 +2,11 @@ import os
 
 class Config(object):
     SECRET_KEY = 'cc530c1746dc2c713ccd28936fc870d6f30106582ed09bef074f66376683ccc8'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///../database/encyclopedia.db'
+    POSTGRES_USERNAME = os.environ.get('POSTGRES_USERNAME')
+    POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+    POSTGRES_HOST = os.environ.get('POSTGRES_HOST')
+    POSTGRES_PORT = os.environ.get('POSTGRES_PORT')
+    SQLALCHEMY_DATABASE_URI = f'postgresql://{POSTGRES_USERNAME}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/encyclopedia'
     # MSEARCH_BACKEND = 'whoosh'
     # WHOOSH_BASE = 'whoosh'
     MSEARCH_PRIMARY_KEY = 'id'
