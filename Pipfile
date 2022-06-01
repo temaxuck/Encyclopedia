@@ -32,6 +32,8 @@ sqlathanor = "*"
 jieba = "*"
 flask-redis = "*"
 psycopg2 = "*"
+python-dotenv = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
