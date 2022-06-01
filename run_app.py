@@ -4,11 +4,12 @@ from encyclopedia.shell import get_pyramid
 
 from dotenv import load_dotenv
 import os
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 app = create_app()
 
 if __name__ == '__main__':
-    load_dotenv()
+    load_dotenv(os.path.join(BASE_DIR, '.env'), override=True)
     app.run(debug=True, host=f"{os.environ.get('RUN_HOST')}", port=os.environ.get('RUN_PORT'))
     
 @app.shell_context_processor

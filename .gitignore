@@ -9,3 +9,4 @@ tempCodeRunnerFile.py
 Dockerfile
 .env
 database/
+*__pycache__
