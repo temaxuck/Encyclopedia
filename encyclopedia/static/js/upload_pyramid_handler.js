@@ -1,4 +1,4 @@
-let gf_count = 1, ef_count = 1;
+let gf_count = 1, ef_count = 1, rel_count = 1;
 
 // Generating Function
 function add_gf_input(addbtn) {
@@ -111,3 +111,51 @@ function remove_ef_input(remove_btn) {
         content.children[0].querySelector('.f_condition').style.display = 'none';
     }
 }
+
+
+// Relations
+function add_rel_input(addbtn) {
+    let parent = addbtn.parentNode;
+    rel_count++;            
+
+    let cloned = parent.querySelector('.form-group-gf').cloneNode(true);
+    cloned.querySelector('.related_seq').value = 0;
+    cloned.querySelector('.related_seq').id = `relations-${rel_count-1}-relatedto_pyramid`;
+    cloned.querySelector('.related_seq').name = `relations-${rel_count-1}-relatedto_pyramid`;
+
+    cloned.querySelector('.related_tag').value = 0;
+    cloned.querySelector('.related_tag').id = `relations-${rel_count-1}-tag`;
+    cloned.querySelector('.related_tag').name = `relations-${rel_count-1}-tag`;
+
+    parent.querySelector('.rels-wrapper').appendChild(cloned);
+}
+
+function remove_rel_input(remove_btn) {
+    let parent = remove_btn.parentNode;
+    let currentNodeId = parent.querySelector('.related_seq').id.match(/\d+/).toString();
+    currentNodeId = parseInt(currentNodeId);
+
+    if (rel_count < 2) {
+        return;
+    }
+    
+    rel_count--;
+    
+    for (let i = currentNodeId + 1; i < rel_count + 1; i++) {
+        temp_el = parent.parentNode.children[i];
+        // console.log(temp_el);
+        temp_counter = temp_el.querySelector('.related_seq').id.match(/\d+/).toString();
+        temp_counter = parseInt(temp_counter);
+        temp_el.querySelector('.related_seq').id = `relations-${temp_counter-1}-relatedto_pyramid`;
+        temp_el.querySelector('.related_seq').name = `relations-${temp_counter-1}-relatedto_pyramid`;
+        temp_el.querySelector('.related_tag').id = `relations-${temp_counter-1}-tag`;
+        temp_el.querySelector('.related_tag').name = `relations-${temp_counter-1}-tag`;
+        
+    }
+    
+    let content = parent.parentNode;
+
+    
+    parent.remove()
+}
+

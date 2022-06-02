@@ -68,7 +68,8 @@ class RelationForm(Form):
         ('Right on y', 'Right on y'),
         ('Left on x', 'Left on x'),
         ('Right on x', 'Right on x'),
-        ('Change x y', 'Change x y')
+        ('Change x y', 'Change x y'),
+        (None, '--Select--'),
     ]
     relatedto_pyramid = IntegerField('Related to pyramid #', validators=[NumberRange(min=0), Optional()])
     tag = SelectField('Tag', choices=TAG_CHOICES)
