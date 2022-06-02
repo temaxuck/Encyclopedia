@@ -1,6 +1,8 @@
 from encyclopedia import db, login_manager
 from encyclopedia.math_module import kron_delta, custom_sqrt, OPERATIONS
 
+from abc import ABC, abstractmethod
+
 import math
 import sympy as sp
 import re
@@ -89,20 +91,30 @@ class Pyramid(db.Model):
     def isLinked(self, pyramid):
         return True if self.relations.filter_by(sequence_number=pyramid.sequence_number).count() > 0 else False
 
-    def add_relation(self, pyramid):
+    def add_relation(self, relatedto_pyramid_id, tag):
+        from sqlalchemy import update, and_
+
+        pyramid = Pyramid.query.filter_by(id=relatedto_pyramid_id).first()
+
         if not self.isLinked(pyramid) and not pyramid.isLinked(self):
             self.relations.append(pyramid)
             pyramid.relations.append(self)
+
+            db.engine.execute(
+                update(relations).values({"tag": tag}).\
+                where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id))
+            ) 
     
     def delete_relation(self, pyramid):
         if self.isLinked(pyramid) and pyramid.isLinked(self):
             self.relations.remove(pyramid)
             pyramid.relations.remove(self)
 
-    
+    # Should be rewrote
     def __get_relations_str__(self):
         return [relation.sequence_number for relation in self.relations ]
     
+    # Should be rewrote
     def get_relations_as_str(self):
         s = ''
 
@@ -113,6 +125,32 @@ class Pyramid(db.Model):
         
         return s
 
+    def get_relations_as_dict(self):
+        return [
+            {'relatedto_pyramid': relation[2], 'tag': relation[0]} \
+            for relation in db.session.query(relations).filter(relations.c.linked_pyramid_id == self.id).all()
+            ]
+
+    # Get one particular relation with given relatedto_pyramid_id
+    def get_relation(self, relatedto_pyramid_id: int):
+        for relation in self.get_relations_as_dict():
+            if relation.get('relatedto_pyramid') == relatedto_pyramid_id:
+                return relation
+            
+        return None
+    
+    def set_existing_relation(self, relatedto_pyramid_id: int, tag: str) -> None:
+        from sqlalchemy import update, and_
+        
+        db.session.query(relations).filter(
+            and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id)
+        ).one()
+        
+        db.engine.execute(
+            update(relations).values({"tag": tag}).\
+            where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id))
+        ) 
+    
     # Generating function methods
     def add_generating_function(self, funciton_name, variables, expression, ismain):
         formula = GeneratingFunction(funciton_name, variables, expression, ismain)
@@ -299,31 +337,17 @@ class Formula(db.Model):
                 s += ', '
         return s
     
-    def get_latex(self): # Abstract method
+    # Abstract method
+    def init_f_evaluation(self): 
         ...
-
+    
+    # Abstract method
+    def get_latex(self): 
+        ...
+    
+    # Abstract method 
     def change_formula(self, *args): # Abstract method
         ...
-        
-    
-        
-
-class Variable(db.Model):
-    __tablename__ = 'variable'
-    id = db.Column(db.Integer, primary_key=True)
-    variable_name = db.Column(db.String(1), nullable=False)
-    formula_id = db.Column(db.Integer, db.ForeignKey('formula.id'), nullable=False)
-
-    def isVariable(self, variable_name, formula_id):
-        return Variable.query.filter_by(variable_name=variable_name, formula_id=formula_id).count() > 0
-
-    def __init__(self, variable_name, formula_id):
-        if not self.isVariable(variable_name, formula_id):
-            self.variable_name = variable_name
-            self.formula_id = formula_id
-    
-    def __repr__(self):
-        return f"{self.variable_name}"
 
 class GeneratingFunction(Formula):
     __tablename__ = 'generatingfunction'
@@ -430,5 +454,19 @@ class ExplicitFormula(Formula):
         'polymorphic_identity': 'explicitformula',
     }
     
-# from encyclopedia import search
-# search.create_index(Pyramid)
+class Variable(db.Model):
+    __tablename__ = 'variable'
+    id = db.Column(db.Integer, primary_key=True)
+    variable_name = db.Column(db.String(1), nullable=False)
+    formula_id = db.Column(db.Integer, db.ForeignKey('formula.id'), nullable=False)
+
+    def isVariable(self, variable_name, formula_id):
+        return Variable.query.filter_by(variable_name=variable_name, formula_id=formula_id).count() > 0
+
+    def __init__(self, variable_name, formula_id):
+        if not self.isVariable(variable_name, formula_id):
+            self.variable_name = variable_name
+            self.formula_id = formula_id
+    
+    def __repr__(self):
+        return f"{self.variable_name}"
