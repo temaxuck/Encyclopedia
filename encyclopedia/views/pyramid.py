@@ -75,6 +75,7 @@ def upload_pyramid():
 @pyramidbp.route('/<snid>/edit', methods=['POST', 'GET'])
 @login_required
 def edit_pyramid(snid: int):
+    from encyclopedia.models import relations
     if not current_user.moderator:
         flash("You have no access to this page", "danger")
         return redirect(url_for("general.home"))
@@ -109,13 +110,27 @@ def edit_pyramid(snid: int):
             except IndexError:
                 pyramid.add_explicit_formula(form.ef_vars.data, ef.f_expr.data, ef.f_condition.data)
         
-        if form.relations.data != pyramid.get_relations_as_str():
-            # pyramid.relations = []
-            for relation in pyramid.relations.all():
-                pyramid.delete_relation(relation)
-            for rel in form.relations.data.split(','):
-                related = Pyramid.query.filter_by(sequence_number=int(rel)).first()
-                pyramid.add_relation(related)
+        # print(form.relations.data, '\n', pyramid.get_relations_as_str())
+        # print(db.session.query(relations).filter(relations.c.linked_pyramid_id==pyramid.id).first().tag == form.relations.data[0].get('tag'))
+        # print(pyramid.get_relations_as_dict == form.relations.data)
+        for i, relation in enumerate(form.relations.data):
+            # relation
+            # print(relation)
+            try:
+                pyramid.set_existing_relation(Pyramid.query.filter_by(sequence_number=relation.get('relatedto_pyramid')).first().id, relation.get('tag')) 
+            except sqlalchemy.exc.NoResultFound:
+                pyramid.add_relation(Pyramid.query.filter_by(sequence_number=relation.get('relatedto_pyramid')).first().id, relation.get('tag'))
+        #     if form.relations.data[i] != relation:
+                
+            # print(relation, i)
+            
+        # if form.relations.data != pyramid.get_relations_as_str():
+        #     # pyramid.relations = []
+        #     for relation in pyramid.relations.all():
+        #         pyramid.delete_relation(relation)
+        #     for rel in form.relations.data.split(','):
+        #         related = Pyramid.query.filter_by(sequence_number=int(rel)).first()
+        #         pyramid.add_relation(related)
 
 
         pyramid.init_special_value()
@@ -136,6 +151,9 @@ def edit_pyramid(snid: int):
         form.explicitFormula[0].f_expr.data = pyramid.explicit_formula[0].expression
         form.explicitFormula[0].f_condition.data = pyramid.explicit_formula[0].limitation
 
+        if pyramid.relations.all():
+            form.relations[0].relatedto_pyramid.data = pyramid.relations[0].sequence_number
+            form.relations[0].tag.data = pyramid.get_relation(pyramid.relations[0].id).get('tag')
         # form.relations[0].relatedto_pyramid.data = pyramid.relations[0].sequence_number if pyramid.relations else ''
         # form.relations[0].tag.data = 'Reciprocal' if pyramid.relations else ''
   
@@ -154,13 +172,19 @@ def edit_pyramid(snid: int):
             eform.f_condition=ef.limitation
             form.explicitFormula.append_entry(eform)
             
-        if pyramid.relations.all():
-            form.relations[0].relatedto_pyramid.data = pyramid.relations[0].sequence_number
-            form.relations[0].tag.data = 2 
+        if pyramid.relations.count() > 1:
+            rels = pyramid.relations.all()
+            for i in range(len(rels) - 1):
+                relform = RelationForm()
+                relform.relatedto_pyramid = rels[i+1].sequence_number
+                relform.tag = pyramid.get_relation(rels[i+1].id).get('tag')
+                form.relations.append_entry(relform)
+                # print(pyramid.get_relation(rels[i+1].id))
+            # print(dir(form.relations[0].tag), form.relations[0].tag.data, dir(form.relations[0].tag.option_widget))
         else:
-            form.relations[0].relatedto_pyramid.data = ''
+            form.relations[0].relatedto_pyramid.data = 0
             form.relations[0].tag.data = '' 
-            print(form.relations[0].tag.data)
+            # print(form.relations[0].tag.data)
 
   		# for i in range(len(pyramid.explicit_formula) - 1):
         #     ef = pyramid.explicit_formula[i+1]
