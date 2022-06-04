@@ -42,8 +42,7 @@ def signup():
     form = SignupForm()
 
     if form.validate_on_submit():
-        hashed_pw = hasher.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(form.username.data.lower(), form.email.data.lower(), hashed_pw)
+        user = User(form.username.data.lower(), form.email.data.lower(), form.password.data)
         db.session.add(user)
         db.session.commit()
 

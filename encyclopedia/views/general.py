@@ -29,7 +29,7 @@ def home():
         
     return render_template('home.html', pyramids=pyramids, page=page, pages_in_total=pages_in_total)
 
-@generalbp.route('/400',  methods=['POST', 'GET'])
+@generalbp.route('/not_found',  methods=['POST', 'GET'])
 def not_found():
     query = request.args.get('q')
     if not query:
@@ -74,8 +74,8 @@ LIMIT :param_1"
             redis_client.set(user_input, json.dumps(results))
             redis_client.expire(user_input, 3600)
             return render_template('search.html', results=results, q=user_input)
-        # except:
-        #     flash('Something went wrong', 'danger')
+        # except Exception as e:
+        #     flash(f'Something went wrong {e}', 'danger')
         #     return redirect(url_for("general.home"))
             
     flash('Something went wrong', 'danger')
