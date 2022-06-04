@@ -1,4 +1,4 @@
-from encyclopedia import db, login_manager
+from encyclopedia import db, login_manager, hasher
 from encyclopedia.math_module import kron_delta, custom_sqrt, OPERATIONS
 
 from abc import ABC, abstractmethod
@@ -40,7 +40,7 @@ class User(db.Model, UserMixin):
     def __init__(self, username, email, password, moderator=False):
         self.username = username
         self.email = email
-        self.password = password
+        self.password = hasher.generate_password_hash(password).decode('utf-8') 
         self.moderator = moderator
 
     def __repr__(self):
@@ -152,7 +152,7 @@ class Pyramid(db.Model):
         ) 
     
     # Generating function methods
-    def add_generating_function(self, funciton_name, variables, expression, ismain):
+    def add_generating_function(self, funciton_name: str, variables: str, expression: str, ismain: bool):
         formula = GeneratingFunction(funciton_name, variables, expression, ismain)
         self.generating_function.append(formula)
         formula.pyramid_id = self.id
@@ -185,7 +185,7 @@ class Pyramid(db.Model):
         for i in range(len(other_funcs)):
             other_funcs[i] = self.evaluate_certain_gf(other_funcs[i], values)
             to_be_evaluated = re.sub("_TBR_", f"({str(other_funcs[i])})", to_be_evaluated, count=1)
-        print(OPERATIONS['math'])
+                
         return eval(to_be_evaluated, values, OPERATIONS['math'])
 
     def evaluate_gf_at(self, *args):
@@ -213,7 +213,7 @@ class Pyramid(db.Model):
         return latexrepr
 
     # Explicit formula methods
-    def add_explicit_formula(self, variables, expression, limitation=''):
+    def add_explicit_formula(self, variables: str, expression: str, limitation: str =''):
         formula = ExplicitFormula(variables, expression, limitation)
         self.explicit_formula.append(formula)
         formula.pyramid_id = self.id
@@ -346,7 +346,7 @@ class Formula(db.Model):
         ...
     
     # Abstract method 
-    def change_formula(self, *args): # Abstract method
+    def change_formula(self, *args): 
         ...
 
 class GeneratingFunction(Formula):
@@ -388,8 +388,8 @@ class GeneratingFunction(Formula):
             if ord(i) in range(ord("A"), ord("Z") + 1):
                 self.other_func_calls += 1
                 other_func.append(i)
-        self.__expr__ = re.sub('\^','**', self.expression) # people often use caret to do exponential math, but python should interpret it as ** operator 
-        self.__expr__ = re.sub('[A-Z]?\((\w|, )*\)','_TBR_', self.__expr__) # _TBR_ is being replaced later 
+        self.__expr__ = re.sub(r'\^','**', self.expression) # people often use caret to do exponential math, but python should interpret it as ** operator 
+        self.__expr__ = re.sub(r'[A-Z]?\((\w|, )*\)','_TBR_', self.__expr__) # _TBR_ is being replaced later 
         self.other_func = other_func # other functions in chronological order
 
     def change_formula(self, function_name=None, variables=None, expression=None, main=None):
