@@ -103,7 +103,7 @@ main {
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
   gap: 10px;
-  height: 40px;
+  margin-top: 10px;
 }
 
 .group_operate_gf {

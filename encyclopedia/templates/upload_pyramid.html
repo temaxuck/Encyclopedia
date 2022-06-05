@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/forms__style.css') }}"/>
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/upload_pyramidstyle.css') }}">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-<script src="/static/js/upload_pyramid_handler.js"></script>
 
 <title>
     {% if pyramid %}
@@ -110,8 +109,8 @@
                     <div class="rels-wrapper">
                         {% for relation in form.relations %}
                             <div class="form-group-gf">
-                                {{ relation.relatedto_pyramid(autocomplete="off", class="related_seq") }}
-                                {{ relation.tag(autocomplete="off", class="related_tag") }}
+                                {{ relation.relatedto_pyramid(autocomplete="off", class="related_seq groupelement-input") }}
+                                {{ relation.tag(autocomplete="off", class="related_tag groupelement-input growable") }}
                                 <button class="group_operate_gf" onclick="remove_rel_input(this)" type="button">-</button>
                             </div>
                         {% endfor %}
@@ -135,4 +134,8 @@
         </form>
     </div>
 </main>
+{% endblock %}
+
+{% block afterscripts %} 
+    <script src="/static/js/upload_pyramid_handler.js"></script>
 {% endblock %}

@@ -80,7 +80,7 @@ class UploadPyramidForm(FlaskForm):
     explicitFormula = FieldList(FormField(ExplicitFormulaForm), min_entries=1)
     ef_name = StringField('Formula name', validators=[InputRequired()], default="T")
     ef_vars = StringField('Formula variables', validators=[InputRequired()], default="n, m, k")
-    relations = FieldList(FormField(RelationForm), validators=[Optional()], min_entries=1)
+    relations = FieldList(FormField(RelationForm), validators=[Optional()])
 
     def validate_relations(self, relations):
         try:
