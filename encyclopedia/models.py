@@ -91,6 +91,9 @@ class Pyramid(db.Model):
     def isLinked(self, pyramid):
         return True if self.relations.filter_by(sequence_number=pyramid.sequence_number).count() > 0 else False
 
+    def get_relation_tag(self, pyramid):
+        return db.session.query(relations).filter(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == pyramid.id).first().tag
+
     def add_relation(self, relatedto_pyramid_id, tag):
         from sqlalchemy import update, and_
 
@@ -100,16 +103,48 @@ class Pyramid(db.Model):
             self.relations.append(pyramid)
             pyramid.relations.append(self)
 
+            db.session.commit()
+            
             db.engine.execute(
                 update(relations).values({"tag": tag}).\
                 where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id))
             ) 
-    
-    def delete_relation(self, pyramid):
-        if self.isLinked(pyramid) and pyramid.isLinked(self):
-            self.relations.remove(pyramid)
-            pyramid.relations.remove(self)
 
+    def set_existing_relation(self, relatedto_pyramid_id: int, tag: str) -> None:
+        from sqlalchemy import update, and_
+        
+        db.session.query(relations).filter(
+            and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id)
+        ).one()
+        
+        db.engine.execute(
+            update(relations).values({"tag": tag}).\
+            where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id))
+        ) 
+        
+    def delete_relation(self, pyramid):
+        from sqlalchemy import and_, or_
+        if self.isLinked(pyramid) and pyramid.isLinked(self):
+            # self.relations.remove(pyramid)
+            # pyramid.relations.remove(self)
+            to_delete = db.session.query(relations).filter(or_(
+                and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == pyramid.id),
+                and_(relations.c.linked_pyramid_id == pyramid.id, relations.c.relatedto_pyramid_id == self.id)
+            ))
+            to_delete.delete(synchronize_session=False)
+            db.session.commit()
+            # relations.delete().where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == pyramid.id))
+            # relations.delete().where(and_(relations.c.linked_pyramid_id == pyramid.id, relations.c.relatedto_pyramid_id == self.id))
+            
+    def delete_all_relations(self):
+        from sqlalchemy import and_, or_
+        to_delete = db.session.query(relations).filter(or_(
+            relations.c.linked_pyramid_id == self.id, 
+            relations.c.relatedto_pyramid_id == self.id
+        ))
+        to_delete.delete(synchronize_session=False)
+        db.session.commit()    
+        
     # Should be rewrote
     def __get_relations_str__(self):
         return [relation.sequence_number for relation in self.relations ]
@@ -139,18 +174,6 @@ class Pyramid(db.Model):
             
         return None
     
-    def set_existing_relation(self, relatedto_pyramid_id: int, tag: str) -> None:
-        from sqlalchemy import update, and_
-        
-        db.session.query(relations).filter(
-            and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id)
-        ).one()
-        
-        db.engine.execute(
-            update(relations).values({"tag": tag}).\
-            where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id))
-        ) 
-    
     # Generating function methods
     def add_generating_function(self, funciton_name: str, variables: str, expression: str, ismain: bool):
         formula = GeneratingFunction(funciton_name, variables, expression, ismain)
@@ -174,7 +197,7 @@ class Pyramid(db.Model):
         values['__builtins__'] = None
         
         if sqrt:
-            OPERATIONS['math']['sqrt'] = sqrt
+            OPERATIONS['math']['sqrt'] = sqrt['sqrt']
         
         if (self.gf_dict[function_name].other_func_calls == 0):
             return eval(self.gf_dict[function_name].__expr__, values, OPERATIONS['math'])

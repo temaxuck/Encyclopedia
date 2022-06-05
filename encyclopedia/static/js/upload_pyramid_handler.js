@@ -1,4 +1,12 @@
-let gf_count = 1, ef_count = 1, rel_count = 1;
+let gf_count = 1, ef_count = 1, rel_count = 0;
+
+try {
+    rels = document.querySelectorAll('.related_seq');
+    rel_count = parseInt(rels[rels.length - 1].id.match(/\d+(\.\d+)?/)) + 1;
+    // rel_count = rels[rels.length - 1].id
+} catch (error) {
+    // console.log('');
+}
 
 // Generating Function
 function add_gf_input(addbtn) {
@@ -118,26 +126,30 @@ function add_rel_input(addbtn) {
     let parent = addbtn.parentNode;
     rel_count++;            
 
-    let cloned = parent.querySelector('.form-group-gf').cloneNode(true);
-    cloned.querySelector('.related_seq').value = 0;
-    cloned.querySelector('.related_seq').id = `relations-${rel_count-1}-relatedto_pyramid`;
-    cloned.querySelector('.related_seq').name = `relations-${rel_count-1}-relatedto_pyramid`;
+    relation_html = 
+    `<div class="form-group-gf">
+        <input autocomplete="off" class="related_seq groupelement-input" id="relations-${rel_count - 1}-relatedto_pyramid" min="0" name="relations-${rel_count - 1}-relatedto_pyramid" type="number">
+        <select autocomplete="off" class="related_tag groupelement-input growable" id="relations-${rel_count - 1}-tag" name="relations-${rel_count - 1}-tag"><option value="Reciprocal">Reciprocal</option><option value="Reversion on y">Reversion on y</option><option value="Right on x">Right on x</option><option value="Right on y">Right on y</option><option value="Left on x">Left on x</option><option selected="" value="Right on x">Right on x</option><option value="Change x y">Change x y</option><option value="None">--Select--</option></select>
+        <button class="group_operate_gf" onclick="remove_rel_input(this)" type="button">-</button>
+    </div>
+`
 
-    cloned.querySelector('.related_tag').value = 0;
-    cloned.querySelector('.related_tag').id = `relations-${rel_count-1}-tag`;
-    cloned.querySelector('.related_tag').name = `relations-${rel_count-1}-tag`;
+    // let cloned = parent.querySelector('.form-group-gf').cloneNode(true);
+    // cloned.querySelector('.related_seq').value = 0;
+    // cloned.querySelector('.related_seq').id = `relations-${rel_count-1}-relatedto_pyramid`;
+    // cloned.querySelector('.related_seq').name = `relations-${rel_count-1}-relatedto_pyramid`;
 
-    parent.querySelector('.rels-wrapper').appendChild(cloned);
+    // cloned.querySelector('.related_tag').value = 0;
+    // cloned.querySelector('.related_tag').id = `relations-${rel_count-1}-tag`;
+    // cloned.querySelector('.related_tag').name = `relations-${rel_count-1}-tag`;
+
+    parent.querySelector('.rels-wrapper').insertAdjacentHTML('beforeend', relation_html);
 }
 
 function remove_rel_input(remove_btn) {
     let parent = remove_btn.parentNode;
     let currentNodeId = parent.querySelector('.related_seq').id.match(/\d+/).toString();
     currentNodeId = parseInt(currentNodeId);
-
-    if (rel_count < 2) {
-        return;
-    }
     
     rel_count--;
     
