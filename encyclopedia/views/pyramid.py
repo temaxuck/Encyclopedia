@@ -49,18 +49,14 @@ def upload_pyramid():
 
         db.session.add(pyramid)
 
-        # if rels:
-        #     for rel in rels.split(','):
-        #         try:
-        #             rel = int(rel)
-        #             related_pyramid = Pyramid.query.filter_by(sequence_number = rel).first()
-        #             if related_pyramid is None:
-        #                 flash(f'Could not get Pyramid#{rel}', 'danger')
-        #             else:
-        #                 pyramid.add_relation(related_pyramid)
-        #         except ValueError:
-        #             flash(f'Could not convert Pyramid #{pyramid.sequence_number} relation {rel} to int', 'danger')
 
+        for i, relation in enumerate(form.relations.data):
+            try:
+                pyramid.add_relation(Pyramid.query.filter_by(sequence_number=relation.get('relatedto_pyramid')).first().id, relation.get('tag'))
+            except Exception:
+                flash(f"Could not add a relation between pyramids #{relation.get('relatedto_pyramid')} and #{pyramid.sequence_number}", 'danger')
+                return redirect(url_for('pyramid.edit_pyramid', snid=pyramid.sequence_number))
+                
         current_user.add_pyramid(pyramid)
         db.session.commit()
         flash('The pyramid has been added!', 'success')
