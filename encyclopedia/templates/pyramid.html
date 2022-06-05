@@ -83,7 +83,7 @@
                         <div class="title">Export as LaTEX</div> 
                         <div class="closebtn"><span class="material-icons">close</span></div>
                     </div>
-                    <textarea class="exportcode" readonly>{{ pyramid.gf_latex.replace("$","")|safe }}&#13;&#10;{{ pyramid.ef_latex.replace("$","")|safe }}</textarea>
+                    <textarea class="exportcode" readonly>{{ pyramid.gf_latex.replace("$","") }}&#13;&#10;{{ pyramid.ef_latex.replace("$","") }}</textarea>
                     <div class="exportcopybtn-wrapper"> <button class="copybtn" onclick="copy()">Copy</button> </div>
                 </div>
             </div>

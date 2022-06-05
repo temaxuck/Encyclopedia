@@ -219,7 +219,7 @@ class Pyramid(db.Model):
         latexrepr = ''
 
         for (loop, formula) in enumerate(self.generating_function):
-            latexrepr += r' $$' + formula.get_latex() + r'$$ '
+            latexrepr += r'$$' + formula.get_latex() + r'$$ '
 
         return latexrepr
 
@@ -255,7 +255,7 @@ class Pyramid(db.Model):
     @property
     def ef_latex(self):
         latexrepr = f'$${self.explicit_formula[0].function_name}_{{{self.sequence_number}}}\
-                      ({self.explicit_formula[0].get_variables_as_str()}) ='
+({self.explicit_formula[0].get_variables_as_str()}) = '
         if len(self.explicit_formula) > 1:
             latexrepr += r'\begin{cases}' 
 
