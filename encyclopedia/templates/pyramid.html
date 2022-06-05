@@ -62,7 +62,7 @@
         <div class="textlinks">
             {% for related_pyramid in pyramid.relations.all() %} 
                 <a href="{{ url_for('pyramid.pyramid', snid=related_pyramid.sequence_number) }}">
-                    Pyramid #{{ related_pyramid.sequence_number }}: {{ pyramid.get_relation_tag(related_pyramid) }} 
+                    Pyramid #{{ related_pyramid.sequence_number }}: {{ pyramid.get_relation(related_pyramid.id)['tag'] }} 
                 </a> <br>
             {% endfor %}
         </div>

@@ -91,17 +91,13 @@ class Pyramid(db.Model):
     def isLinked(self, pyramid):
         return True if self.relations.filter_by(sequence_number=pyramid.sequence_number).count() > 0 else False
 
-    def get_relation_tag(self, pyramid):
-        return db.session.query(relations).filter(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == pyramid.id).first().tag
-
     def add_relation(self, relatedto_pyramid_id, tag):
         from sqlalchemy import update, and_
 
         pyramid = Pyramid.query.filter_by(id=relatedto_pyramid_id).first()
 
-        if not self.isLinked(pyramid) and not pyramid.isLinked(self):
+        if not self.isLinked(pyramid):
             self.relations.append(pyramid)
-            pyramid.relations.append(self)
 
             db.session.commit()
             
@@ -125,23 +121,15 @@ class Pyramid(db.Model):
     def delete_relation(self, pyramid):
         from sqlalchemy import and_, or_
         if self.isLinked(pyramid) and pyramid.isLinked(self):
-            # self.relations.remove(pyramid)
-            # pyramid.relations.remove(self)
-            to_delete = db.session.query(relations).filter(or_(
+            to_delete = db.session.query(relations).filter(
                 and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == pyramid.id),
-                and_(relations.c.linked_pyramid_id == pyramid.id, relations.c.relatedto_pyramid_id == self.id)
-            ))
+            )
             to_delete.delete(synchronize_session=False)
             db.session.commit()
-            # relations.delete().where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == pyramid.id))
-            # relations.delete().where(and_(relations.c.linked_pyramid_id == pyramid.id, relations.c.relatedto_pyramid_id == self.id))
             
     def delete_all_relations(self):
         from sqlalchemy import and_, or_
-        to_delete = db.session.query(relations).filter(or_(
-            relations.c.linked_pyramid_id == self.id, 
-            relations.c.relatedto_pyramid_id == self.id
-        ))
+        to_delete = db.session.query(relations).filter(relations.c.linked_pyramid_id == self.id)
         to_delete.delete(synchronize_session=False)
         db.session.commit()    
         
