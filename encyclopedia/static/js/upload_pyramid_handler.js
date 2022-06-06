@@ -129,7 +129,7 @@ function add_rel_input(addbtn) {
     relation_html = 
     `<div class="form-group-gf">
         <input autocomplete="off" class="related_seq groupelement-input" id="relations-${rel_count - 1}-relatedto_pyramid" min="0" name="relations-${rel_count - 1}-relatedto_pyramid" type="number">
-        <select autocomplete="off" class="related_tag groupelement-input growable" id="relations-${rel_count - 1}-tag" name="relations-${rel_count - 1}-tag"><option value="Reciprocal">Reciprocal</option><option value="Reversion on y">Reversion on y</option><option value="Right on x">Right on x</option><option value="Right on y">Right on y</option><option value="Left on x">Left on x</option><option selected="" value="Right on x">Right on x</option><option value="Change x y">Change x y</option><option value="None">--Select--</option></select>
+        <select autocomplete="off" class="related_tag groupelement-input growable" id="relations-${rel_count - 1}-tag" name="relations-${rel_count - 1}-tag"><option value="Reciprocal">Reciprocal</option><option value="Reversion on y">Reversion on y</option><option value="Reversion on x">Reversion on x</option><option value="Right on x">Right on x</option><option value="Right on y">Right on y</option><option value="Left on x">Left on x</option><option value="Left on y">Left on y</option><option value="Change x y">Change x y</option><option value="None">--Select--</option></select>
         <button class="group_operate_gf" onclick="remove_rel_input(this)" type="button">-</button>
     </div>
 `

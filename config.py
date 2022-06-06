@@ -9,17 +9,20 @@ class Config(object):
     POSTGRES_HOST = os.environ.get('POSTGRES_HOST')
     POSTGRES_PORT = os.environ.get('POSTGRES_PORT')
     SQLALCHEMY_DATABASE_URI = f'postgresql://{POSTGRES_USERNAME}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/encyclopedia'
+    
     RUN_HOST = os.environ.get('RUN_HOST')
     RUN_PORT = os.environ.get('RUN_PORT')
     
-    # MSEARCH_BACKEND = 'whoosh'
-    # WHOOSH_BASE = 'whoosh'
     MSEARCH_PRIMARY_KEY = 'id'
     MSEARCH_ENABLE = True
     REDIS_URL = "redis://:@localhost:6379/0"
     
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    # ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
-    # ELASTIC_USER = os.environ.get("ELASTIC_USER")
-    # ELASTIC_PASSWORD = os.environ.get("ELASTIC_PASSWORD")
     
+    MAIL_SERVER ='smtp.gmail.com'
+    MAIL_PORT = 465
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    MAIL_DEFAULT_SENDER = os.environ.get('MAIL_USERNAME')
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True

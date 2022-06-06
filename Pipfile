@@ -35,6 +35,7 @@ psycopg2 = "*"
 python-dotenv = "*"
 psycopg2-binary = "*"
 pytest = "*"
+flask-mail = "*"
 
 [dev-packages]
 

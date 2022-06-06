@@ -64,10 +64,11 @@ class RelationForm(Form):
     TAG_CHOICES = [
         ('Reciprocal', 'Reciprocal'),
         ('Reversion on y', 'Reversion on y'),
+        ('Reversion on x', 'Reversion on x'),
         ('Right on x', 'Right on x'),
         ('Right on y', 'Right on y'),
         ('Left on x', 'Left on x'),
-        ('Right on x', 'Right on x'),
+        ('Left on y', 'Left on y'),
         ('Change x y', 'Change x y'),
         (None, '--Select--'),
     ]
