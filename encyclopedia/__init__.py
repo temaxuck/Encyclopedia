@@ -5,12 +5,14 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_msearch import Search
 from flask_redis import FlaskRedis
+from flask_mail import Mail
 
 from config import Config
 
 db = SQLAlchemy()
 hasher = Bcrypt()
 search = Search()
+mail = Mail()
 migrations = Migrate()
 redis_client = FlaskRedis()
 login_manager = LoginManager()
@@ -23,6 +25,7 @@ def create_app():
     app.app_context().push()
     app.config.from_object(Config)
     db.init_app(app)
+    # mail.init_app(app)
     hasher.init_app(app)
     migrations.init_app(app, db, render_as_batch=True)
     login_manager.init_app(app)
