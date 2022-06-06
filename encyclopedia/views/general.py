@@ -80,4 +80,3 @@ LIMIT :param_1"
             
     flash('Something went wrong', 'danger')
     return redirect(url_for("general.home"))
-        
