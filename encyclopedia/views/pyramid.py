@@ -48,6 +48,7 @@ def upload_pyramid():
             return redirect(url_for('pyramid.upload_pyramid'))
 
         db.session.add(pyramid)
+        db.session.commit()
 
 
         for i, relation in enumerate(form.relations.data):
@@ -111,8 +112,11 @@ def edit_pyramid(snid: int):
         for i, relation in enumerate(form.relations.data):
             try:
                 pyramid.add_relation(Pyramid.query.filter_by(sequence_number=relation.get('relatedto_pyramid')).first().id, relation.get('tag'))
-            except Exception:
-                flash(f"Could not add a relation between pyramids #{relation.get('relatedto_pyramid')} and #{pyramid.sequence_number}", 'danger')
+            except Exception as e:
+                print(e)
+                flash(
+                    f"Could not add a relation between pyramids #{relation.get('relatedto_pyramid')} and #{pyramid.sequence_number}. Make sure pyramid #{relation.get('relatedto_pyramid')} exists",
+                    'danger')
                 return redirect(url_for('pyramid.edit_pyramid', snid=pyramid.sequence_number))
         
         db.session.add(pyramid)
