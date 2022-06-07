@@ -56,7 +56,8 @@ SELECT pyramid.id, pyramid.sequence_number, pyramid.user_id, pyramid.__special_h
 FROM pyramid \n\
 WHERE (CAST (pyramid.sequence_number AS text) LIKE '%%' || :sequence_number_1 || '%%') ORDER BY pyramid.sequence_number ASC\n\
 LIMIT :param_1"
-            pyramid_results = db.session.execute(select(Pyramid).from_statement(text(sqlexpression)), {'sequence_number_1': user_input, 'param_1': 50}).scalars().all()
+            with db.engine.connect() as conn:
+                pyramid_results = conn.execute(select(Pyramid).from_statement(text(sqlexpression)), {'sequence_number_1': user_input, 'param_1': 50}).scalars().all()
             gf_results = GeneratingFunction.query.msearch(user_input, fields=['expression'], limit=50).all()
             ef_results = ExplicitFormula.query.msearch(user_input, fields=['expression'], limit=50).all()
             user_results = User.query.msearch(user_input, fields=['username'], limit=50).all()

@@ -115,7 +115,7 @@ def upload_file(form_file, user_id):
     new_filename += os.path.splitext(form_file.filename)[1]
     new_filename = secure_filename(new_filename)
     
-    filedir = os.path.join(app.root_path, 'static', 'profile_pictures', str(user_id))
+    filedir = os.path.join(current_app.root_path, 'static', 'profile_pictures', str(user_id))
     if not os.path.isdir(filedir):
         print('Does not exist!', os.path.isfile(filedir))
         os.mkdir(filedir)
