@@ -21,7 +21,3 @@ def make_shell_context():
 @app.before_first_request
 def create_tables():
     db.create_all()
-    
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    db.session.remove()
