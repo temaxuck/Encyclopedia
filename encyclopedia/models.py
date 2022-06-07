@@ -1,6 +1,7 @@
 from encyclopedia import db, login_manager, hasher
 from encyclopedia.math_module import kron_delta, custom_sqrt, OPERATIONS
-from encyclopedia.db_handler import clean_up
+
+from abc import ABC, abstractmethod
 
 import math
 import sympy as sp
@@ -96,52 +97,41 @@ class Pyramid(db.Model):
         pyramid = Pyramid.query.filter_by(id=relatedto_pyramid_id).first()
 
         if not self.isLinked(pyramid):
-            try:
-                self.relations.append(pyramid)
+            self.relations.append(pyramid)
 
-                db.session.commit()
-                
-                db.engine.execute(
-                    update(relations).values({"tag": tag}).\
-                    where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id))
-                ) 
-            finally:
-                clean_up(db.session)
-
-    def set_existing_relation(self, relatedto_pyramid_id: int, tag: str) -> None:
-        from sqlalchemy import update, and_
-        try:
-            db.session.query(relations).filter(
-                and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id)
-            ).one()
+            db.session.commit()
             
             db.engine.execute(
                 update(relations).values({"tag": tag}).\
                 where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id))
             ) 
-        finally:
-            clean_up()
+
+    def set_existing_relation(self, relatedto_pyramid_id: int, tag: str) -> None:
+        from sqlalchemy import update, and_
+        
+        db.session.query(relations).filter(
+            and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id)
+        ).one()
+        
+        db.engine.execute(
+            update(relations).values({"tag": tag}).\
+            where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id))
+        ) 
         
     def delete_relation(self, pyramid):
         from sqlalchemy import and_, or_
         if self.isLinked(pyramid) and pyramid.isLinked(self):
-            try:
-                to_delete = db.session.query(relations).filter(
-                    and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == pyramid.id),
-                )
-                to_delete.delete(synchronize_session=False)
-                db.session.commit()
-            finally:
-                clean_up()
+            to_delete = db.session.query(relations).filter(
+                and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == pyramid.id),
+            )
+            to_delete.delete(synchronize_session=False)
+            db.session.commit()
             
     def delete_all_relations(self):
         from sqlalchemy import and_, or_
-        try:
-            to_delete = db.session.query(relations).filter(relations.c.linked_pyramid_id == self.id)
-            to_delete.delete(synchronize_session=False)
-            db.session.commit()    
-        finally:
-            clean_up()
+        to_delete = db.session.query(relations).filter(relations.c.linked_pyramid_id == self.id)
+        to_delete.delete(synchronize_session=False)
+        db.session.commit()    
         
     # Should be rewrote
     def __get_relations_str__(self):
