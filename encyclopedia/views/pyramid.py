@@ -114,6 +114,8 @@ def edit_pyramid(snid: int):
             except Exception:
                 flash(f"Could not add a relation between pyramids #{relation.get('relatedto_pyramid')} and #{pyramid.sequence_number}", 'danger')
                 return redirect(url_for('pyramid.edit_pyramid', snid=pyramid.sequence_number))
+        
+        db.session.add(pyramid)
                 
         pyramid.init_special_value()
         db.session.commit()
