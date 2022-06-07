@@ -5,14 +5,14 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_msearch import Search
 from flask_redis import FlaskRedis
-from flask_mail import Mail
+# from flask_mail import Mail
 
 from config import Config
 
 db = SQLAlchemy()
 hasher = Bcrypt()
 search = Search()
-mail = Mail()
+# mail = Mail()
 migrations = Migrate()
 redis_client = FlaskRedis()
 login_manager = LoginManager()
