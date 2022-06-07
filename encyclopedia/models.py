@@ -1,7 +1,8 @@
 from encyclopedia import db, login_manager, hasher
 from encyclopedia.math_module import kron_delta, custom_sqrt, OPERATIONS
+from sqlalchemy.orm import Session 
 
-from abc import ABC, abstractmethod
+from flask import current_app
 
 import math
 import sympy as sp
@@ -93,18 +94,18 @@ class Pyramid(db.Model):
 
     def add_relation(self, relatedto_pyramid_id, tag):
         from sqlalchemy import update, and_
+        with db.engine.connect() as conn:
+            pyramid = Pyramid.query.filter_by(id=relatedto_pyramid_id).first()
 
-        pyramid = Pyramid.query.filter_by(id=relatedto_pyramid_id).first()
+            if not self.isLinked(pyramid):
+                self.relations.append(pyramid)
 
-        if not self.isLinked(pyramid):
-            self.relations.append(pyramid)
-
-            db.session.commit()
-            
-            db.engine.execute(
-                update(relations).values({"tag": tag}).\
-                where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id))
-            ) 
+                db.session.commit()
+                
+                conn.execute(
+                    update(relations).values({"tag": tag}).\
+                    where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id))
+                ) 
 
     def set_existing_relation(self, relatedto_pyramid_id: int, tag: str) -> None:
         from sqlalchemy import update, and_
@@ -113,10 +114,11 @@ class Pyramid(db.Model):
             and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id)
         ).one()
         
-        db.engine.execute(
-            update(relations).values({"tag": tag}).\
-            where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id))
-        ) 
+        with db.engine.connect() as conn:
+            conn.execute(
+                update(relations).values({"tag": tag}).\
+                where(and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id))
+            ) 
         
     def delete_relation(self, pyramid):
         from sqlalchemy import and_, or_
