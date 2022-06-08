@@ -22,47 +22,51 @@ def upload_pyramid():
     form = UploadPyramidForm()
 
     if form.validate_on_submit():
-        alreadyExist = Pyramid.query.filter_by(sequence_number=form.sequenceNumber.data).count() > 0
-        if alreadyExist:
-            flash(f'Such pyramid already exists', 'danger')
-            return redirect(url_for('pyramid.upload_pyramid'))
+        try:
+            alreadyExist = Pyramid.query.filter_by(sequence_number=form.sequenceNumber.data).count() > 0
+            if alreadyExist:
+                flash(f'Such pyramid already exists', 'danger')
+                return redirect(url_for('pyramid.upload_pyramid'))
 
-        pyramid = Pyramid(form.sequenceNumber.data)
+            pyramid = Pyramid(form.sequenceNumber.data)
 
-        rels = form.relations.data
-        
-        for i, gf in enumerate(form.generatingFunction):
-            isMain = False
-            if gf.f_name.data == 'U' or gf.f_name.data == 'u' or i == len(form.generatingFunction) - 1:
-                isMain = True
-            pyramid.add_generating_function(gf.f_name.data, gf.f_vars.data, gf.f_expr.data, isMain)
-        
-        for ef in form.explicitFormula:
-            pyramid.add_explicit_formula(form.ef_vars.data, ef.f_expr.data, ef.f_condition.data)
+            rels = form.relations.data
+            
+            for i, gf in enumerate(form.generatingFunction):
+                isMain = False
+                if gf.f_name.data == 'U' or gf.f_name.data == 'u' or i == len(form.generatingFunction) - 1:
+                    isMain = True
+                pyramid.add_generating_function(gf.f_name.data, gf.f_vars.data, gf.f_expr.data, isMain)
+            
+            for ef in form.explicitFormula:
+                pyramid.add_explicit_formula(form.ef_vars.data, ef.f_expr.data, ef.f_condition.data)
 
-        pyramid.init_special_value()
-        alreadyExist = Pyramid.query.filter_by(__special_hashed_value__=pyramid.__special_hashed_value__).count() > 0
-        
-        if alreadyExist:
-            flash(f'Such pyramid already exists', 'danger')
-            return redirect(url_for('pyramid.upload_pyramid'))
+            pyramid.init_special_value()
+            alreadyExist = Pyramid.query.filter_by(__special_hashed_value__=pyramid.__special_hashed_value__).count() > 0
+            
+            if alreadyExist:
+                flash(f'Such pyramid already exists', 'danger')
+                return redirect(url_for('pyramid.upload_pyramid'))
 
-        db.session.add(pyramid)
-        db.session.commit()
+            db.session.add(pyramid)
+            db.session.commit()
 
 
-        for i, relation in enumerate(form.relations.data):
-            try:
-                pyramid.add_relation(Pyramid.query.filter_by(sequence_number=relation.get('relatedto_pyramid')).first().id, relation.get('tag'))
-            except Exception:
-                flash(f"Could not add a relation between pyramids #{relation.get('relatedto_pyramid')} and #{pyramid.sequence_number}", 'danger')
-                return redirect(url_for('pyramid.edit_pyramid', snid=pyramid.sequence_number))
-                
-        current_user.add_pyramid(pyramid)
-        db.session.commit()
-        flash('The pyramid has been added!', 'success')
+            for i, relation in enumerate(form.relations.data):
+                try:
+                    pyramid.add_relation(Pyramid.query.filter_by(sequence_number=relation.get('relatedto_pyramid')).first().id, relation.get('tag'))
+                except Exception:
+                    flash(f"Could not add a relation between pyramids #{relation.get('relatedto_pyramid')} and #{pyramid.sequence_number}", 'danger')
+                    return redirect(url_for('pyramid.edit_pyramid', snid=pyramid.sequence_number))
+                    
+            current_user.add_pyramid(pyramid)
+            db.session.commit()
+            flash('The pyramid has been added!', 'success')
 
-        return redirect(url_for('general.home', username=current_user.username))
+        except:
+            flash('Could not process formulas!', 'danger')
+
+        return redirect(url_for('pyramid.pyramid', snid=pyramid.sequence_number))
     
     if request.method == 'POST':
         return redirect(url_for('general.search', q=request.form.get('pyramidinput')))
@@ -80,50 +84,52 @@ def edit_pyramid(snid: int):
     form = UploadPyramidForm()
     pyramid = Pyramid.query.filter_by(sequence_number=snid).first()
 
-    
     if form.validate_on_submit():
-
-        for i, gf in enumerate(form.generatingFunction):
-            isMain = False
-            if gf.f_name.data == 'U' or gf.f_name.data == 'u' or i == len(form.generatingFunction) - 1:
-                isMain = True
+        try:
+            for i, gf in enumerate(form.generatingFunction):
+                isMain = False
+                if gf.f_name.data == 'U' or gf.f_name.data == 'u' or i == len(form.generatingFunction) - 1:
+                    isMain = True
+                
+                try:
+                    pyramid.generating_function[i].change_formula(
+                            function_name=gf.f_name.data, 
+                            variables=gf.f_vars.data, 
+                            expression=gf.f_expr.data, 
+                        )
+                except IndexError:
+                    pyramid.add_generating_function(gf.f_name.data, gf.f_vars.data, gf.f_expr.data, isMain)
             
-            try:
-                pyramid.generating_function[i].change_formula(
-                        function_name=gf.f_name.data, 
-                        variables=gf.f_vars.data, 
-                        expression=gf.f_expr.data, 
+            for i, ef in enumerate(form.explicitFormula):
+                try:
+                    pyramid.explicit_formula[i].change_formula(
+                        expression=ef.f_expr.data, 
+                        variables=form.ef_vars.data,
+                        limitation=ef.f_condition.data
                     )
-            except IndexError:
-                pyramid.add_generating_function(gf.f_name.data, gf.f_vars.data, gf.f_expr.data, isMain)
-        
-        for i, ef in enumerate(form.explicitFormula):
-            try:
-                pyramid.explicit_formula[i].change_formula(
-                    expression=ef.f_expr.data, 
-                    variables=form.ef_vars.data,
-                    limitation=ef.f_condition.data
-                )
-            except IndexError:
-                pyramid.add_explicit_formula(form.ef_vars.data, ef.f_expr.data, ef.f_condition.data)
-        
-        pyramid.delete_all_relations()
-                
-        for i, relation in enumerate(form.relations.data):
-            try:
-                pyramid.add_relation(Pyramid.query.filter_by(sequence_number=relation.get('relatedto_pyramid')).first().id, relation.get('tag'))
-            except Exception as e:
-                print(e)
-                flash(
-                    f"Could not add a relation between pyramids #{relation.get('relatedto_pyramid')} and #{pyramid.sequence_number}. Make sure pyramid #{relation.get('relatedto_pyramid')} exists",
-                    'danger')
-                return redirect(url_for('pyramid.edit_pyramid', snid=pyramid.sequence_number))
-        
-        db.session.add(pyramid)
-                
-        pyramid.init_special_value()
-        db.session.commit()
-        flash('The pyramid has been edited!', 'success')
+                except IndexError:
+                    pyramid.add_explicit_formula(form.ef_vars.data, ef.f_expr.data, ef.f_condition.data)
+            
+            pyramid.delete_all_relations()
+                    
+            for i, relation in enumerate(form.relations.data):
+                try:
+                    pyramid.add_relation(Pyramid.query.filter_by(sequence_number=relation.get('relatedto_pyramid')).first().id, relation.get('tag'))
+                except Exception as e:
+                    print(e)
+                    flash(
+                        f"Could not add a relation between pyramids #{relation.get('relatedto_pyramid')} and #{pyramid.sequence_number}. Make sure pyramid #{relation.get('relatedto_pyramid')} exists",
+                        'danger')
+                    return redirect(url_for('pyramid.edit_pyramid', snid=pyramid.sequence_number))
+            
+            db.session.add(pyramid)
+                    
+            pyramid.init_special_value()
+            db.session.commit()
+            flash('The pyramid has been edited!', 'success')
+
+        except:
+            flash('Could not process formulas!', 'danger')
 
         return redirect(url_for('pyramid.pyramid', snid=pyramid.sequence_number))
     
