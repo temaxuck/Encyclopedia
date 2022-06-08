@@ -18,6 +18,10 @@ class Config(object):
     REDIS_URL = "redis://:@localhost:6379/0"
     
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        'pool_size': 30,
+        'pool_timeout': 50
+        }
     
     MAIL_SERVER ='smtp.gmail.com'
     MAIL_PORT = 465
