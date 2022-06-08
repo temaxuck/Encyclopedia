@@ -27,6 +27,62 @@ def Tsqrt(n, k):
             return (-1)**(n-m) * binomial(n, m) * binomial(2*n, n) / binomial(2*n, 2*m)
         else:
             return binomial(2*m, 2*n) * binomial(2*n, n) / binomial(m, n)
+        
+def TA271825(n, k):
+    from sympy import binomial
+    if n == 0:
+        return 1
+    else:
+        return k*(-1)**(n-1) / n * binomial(2*n-k-1, n-1) 
+    
+def TLeftA271825(n, k):
+    from sympy import binomial
+    if n == 0:
+        return 1
+    else:
+        return k*(-1)**(n-1) / n * binomial(3*n-k-1, n-1) 
+
+def TA984(n, k):
+    from sympy import binomial
+    if k % 2 == 0:
+        j = k / 2
+    else:
+        j = (k - 1) / 2
+        
+    return binomial(n+j, n) * binomial(2*n + 2*j, n+j) / binomial(2*j, j)
+
+# def Tsqrt2(n,k):
+#     if evenp(k+n):
+#         return (Tsqrt_even(n,((k+n)/2))*k/(n+k))
+#     else:
+#         return (Tsqrt_odd(n,(n+k+1)/2)*k/(n+k));
+
+
+# def TLeftA271825(n,k):
+#     if n==0:
+#         return (1)
+#     else:
+#         return ((k*((binomial(3*n-k-1,n-1))*(-1)**(n-1)))/n)
+
+# def TA000984(n,k):
+#     if evenp(k):
+#         return (4**n*(binomial(n+int(k/2)-1,n)))
+#     else:
+#         return(binomial(n+int((k-1)/2),n)*binomial(2*n+k-1,n+int((k-1)/2))/binomial(k-1,int((k-1)/2)))
+
+# def Tsqrt3(n,k):
+#     if n==0:
+#         return (1)
+#     else:
+#         return (2*binomial(2*n-2*k-1,n-1)*k/n*(-1)**(n-1))
+
+# def TCube5(n,k):
+#     if n==0:
+#         return (1)
+#     else:
+#         return (2*k*binomial(3*n-2*k-1,n-1)/n*(-1)**(n-1))
+
+
 
 OPERATIONS = {
     'parity': {
@@ -41,7 +97,9 @@ OPERATIONS = {
         'sin': math.sin,
         'cos': math.cos,
         'arcsin': math.asin,
+        'asin': math.asin,
         'arccos': math.acos,
+        'acos': math.acos,
         'tan': math.tan,
         'tg': math.tan,
         'cotan': cotan,
@@ -54,7 +112,10 @@ OPERATIONS = {
     'combinatorics': {
         'delta': kron_delta,
         'binomial': sympy.binomial,
-        'Tsqrt': Tsqrt
+        'Tsqrt': Tsqrt,
+        'TA271825': TA271825,
+        'TA984': TA984,
+        'TLeftA271825': TLeftA271825
     }
 }
 
