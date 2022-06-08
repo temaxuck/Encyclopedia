@@ -16,6 +16,18 @@ def cotan(x):
 def arccotan(x):
     return (math.acos(x)/ math.asin(x))
 
+def Tsqrt(n, k):
+    from sympy import binomial
+    if k % 2 == 0:
+        m = k / 2
+        return binomial(m,n) * 4 ** n
+    else:
+        m = (k + 1) / 2
+        if n > k:
+            return (-1)**(n-m) * binomial(n, m) * binomial(2*n, n) / binomial(2*n, 2*m)
+        else:
+            return binomial(2*m, 2*n) * binomial(2*n, n) / binomial(m, n)
+
 OPERATIONS = {
     'parity': {
         'even': '% 2 == 0',
@@ -41,7 +53,8 @@ OPERATIONS = {
     },
     'combinatorics': {
         'delta': kron_delta,
-        'binomial': sympy.binomial
+        'binomial': sympy.binomial,
+        'Tsqrt': Tsqrt
     }
 }
 
