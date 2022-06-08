@@ -1,4 +1,5 @@
 from encyclopedia.models import User, Pyramid, GeneratingFunction, ExplicitFormula, relations, Variable, Formula
+from encyclopedia import db
 
 def get_pyramid(query, filter_by=1):
     # Get pyramid right from db
@@ -19,3 +20,10 @@ def get_pyramid(query, filter_by=1):
     
     return Pyramid.query.filter(filters[filter_by]==query).first()
     
+def delete_last_ef(sequence_number: int):
+    pyr_id = get_pyramid(sequence_number).id
+    formulas = Formula.query.filter_by(pyramid_id=pyr_id, type='explicitformula').all()
+    print(formulas)
+    order = int(input('Which one to delete? oo\n'))
+    db.session.delete(formulas[order])
+    db.session.commit()

@@ -303,7 +303,7 @@ class Pyramid(db.Model):
             b = self.evaluate_ef_at(*ef_point)
         except Exception:
             b = 'Undefined'
-
+            
         s = f'{a}_{b}'
         self.__special_hashed_value__ = hashlib.sha256(s.encode()).hexdigest()
 
@@ -313,7 +313,7 @@ class Formula(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     function_name = db.Column(db.String(20), nullable=False)
-    variables = db.relationship('Variable', backref='formula', lazy=True) 
+    variables = db.relationship('Variable', backref='formula', lazy=True, cascade="all,delete") 
     expression = db.Column(db.String(120), nullable=False)
     pyramid_id = db.Column(db.Integer, db.ForeignKey('pyramid.id'))
 

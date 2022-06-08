@@ -45,7 +45,7 @@ def upload_pyramid():
             alreadyExist = Pyramid.query.filter_by(__special_hashed_value__=pyramid.__special_hashed_value__).count() > 0
             
             if alreadyExist:
-                flash(f'Such pyramid already exists', 'danger')
+                flash(f'Pyramid with such formulas probably already exists. Make sure generating function and explicit formula are unique', 'danger')
                 return redirect(url_for('pyramid.upload_pyramid'))
 
             db.session.add(pyramid)
