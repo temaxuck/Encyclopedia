@@ -296,12 +296,12 @@ class Pyramid(db.Model):
 
         try:
             a = self.evaluate_gf_at(*gf_point)
-        except ValueError:
+        except Exception:
             a = 'Undefined'
         
         try:
             b = self.evaluate_ef_at(*ef_point)
-        except ValueError:
+        except Exception:
             b = 'Undefined'
 
         s = f'{a}_{b}'
