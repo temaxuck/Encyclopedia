@@ -4,11 +4,14 @@ import os
 class Config(object):
     SECRET_KEY = 'cc530c1746dc2c713ccd28936fc870d6f30106582ed09bef074f66376683ccc8'
     
+    DEBUG = os.environ.get('DEBUG')
+    
     POSTGRES_USERNAME = os.environ.get('POSTGRES_USERNAME')
     POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
     POSTGRES_HOST = os.environ.get('POSTGRES_HOST')
     POSTGRES_PORT = os.environ.get('POSTGRES_PORT')
     SQLALCHEMY_DATABASE_URI = f'postgresql://{POSTGRES_USERNAME}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/encyclopedia'
+    # SQLALCHEMY_DATABASE_URI = f'postgresql://prog:groovst@localhost:5432/encyclopedia'
     
     RUN_HOST = os.environ.get('RUN_HOST')
     RUN_PORT = os.environ.get('RUN_PORT')
