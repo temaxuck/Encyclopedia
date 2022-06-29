@@ -10,3 +10,5 @@ Dockerfile
 .env
 database/
 *__pycache__
+tree
+test*.*
