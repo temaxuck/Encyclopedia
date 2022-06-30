@@ -37,6 +37,7 @@ psycopg2-binary = "*"
 pytest = "*"
 flask-mail = "*"
 gunicorn = "*"
+flask-cors = "*"
 
 [dev-packages]
 
