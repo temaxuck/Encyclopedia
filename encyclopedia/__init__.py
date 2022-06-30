@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_msearch import Search
 from flask_redis import FlaskRedis
+from flask_cors import CORS
 # from flask_mail import Mail
 
 from config import Config
@@ -47,5 +48,8 @@ def create_app():
     app.register_blueprint(generalbp, url_prefix="/")
     app.register_blueprint(accountbp, url_prefix="/account")
     app.register_blueprint(pyramidbp, url_prefix="/pyramid")
+
+    CORS(accountbp)
+    CORS(pyramidbp)
 
     return app
