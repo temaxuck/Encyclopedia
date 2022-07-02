@@ -3,8 +3,9 @@ import pytest
 
 from encyclopedia import create_app, db as _db
 from encyclopedia.models import User, Pyramid, GeneratingFunction, ExplicitFormula, relations
+from encyclopedia.managers import PyramidManager
 
-TEST_DATABASE_URI = 'postgresql:///test_encyclopedia'
+TEST_DATABASE_URI = 'postgresql://tester@localhost:5432/test_encyclopedia'
 
 @pytest.fixture(scope='session')
 def app():
@@ -83,4 +84,12 @@ def new_generatingFunction():
 @pytest.fixture(scope='module')
 def relations_table():
     return relations
+
+@pytest.fixture(scope='module')
+def pyramid_table():
+    return Pyramid
+
+@pytest.fixture(scope='module')
+def pyramid_manager():
+    return PyramidManager
 
