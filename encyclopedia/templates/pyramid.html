@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/forms__style.css') }}"/>
 <link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/pyramidstyle.css') }}">
 <title>Pyramid {{ pyramid.sequence_number }} </title>
 {% endblock %} {% block header %}
@@ -6,7 +7,11 @@
 {% endblock %} {% block body %}
 <main>
     {% if current_user.is_authenticated and current_user.moderator  %}
+    <div class="btns pyramid_moderator_control">
         <a href="{{ url_for('pyramid.edit_pyramid', snid=pyramid.sequence_number) }}" class="link edit_pyramid"> Edit pyramid </a>
+        <a onclick="show_modal('#deletion_confirmation')" class="link danger-btn"> Delete pyramid </a>
+    </div>
+
     {% endif %}
 
     <div class="content-wrapper"> <!-- Generating function -->
@@ -73,14 +78,14 @@
         <div class="exportbtn-wrapper">
             <!-- <button class="exportbtn" id="maximabtn" onclick="show_modal('#maximacode')">Export as Maxima</button>
             <button class="exportbtn" id="mathematicabtn" onclick="show_modal('#mathematicacode')">Export as Mathematica</button> -->
-            <button class="exportbtn" id="latexbtn" onclick="show_modal('#latexcode')">Export as LaTEX</button>
+            <button class="exportbtn" id="latexbtn" onclick="show_modal('#latexcode')">Export as LaTeX</button>
 
-            
-
-            <div class="modalwindow" id="latexcode" onclick="close_modal(event)"> <!-- LaTEX -->
-                <div class="exportcode-wrapper">
-                    <div class="exportcode-header">
-                        <div class="title">Export as LaTEX</div> 
+            <!-- Modals -->
+ 
+            <div class="modalwindow" id="latexcode" onclick="close_modal(event)"> <!-- LaTeX -->
+                <div class="modal-wrapper">
+                    <div class="modal-header">
+                        <div class="title">Export as LaTeX</div> 
                         <div class="closebtn"><span class="material-icons">close</span></div>
                     </div>
                     <textarea class="exportcode" readonly>{{ pyramid.gf_latex.replace("$","") }}&#13;&#10;{{ pyramid.ef_latex.replace("$","") }}</textarea>
@@ -88,6 +93,27 @@
                 </div>
             </div>
 
+            
+            <div class="modalwindow" id="deletion_confirmation" onclick="close_modal(event)"> <!-- Confirm deletion -->
+                <div class="modal-wrapper">
+                    <div class="modal-header">
+                        <div class="title">Delete confirmation</div> 
+                        <div class="closebtn"><span class="material-icons">close</span></div>
+                    </div>
+                    <div class="modal-body">
+                        <span>Are you sure, you want to delete Pyramid #{{ pyramid.sequence_number }}?</span>
+                    </div>
+
+                    <form method="post" style="display: flex; flex-direction: column;">
+                        {{ DeleteForm.hidden_tag() }}
+                        <div class="btns align-flex-end"> 
+                            <!-- <button class="link danger-btn" type="submit">Delete</button> -->
+                            <a class="link cancelbtn" id="cancel">Cancel</a>
+                            {{ DeleteForm.submit(class="sumbitbtn groupelement-input danger-btn") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -95,5 +121,6 @@
 {% endblock %}
 
 {% block afterscripts %}
-    <script src="/static/js/export.js"></script>
+    <script src="/static/js/pyramid/export.js"></script>
+    <script src="/static/js/pyramid/deletion_confirmation.js"></script>
 {% endblock %}

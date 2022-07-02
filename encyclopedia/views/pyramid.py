@@ -1,15 +1,29 @@
 from encyclopedia.views import *
+from encyclopedia.forms import UploadPyramidForm, ConfirmPyramidDeletionForm
 
 pyramidbp = Blueprint('pyramid', __name__)
 
-@pyramidbp.route('/<snid>', methods=['POST', 'GET'])
+@pyramidbp.route('/<snid>', methods=['GET', 'POST'])
 def pyramid(snid: int):
     pyramid = Pyramid.query.filter_by(sequence_number=snid).first()
+    
+    DeleteForm = ConfirmPyramidDeletionForm()
+
+    if DeleteForm.validate_on_submit():
+        if current_user.moderator:
+            from encyclopedia.managers import PyramidManager
+            
+            PyramidManager(db.session).delete(pyramid)
+            flash(f'The pyramid #{pyramid.sequence_number} has been successfully deleted!', 'success')
+            
+            return redirect(url_for('general.home'))
+        
+        return render_template('page_not_found.html'), 403
 
     if request.method == 'POST':
         return redirect(url_for('general.search', q=request.form.get('pyramidinput')))
 
-    return render_template('pyramid.html', pyramid=pyramid, PyramidModel=Pyramid)
+    return render_template('pyramid.html', pyramid=pyramid, PyramidModel=Pyramid, DeleteForm=DeleteForm)
 
 
 @pyramidbp.route('/upload', methods=['POST', 'GET'])

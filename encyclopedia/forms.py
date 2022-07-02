@@ -51,16 +51,16 @@ class UpdateProfileForm(FlaskForm):
             if user:
                 raise ValidationError('User with such email already exists.')
 
-class GeneratingFunctionForm(Form):
+class GeneratingFunctionSubform(Form):
     f_name = StringField('Function name', validators=[InputRequired()], default="U")
     f_vars = StringField('Function variables', validators=[InputRequired()], default="x, y")
     f_expr = StringField('Expression', validators=[InputRequired()])
 
-class ExplicitFormulaForm(Form):
+class ExplicitFormulaSubform(Form):
     f_expr = StringField('Expression', validators=[InputRequired()])
     f_condition = StringField('Condition')
 
-class RelationForm(Form):
+class RelationSubform(Form):
     TAG_CHOICES = [
         ('Reciprocal', 'Reciprocal'),
         ('Reversion on y', 'Reversion on y'),
@@ -77,11 +77,12 @@ class RelationForm(Form):
 
 class UploadPyramidForm(FlaskForm):
     sequenceNumber = IntegerField('Sequence number', validators=[InputRequired(), NumberRange(min=0)])
-    generatingFunction = FieldList(FormField(GeneratingFunctionForm), min_entries=1)
-    explicitFormula = FieldList(FormField(ExplicitFormulaForm), min_entries=1)
+    generatingFunction = FieldList(FormField(GeneratingFunctionSubform), min_entries=1)
+    explicitFormula = FieldList(FormField(ExplicitFormulaSubform), min_entries=1)
     ef_name = StringField('Formula name', validators=[InputRequired()], default="T")
     ef_vars = StringField('Formula variables', validators=[InputRequired()], default="n, m, k")
-    relations = FieldList(FormField(RelationForm), validators=[Optional()])
+    relations = FieldList(FormField(RelationSubform), validators=[Optional()])
+    submit = SubmitField('Upload pyramid')
 
     def validate_relations(self, relations):
         try:
@@ -92,6 +93,7 @@ class UploadPyramidForm(FlaskForm):
         except:
             raise ValidationError('Incorrect relations field')
 
-    submit = SubmitField('Upload pyramid')
+class ConfirmPyramidDeletionForm(FlaskForm):
+    submit = SubmitField('Delete pyramid')
 
     

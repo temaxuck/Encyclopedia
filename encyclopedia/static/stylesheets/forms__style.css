@@ -18,16 +18,34 @@ main {
     box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px; 
 }
 
+
+.update-form {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: unset;
+    -ms-flex-align: unset;
+    align-items: unset;
+
+    width: 75%;
+}
+
 .groups {
     padding: 50px 50px;
     /* height: calc(70vh*0.8); */
-    width: calc(25vw*0.8);
+    /* width: calc(25vw*0.8); */
     display: flex;
 
     flex-direction: column;
     justify-content: space-between;
 
     border: none;
+
+    -webkit-box-pack: left;
+    -ms-flex-pack: left;
+    justify-content: left;
+    width: auto;
 }
 
 /* form-group */
@@ -38,7 +56,8 @@ main {
     justify-content: space-between;
 
     margin: 5px 0;
-    height: 33%;
+    height: auto;
+    gap: 10px;
 }
 
 .title {
@@ -50,8 +69,9 @@ main {
     margin-bottom: 20px;
 }
 
-.signup-form > .groups > .title {
-    justify-content: center;
+
+:is(.login-form, .signup-form) > .groups {
+    width: calc(25vw * 0.8);
 }
 
 /* Group element */
@@ -75,6 +95,10 @@ main {
     line-height: 28px;
 }
 
+.groupelement-input:focus,
+.groupelement-input:hover {
+    background-color: rgba(51, 51, 51, 0.06);
+}
 
 /* Remember me */
 
@@ -100,21 +124,61 @@ main {
 
 /* Submit button */
 .sumbitbtn {
-    background-color: #0076ef;
+  background-color: #2390ff;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, 
                 rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
-    font-weight: 600;
     font-family: 'Jura', sans-serif;
     color: white;
     cursor: pointer;
+    
+    width: auto;
+    font-weight: 100;
+    -webkit-box-flex: 0;
+        -ms-flex-positive: 0;
+            flex-grow: 0;
+    color: white;
+}
+
+.sumbitbtn:hover,
+.sumbitbtn:focus {
+  background-color: #0076ef;
 }
 
 .sumbitbtn:active {
-    background-color: #002A55;
+  background-color: #002A55;
 }
 
 .form-submit {
     margin-top: 30px;
+    height: 40px;
+    
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+.cancelbtn {
+    font-weight: 100;
+    padding: 0 16px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    /* width: 130px; */
+    /* flex-grow: 1; */
+    border: 1px solid #0076ef;
+    background: transparent;
+    color: #0076ef;
+}
+
+.cancelbtn:hover {
+    background: rgba(0, 118, 239, 0.1);
 }
 
 /* invalid */
@@ -127,6 +191,7 @@ main {
     font-size: 14px;
     color:rgba(255, 0, 0, 1)
 }
+
 /* Already/Dont have an acc */
 
 .already {
