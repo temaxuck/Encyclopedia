@@ -1,4 +1,7 @@
 from encyclopedia.views import *
+from encyclopedia.forms import LoginForm, SignupForm, UpdateProfileForm
+from flask_login import login_user, logout_user
+from encyclopedia import hasher
 
 import os
 import secrets
