@@ -82,7 +82,11 @@ def account(username: str):
 @accountbp.route('/edit/<id>', methods=['POST', 'GET'])
 @login_required
 def update_profile(id: int):
-    user_account = User.query.filter_by(id=id).first() # user passed as an argument
+    try:
+        user_account = User.query.filter_by(id=id).first() # user passed as an argument
+    except sqlalchemy.exc.DataError:
+        return redirect(url_for('errors.error404'))
+
     form = UpdateProfileForm()
 
     if (not user_account) or (user_account != current_user):

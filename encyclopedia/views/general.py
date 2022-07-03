@@ -20,8 +20,8 @@ def home():
     pyramid_list = Pyramid.query.order_by(Pyramid.sequence_number)
     pyramids = pyramid_list[(page-1)*POSTS_PER_PAGE:(page)*POSTS_PER_PAGE]
     
-    # if not pyramids:
-    #     return redirect(url_for('general.home', page=1))
+    if not pyramids:
+        return redirect(url_for('general.home', page=1))
     
     pages_in_total = len(pyramid_list.all()) // POSTS_PER_PAGE
     if len(pyramid_list.all()) % POSTS_PER_PAGE:

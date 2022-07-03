@@ -34,6 +34,15 @@ main {
 
 .result_brief > .result_title {
     font-size: 2em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.broken_info {
+    color: #002A55;
+    /* cursor: default; */
+    user-select: none;
+    font-size: 1em;
 }
 
 .result_brief > .data {

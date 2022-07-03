@@ -108,7 +108,7 @@ footer {
     padding: 0.25rem;
 }
 
-.flashes > .alert {
+.alert {
     display: grid;
     grid-gap: 0.2rem;
     grid-template-columns: 1fr auto;
@@ -120,22 +120,22 @@ footer {
     box-shadow: 0 0 5px hsla(0, 0%, 0%, 0.1), 0 2px 3px hsla(0, 0%, 0%, 0.1);
 }
 
-.flashes > .success {
-    background: rgba(0, 255, 0, .15);
+.success {
+    background-color: rgba(0, 255, 0, .15);
     border: 1px solid rgba(0, 100, 0, .5);
 }
 
-.flashes > .danger {
+.danger {
     border: 1px solid rgba(171, 145, 68, .5);
-    background: rgba(255, 255, 0, .15);
+    background-color: rgba(255, 255, 0, .15) !important;
 }
 
-.flashes > .info {
+.info {
     border: 1px solid rgba(0, 0, 255, .5);
-    background: rgba(0, 118, 239, .15);
+    background-color: rgba(0, 118, 239, .15);
 }
 
-.flashes > .alert > .closebtn {
+.alert > .closebtn {
     background: none;
     border: none;
     width: 20px;
