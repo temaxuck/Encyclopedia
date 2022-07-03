@@ -96,4 +96,17 @@ class UploadPyramidForm(FlaskForm):
 class ConfirmPyramidDeletionForm(FlaskForm):
     submit = SubmitField('Delete pyramid')
 
+class SearchForm(FlaskForm):
+    q = StringField('Search', validators=[InputRequired()])
     
+    def __init__(self, *args, **kwargs):
+        from flask import request
+
+        if 'formdata' not in kwargs:
+            kwargs['formdata'] = request.args
+        if 'csrf_enabled' not in kwargs:
+            kwargs['csrf_enabled'] = False
+        super(SearchForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        csrf = False

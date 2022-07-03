@@ -105,11 +105,11 @@
                     </div>
 
                     <form method="post" style="display: flex; flex-direction: column;">
-                        {{ DeleteForm.hidden_tag() }}
+                        {{ deleteform.hidden_tag() }}
                         <div class="btns align-flex-end"> 
                             <!-- <button class="link danger-btn" type="submit">Delete</button> -->
                             <a class="link cancelbtn" id="cancel">Cancel</a>
-                            {{ DeleteForm.submit(class="sumbitbtn groupelement-input danger-btn") }}
+                            {{ deleteform.submit(class="sumbitbtn groupelement-input danger-btn") }}
                         </div>
                     </form>
                 </div>
