@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
@@ -36,7 +36,7 @@ def create_app():
     # See errors.py to figure out why we handle it at this level
     @app.errorhandler(404)
     def page_not_found(e):
-        return render_template('page_not_found.html'), 404
+        return redirect(url_for('errors.error404'))
 
     # Register blueprints
     from encyclopedia.views.errors import errorsbp
