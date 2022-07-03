@@ -2,7 +2,6 @@ from encyclopedia import db
 from encyclopedia.models import Pyramid
 
 class PyramidManager():
-    
     db_session = None
 
     def __init__(self, db_session):

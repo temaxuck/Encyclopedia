@@ -5,8 +5,15 @@ pyramidbp = Blueprint('pyramid', __name__)
 
 @pyramidbp.route('/<snid>', methods=['GET', 'POST'])
 def pyramid(snid: int):
-    pyramid = Pyramid.query.filter_by(sequence_number=snid).first()
-    
+    try:
+        pyramid = Pyramid.query.filter_by(sequence_number=snid).first()
+    except sqlalchemy.exc.DataError:
+        return redirect(url_for('errors.error404'))
+
+
+    if not pyramid:
+        return redirect(url_for('errors.error404'))
+
     DeleteForm = ConfirmPyramidDeletionForm()
 
     if DeleteForm.validate_on_submit():
@@ -98,6 +105,9 @@ def edit_pyramid(snid: int):
     form = UploadPyramidForm()
     pyramid = Pyramid.query.filter_by(sequence_number=snid).first()
 
+    if not pyramid:
+        return render_template('page_not_found.html'), 404
+
     if form.validate_on_submit():
         try:
             for i, gf in enumerate(form.generatingFunction):
@@ -150,15 +160,17 @@ def edit_pyramid(snid: int):
     elif request.method == 'GET':
         form.sequenceNumber.data = pyramid.sequence_number
         
-        form.generatingFunction[0].f_name.data = pyramid.generating_function[0].function_name
-        form.generatingFunction[0].f_vars.data = pyramid.generating_function[0].get_variables_as_str()
-        form.generatingFunction[0].f_expr.data = pyramid.generating_function[0].expression
+        if pyramid.generating_function:
+            form.generatingFunction[0].f_name.data = pyramid.generating_function[0].function_name
+            form.generatingFunction[0].f_vars.data = pyramid.generating_function[0].get_variables_as_str()
+            form.generatingFunction[0].f_expr.data = pyramid.generating_function[0].expression
 
-        form.ef_name.data = pyramid.explicit_formula[0].function_name
-        form.ef_vars.data = pyramid.explicit_formula[0].get_variables_as_str()
-        form.explicitFormula[0].f_expr.data = pyramid.explicit_formula[0].expression
-        form.explicitFormula[0].f_condition.data = pyramid.explicit_formula[0].limitation
-          
+        if pyramid.explicit_formula:
+            form.ef_name.data = pyramid.explicit_formula[0].function_name
+            form.ef_vars.data = pyramid.explicit_formula[0].get_variables_as_str()
+            form.explicitFormula[0].f_expr.data = pyramid.explicit_formula[0].expression
+            form.explicitFormula[0].f_condition.data = pyramid.explicit_formula[0].limitation
+
         for i in range(len(pyramid.generating_function) - 1):
             gf = pyramid.generating_function[i+1]
             gform = GeneratingFunctionForm()
