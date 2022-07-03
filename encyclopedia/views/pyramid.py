@@ -3,7 +3,7 @@ from encyclopedia.forms import UploadPyramidForm, ConfirmPyramidDeletionForm
 
 pyramidbp = Blueprint('pyramid', __name__)
 
-@pyramidbp.route('/<snid>', methods=['GET', 'POST'])
+@pyramidbp.route('/<snid>', methods=['GET'])
 def pyramid(snid: int):
     try:
         pyramid = Pyramid.query.filter_by(sequence_number=snid).first()
@@ -14,9 +14,9 @@ def pyramid(snid: int):
     if not pyramid:
         return redirect(url_for('errors.error404'))
 
-    DeleteForm = ConfirmPyramidDeletionForm()
+    deleteform = ConfirmPyramidDeletionForm()
 
-    if DeleteForm.validate_on_submit():
+    if deleteform.validate_on_submit():
         if current_user.moderator:
             from encyclopedia.managers import PyramidManager
             
@@ -27,10 +27,7 @@ def pyramid(snid: int):
         
         return render_template('page_not_found.html'), 403
 
-    if request.method == 'POST':
-        return redirect(url_for('general.search', q=request.form.get('pyramidinput')))
-
-    return render_template('pyramid.html', pyramid=pyramid, PyramidModel=Pyramid, DeleteForm=DeleteForm)
+    return render_template('pyramid.html', pyramid=pyramid, PyramidModel=Pyramid, deleteform=deleteform)
 
 
 @pyramidbp.route('/upload', methods=['POST', 'GET'])
@@ -88,9 +85,6 @@ def upload_pyramid():
             flash('Could not process formulas!', 'danger')
 
         return redirect(url_for('pyramid.pyramid', snid=pyramid.sequence_number))
-    
-    if request.method == 'POST':
-        return redirect(url_for('general.search', q=request.form.get('pyramidinput')))
     
     return render_template('upload_pyramid.html', form=form)
 
@@ -194,8 +188,4 @@ def edit_pyramid(snid: int):
                 relform.tag = pyramid.get_relation(rel.id).get('tag')
                 form.relations.append_entry(relform)
 
-    
-    if request.method == 'POST':
-        return redirect(url_for('general.search', q=request.form.get('pyramidinput')))
-    
     return render_template('upload_pyramid.html', form=form, pyramid=pyramid)
