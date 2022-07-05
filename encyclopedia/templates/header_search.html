@@ -1,20 +1,21 @@
 <link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/header_search.css') }}"/>
 
 <div class="search-div">
-    <form method="post" class="search-form">
+    {% if g.search_form %}
+    <form method="get" class="search-form" action="{{ url_for('general.search') }}">
         <div class="search-wrapper">
             <div class="input-wrapper">
-                <!-- <label for="pyramidinput" class="questionlabel"> -->
-                    <input 
-                        type="text" 
-                        name="pyramidinput" 
-                        class="question" 
-                        id="pyramidinput" 
-                        placeholder="Pyramid expression"
-                        required autocomplete="off" />
+                    
+                    {{ g.search_form.q(
+                        type="text", 
+                        class="question",
+                        placeholder="Pyramid expression",
+                        autocomplete="off"
+                    ) }}
                 <!-- </label> -->
                 <button type="submit" class="questionbtn" id="questionbtn"> <span class="material-icons">search</span> </button>
             </div>
         </div>
     </form>
+    {% endif %}
 </div>

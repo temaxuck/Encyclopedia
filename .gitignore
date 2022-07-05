@@ -12,3 +12,4 @@ database/
 *__pycache__
 tree
 test*.*
+gunicorn.conf.py
