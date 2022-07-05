@@ -3,7 +3,7 @@ from encyclopedia.forms import UploadPyramidForm, ConfirmPyramidDeletionForm
 
 pyramidbp = Blueprint('pyramid', __name__)
 
-@pyramidbp.route('/<snid>', methods=['GET'])
+@pyramidbp.route('/<snid>', methods=['GET', 'POST'])
 def pyramid(snid: int):
     try:
         pyramid = Pyramid.query.filter_by(sequence_number=snid).first()
