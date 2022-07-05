@@ -18,13 +18,30 @@ function display_results() {
 
     let temp = current_page*RESULTS_PER_PAGE + 1;
     let until = (temp > __results.length) ? __results.length : temp;
-    for (let i = (current_page-1)*RESULTS_PER_PAGE; i < until; i++)
-        if (__results[i]['sequence_number']) 
-            document.querySelector('.results').innerHTML += `
-            <div class="result_brief">
-                <div class="result_title textlinks">
-                    <a href="pyramid/${__results[i]['sequence_number']}">Pyramid ${__results[i]['sequence_number']}</a>   
-                </div>
+    for (let i = (current_page-1)*RESULTS_PER_PAGE; i < until; i++) {
+        if (__results[i]['sequence_number']) {
+            // html_to_append = `<div class="result_brief">` ? __results[i]['statuscode'] == 0 : ;
+            
+            if (__results[i]['statuscode'] == 0)
+                html_to_append = 
+                `<div class="result_brief">
+                    <div class="result_title textlinks">
+                        <a href="pyramid/${__results[i]['sequence_number']}">Pyramid ${__results[i]['sequence_number']}</a>   
+                    </div>`;
+            else if (__results[i]['statuscode'] == 1)
+                html_to_append = 
+                `<div class="result_brief danger">
+                    <div class="result_title textlinks">
+                        <a href="pyramid/${__results[i]['sequence_number']}">Pyramid ${__results[i]['sequence_number']}</a>   
+                        <div class="textlinks align-flex-end" data-tooltip="This pyramid is not valid. It'll be fixed as soon as posible.">
+                            <a class="material-symbols-outlined broken_info">help</a>
+                        </div>
+                    </div>`;
+                
+
+
+            html_to_append += `
+                
 
                 <div class="data">
                     <span class="unit-description"><i>Preview</i></span>
@@ -36,28 +53,30 @@ function display_results() {
                         ]})}
                     </a>   
                 </div>   
-
-                <div class="author">
-                    <span class="unit-description"><i>Author</i></span>
-                    <div class="author-credits textlinks">
-                    
-                        <a href="account/${__results[i]['author']['username']}" class="authorlink">
-                            <img
-                            src="/static/profile_pictures/${__results[i]['author']['profile_image']}"
-                            alt=${__results[i]['author']['username'].replace(/^\w/, c => c.toUpperCase())}
-                            title=${__results[i]['author']['username'].replace(/^\w/, c => c.toUpperCase())}
-                            width="40" height="40"
-                            class="profile_img">
-                        </a>
-                        <a href="account/${__results[i]['author']['username']}">
-                            ${__results[i]['author']['username'].replace(/^\w/, c => c.toUpperCase())}
-                        </a>
+            `
+            if (__results[i]['author'])
+                html_to_append += `
+                    <div class="author">
+                        <span class="unit-description"><i>Author</i></span>
+                        <div class="author-credits textlinks">
+                        
+                            <a href="account/${__results[i]['author']['username']}" class="authorlink">
+                                <img
+                                src="/static/profile_pictures/${__results[i]['author']['profile_image']}"
+                                alt=${__results[i]['author']['username'].replace(/^\w/, c => c.toUpperCase())}
+                                title=${__results[i]['author']['username'].replace(/^\w/, c => c.toUpperCase())}
+                                width="40" height="40"
+                                class="profile_img">
+                            </a>
+                            <a href="account/${__results[i]['author']['username']}">
+                                ${__results[i]['author']['username'].replace(/^\w/, c => c.toUpperCase())}
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            `
-        else
-            document.querySelector('.results').innerHTML += `
+                `
+        } else
+            html_to_append = `
             <div class="result_brief user_brief">
                 <a href="account/${__results[i]['username']}" class="authorlink">
                     <img
@@ -76,6 +95,8 @@ function display_results() {
 
             </div>
             `
+        document.querySelector('.results').innerHTML += html_to_append
+    }
 }
 
 function update_page(page_id) {

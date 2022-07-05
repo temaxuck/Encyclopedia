@@ -85,8 +85,31 @@ class Pyramid(db.Model):
             'id': self.id,
             'sequence_number': self.sequence_number,
             'generating_function': self.gf_latex,
-            'author': json.loads(self.author.toJSON())
+            'statuscode': self.status[0],
+            'author': json.loads(self.author.toJSON()) if self.author else None,
         })
+
+    @property
+    def status(self):
+        # statuscode 0: OK
+        # statuscode 1: has missed instances
+
+        missed = []
+        statuscode = 0
+        
+        if not self.generating_function:
+            missed.append('generating_function')
+        
+        if not self.explicit_formula:
+            missed.append('explicit_formula')
+
+        if not self.user_id:
+            missed.append('user_id')
+
+        if missed:
+            statuscode = 1
+
+        return statuscode, missed
 
     # Relations methods
     def isLinked(self, pyramid):
@@ -220,6 +243,9 @@ class Pyramid(db.Model):
     def gf_latex(self):
         latexrepr = ''
 
+        if not self.generating_function:
+            return 'None'
+
         for (loop, formula) in enumerate(self.generating_function):
             latexrepr += r'$$' + formula.get_latex() + r'$$ '
 
@@ -256,23 +282,27 @@ class Pyramid(db.Model):
     
     @property
     def ef_latex(self):
-        latexrepr = f'$${self.explicit_formula[0].function_name}_{{{self.sequence_number}}}\
-({self.explicit_formula[0].get_variables_as_str()}) = '
-        if len(self.explicit_formula) > 1:
-            latexrepr += r'\begin{cases}' 
+        try:
+            latexrepr = f'$${self.explicit_formula[0].function_name}_{{{self.sequence_number}}}\
+    ({self.explicit_formula[0].get_variables_as_str()}) = '
+            if len(self.explicit_formula) > 1:
+                latexrepr += r'\begin{cases}' 
 
-        for loopid, formula in enumerate(self.explicit_formula):
-            latexrepr += formula.get_latex()
-            if formula.limitation:
-                latexrepr +=  f'&\\text{{if {formula.limitation}}} '
-            if loopid != len(self.explicit_formula) - 1:
-                latexrepr += r',\ \\'
+            for loopid, formula in enumerate(self.explicit_formula):
+                latexrepr += formula.get_latex()
+                if formula.limitation:
+                    latexrepr +=  f'&\\text{{if {formula.limitation}}} '
+                if loopid != len(self.explicit_formula) - 1:
+                    latexrepr += r',\ \\'
 
-        if len(self.explicit_formula) > 1:
-            latexrepr += r' \end{cases} '
+            if len(self.explicit_formula) > 1:
+                latexrepr += r' \end{cases} '
 
-        latexrepr += '$$'
-
+            latexrepr += '$$'
+        
+        except IndexError:
+            latexrepr = 'None'
+        
         return latexrepr
 
     def get_data_by_ef(self, n, m, k):

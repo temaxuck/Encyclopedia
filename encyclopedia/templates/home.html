@@ -3,6 +3,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/homestyle.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/tooltip.css') }}">
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         renderMathInElement(document.body, {
@@ -26,9 +27,16 @@
 <main>
     <div class="results">
         {% for pyramid in pyramids %}
-            <div class="result_brief">
-                <div class="result_title textlinks">
-                    <a href="{{ url_for('pyramid.pyramid', snid=pyramid.sequence_number) }}">Pyramid {{ pyramid.sequence_number }}</a>   
+            
+            
+            <div class="result_brief {{ 'danger' if pyramid.status[0] == 1 }}">
+                <div class="result_title textlinks ">
+                    <a href="{{ url_for('pyramid.pyramid', snid=pyramid.sequence_number) }}">Pyramid {{ pyramid.sequence_number }}</a>
+                    {% if pyramid.status[0] == 1 %}
+                    <div class="textlinks align-flex-end" data-tooltip="This pyramid is not valid. It'll be fixed as soon as posible.">
+                        <a class="material-symbols-outlined broken_info">help</a>
+                    </div>
+                    {% endif %}
                 </div>
 
                 <div class="data">
@@ -37,18 +45,21 @@
                 </div>   
 
                 <div class="author">
-                    <span class="unit-description"><i>Author</i></span>
-                    <div class="author-credits textlinks">
-                        <a href="{{ url_for('account.account', username=pyramid.author.username) }}" class="authorlink">
-                            <img
-                            src="{{ url_for('static', filename='profile_pictures/' + pyramid.author.profile_imagefile|safe )}}"
-                            alt="{{ pyramid.author.username.capitalize() }}"
-                            title="{{ pyramid.author.username.capitalize() }}"
-                            width="40" height="40"
-                            class="profile_img">
-                       </a>
-                        <a href="{{ url_for('account.account', username=pyramid.author.username) }}">{{ pyramid.author.username.capitalize() }} </a>
-                    </div>
+                    {% if pyramid.author %}
+                        <span class="unit-description"><i>Author</i></span>
+                        <div class="author-credits textlinks">
+                            <a href="{{ url_for('account.account', username=pyramid.author.username) }}" class="authorlink">
+                                <img
+                                src="{{ url_for('static', filename='profile_pictures/' + pyramid.author.profile_imagefile|safe )}}"
+                                alt="{{ pyramid.author.username.capitalize() }}"
+                                title="{{ pyramid.author.username.capitalize() }}"
+                                width="40" height="40"
+                                class="profile_img">
+                            </a>
+                            
+                            <a href="{{ url_for('account.account', username=pyramid.author.username) }}">{{ pyramid.author.username.capitalize() }} </a>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             

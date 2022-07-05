@@ -116,18 +116,19 @@ table th {
     left: 0;
 }
 
-.exportcode-wrapper {
+.modal-wrapper {
     display: flex;
     flex-direction: column;
     padding: 15px;
 
     position: absolute;
     width: 40vw;
-    height: 40vh;
 
     top: 50vh;
     left: 50vw;
     transform: translate(-50%, -50%);
+
+    gap: 15px;
 
     background-color: white;
     border-radius: 10px;
@@ -144,7 +145,7 @@ table th {
     display: block;
 }
 
-.exportcode-header,
+.modal-header,
 .exportcopybtn-wrapper {
     display: flex;
     height: 8vh;
@@ -152,12 +153,17 @@ table th {
     align-items: center;
 }
 
-.exportcode-header {
+.modal-header {
     justify-content: space-between;
 }
 
 .exportcopybtn-wrapper {
     justify-content: center;
+}
+
+.modal-body {
+    text-align: center;
+    font-size: 1.2em;
 }
 
 /* copy button */
@@ -247,6 +253,12 @@ table th {
     font-size: 1.5em;
 }
 
+.pyramid_moderator_control {
+    /* margin-left: auto; */
+    align-self: flex-end;
+    margin-bottom: 5vh;
+}
+
 @media screen and (max-width: 600px) {
     .btn-radio {
         display: block;
@@ -276,8 +288,4 @@ table th {
     .formelement > .btn {
         width: 300px;
     }
-}
-
-.edit_pyramid {
-    margin-left: auto;
 }
