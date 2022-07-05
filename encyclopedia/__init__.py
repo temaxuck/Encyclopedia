@@ -49,6 +49,7 @@ def create_app():
     app.register_blueprint(accountbp, url_prefix="/account")
     app.register_blueprint(pyramidbp, url_prefix="/pyramid")
 
+    CORS(generalbp)
     CORS(accountbp)
     CORS(pyramidbp)
 
