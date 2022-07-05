@@ -7,6 +7,13 @@ from werkzeug.utils import secure_filename
 
 accountbp = Blueprint('account', __name__)
 
+@accountbp.after_request 
+def after_request(response):
+    header = response.headers
+    header['Access-Control-Allow-Origin'] = '*'
+    # Other headers can be added here if needed
+    return response
+
 @accountbp.route('/login', methods=['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
