@@ -6,10 +6,9 @@ generalbp = Blueprint('general', __name__)
 
 POSTS_PER_PAGE = 20
 
-@generalbp.route('/', methods=['POST', 'GET'])
+@generalbp.route('/', methods=['GET'])
 def home():
-    if request.method == 'POST':
-        return redirect(url_for('general.search', q=request.form.get('pyramidinput')))
+
     page = request.args.get('page')
     try:
         page = int(page)
@@ -20,8 +19,8 @@ def home():
     pyramid_list = Pyramid.query.order_by(Pyramid.sequence_number)
     pyramids = pyramid_list[(page-1)*POSTS_PER_PAGE:(page)*POSTS_PER_PAGE]
     
-    # if not pyramids:
-    #     return redirect(url_for('general.home', page=1))
+    if not pyramids:
+        return redirect(url_for('general.home', page=1))
     
     pages_in_total = len(pyramid_list.all()) // POSTS_PER_PAGE
     if len(pyramid_list.all()) % POSTS_PER_PAGE:
@@ -29,23 +28,23 @@ def home():
         
     return render_template('home.html', pyramids=pyramids, page=page, pages_in_total=pages_in_total)
 
-@generalbp.route('/not_found',  methods=['POST', 'GET'])
+@generalbp.route('/not_found',  methods=['GET'])
 def not_found():
     query = request.args.get('q')
     if not query:
         return redirect(url_for("general.home", is_empty=1))
 
-    if request.method == 'POST':
-        return redirect(url_for('general.search', q=request.form.get('pyramidinput')))
-    
     return render_template('not_found.html', user_input=query)
 
-@generalbp.route('/search', methods=['POST', 'GET'])
+@generalbp.route('/search', methods=['GET'])
 def search():
     import json
-    if request.method == 'POST':
-        return redirect(url_for('general.search', q=request.form.get('pyramidinput')))
-    user_input = request.args.get('q')
+
+    if not g.search_form.validate():
+        return redirect(url_for('general.home'))
+
+    user_input = g.search_form.q.data
+    
     if user_input:
         try:
             results = json.loads(redis_client.get(user_input))

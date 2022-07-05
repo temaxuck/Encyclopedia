@@ -1,50 +1,48 @@
-main {
+/* main {
     justify-content: space-between;
-}
+} */
 
-.update_profile-content {
+/* .update_profile-content {
     width: 75%;
-}
+} */
 
-.update-form {
+/* .update-form {
     flex-direction: column;
     align-items: unset;
-}
+} */
 
-.groups {
+/* .groups {
     justify-content: left;
     width: auto;
-}
+}  */
 
-.groups > .title {
+/* .groups > .title {
     align-items: unset;
-}
+} */
 
-.sumbitbtn {
+/* .form-group {
+    height: 33%;
+} */
+
+/* .sumbitbtn {
     font-weight: 100;
     width: 130px;
-}
-
-.cancelbtn {
-    font-weight: 100;
-    padding: 0 16px;
-    box-sizing: border-box;
-    width: 130px;
-
-    border: 1px solid rgb(0, 118, 239);
-    background: transparent;
-    color: rgb(0, 118, 239);  
-}
-
-.cancelbtn:hover {
-    background: rgba(0, 118, 239, 0.1);
-
 }
 
 .form-submit {
     width: 40%;
     flex-direction: row;
     height: 40px;
+} */
+
+.groups > .title {
+    -webkit-box-align: unset;
+    -ms-flex-align: unset;
+    align-items: unset;
+}
+
+.groupelement-file {
+    display: none;
 }
 
 .profile-image {
@@ -52,7 +50,7 @@ main {
 }
 
 .picture-label {
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(35, 144, 255, 0.5);
     text-align: center;
 
     transform: translateY(-100%);
@@ -60,11 +58,13 @@ main {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 
+    color: white;
+
     cursor: pointer;
 }
 
 .picture-label:hover {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(35, 144, 255, 1);
 }
 
 .filename {

@@ -1,4 +1,7 @@
 from encyclopedia.views import *
+from encyclopedia.forms import LoginForm, SignupForm, UpdateProfileForm
+from flask_login import login_user, logout_user
+from encyclopedia import hasher
 
 import os
 import secrets
@@ -35,9 +38,6 @@ def login():
         else:
             flash(f'Login unsuccessful. Please check email/username and password', 'danger')
 
-    if request.method == 'POST':
-        return redirect(url_for('general.search', q=request.form.get('pyramidinput')))
-
     return render_template('login.html', form=form)
 
 @accountbp.route('/signup', methods=['POST', 'GET'])
@@ -56,9 +56,6 @@ def signup():
         flash(f'Your account has been created! You are now able to log in!', 'success')
         return redirect(url_for('account.login'))
 
-    if request.method == 'POST':
-        return redirect(url_for('general.search', q=request.form.get('pyramidinput')))
-    
     return render_template('signup.html', form=form)
 
 @accountbp.route('/logout')
@@ -67,7 +64,7 @@ def logout():
     
     return redirect(url_for('general.home'))
 
-@accountbp.route('/<username>', methods=['POST', 'GET'])
+@accountbp.route('/<username>', methods=['GET'])
 @login_required
 def account(username: str):
     user_account = User.query.filter_by(username=username).first() # user passed as an argument
@@ -78,15 +75,16 @@ def account(username: str):
     
     imagesrc = url_for('static', filename=f'profile_pictures/{user_account.profile_imagefile}')
 
-    if request.method == 'POST':
-        return redirect(url_for('general.search', q=request.form.get('pyramidinput')))
-
     return render_template('account.html', user=user_account, imagesrc=imagesrc)
 
 @accountbp.route('/edit/<id>', methods=['POST', 'GET'])
 @login_required
 def update_profile(id: int):
-    user_account = User.query.filter_by(id=id).first() # user passed as an argument
+    try:
+        user_account = User.query.filter_by(id=id).first() # user passed as an argument
+    except sqlalchemy.exc.DataError:
+        return redirect(url_for('errors.error404'))
+
     form = UpdateProfileForm()
 
     if (not user_account) or (user_account != current_user):
@@ -111,9 +109,6 @@ def update_profile(id: int):
         form.email.data = current_user.email.capitalize()
 
     imagesrc = url_for('static', filename=f'profile_pictures/{user_account.profile_imagefile}')
-
-    if request.method == 'POST':
-        return redirect(url_for('general.search', q=request.form.get('pyramidinput')))
 
     return render_template('update_profile.html', imagesrc=imagesrc, form=form)
 
