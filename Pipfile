@@ -38,6 +38,8 @@ pytest = "*"
 flask-mail = "*"
 gunicorn = "*"
 flask-cors = "*"
+flask-restful = "*"
+pyjwt = "*"
 
 [dev-packages]
 
