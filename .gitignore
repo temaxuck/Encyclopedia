@@ -2,7 +2,7 @@ Pipfile.lock
 .history/
 _.swp
 encyclopedia.db
-encyclopedia/static
+encyclopedia/static/profile_pictures
 test.html
 migrations
 tempCodeRunnerFile.py
