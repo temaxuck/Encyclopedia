@@ -159,14 +159,13 @@ if True:
             from encyclopedia import db
 
             query = self.prepare_string(self.search_ref.query)
-            print(query)
             
             sql_ex = text('''
-            SELECT id 
-            FROM pyramid 
-            WHERE index_of_subarray(data, (SELECT (:_data)::text[])) IS NOT NULL
-            LIMIT :limit;
-            ''')
+                SELECT id 
+                FROM pyramid 
+                WHERE index_of_subarray(data, (SELECT (:_data)::text[])) IS NOT NULL
+                LIMIT :limit;
+                ''')
             results = []
 
             with db.engine.connect() as conn:
