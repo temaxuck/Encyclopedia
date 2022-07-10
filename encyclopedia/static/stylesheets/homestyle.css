@@ -72,52 +72,6 @@ main {
     gap: 10px;
 }
 
-.nav_wrapper {
-    align-self: flex-end;
-    margin: 20px;
-    font-size: 1.45em;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-
-}
-
-.page_nav {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-.page_nav-element {
-    display: flex;
-    width: 50px;
-    height: 50px;
-
-    border: 1px solid rgba(60, 66, 87, 0.16) ;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
-    border-radius: 5px;
-}
-
-.page_nav-element:hover {
-    border-color: rgba(60, 66, 87, 0.46);
-}
-
-
-.pagenum {
-    font-family: 'Jura', sans-serif;
-    outline: none;
-    font-size: 1em;
-    background-color: white;
-    width: 100%;
-    cursor: pointer;
-    transition: all 150ms ease;
-    padding-right: 1em;
-
-    -moz-appearance: none;
-}
 
 .manual_page_input {
     position: relative;
