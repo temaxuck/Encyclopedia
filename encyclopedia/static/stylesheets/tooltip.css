@@ -157,3 +157,18 @@
     border-color: transparent transparent rgba(55, 64, 70, 0.9) transparent;
     transform-origin: bottom;
   }
+
+  /* Additional locations */
+
+  /* LEFT */
+  [data-tooltip-additional-location="left"]:before,
+  [data-tooltip-additional-location="left"]:after {
+    left: 5vw !important; 
+  }
+
+  /* Text aligns */
+
+  /* LEFT */
+  [data-tooltip-textalign="left"]:before {
+    text-align: left !important;
+  }
