@@ -1,17 +1,16 @@
-from encyclopedia import db, login_manager, hasher
-from encyclopedia.math_module import kron_delta, custom_sqrt, OPERATIONS
-from sqlalchemy.orm import Session 
-
-from flask import current_app
-
+import json
 import math
-import sympy as sp
 import re
 from copy import deepcopy
+
+import sympy as sp
+from flask import current_app
 from flask_login import UserMixin
-# from sqlathanor import declarative_base, Column, relationship, AttributeConfiguration
-# from jieba.analyse import ChineseAnalyzer
-import json
+from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.orm import Session
+
+from encyclopedia import db, hasher, login_manager
+from encyclopedia.math_module import OPERATIONS, custom_sqrt, kron_delta
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -63,8 +62,12 @@ class Pyramid(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     sequence_number = db.Column(db.Integer, unique=True, nullable=False)
-    generating_function = db.relationship("GeneratingFunction", backref="pyramid", lazy=True)
-    explicit_formula = db.relationship("ExplicitFormula", backref="pyramid", lazy=True)
+    generating_function = db.relationship("GeneratingFunction", backref="pyramid", lazy=True, cascade="all,delete")
+    explicit_formula = db.relationship("ExplicitFormula", backref="pyramid", lazy=True, cascade="all,delete")
+    
+    # Array of strings, represents the data table, you can get calling get_data_by_ef(7, 7, 1)
+    data = db.Column(ARRAY(db.String), nullable=True)
+    
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     relations = db.relationship('Pyramid', secondary = relations, primaryjoin=(relations.c.linked_pyramid_id == id),
                                 secondaryjoin=(relations.c.relatedto_pyramid_id == id),
@@ -116,7 +119,7 @@ class Pyramid(db.Model):
         return True if self.relations.filter_by(sequence_number=pyramid.sequence_number).count() > 0 else False
 
     def add_relation(self, relatedto_pyramid_id, tag):
-        from sqlalchemy import update, and_
+        from sqlalchemy import and_, update
         with db.engine.connect() as conn:
             pyramid = Pyramid.query.filter_by(id=relatedto_pyramid_id).first()
 
@@ -131,7 +134,7 @@ class Pyramid(db.Model):
                 ) 
 
     def set_existing_relation(self, relatedto_pyramid_id: int, tag: str) -> None:
-        from sqlalchemy import update, and_
+        from sqlalchemy import and_, update
         
         db.session.query(relations).filter(
             and_(relations.c.linked_pyramid_id == self.id, relations.c.relatedto_pyramid_id == relatedto_pyramid_id)
@@ -264,18 +267,12 @@ class Pyramid(db.Model):
             for formula in self.explicit_formula:
                 formula.init_f_evaluation()
 
-                if not formula.limitation:
+                if not formula.limitation or eval(formula.limitation_to_eval, values):
                     answer = eval(formula.expression, values, OPERATIONS['combinatorics'])
                     try: answer = int(answer)
-                    except: ...
+                    except: answer = None
                     return answer
 
-                if eval(formula.limitation_to_eval, values):
-                    answer = eval(formula.expression, values, OPERATIONS['combinatorics'])
-                    try: answer = int(answer)
-                    except: ...
-                    return answer
-            
             return answer
         except:
             return None
@@ -283,8 +280,8 @@ class Pyramid(db.Model):
     @property
     def ef_latex(self):
         try:
-            latexrepr = f'$${self.explicit_formula[0].function_name}_{{{self.sequence_number}}}\
-    ({self.explicit_formula[0].get_variables_as_str()}) = '
+            latexrepr = \
+                f'$${self.explicit_formula[0].function_name}_{{{self.sequence_number}}}({self.explicit_formula[0].get_variables_as_str()}) = '
             if len(self.explicit_formula) > 1:
                 latexrepr += r'\begin{cases}' 
 
@@ -345,7 +342,7 @@ class Formula(db.Model):
     function_name = db.Column(db.String(20), nullable=False)
     variables = db.relationship('Variable', backref='formula', lazy=True, cascade="all,delete") 
     expression = db.Column(db.String(120), nullable=False)
-    pyramid_id = db.Column(db.Integer, db.ForeignKey('pyramid.id'))
+    pyramid_id = db.Column(db.Integer, db.ForeignKey('pyramid.id', ondelete='CASCADE'))
 
 
     type = db.Column(db.String(50))
@@ -395,7 +392,7 @@ class Formula(db.Model):
 class GeneratingFunction(Formula):
     __tablename__ = 'generatingfunction'
     
-    id = db.Column(db.Integer, db.ForeignKey('formula.id'), primary_key=True)
+    id = db.Column(db.Integer, db.ForeignKey('formula.id', ondelete='CASCADE'), primary_key=True)
     ismain = db.Column(db.Boolean, nullable=False)
     other_func_calls = 0
     other_func = []
@@ -453,7 +450,7 @@ class GeneratingFunction(Formula):
 
 class ExplicitFormula(Formula):
     __tablename__ = 'explicitformula'
-    id = db.Column(db.Integer, db.ForeignKey('formula.id'), primary_key=True)
+    id = db.Column(db.Integer, db.ForeignKey('formula.id', ondelete='CASCADE'), primary_key=True)
     limitation = db.Column(db.String(100))
     limitation_to_eval = ""
 
@@ -501,7 +498,7 @@ class Variable(db.Model):
     __tablename__ = 'variable'
     id = db.Column(db.Integer, primary_key=True)
     variable_name = db.Column(db.String(1), nullable=False)
-    formula_id = db.Column(db.Integer, db.ForeignKey('formula.id'), nullable=False)
+    formula_id = db.Column(db.Integer, db.ForeignKey('formula.id', ondelete='CASCADE'), nullable=False)
 
     def isVariable(self, variable_name, formula_id):
         return Variable.query.filter_by(variable_name=variable_name, formula_id=formula_id).count() > 0
