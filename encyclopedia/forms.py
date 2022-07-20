@@ -97,8 +97,14 @@ class ConfirmPyramidDeletionForm(FlaskForm):
     submit = SubmitField('Delete pyramid')
 
 class SearchForm(FlaskForm):
+    SEARCHTYPES = [
+        (0, 'Default'),
+        (1, 'By data'),
+    ]
+
     q = StringField('Search', validators=[InputRequired()])
-    
+    search_type = SelectField('Search type', choices=SEARCHTYPES)
+
     def __init__(self, *args, **kwargs):
         from flask import request
 

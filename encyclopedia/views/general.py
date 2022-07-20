@@ -1,6 +1,6 @@
 from encyclopedia.views import *
 from encyclopedia import redis_client
-from sqlalchemy.sql import text, select
+from encyclopedia.search import DefaultSearch, PyramidDataSearch
 
 generalbp = Blueprint('general', __name__)
 
@@ -44,38 +44,28 @@ def search():
         return redirect(url_for('general.home'))
 
     user_input = g.search_form.q.data
-    
+    search_type = g.search_form.search_type.data
+    search_type = '0' if search_type == None else search_type
+
     if user_input:
         try:
-            results = json.loads(redis_client.get(user_input))
+            results = json.loads(redis_client.get(f'{user_input}:{search_type}'))
             return render_template('search.html', results=results, q=user_input)
         except TypeError:
-            sqlexpression = "\
-SELECT pyramid.id, pyramid.sequence_number, pyramid.user_id, pyramid.__special_hashed_value__ \n\
-FROM pyramid \n\
-WHERE (CAST (pyramid.sequence_number AS text) LIKE '%%' || :sequence_number_1 || '%%') ORDER BY pyramid.sequence_number ASC\n\
-LIMIT :param_1"
-            pyramid_results = db.session.execute(select(Pyramid).from_statement(text(sqlexpression)), {'sequence_number_1': user_input, 'param_1': 50}).scalars().all()
-            gf_results = GeneratingFunction.query.msearch(user_input, fields=['expression'], limit=50).all()
-            ef_results = ExplicitFormula.query.msearch(user_input, fields=['expression'], limit=50).all()
-            user_results = User.query.msearch(user_input, fields=['username'], limit=50).all()
-            results = list(map(lambda x: json.loads(x.toJSON()), pyramid_results))
-            for result in gf_results + ef_results:
-                try: results.append(json.loads(result.pyramid.toJSON()))
-                except: ...
             
-            for result in user_results:
-                results.append(json.loads(result.toJSON()))
+            if search_type == '0':
+                search = DefaultSearch(db.session, user_input)
+            elif search_type == '1':
+                search = PyramidDataSearch(db.session, user_input)
+            
+            results = search.search()
 
             if not results:
                 return redirect(url_for("general.not_found", q=user_input))
-                
-            redis_client.set(user_input, json.dumps(results))
+
+            redis_client.set(f'{user_input}:{search_type}', json.dumps(results))
             redis_client.expire(user_input, 3600)
             return render_template('search.html', results=results, q=user_input)
-        # except Exception as e:
-        #     flash(f'Something went wrong {e}', 'danger')
-        #     return redirect(url_for("general.home"))
             
     flash('Something went wrong', 'danger')
     return redirect(url_for("general.home"))
