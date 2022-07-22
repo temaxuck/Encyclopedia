@@ -11,7 +11,7 @@ app = create_app()
 
 if __name__ == '__main__':
     load_dotenv(os.path.join(BASE_DIR, '.env'), override=True)
-    app.run(debug=True, host=f"{os.environ.get('RUN_HOST')}", port=os.environ.get('RUN_PORT'))
+    app.run(threaded=True, debug=True, host=f"{os.environ.get('RUN_HOST')}", port=os.environ.get('RUN_PORT'))
     
 @app.shell_context_processor
 def make_shell_context():

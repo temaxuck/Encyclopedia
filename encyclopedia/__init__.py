@@ -1,5 +1,6 @@
 import jwt
 import redis
+from celery import Celery
 from config import Config
 from flask import Flask, redirect, render_template, url_for
 from flask_bcrypt import Bcrypt
@@ -18,6 +19,7 @@ hasher = Bcrypt()
 search = Search()
 # mail = Mail()
 migrations = Migrate()
+celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
 redis_client = redis.Redis(host='localhost', port=6379, db=0)
 redis_client_api = redis.Redis(host='localhost', port=6379, db=1)
 
@@ -53,6 +55,7 @@ def create_app():
     migrations.init_app(app, db, render_as_batch=True)
     login_manager.init_app(app)
     search.init_app(app)
+    celery.conf.update(app.config)
     # redis_client.init_app(app)
     # redis_client_api.init_app(app)
     
