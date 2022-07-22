@@ -114,6 +114,50 @@ class Pyramid(db.Model):
 
         return statuscode, missed
 
+    def json(self):
+        return json.dumps({
+            'id': self.id,
+            'sequence_number': self.sequence_number,
+            'generating_function': [json.loads(gf.json()) for gf in self.generating_function],
+            'explicit_formula': [json.loads(ef.json()) for ef in self.explicit_formula],
+            'data': list(map(int, self.data)),
+            'statuscode': self.status[0],
+            'author': json.loads(self.author.toJSON()) if self.author else None,
+        })
+    
+    def toJSON(self):
+        # data needed for search results only
+        # use json() to get whole data about pyramid
+        return json.dumps({
+            'id': self.id,
+            'sequence_number': self.sequence_number,
+            'generating_function': self.gf_latex,
+            'statuscode': self.status[0],
+            'author': json.loads(self.author.toJSON()) if self.author else None,
+        })
+
+    @property
+    def status(self):
+        # statuscode 0: OK
+        # statuscode 1: has missed instances
+
+        missed = []
+        statuscode = 0
+        
+        if not self.generating_function:
+            missed.append('generating_function')
+        
+        if not self.explicit_formula:
+            missed.append('explicit_formula')
+
+        if not self.user_id:
+            missed.append('user_id')
+
+        if missed:
+            statuscode = 1
+
+        return statuscode, missed
+
     # Relations methods
     def isLinked(self, pyramid):
         return True if self.relations.filter_by(sequence_number=pyramid.sequence_number).count() > 0 else False
@@ -363,6 +407,13 @@ class Formula(db.Model):
     def __repr__(self):
         return f'Formula("{self.function_name}", {self.variables}, "{self.expression}", {self.pyramid_id})'
 
+    def json(self):
+        return json.dumps({
+            'name': self.function_name,
+            'variables': self.get_variables_as_str(),
+            'expression': self.expression
+        })
+
     
     def __get_variables_str__(self):
         temp = []
@@ -401,6 +452,13 @@ class GeneratingFunction(Formula):
     def __init__(self, funciton_name: str, variables: str, expression: str, main: bool = False):
         super().__init__(funciton_name, variables, expression)
         self.ismain = main
+
+    
+    def json(self):
+        jdata = json.loads(super().json())
+        jdata.update({'is_main': self.ismain})
+
+        return json.dumps(jdata)
 
 
     def get_latex(self):
@@ -457,6 +515,12 @@ class ExplicitFormula(Formula):
     def __init__(self, variables, expression, limitation=""):
         super().__init__('T', variables, expression)
         self.limitation = limitation
+
+    def json(self):
+        jdata = json.loads(super().json())
+        jdata.update({'limitation': self.limitation})
+
+        return json.dumps(jdata)
 
     def init_f_evaluation(self):
         self.limitation_to_eval = self.limitation
