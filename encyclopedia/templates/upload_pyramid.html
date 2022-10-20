@@ -1,75 +1,75 @@
 {% extends 'base.html' %} {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/accountstyle.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/forms__style.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/forms__style.css') }}"/>
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/upload_pyramidstyle.css') }}">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
 <title>
     {% if pyramid %}
-    Edit pyramid #{{ pyramid.sequence_number }}
+        Edit pyramid #{{ pyramid.sequence_number }}
     {% else %}
-    Upload pyramid
+        Upload pyramid
     {% endif %}
 </title>
-{% endblock %} {% block header %}
-{% include 'header_search.html' %}
+{% endblock %} {% block header %} 
+    {% include 'header_search.html' %}
 {% endblock %} {% block body %}
 <main>
     <form action="" method="post" class="form update-form" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
-
+        
         <fieldset class="groups">
             <div class="form-group title">
                 {% if pyramid %}
-                Edit pyramid #{{ pyramid.sequence_number }}
+                    Edit pyramid #{{ pyramid.sequence_number }}
                 {% else %}
-                Upload pyramid
+                    Upload pyramid
                 {% endif %}
             </div>
             <div class="form-group">
                 {{ form.sequenceNumber.label(class="groupelement-label") }}
-                {% if form.sequenceNumber.errors %}
-                {{ form.sequenceNumber(class="groupelement-input invalid", placeholder="Sequence number") }}
+                    {% if form.sequenceNumber.errors %}
+                    {{ form.sequenceNumber(class="groupelement-input invalid", placeholder="Sequence number") }}
 
-                <div class="invalid-feedback">
-                    {% for error in form.sequenceNumber.errors%}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
+                    <div class="invalid-feedback">
+                        {% for error in form.sequenceNumber.errors%}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
 
                 {% else %}
-                {{ form.sequenceNumber(class="groupelement-input", placeholder="Sequence number") }}
+                    {{ form.sequenceNumber(class="groupelement-input", placeholder="Sequence number") }}
                 {% endif %}
             </div>
             <div class="form-group">
                 <!-- {{ form.generatingFunction.label(class="groupelement-label") }} -->
                 <label for="" class="groupelement-label">Generating function</label>
                 {% for g_field in form.generatingFunction %}
-                <div class="form-group-gf">
-                    {% if form.generatingFunction.errors %}
-                    <div class="invalid-feedback">
-                        {% for error in form.generatingFunction.errors %}
-                        <span> {{ error }} </span>
-                        {% endfor %}
+                    <div class="form-group-gf">
+                        {% if form.generatingFunction.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.generatingFunction.errors %}
+                                    <span> {{ error }} </span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                            {{ g_field.form.f_name(class="groupelement-input shrinkable f_name", placeholder="Function") }}
+                            {{ g_field.form.f_vars(class="groupelement-input shrinkable f_vars", placeholder="Variables") }}
+                        <div class="f_operator">=</div>
+                        {{ g_field.f_expr(class="groupelement-input growable f_expr", placeholder="Expression") }}
+                        <button class="group_operate_gf" onclick="add_gf_input(this)" type="button">+</button>
                     </div>
-                    {% endif %}
-                    {{ g_field.form.f_name(class="groupelement-input shrinkable f_name", placeholder="Function") }}
-                    {{ g_field.form.f_vars(class="groupelement-input shrinkable f_vars", placeholder="Variables") }}
-                    <div class="f_operator">=</div>
-                    {{ g_field.f_expr(class="groupelement-input growable f_expr", placeholder="Expression") }}
-                    <button class="group_operate_gf" onclick="add_gf_input(this)" type="button">+</button>
-                </div>
                 {% endfor %}
             </div>
             <div class="form-group">
                 <label for="" class="groupelement-label">Explicit formula</label>
                 <div class="form-group-ef">
                     {% if form.explicitFormula.errors %}
-                    <div class="invalid-feedback">
-                        {% for error in form.generatingFunction.errors %}
-                        <span> {{ error }} </span>
-                        {% endfor %}
-                    </div>
+                        <div class="invalid-feedback">
+                            {% for error in form.generatingFunction.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
                     {% endif %}
                     <div class="ef_declaration">
                         {{ form.ef_name(class="groupelement-input shrinkable f_name", placeholder="Formula name", ) }}

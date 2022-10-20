@@ -82,8 +82,21 @@ class Pyramid(db.Model):
     
     def __repr__(self):
         return f'Pyramid({self.id}, {self.sequence_number}, {self.generating_function}, {self.explicit_formula})'
+
+    def json(self):
+        return json.dumps({
+            'id': self.id,
+            'sequence_number': self.sequence_number,
+            'generating_function': [json.loads(gf.json()) for gf in self.generating_function],
+            'explicit_formula': [json.loads(ef.json()) for ef in self.explicit_formula],
+            'data': list(map(int, self.data)),
+            'statuscode': self.status[0],
+            'author': json.loads(self.author.toJSON()) if self.author else None,
+        })
     
     def toJSON(self):
+        # data needed for search results only
+        # use json() to get whole data about pyramid
         return json.dumps({
             'id': self.id,
             'sequence_number': self.sequence_number,
@@ -363,6 +376,13 @@ class Formula(db.Model):
     def __repr__(self):
         return f'Formula("{self.function_name}", {self.variables}, "{self.expression}", {self.pyramid_id})'
 
+    def json(self):
+        return json.dumps({
+            'name': self.function_name,
+            'variables': self.get_variables_as_str(),
+            'expression': self.expression
+        })
+
     
     def __get_variables_str__(self):
         temp = []
@@ -401,6 +421,13 @@ class GeneratingFunction(Formula):
     def __init__(self, funciton_name: str, variables: str, expression: str, main: bool = False):
         super().__init__(funciton_name, variables, expression)
         self.ismain = main
+
+    
+    def json(self):
+        jdata = json.loads(super().json())
+        jdata.update({'is_main': self.ismain})
+
+        return json.dumps(jdata)
 
 
     def get_latex(self):
@@ -457,6 +484,12 @@ class ExplicitFormula(Formula):
     def __init__(self, variables, expression, limitation=""):
         super().__init__('T', variables, expression)
         self.limitation = limitation
+
+    def json(self):
+        jdata = json.loads(super().json())
+        jdata.update({'limitation': self.limitation})
+
+        return json.dumps(jdata)
 
     def init_f_evaluation(self):
         self.limitation_to_eval = self.limitation
