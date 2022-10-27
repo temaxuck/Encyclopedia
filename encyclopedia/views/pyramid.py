@@ -1,14 +1,14 @@
 from encyclopedia.views import *
-from encyclopedia.forms import UploadPyramidForm, ConfirmPyramidDeletionForm
+from encyclopedia.forms import UploadPyramidForm, ConfirmPyramidDeletionForm, ExplicitFormulaSubform, RelationSubform, GeneratingFunctionSubform
 
 pyramidbp = Blueprint('pyramid', __name__)
 
-@pyramidbp.after_request 
-def after_request(response):
-    header = response.headers
-    header['Access-Control-Allow-Origin'] = '*'
-    # Other headers can be added here if needed
-    return response
+# @pyramidbp.after_request 
+# def after_request(response):
+#     header = response.headers
+#     header['Access-Control-Allow-Origin'] = '*'
+#     # Other headers can be added here if needed
+#     return response
 
 @pyramidbp.route('/<snid>', methods=['GET', 'POST'])
 def pyramid(snid: int):
@@ -174,7 +174,7 @@ def edit_pyramid(snid: int):
 
         for i in range(len(pyramid.generating_function) - 1):
             gf = pyramid.generating_function[i+1]
-            gform = GeneratingFunctionForm()
+            gform = GeneratingFunctionSubform()
             gform.f_name = gf.function_name
             gform.f_vars = gf.get_variables_as_str()
             gform.f_expr = gf.expression
@@ -182,7 +182,7 @@ def edit_pyramid(snid: int):
 
         for i in range(len(pyramid.explicit_formula) - 1):
             ef = pyramid.explicit_formula[i+1]
-            eform = ExplicitFormulaForm()
+            eform = ExplicitFormulaSubform()
             eform.f_expr=ef.expression
             eform.f_condition=ef.limitation
             form.explicitFormula.append_entry(eform)
@@ -190,7 +190,7 @@ def edit_pyramid(snid: int):
         if pyramid.relations.count() > 0:
             rels = pyramid.relations.all()
             for rel in rels:
-                relform = RelationForm()
+                relform = RelationSubform()
                 relform.relatedto_pyramid = rel.sequence_number
                 relform.tag = pyramid.get_relation(rel.id).get('tag')
                 form.relations.append_entry(relform)

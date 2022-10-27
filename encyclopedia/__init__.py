@@ -6,10 +6,12 @@ from flask_migrate import Migrate
 from flask_msearch import Search
 from flask_redis import FlaskRedis
 from flask_cors import CORS
+from flask_wtf.csrf import CSRFProtect
 # from flask_mail import Mail
 
 from config import Config
 
+csrf = CSRFProtect()
 db = SQLAlchemy()
 hasher = Bcrypt()
 search = Search()
@@ -21,10 +23,12 @@ login_manager.login_view = 'account.login'
 login_manager.login_message = 'Please log in to access this page'
 login_manager.login_message_category = 'info'
 
+
 def create_app():
     app = Flask(__name__)
     app.app_context().push()
     app.config.from_object(Config)
+    csrf.init_app(app)
     db.init_app(app)
     # mail.init_app(app)
     hasher.init_app(app)
@@ -34,9 +38,9 @@ def create_app():
     redis_client.init_app(app)
     
     # See errors.py to figure out why we handle it at this level
-    @app.errorhandler(404)
-    def page_not_found(e):
-        return redirect(url_for('errors.error404'))
+    # @app.errorhandler(404)
+    # def page_not_found(e):
+    #     return redirect(url_for('errors.error404'))
 
     # Register blueprints
     from encyclopedia.views.errors import errorsbp
@@ -49,8 +53,9 @@ def create_app():
     app.register_blueprint(accountbp, url_prefix="/account")
     app.register_blueprint(pyramidbp, url_prefix="/pyramid")
 
+    # CORS(app, support_credentials=True)
     CORS(generalbp)
     CORS(accountbp)
     CORS(pyramidbp)
-
+    
     return app

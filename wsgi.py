@@ -3,6 +3,8 @@ from encyclopedia.models import User, Pyramid, GeneratingFunction, ExplicitFormu
 from encyclopedia.shell import get_pyramid, delete_last_ef
 from encyclopedia.managers import PyramidManager
 
+from flask import session, g
+
 from dotenv import load_dotenv
 import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -22,3 +24,9 @@ def make_shell_context():
 @app.before_first_request
 def create_tables():
     db.create_all()
+
+@app.before_request
+def fix_missing_csrf_token():
+    if app.config['WTF_CSRF_FIELD_NAME'] not in session:
+        if app.config['WTF_CSRF_FIELD_NAME'] in g:
+            g.pop(app.config['WTF_CSRF_FIELD_NAME'])

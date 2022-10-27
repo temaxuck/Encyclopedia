@@ -2,7 +2,8 @@ import os
 
 
 class Config(object):
-    SECRET_KEY = 'cc530c1746dc2c713ccd28936fc870d6f30106582ed09bef074f66376683ccc8'
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    # SERVER_NAME = 'localhost:8000'
     
     DEBUG = os.environ.get('DEBUG')
     
@@ -11,10 +12,15 @@ class Config(object):
     POSTGRES_HOST = os.environ.get('POSTGRES_HOST')
     POSTGRES_PORT = os.environ.get('POSTGRES_PORT')
     SQLALCHEMY_DATABASE_URI = f'postgresql://{POSTGRES_USERNAME}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/encyclopedia'
-    # SQLALCHEMY_DATABASE_URI = f'postgresql://prog:groovst@localhost:5432/encyclopedia'
     
     RUN_HOST = os.environ.get('RUN_HOST')
     RUN_PORT = os.environ.get('RUN_PORT')
+    
+    
+    WTF_CSRF_ENABLED = True
+    WTF_CSRF_SECRET_KEY = os.environ.get('SECRET_KEY')
+    SESSION_COOKIE_SECURE =  False
+    REMEMBER_COOKIE_SECURE =  True
     
     MSEARCH_PRIMARY_KEY = 'id'
     MSEARCH_ENABLE = True

@@ -6,6 +6,18 @@ generalbp = Blueprint('general', __name__)
 
 POSTS_PER_PAGE = 20
 
+# @generalbp.after_request 
+# def after_request(response):
+#     response.headers.add('Content-Type', 'text/html')
+#     response.headers.add('Access-Control-Allow-Origin', '*')
+#     response.headers.add('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
+#     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+#     response.headers.add('Access-Control-Expose-Headers', 'Content-Type,Content-Length,Authorization,X-Pagination')
+# #     header = response.headers
+# #     header['Access-Control-Allow-Origin'] = '*'
+# #     # Other headers can be added here if needed
+#     return response
+
 @generalbp.route('/', methods=['GET'])
 def home():
 

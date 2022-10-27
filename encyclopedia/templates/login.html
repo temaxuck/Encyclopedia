@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/forms__style.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/forms__style.css') }}" />
 <title>Log In</title>
 {% endblock %} {% block header %}
 {% include 'header_search.html' %}
 {% endblock %} {% block body %}
 <main>
     {% if error %}
-        <p class=error><strong>Error:</strong> {{ error }}
-    {% endif %}
-    <form action="" method="post" class="form login-form">
+    <p class=error><strong>Error:</strong> {{ error }}
+        {% endif %}
+    <form action="" method="post" class="form login-form" name="loginform">
+        {{ form.csrf_token() }}
         {{ form.hidden_tag() }}
-        
+
         <fieldset class="groups">
             <div class="form-group title">Log In</div>
             <div class="form-group">
@@ -33,11 +34,11 @@
             </div>
         </fieldset>
 
-        
+
     </form>
     <div class="already">
         <small class="">
-            Don't have an account? <a href="{{ url_for('account.signup') }}" class="signlink">Sign up</a> 
+            Don't have an account? <a href="{{ url_for('account.signup') }}" class="signlink">Sign up</a>
         </small>
     </div>
 </main>

@@ -1,7 +1,9 @@
 from encyclopedia.views import *
 from encyclopedia.forms import LoginForm, SignupForm, UpdateProfileForm
 from flask_login import login_user, logout_user
-from encyclopedia import hasher
+from encyclopedia import hasher, csrf
+from flask_cors import CORS
+from flask import session, current_app, g
 
 import os
 import secrets
@@ -10,22 +12,19 @@ from werkzeug.utils import secure_filename
 
 accountbp = Blueprint('account', __name__)
 
-@accountbp.after_request 
-def after_request(response):
-    header = response.headers
-    header['Access-Control-Allow-Origin'] = '*'
-    # Other headers can be added here if needed
-    return response
-
 @accountbp.route('/login', methods=['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
         flash(f'You already have been logged in!', 'info')
         return redirect(url_for('general.home'))
 
-    form = LoginForm()
-
-    if form.validate_on_submit():
+    form = LoginForm(request.form)
+    # flash(f'{request.form}', 'info')
+    # flash(f'{session}', 'info')
+    
+    # flash(f'{current_app.secret_key}', 'info')
+    
+    if request.method == 'POST' and form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
         if not user:
             user = User.query.filter_by(username=form.email.data.lower()).first()        
@@ -37,8 +36,9 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('general.home'))
         else:
             flash(f'Login unsuccessful. Please check email/username and password', 'danger')
-
-    return render_template('login.html', form=form)
+    else:
+        flash(f'{form.errors}', 'danger')
+        return render_template('login.html', form=form)
 
 @accountbp.route('/signup', methods=['POST', 'GET'])
 def signup():
@@ -128,3 +128,9 @@ def upload_file(form_file, user_id):
     dbfilepath = f'{user_id}/{new_filename}'
     return dbfilepath
 
+# @accountbp.route('/test', methods=['POST', 'GET'])
+# def test():
+#     if request.method == 'POST':
+#         return {'message': 'Successful posted some data'}, 201
+    
+#     return "Hello, World!"
