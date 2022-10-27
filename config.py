@@ -24,8 +24,14 @@ class Config(object):
     
     MSEARCH_PRIMARY_KEY = 'id'
     MSEARCH_ENABLE = True
+
     REDIS_URL = "redis://:@localhost:6379/0"
     
+    CELERY_BROKER_URL = 'redis://:@localhost:6379/2'
+    CELERY_RESULT_BACKEND = 'redis://:@localhost:6379/2'
+    TASK_SERIALIZER = 'json'
+    RESULT_SERIALIZER = 'json'
+
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_ENGINE_OPTIONS = {
         'pool_size': 30,

@@ -19,10 +19,6 @@ def login():
         return redirect(url_for('general.home'))
 
     form = LoginForm(request.form)
-    # flash(f'{request.form}', 'info')
-    # flash(f'{session}', 'info')
-    
-    # flash(f'{current_app.secret_key}', 'info')
     
     if request.method == 'POST' and form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
@@ -37,7 +33,6 @@ def login():
         else:
             flash(f'Login unsuccessful. Please check email/username and password', 'danger')
     else:
-        flash(f'{form.errors}', 'danger')
         return render_template('login.html', form=form)
 
 @accountbp.route('/signup', methods=['POST', 'GET'])
@@ -128,9 +123,3 @@ def upload_file(form_file, user_id):
     dbfilepath = f'{user_id}/{new_filename}'
     return dbfilepath
 
-# @accountbp.route('/test', methods=['POST', 'GET'])
-# def test():
-#     if request.method == 'POST':
-#         return {'message': 'Successful posted some data'}, 201
-    
-#     return "Hello, World!"

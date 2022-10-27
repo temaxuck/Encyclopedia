@@ -95,10 +95,11 @@ class Searcher(object):
         return results
 
     def get_results(self) -> list:
-        # Get results should return 
+        # The implementation of getting results from database 
         raise NotImplementedError
 
     def prepare_string(self, s) -> str:
+        # The implementation of preparation user defined query for quering database
         raise NotImplementedError
 
 # 
