@@ -76,8 +76,8 @@
     <div class="content-wrapper">
         <div class="title">Export</div>
         <div class="exportbtn-wrapper">
-            <!-- <button class="exportbtn" id="maximabtn" onclick="show_modal('#maximacode')">Export as Maxima</button>
-            <button class="exportbtn" id="mathematicabtn" onclick="show_modal('#mathematicacode')">Export as Mathematica</button> -->
+            <button class="exportbtn" id="maximabtn" onclick="show_modal('#maximacode')">Export as Maxima</button>
+            <!-- <button class="exportbtn" id="mathematicabtn" onclick="show_modal('#mathematicacode')">Export as Mathematica</button> -->
             <button class="exportbtn" id="latexbtn" onclick="show_modal('#latexcode')">Export as LaTeX</button>
 
             <!-- Modals -->
@@ -89,6 +89,17 @@
                         <div class="closebtn"><span class="material-icons">close</span></div>
                     </div>
                     <textarea class="exportcode" readonly>{{ pyramid.gf_latex.replace("$","") }}&#13;&#10;{{ pyramid.ef_latex.replace("$","") }}</textarea>
+                    <div class="exportcopybtn-wrapper"> <button class="copybtn" onclick="copy()">Copy</button> </div>
+                </div>
+            </div>
+
+            <div class="modalwindow" id="maximacode" onclick="close_modal(event)"> <!-- LaTeX -->
+                <div class="modal-wrapper">
+                    <div class="modal-header">
+                        <div class="title">Export as Maxima</div> 
+                        <div class="closebtn"><span class="material-icons">close</span></div>
+                    </div>
+                    <textarea class="exportcode" readonly>{{ pyramid.gf_maxima }}&#13;&#10;{{ pyramid.ef_maxima }}</textarea>
                     <div class="exportcopybtn-wrapper"> <button class="copybtn" onclick="copy()">Copy</button> </div>
                 </div>
             </div>
