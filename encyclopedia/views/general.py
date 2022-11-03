@@ -4,29 +4,13 @@ from encyclopedia.search import DefaultSearch, PyramidDataSearch
 
 generalbp = Blueprint('general', __name__)
 
-POSTS_PER_PAGE = 20
-
 @generalbp.route('/', methods=['GET'])
 def home():
+    return render_template('home.html')
 
-    page = request.args.get('page')
-    try:
-        page = int(page)
-    except:
-        page = 1
-    if not page:
-        page = 1
-    pyramid_list = Pyramid.query.order_by(Pyramid.sequence_number)
-    pyramids = pyramid_list[(page-1)*POSTS_PER_PAGE:(page)*POSTS_PER_PAGE]
-    
-    if not pyramids:
-        return redirect(url_for('general.home', page=1))
-    
-    pages_in_total = len(pyramid_list.all()) // POSTS_PER_PAGE
-    if len(pyramid_list.all()) % POSTS_PER_PAGE:
-        pages_in_total += 1
-        
-    return render_template('home.html', pyramids=pyramids, page=page, pages_in_total=pages_in_total)
+@generalbp.route('/about', methods=['GET'])
+def about():
+    return render_template('about.html')
 
 @generalbp.route('/not_found',  methods=['GET'])
 def not_found():

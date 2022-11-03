@@ -31,16 +31,14 @@ blinker = "*"
 sqlathanor = "*"
 jieba = "*"
 flask-redis = "*"
-psycopg2 = "*"
 python-dotenv = "*"
 psycopg2-binary = "*"
 pytest = "*"
 flask-mail = "*"
 gunicorn = "*"
 flask-cors = "*"
-flask-restful = "*"
-pyjwt = "*"
 celery = "*"
+flask-restful = "*"
 
 [dev-packages]
 

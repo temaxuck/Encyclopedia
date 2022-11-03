@@ -1,0 +1,99 @@
+{% extends 'base.html' %} {% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-KiWOvVjnN8qwAZbuQyWDIbfCLFhLXNETzBQjA/92pIowpC0d2O3nppDGQVgwd2nB" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" integrity="sha384-0fdwu/T/EQMsQlrHCCHoH10pkPLlKA1jL5dFyUOvB3lfeT2540/2g6YgSi2BL14p" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/pyramid_liststyle.css') }}">
+<title>Home</title>
+{% endblock %} {% block header %}
+{% include 'header_search.html' %}
+{% endblock %} {% block body %}
+<main>
+    <div class="results">
+        {% for pyramid in pyramids %}
+            
+            
+            <div class="result_brief {{ 'danger' if pyramid.status[0] == 1 }}">
+                <div class="result_title textlinks ">
+                    <a href="{{ url_for('pyramid.pyramid', snid=pyramid.sequence_number) }}">Pyramid {{ pyramid.sequence_number }}</a>
+                    {% if pyramid.status[0] == 1 %}
+                    <div class="textlinks align-flex-end" data-tooltip="This pyramid is not valid. It'll be fixed as soon as posible.">
+                        <a class="material-symbols-outlined broken_info">help</a>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="data">
+                    <span class="unit-description"><i>Preview</i></span>
+                    <a href="{{ url_for('pyramid.pyramid', snid=pyramid.sequence_number) }}">{{ pyramid.gf_latex }}</a>
+                </div>   
+
+                <div class="author">
+                    {% if pyramid.author %}
+                        <span class="unit-description"><i>Author</i></span>
+                        <div class="author-credits textlinks">
+                            <a href="{{ url_for('account.account', username=pyramid.author.username) }}" class="authorlink">
+                                <img
+                                src="{{ url_for('static', filename='profile_pictures/' + pyramid.author.profile_imagefile|safe )}}"
+                                alt="{{ pyramid.author.username.capitalize() }}"
+                                title="{{ pyramid.author.username.capitalize() }}"
+                                width="40" height="40"
+                                class="profile_img">
+                            </a>
+                            
+                            <a href="{{ url_for('account.account', username=pyramid.author.username) }}">{{ pyramid.author.username.capitalize() }} </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+        {% endfor %}
+    </div>
+
+    {% set left_b = page - 3 %}
+    {% set right_b = page + 3 %}
+    {% if left_b < 1 %}
+    {% set left_b = 1 %}    
+    {% endif %}
+    {% if right_b > pages_in_total %}
+    {% set right_b = pages_in_total %}    
+    {% endif %}
+    {% if pages_in_total != 1 %}
+    <div class="nav_wrapper">
+        <div class="page_nav textlinks">
+            <span>Page:</span>
+            {% if page - 4 > 1 %}
+                <a href="{{ url_for('general.home', page=1) }}" class="page_nav-element">{{ 1 }}</a>
+                <span>...</span>
+            {% elif page - 4 == 1 %}
+                <a href="{{ url_for('general.home', page=1) }}" class="page_nav-element">{{ 1 }}</a>
+            {% endif %}
+            
+
+            {% for page_id in range(left_b, right_b+1) %}
+                {% if page_id != page %}
+                    <a href="{{ url_for('general.home', page=page_id) }}" class="page_nav-element">{{ page_id }}</a>
+                {% else %}
+                    <span class="page_nav-element">{{ page_id }}</span>
+                {% endif %}
+            {% endfor %}
+
+            {% if page + 4 < pages_in_total %}
+                <span>...</span>
+                <a href="{{ url_for('general.home', page=pages_in_total) }}" class="page_nav-element">{{ pages_in_total }}</a>
+            {% elif page + 4 == pages_in_total %}
+                <a href="{{ url_for('general.home', page=pages_in_total) }}" class="page_nav-element">{{ pages_in_total }}</a>
+            {% endif %}
+
+        </div>
+        <span>or</span>
+        <div class="manual_page_input">
+            <select class="page_nav-element pagenum" onchange="window.location.assign(`{{ url_for('general.home') }}` + '?page=' + this.options[this.selectedIndex].text)">
+                {% for page_id in range(1, pages_in_total+1) %}
+                    <option value="{{page_id}}" {% if page_id == page %}selected{% endif %}>{{page_id}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    {% endif %}
+</main>
+{% endblock %}
