@@ -314,6 +314,29 @@ class Pyramid(db.Model):
             latexrepr = 'None'
         
         return latexrepr
+    
+    @property
+    def gf_maxima(self):
+        try:
+            result = ''
+            for loopid, formula in enumerate(self.generating_function):
+                result = f'{formula.function_name}{self.sequence_number}({formula.get_variables_as_str()}) := {formula.get_maxima()};'
+        except:
+            result = 'Generating function export to Maxima is not supported for this Pyramid yet.'
+        return result 
+    
+    @property
+    def ef_maxima(self):
+        try:
+            result = f'{self.explicit_formula[0].function_name}{self.sequence_number}({self.explicit_formula[0].get_variables_as_str()}) := '
+            for loopid, formula in enumerate(self.explicit_formula):
+                result += formula.get_maxima()
+                if loopid != len(self.explicit_formula) - 1:
+                    result += ' else '
+            result += ';'
+        except:
+            result = 'Explicit formula export to Maxima is not supported for this Pyramid yet.'
+        return result                            
 
     def get_data_by_ef(self, n, m, k):
         data = []
@@ -448,6 +471,11 @@ class GeneratingFunction(Formula):
 
         return function_declaration + variables_declaration + ' = ' + latexrepr
     
+    def get_maxima(self):
+        maximarepr = self.expression
+        
+        return maximarepr
+    
     def init_f_evaluation(self):
         self.other_func_calls = 0
         other_func = []
@@ -503,7 +531,14 @@ class ExplicitFormula(Formula):
         for key, value in OPERATIONS['parity'].items():
             key.encode('unicode_escape')
             value.encode('unicode_escape')
-            self.limitation_to_eval = re.sub(r'\b'+key, value, self.limitation_to_eval)
+            p = re.compile(fr'(.+)({key})')
+            result = p.search(self.limitation_to_eval)
+            if not result:
+                continue
+            # print(result, "\n", result.groups())
+            # print(re.sub(fr'(.+)', r'(\1)', result.group(1)) + result.group(2))
+            self.limitation_to_eval = re.sub(fr'(.+)', r'(\1)', result.group(1)) + " "+ result.group(2)
+            self.limitation_to_eval = re.sub(fr'\b{key}\b', value, self.limitation_to_eval)
 
     def get_latex(self):
         try:
@@ -511,6 +546,21 @@ class ExplicitFormula(Formula):
         except: #sympy.core.sympify.SympifyError
             latexrepr = self.expression
         return latexrepr
+    
+    def get_maxima(self):
+        import re
+        maximarepr = self.expression
+        maximarepr = re.sub('delta', 'kron_delta', maximarepr)
+        
+        if lim := self.limitation_to_eval:
+            # lim = re.sub(r'(.+)', r'(\1)', lim)
+            p = re.compile(r'(.*)\s*%\s*([^=]*)\s*[=]+(.*)')
+            result = p.search(lim)
+            if result:
+                lim = fr'mod({result.group(1)}, {result.group(2)}) = {result.group(3)}'
+            maximarepr = f'if {lim} then {maximarepr}'
+        
+        return maximarepr
 
     def change_formula(self, variables=None, expression=None, limitation=None):
         self.expression = expression if not expression==None else self.expression

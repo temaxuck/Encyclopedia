@@ -81,15 +81,23 @@
                             <div class="brace-top"></div>
                             <div class="brace-bottom"></div>
                         </div>
-                        
+
                         <div class="content">
                             {% for e_field in form.explicitFormula %}
-                                <div class="e_field">
-                                    {{ e_field.f_expr(class="groupelement-input growable f_expr", placeholder="Expression") }}
-                                    {{ e_field.f_condition(class="groupelement-input growable f_condition", placeholder="Condition") }}
-                                    <button class="group_operate_gf" onclick="add_ef_input(this)" type="button">+</button>
-                                </div>
-                            {% endfor %}                            
+                            <div class="e_field">
+                                {{ e_field.f_expr(class="groupelement-input growable f_expr", placeholder="Expression")
+                                }}
+                                {{ e_field.f_condition(class="groupelement-input growable f_condition",
+                                placeholder="Condition") }}
+                                {% if (loop.index == form.explicitFormula|length) %}
+                                <button class="group_operate_gf" onclick="add_ef_input(this)" type="button">+</button>
+                                {% else %}
+                                <button class="group_operate_gf" onclick="remove_ef_input(this)"
+                                    type="button">-</button>
+                                {% endif %}
+
+                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -97,21 +105,21 @@
             <div class="form-group">
                 {{ form.relations.label(class="groupelement-label") }}
                 {% if form.relations.errors %}
-                    {{ form.relations(class="groupelement-input invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.relations.errors%}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
+                {{ form.relations(class="groupelement-input invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.relations.errors%}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
                 {% endif %}
-                
+
                 <div class="rels-wrapper">
                     {% for relation in form.relations %}
-                        <div class="form-group-gf">
-                            {{ relation.relatedto_pyramid(autocomplete="off", class="related_seq groupelement-input") }}
-                            {{ relation.tag(autocomplete="off", class="related_tag groupelement-input growable") }}
-                            <button class="group_operate_gf" onclick="remove_rel_input(this)" type="button">-</button>
-                        </div>
+                    <div class="form-group-gf">
+                        {{ relation.relatedto_pyramid(autocomplete="off", class="related_seq groupelement-input") }}
+                        {{ relation.tag(autocomplete="off", class="related_tag groupelement-input growable") }}
+                        <button class="group_operate_gf" onclick="remove_rel_input(this)" type="button">-</button>
+                    </div>
                     {% endfor %}
                 </div>
 
@@ -119,14 +127,15 @@
             </div>
             <div class="form-group form-submit">
                 {% if pyramid %}
-                    {{ form.submit(class="sumbitbtn groupelement-input upload_pyramidbtn", value="Confirm") }}
+                {{ form.submit(class="sumbitbtn groupelement-input upload_pyramidbtn", value="Confirm") }}
                 {% else %}
-                    {{ form.submit(class="sumbitbtn groupelement-input upload_pyramidbtn") }}
+                {{ form.submit(class="sumbitbtn groupelement-input upload_pyramidbtn") }}
                 {% endif %}
                 {% if pyramid %}
-                    <a href="{{ url_for('pyramid.pyramid', snid=pyramid.sequence_number) }}" class="link cancelbtn">Cancel</a>
+                <a href="{{ url_for('pyramid.pyramid', snid=pyramid.sequence_number) }}"
+                    class="link cancelbtn">Cancel</a>
                 {% else %}
-                    <a href="{{ url_for('general.home') }}" class="link cancelbtn">Cancel</a>
+                <a href="{{ url_for('general.home') }}" class="link cancelbtn">Cancel</a>
                 {% endif %}
             </div>
         </fieldset>
@@ -134,6 +143,6 @@
 </main>
 {% endblock %}
 
-{% block afterscripts %} 
-    <script src="/static/js/upload_pyramid_handler.js"></script>
+{% block afterscripts %}
+<script src="/static/js/upload_pyramid_handler.js"></script>
 {% endblock %}
