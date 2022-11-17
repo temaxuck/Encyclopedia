@@ -32,10 +32,10 @@ def search():
     search_type = '0' if search_type == None else search_type
 
     if user_input:
-        # try:
-        #     results = json.loads(redis_client.get(f'{user_input}:{search_type}'))
-        #     return render_template('search.html', results=results, q=user_input)
-        # except TypeError:
+        try:
+            results = json.loads(redis_client.get(f'{user_input}:{search_type}'))
+            return render_template('search.html', results=results, q=user_input)
+        except TypeError:
             
             if search_type == '0':
                 search = DefaultSearch(db.session, user_input)
