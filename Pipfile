@@ -39,6 +39,7 @@ gunicorn = "*"
 flask-cors = "*"
 celery = "*"
 flask-restful = "*"
+colorama = "*"
 
 [dev-packages]
 

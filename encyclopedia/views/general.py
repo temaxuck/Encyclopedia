@@ -32,10 +32,10 @@ def search():
     search_type = '0' if search_type == None else search_type
 
     if user_input:
-        try:
-            results = json.loads(redis_client.get(f'{user_input}:{search_type}'))
-            return render_template('search.html', results=results, q=user_input)
-        except TypeError:
+        # try:
+        #     results = json.loads(redis_client.get(f'{user_input}:{search_type}'))
+        #     return render_template('search.html', results=results, q=user_input)
+        # except TypeError:
             
             if search_type == '0':
                 search = DefaultSearch(db.session, user_input)
@@ -44,12 +44,12 @@ def search():
             
             results = search.search()
 
-            if not results:
+            if not (results['exact'] or results['related']):
                 return redirect(url_for("general.not_found", q=user_input))
 
             redis_client.set(f'{user_input}:{search_type}', json.dumps(results))
             redis_client.expire(user_input, 3600)
-            return render_template('search.html', results=results, q=user_input)
+            return render_template('search.html', related=results['related'], exact=results['exact'], q=user_input)
             
     flash('Something went wrong', 'danger')
     return redirect(url_for("general.home"))

@@ -5,7 +5,7 @@ from sqlalchemy import cast, text
 from sqlalchemy.dialects.postgresql import ARRAY, array
 
 from encyclopedia import create_app, db
-from encyclopedia.models import Pyramid
+from encyclopedia.models import Pyramid, Formula
 
 app = create_app()
 
@@ -24,3 +24,14 @@ def insert_data_into_pyramid():
 
         with db.engine.connect() as conn:
             conn.execute(sql_ex, _data=_data, _id=pyramid.id)
+
+def sympify_all_formulas():
+    from sympy import sympify
+    with open("temp.txt", 'w') as f:
+        for formula in Formula.query.all():
+            try:
+                print(formula.pyramid_id, file=f)
+                formula.expression = str(sympify(formula.expression))
+                db.session.commit()
+            except Exception:
+                print('Exception thrown:', Exception)
