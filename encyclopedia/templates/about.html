@@ -5,5 +5,32 @@
 />
 <title>About</title>
 {% endblock %} {% block body %}
-<!-- TODO -->
+<body>
+  <div class="content">
+    <div class="image">
+      <div class="image_first exmpl">
+        <img src="../static/images/image_one.jpg" />
+      </div>
+
+      <div class="images_two">
+        <img
+          width="400"
+          height="300"
+          src="../static/images/image_two.jpg"
+          style="border-radius: 3px"
+        />
+        <img
+          width="400"
+          height="300"
+          src="../static/images/image_three.jpg"
+          style="border-radius: 3px"
+        />
+      </div>
+    </div>
+    <div class="textAboutUs">
+      При участии: Лаборатория алгоритмов и технологий исследования дискретных
+      структур (ЛАТИДС) кафедры КСУП
+    </div>
+  </div>
+</body>
 {% endblock %}

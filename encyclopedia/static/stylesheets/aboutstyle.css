@@ -1,0 +1,43 @@
+.content{
+    display: flex;
+    flex-direction: row;  
+    margin: 50px 1em 5px auto;
+}
+
+
+.image{
+    width: 1050px;
+    height: 70vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.image_first{
+    width: 570px;
+    height: 470px;
+    margin: 70px 3em 5px auto;
+    border-radius: 5px;
+}
+.exmpl {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.exmpl img {
+    height: 100%;
+    width: auto;
+}
+.images_two{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 5px 1em 5px auto;
+
+}
+
+.textAboutUs{
+    text-align: justify;
+    font-size:100%;
+    margin: 50px auto 5px 15px;
+}
