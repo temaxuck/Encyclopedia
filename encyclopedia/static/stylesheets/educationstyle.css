@@ -1,0 +1,43 @@
+.main {
+  display: flex;
+  flex-direction: row;
+}
+
+.page ol,
+ul {
+  padding-left: 65px;
+}
+
+#education li {
+  margin-top: 10px;
+}
+
+.page {
+  width: fit-content;
+  height: 100vh;
+  overflow: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  padding: 30px 0px 0px 30px;
+}
+
+.page::-webkit-scrollbar {
+  display: none;
+}
+
+.article {
+  font-size: large;
+  font-weight: bold;
+  margin: 20px auto;
+}
+
+.designations {
+  line-height: 40px;
+}
+
+.paragraph {
+  text-indent: 40px;
+}

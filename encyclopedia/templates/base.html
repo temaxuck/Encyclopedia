@@ -1,138 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='stylesheets/tooltip.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='stylesheets/basestyle.css') }}"
-    />
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        renderMathInElement(document.body, {
-          // customised options
-          // • auto-render specific keys, e.g.:
-          delimiters: [
-            { left: "$$", right: "$$", display: true },
-            { left: "$", right: "$", display: false },
-            { left: "\\(", right: "\\)", display: false },
-            { left: "\\[", right: "\\]", display: true },
-          ],
-          // • rendering keys, e.g.:
-          throwOnError: false,
-        });
-      });
-    </script>
-    {% block head %} {% endblock %} {% with messages =
-    get_flashed_messages(with_categories=true) %} {% if messages %}
-    <div class="flashes">
-      {% for category, message in messages %}
-      <div class="alert {{ category }}" onmouseover="prolongtimeout()">
-        <span>{{ message }}</span>
-        <span class="material-icons closebtn" onclick="close_alert(event)"
-          >close</span
-        >
-      </div>
-      {% endfor %}
-    </div>
-    <script src="/static/js/notifications.js"></script>
-    {% endif %} {% endwith %}
-    <script>
-      MathJax = {
-        tex: {
-          inlineMath: [
-            ["$", "$"],
-            ["\\(", "\\)"],
-          ],
-        },
-        svg: {
-          fontCache: "global",
-        },
-        startup: {
-          ready: () => {
-            MathJax.startup.defaultReady();
-            MathJax.startup.promise.then(() => {
-              console.log("MathJax initial typesetting complete");
-            });
-          },
-        },
-        tex2jax: {
-          preview: "none",
-        },
-      };
-    </script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script
-      id="MathJax-script"
-      async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-    ></script>
-  </head>
 
-  <body onscroll="gotop()">
-    <header>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/tooltip.css') }}" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/basestyle.css') }}" />
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      renderMathInElement(document.body, {
+        // customised options
+        // • auto-render specific keys, e.g.:
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "$", right: "$", display: false },
+          { left: "\\(", right: "\\)", display: false },
+          { left: "\\[", right: "\\]", display: true },
+        ],
+        // • rendering keys, e.g.:
+        throwOnError: false,
+      });
+    });
+  </script>
+  {% block head %} {% endblock %} {% with messages =
+  get_flashed_messages(with_categories=true) %} {% if messages %}
+  <div class="flashes">
+    {% for category, message in messages %}
+    <div class="alert {{ category }}" onmouseover="prolongtimeout()">
+      <span>{{ message }}</span>
+      <span class="material-icons closebtn" onclick="close_alert(event)">close</span>
+    </div>
+    {% endfor %}
+  </div>
+  <script src="/static/js/notifications.js"></script>
+  {% endif %} {% endwith %}
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ["$", "$"],
+          ["\\(", "\\)"],
+        ],
+      },
+      svg: {
+        fontCache: "global",
+      },
+      startup: {
+        ready: () => {
+          MathJax.startup.defaultReady();
+          MathJax.startup.promise.then(() => {
+            console.log("MathJax initial typesetting complete");
+          });
+        },
+      },
+      tex2jax: {
+        preview: "none",
+      },
+    };
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body onscroll="gotop()">
+  <header>
+    <div class="header_logo">
+      <img src="../static/src/pyramid.svg" alt="pyramid">
       <span class="header_name">
         <a href="/">Online encyclopedia of Number Pyramids</a>
       </span>
-      {% block header %} {% endblock %}
+    </div>
+    {% block header %} {% endblock %}
 
-      <div class="btns">
-        {% if current_user.is_authenticated %} {% if current_user.moderator %}
-        <a href="{{ url_for('pyramid.upload_pyramid') }}" class="link">
-          Upload pyramid
-        </a>
-        {% endif %}
+    <div class="btns">
+      {% if current_user.is_authenticated %} {% if current_user.moderator %}
+      <a href="{{ url_for('pyramid.upload_pyramid') }}" class="link">
+        Upload pyramid
+      </a>
+      {% endif %}
 
-        <a
-          href="{{ url_for('account.account', username=current_user.username) }}"
-          class="account"
-        >
-          <img
-            src="{{ url_for('static', filename='profile_pictures/' + current_user.profile_imagefile|safe )}}"
-            alt="{{ current_user.username.capitalize() }}"
-            title="{{ current_user.username.capitalize() }}"
-            width="40"
-            height="40"
-            class="profile_img"
-          />
-        </a>
-        <a href="{{ url_for('account.logout')}}" class="link logout">Log out</a>
-        {% else %}
-        <a href="{{ url_for('account.login')}}" class="link login">Log in</a>
-        <a href="{{ url_for('account.signup')}}" class="link signup">Sign up</a>
-        {% endif %}
-      </div>
-    </header>
-    <div class="site-wrapper">{% block body %} {% endblock %}</div>
+      <a href="{{ url_for('account.account', username=current_user.username) }}" class="account">
+        <img src="{{ url_for('static', filename='profile_pictures/' + current_user.profile_imagefile|safe )}}"
+          alt="{{ current_user.username.capitalize() }}" title="{{ current_user.username.capitalize() }}" width="40"
+          height="40" class="profile_img" />
+      </a>
+      <a href="{{ url_for('account.logout')}}" class="link logout">Log out</a>
+      {% else %}
+      <a href="{{ url_for('account.login')}}" class="link login">Log in</a>
+      <a href="{{ url_for('account.signup')}}" class="link signup">Sign up</a>
+      {% endif %}
+    </div>
+  </header>
+  <div class="site-wrapper">{% block body %} {% endblock %}</div>
 
-    <a href="#" class="go-top">
-      <span class="material-icons-outlined go-arrow top-arrow"
-        >expand_less</span
-      >
-    </a>
+  <a href="#" class="go-top">
+    <span class="material-icons-outlined go-arrow top-arrow">expand_less</span>
+  </a>
 
-    <footer>
-      <div class="credits">Fullstack temax co.</div>
-    </footer>
-  </body>
+  <footer class="footer">
+    <ul class="footer_menu">
+      <li><a href="/" title="Главная">Главная</a></li>
+      <li><a href="/pyramid/1" title="Пирамиды">Пирамиды</a></li>
+      <li><a href="/book" title="Методика использования">Методика использования</a></li>
+      <li><a href="/about" title="О проекте">О проекте</a></li>
+      <li><a href="/contact" title="Контактная информация">Контакты</a></li>
+    </ul>
+    <div class="footer_info">© 2021-2022 Томский Государственный Университет Систем Управления и Радиоэлектроники</div>
+  </footer>
+</body>
 
-  {% block afterscripts %}{% endblock %}
-  <script src="/static/js/topdown-navigation.js"></script>
+{% block afterscripts %}{% endblock %}
+<script src="/static/js/topdown-navigation.js"></script>
+
 </html>

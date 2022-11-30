@@ -12,6 +12,11 @@ def home():
 def about():
     return render_template('about.html')
 
+@generalbp.route('/book', methods=['GET'])
+def book():
+    return render_template('education.html')
+
+
 @generalbp.route('/not_found',  methods=['GET'])
 def not_found():
     query = request.args.get('q')
