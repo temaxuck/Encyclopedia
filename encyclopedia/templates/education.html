@@ -1,8 +1,5 @@
 {% extends 'base.html' %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='stylesheets/educationstyle.css') }}"
-/>
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/educationstyle.css') }}" />
 <title>Book</title>
 {% endblock %} {% block body %}
 <div class="main">
@@ -677,6 +674,998 @@
         </div>
       </div>
       {% endblock %}
+      $$[x^n]{1-2,x\over{1-3\,x+x^2}}=\sum_{k=0}^{n}{n+k-1\choose{2k}}$$
+    </div>
+    <div id="7_5" class="article">7.5 Тождество для гармнических чисел</div>
+    <div>
+
+      Пусть дана производящая функция для гармонических чисел
+      $$H(x)=\frac{1}{1-x}\log\left(\frac{1}{1-x}\right)$$
+
+      Рассмотрим композицию функций $H(1-e^x)$. После подстановки и преобразований получим
+
+      $$
+      H(1-e^x)=-x\,e^x.
+      $$
+      Зная, что композита функции $A(x)=e^x-1$ имеет выражение
+      $$
+      A^{\Delta}(n,k)=\stirlingtwo{n}{k}\frac{k!}{n!}
+      $$
+      то
+      $$
+      [x^n](1-e^x)^k=(-1)^k\stirlingtwo{n}{k}\frac{k!}{n!}
+      $$
+      Окуда используя формулу композиции получим
+      $$
+      [x^n]H(1-e^x)=\sum_{k=0}^n (-1)^k\stirlingtwo{n}{k}\frac{k!}{n!}H_k,
+      $$
+      где
+      $H_k$ - гармонические числа.
+      С другой стороны
+      $$
+      [x^n]e^{-x}(-x)=\frac{(-1)^n}{(n-1)!}.
+      $$
+      Теперь приравняем левую и правую части
+      $$
+      \sum_{k=0}^n (-1)^k\stirlingtwo{n}{k}\frac{k!}{n!}H_k=\frac{(-1)^n}{(n-1)!}
+      $$
+      Произведем преобразования и получим тождество
+      $$
+      \sum_{k=0}^n (-1)^{n-k}\,k!\,\stirlingtwo{n}{k}\,H_k=n
+      $$
+
+      <div id="7_4" class="article">
+        7.4 Получение коэффициентов функции ${1-2x}\over{1-3\,x+x^2}$
+      </div>
+      <div>
+        %Up0002(x)/(1-x*Up0020(x)) Пусть дана производящая функция
+        $${1-2,x}\over{1-3\,x+x^2}$$ Перепишем ее в вдиде $$
+        \frac{x}{1-x}\frac{1}{1-\frac{x}{(1-x)^2}}+1 $$ Рассмотри композицию
+        функций $A(x)=\frac{x}{(1-x)^2}$ и $\frac{1}{1-x}$ Композита функции
+        $A(x)$ имеет выражение $$ A^{\Delta}(n,k)={n+k-1\choose n-k} $$ Тогда $$
+        [x^n]\frac{1}{1-A(x)}=\sum_{k=0}^n {n+k-1\choose n-k} $$ $$
+        \frac{x}{1-x}\frac{1}{1-A(x)}=\frac{x}{1-x}\left(1+\frac{x}{(1-x)^2}x+\frac{x^2}{(1-x)^4}x^2+\ldots+\frac{x^n}{(1-x)^{2n}}x^n+\ldots\right)=
+        $$ $$
+        =x\,\left(\frac{1}{1-x}+\frac{x}{(1-x)^3}x+\frac{x^2}{(1-x)^5}x^2+\ldots+\frac{x^n}{(1-x)^{2n+1}}x^n+\ldots\right)=
+        $$ ряд записанный в скобках имеет нечетные степени $2n+1$. Откуда
+        формула суммирования будет иметь вид.
+        $$\sum_{k=0}^{n}{n+k\choose{n-k}}$$ С учетом сдвига на $x$ и плюс 1 (см.
+        исходную формулу получим искомое выражение).
+        $$[x^n]{1-2,x\over{1-3\,x+x^2}}=\sum_{k=0}^{n}{n+k-1\choose{2k}}$$
+      </div>
+
+      <div id="8" class="article">
+        8. Получение коэффициентов степеней производящих функций одной
+        переменной
+      </div>
+      <div class="paragraph">
+        Имеются простые правила вычисления коэффцинтов степеней производящих
+        функций
+
+        <div id="8_1" class="article">
+          8.1 Коэффициенты $k$-ой степени суммы производящих функций
+        </div>
+        <div>
+          Коэффициенты $k$-ой степени суммы производящих функций $$
+          [x^n](F(x)+G(x))^k=[x^n]\sum_{j=0}^k {k\choose j}F(x)^j\,G(x)^{k-j}=
+          $$ \begin{equation}\label{gfsum1} \sum_{j=0}^k{k\choose j}\sum_{i=0}^n
+          F(i,j)G(n-i,k-j) \end{equation} Пример $$
+          \frac{1+x-x^3}{1-x}=\frac{1}{1-x}+x+x^2 $$ $$
+          [x^n]\frac{1}{(1-x)^k}={n+k-1 \choose n} $$ $$ [x^n](x+x^2)^k={k
+          \choose n-k} $$ $$
+          [x^n]\left(\frac{1+x-x^3}{1-x}\right)^k=\sum_{j=0}^k \sum_{i=0}^n
+          {i+j-1\choose i}{k-j\choose n-i-k+j} $$
+        </div>
+        <div id="8_2" class="article">
+          8.2 Коэффициенты $k$-ой степени произведения производящих функций
+        </div>
+        <div>
+          Коэффициенты $k$-ой степени произведения производящих функций
+          \begin{equation}\label{gfprod1} [x^n](F(x)\cdot G(x))^k=\sum_{j=0}^n
+          F(i,k)G(n-i,k) \end{equation} Пример<br />
+          Пусть дана производящая функция $$
+          \frac{1+x}{1-x}=1+2\,x+2\,x^2+2\,x^3+2\,x^4+2\,x^5+\cdots $$ Найдем
+          надем коэффициенты k-ой степени этой функции использую формулу
+          (\ref{gfprod1}). $$ [x^n]\left(\frac{1+x}{1-x}\right)^k=\sum_{i=0}^n
+          {i+k-1\choose i}\,{k\choose n-i} $$
+        </div>
+        <div id="8_3" class="article">
+          8.3 Коэффициенты $k$-ой степени композиции производящих функций
+        </div>
+        <div>
+          \begin{equation}\label{gfcomp1} [x^n](F(G(x))^k=\sum_{j=0}^n
+          G^{\Delta}(n,j)F(j,k) \end{equation} $ G^{\Delta}(n,k)$ - композита
+          функции $G(x)$ <br />
+          Пример<br />
+          Пусть дана производящая функция $$
+          \frac{1}{1-sin(x)}=1+x+x^2+\frac{5x^3}{6}+\frac{2x^4}{3}+\frac{61x^5}{120}+\dots
+          $$ Найдем надем коэффициенты k-ой степени этой функции использую
+          формулу (\ref{gfcomp1}). Для этого необходимо знать композиту функции
+          $\sin(x)$. Ее композита записана в энциклопедии под номером Tp0114
+          (см. \ref{esin}) $$
+          [x^n]\left(\frac{1}{1-\sin(x)}\right)^k=\sum_{m=0}^n
+          Tp0114(n,m){m+k-1\choose m} $$ здесь $F(x)=\frac{1}{1-x}$,
+          $G(x)=\sin(x)$.
+        </div>
+        <div id="8_4" class="article">
+          8.4 Коэффициенты $k$-ой степени взаимной производящей функции
+        </div>
+        <div>
+          \begin{equation}\label{gfrecip1} [x^n][x^n]\frac{1}
+          {F(x)^k}=\sum_{i=0}^{n}F(0)^{-k-i}\,\left(-1\right)^{i}\,{k
+          +i-1\choose{i}}\,F\left(n , i\right)\,{n+k\choose{n-i}} \end{equation}
+          Пример<br />
+          $$x\cot(x)=1-{\frac{x^2}{3}}-{\frac{x^4}{45}}-{\frac{2\,x^6}{945}}+\cdots
+          $$ Пусть дана производящая функция Найдем надем коэффициенты k-ой
+          степени этой функции использую формулу (\ref{gfrecip1}). Для этого
+          запишем $$ x\cot(x)=\frac{x}{\tan(x)} $$ найдем композиту $\tan(x)$. В
+          энциклопедии эта композита запиасана под номером $Tp0117$
+          $$Tp0117(n,k)=\frac{((-1)^{n}+1)}{(n+k)!}\,\sum_{j=k}^{n+k}{j-1
+          \choose{k-1}},j!,2^{n-j-1},(-1)^[{n+k\over 2}+{j}] {n\choose j}$$
+          $$[x^n](\frac{\tan(x)}{x})^k=Tp0117(n+k,k)=\frac{((-1)^{n}+1)}{(n+k)!}
+          \sum_{j=k}^{n+k} {j-1 \choose k-1 } j! 2^{n+k-j-1}
+          (-1)^{\frac{n+2k}{2} +j} \binom{n+k}{j} $$
+          $$[x^n](\frac{\tan(x)}{x})^k=\frac{((-1)^{n}+1)}{(n+k)!}
+          \sum_{j=0}^{n} {j+k-1 \choose k-1 } (j+k)! 2^{n+j-1} (-1)^{\frac{n}{2}
+          +j} \binom{n+k}{j+k} $$
+          $$[x^n](\frac{\tan(x)}{x})^i=\frac{((-1)^{n}+1)}{(n+i)!}
+          \sum_{j=0}^{n} {j+i-1 \choose i-1 } (j+i)! 2^{n+j-1} (-1)^{\frac{n}{2}
+          +j} \binom{n+i}{j+i} $$ тогда искомая формула будет иметь выражение $$
+          \sum_{i=0}^{n}{k+i-1\choose i}\, \frac{((-1)^{n}+1)}{(n+i)!}
+          \sum_{j=0}^{n} {j+i-1 \choose i-1 } (j+i)! 2^{n+j-1}
+          (-1)^{\frac{n}{2}+j+i} \binom{n+i}{j+i} \binom{n+k}{n-i} $$
+        </div>
+        <div id="8_5" class="article">
+          8.5 Нахождение явных выражений для разложения функций вида
+          $G(x)^{-\alpha}$, $\alpha\in R$
+        </div>
+        <div>
+          $$ \sum_{j=0}^{n} \frac{(-1)^j}{T(0,1)^{j+\alpha}} {j+\alpha-1 \choose
+          j} {T(n,j)} {n+\alpha \choose n-j} $$ и $$ (n+1)\binom{n+\alpha}{n+i}
+          \sum_{i=0}^{n} \frac{T(0,1)^{-j-\alpha}(-1)^{j} T(n,j){n\choose j}}
+          {j+\alpha} $$ Рассмотрим примеры <br />
+          <b> 8.5.1 Пример 1</b>
+
+          $$ G(x)=(\frac{x}{e^x-1})^{\alpha} $$ $$ (e^x-1^k)=\sum_{n\geqslant k}
+          \binom{n}{k}\frac{k!}{n!} x^n $$ $$
+          (\frac{e^x-1}{x})^k=\sum_{n\geqslant 0}
+          \binom{n+k}{k}\frac{k!}{(n+k)!}x^n $$ $$ \sum_{j=0}^{n}(-1)^{j} \binom
+          {j+\alpha-1}{j} \binom{n+j}{j} \frac{j!}{(n+j)!} { n+\alpha \choose
+          n-j} $$ и $$ (n+1){n+\alpha \choose n+1}\sum_{j=0}^{n}
+          \frac{(-1)^{j}j! \binom{n+j}{j} {n \choose j}} {(j+\alpha)(n+j)!} $$
+          <div id="7_5" class="article">7.5 Тождество для гармнических чисел</div>
+          <div>
+
+            Пусть дана производящая функция для гармонических чисел
+            $$H(x)=\frac{1}{1-x}\log\left(\frac{1}{1-x}\right)$$
+
+            Рассмотрим композицию функций $H(1-e^x)$. После подстановки и преобразований получим
+
+            $$
+            H(1-e^x)=-x\,e^x.
+            $$
+            Зная, что композита функции $A(x)=e^x-1$ имеет выражение
+            $$
+            A^{\Delta}(n,k)=\stirlingtwo{n}{k}\frac{k!}{n!}
+            $$
+            то
+            $$
+            [x^n](1-e^x)^k=(-1)^k\stirlingtwo{n}{k}\frac{k!}{n!}
+            $$
+            Окуда используя формулу композиции получим
+            $$
+            [x^n]H(1-e^x)=\sum_{k=0}^n (-1)^k\stirlingtwo{n}{k}\frac{k!}{n!}H_k,
+            $$
+            где
+            $H_k$ - гармонические числа.
+            С другой стороны
+            $$
+            [x^n]e^{-x}(-x)=\frac{(-1)^n}{(n-1)!}.
+            $$
+            Теперь приравняем левую и правую части
+            $$
+            \sum_{k=0}^n (-1)^k\stirlingtwo{n}{k}\frac{k!}{n!}H_k=\frac{(-1)^n}{(n-1)!}
+            $$
+            Произведем преобразования и получим тождество
+            $$
+            \sum_{k=0}^n (-1)^{n-k}\,k!\,\stirlingtwo{n}{k}\,H_k=n
+            $$
+          </div>
+          <div id="9" class="article">9. Получение явных выражений композиции производящих функций двух переменных</div>
+          <div class="paragraph">
+            Рассмотрим решение задачи нахождения явной формулы для композиции производящих функций даух переменных. Для
+            этого запишем таблицу 1, полученныую в \cite{KruBivariate}. В первом столбце записаны варианты композици
+            производящих функций, во втором - явные выражения коэффициентов $k$-ой степени произвлдящей функции
+            выражение
+            через коэффициенты $k$-ой степени производящих функций образующих композицию. При $k=1$ получим коэффициенты
+            композиции производящих функций.
+          </div>
+          <div>
+            <table border="1" class="table">
+              <caption>Таблица формул для определения коэффциентов степеней композиции рядов
+              </caption>
+              <tr>
+                <th> N </th>
+                <th>Композиция $G(x,y)^k$ </th>
+                <th>Формула для $g(n,m,k)$</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>$G(x,y)^k=H(A(x),y)^k$</td>
+                <td>$g(n,m,k)=\sum\limits_{q=0}^n A^{\Delta}(n,q)h(q,m,k)$</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td> $G(x,y)^k=H(x,B(y))^k$</td>
+                <td>$g(n,m,k)=\sum\limits_{r=0}^m B^{\Delta}(m,r)h(n,r,k)$</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>$G(x,y)^k=H(A(x,y))^k$</td>
+                <td>$g(n,m,k)=\sum\limits_{q=0}^{n+m} A^{\Delta}(n,m,q)h(q,k)$</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>$G(x,y)^k=H(A(x,y),y)^k$</td>
+                <td>$g(n,m,k)=\sum\limits_{q=0}^{n+m}\sum\limits_{r=0}^{m}{A^{\Delta}\left(n
+                  ,m-r,q\right)h(q,r,k)}$</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>$G(x,y)^k=H(x,B(x,y))^k$</td>
+                <td>$g(n,m,k)=\sum\limits_{q=0}^{n}{\sum\limits_{r=0}^{n+m-q}{B^{\Delta}\left(n-q
+                  ,m,r\right)}\,h(q,r,k)}$
+                </td>
+              </tr>
+              <!--DELETED 6 -->
+              <tr>
+                <td>7</td>
+                <td> $G(x)^k=H(x,B(x))^k$</td>
+                <td>$g(n,k)=\sum\limits_{q=0}^{n}{\sum\limits_{r=0}^{n-q}{B^{\Delta}(n-q,r)\,
+                  h(q,r,k)}}$</td>
+              </tr>
+            </table>
+            <div class="paragraph">
+              Для выполнения композиции $G(x,y)=H(A(x,y),y)$ необходимо знать условие, что внутренняя функция
+              $A(0,0)=0$. В
+              разработанной базе знаний есть много функций, имеющие свободный член $A(0,0)\ne=0$. Для достижения
+              заданного
+              условия можно воспользоваться способами
+              : домножением производящей функции на переменную моном $x^ay^b$, где $a,b \in N$, $a\geqslant 0$,
+              $b\geqslant
+              0$
+              или вычитанием из производящей функции нулевого элемента разложения.
+            </div>
+            $$G(x,y)={x,y-1\over{x,y+x^2+x-1}}$$
+
+            ее можно представить как
+
+            $$
+            G(x,y)=\frac{1}{1-\frac{x+x^2}{1-x\,y}}=H(A(x,y)),
+            $$
+            где $H(x)=\frac{1}{1-x}$, $A(x,y)=\frac{x+x^2}{1-x\,y}$
+
+            В базе знаний делаем запрос на производящую функцию $U(x,y)=\frac{1+x}{1-y}$. Получим найденную пирамиду под
+            номером 17.
+            <div class="fragment">
+              Generating function:
+              <br>
+              $U_{17}(x,y)={1+x\over{1-y}}$
+              <br>
+              Formula:
+              $T_{17}(n,m,k)={k\choose{n}}\,{m+k-1\choose{m}}$
+              <br>
+              Data:
+              <br>
+              $\begin{array}{lllllll}1&1&1&1&1&1&1\\1&1&1&1&1&1&1\\0&0&0&0&0&0&0\\0&0&0&0&0&0&0
+              \\0&0&0&0&0&0&0\\0&0&0&0&0&0&0\\0&0&0&0&0&0&0\\
+              \end{array}
+              $
+            </div>
+
+            Тогда для композиты функции $x\frac{1+x}{1-y}$ будет верна формула
+            $$
+            T_{17}(n-k,m,k)={k\choose{n-k}}\,{m+k-1\choose{m}}
+            $$
+            Теперь выполним выполним произведение переменной $y$ на $x$ получим
+            $$
+            A^{\Delta}(n,m,k)=T_{17}(n-m-k,m,k)={k\choose{n-k}}\,{m+k-1\choose{m}}
+            $$
+            Откуда на основании формулы композиции двух переменных (см. таблица 1, строка 3, $k=1$)
+            $$
+            g(n,m)=\sum_{k=0}^{n+m} A^{\Delta}(n,m,k)=\sum_{k=0}^{n-m}{k\choose{n-m-k}}\,{m+k-1\choose{m}}.
+            $$
+
+            Таким образом, получили явную фомулу для треугольника последоваетльности A055830, описыващий класс путей на
+            решетке[12].
+          </div>
+          <div id="10" class="article">10. Нахождение взаимных производящих функций</div>
+          <div>
+            Пусть задана производящая функция вида:
+
+            $$G(x,y)={x-sqrt{x^2-2,x^2,y+2,sqrt{1-4,x},x^2,y}}\over{2,x^2,y}$$
+            Найдем явную формулу взаимной производящей функции:
+            $$
+            A(x,y)=\frac{1}{G(x,y)}
+            $$
+            Разложим функцию $G(x,y)$ в ряд Тейлора в точке $x=0$ и $y=0$
+            $$
+            \begin{array}{l}\\
+            1\\
+            +\left(1+y+\cdots \right)\,x\\
+            +\left(2+2\,y+2\,y^2+\cdots \right)\,x^2\\
+            +\left(5+5\,y+6\,y^2+5\,y^3+\cdots \right)\,x^3\\
+            +\left(14+14\,y+18\,y^2+20\,y^3+14\,y^4+\cdots \right)\,x^4+\cdots
+            \end{array}$$
+
+            Заметим, что эта функция описывает треугольник и $G(0,0)=1$. Тогда запишем функцию
+            $H\left(x,\frac{y}{x}\right)$. Ищем эту функцию в базе знаний, получим функцию и тензор под номером 69 (см.
+            \ref{Mris4})
+
+            <div class="fragment">
+              Generating function:
+              <br>
+              $U_{69}(x,y)=x-\sqrt{x^2-2*x*y+2,\sqrt{1-4*x}*x*y}\over{2*x*y}$
+              <br>
+              Formula:
+              $T_{69}(n,m,k)={k,{2*m+k-1
+              \choose{m}},
+              {2*n+m+k-1\choose{n}}}
+              \over{n+m+k}$
+              <br>
+              Data:
+              <br>
+              $\begin{array}{lllllll}1&1&2&5&14&42&132\\1&2&6&20&70&252&924
+              \\2&5&18&70&280&1134&4620\\5&14&56&240&1050&4620&20328
+              \\14&42&180&825&3850&18018&84084\\42&132&594&2860&14014&68796&336336
+              \\132&429&2002&10010&50960&259896&1319472\\\end{array}$
+            </div>
+            Тогда для исходной функции будет верно выражение:
+            $$
+            G(x,y)=\sum_{n}\sum_{m} T_{69}(n-m,m,k)x^n\,y^m.
+            $$
+            Для получения выражения коэффициентов взаимной производящей функции можно воспользоваться
+            выражением[10]:
+            $$T_r(n,m,k)=\sum_{j=0}^{m+n}{T(0 , 0 , 1)^{-j-k}(-1)^{j}{j+k-1\choose{j}}{\it T}\left(n , m , j\right)
+            {k+m+n\choose{m+n-j}}}$$
+            где $T(n,m,k)$ - тензор для исходной производящей функции, при условии, что $T(0,0,0)=1$ и $T(n,m,0)=0$.
+            Запишем
+            тензор для исходной функции
+            $$
+            T(n,m,k)=T_{69}(n-m,m,k)={\frac{k}{n+k}{2*m+k-1\choose{m}}{2*n+k-1\choose{n-m}}}.
+            $$
+            Тогда тензор взаимной производящнй функции будет иметь явное выражение
+            $$
+            T_r(n,m,k)=\sum_{j=0}^{m+n}(-1)^{j}
+            {j+k-1\choose{j}}
+            {\frac{j}{n+j}}
+            {2*m+j-1\choose{m}}
+            {2*n+j-1\choose{n-m}}
+            {k+m+n\choose{m+n-j}}.
+            $$
+
+          </div>
+          <div id="10_1" class="article">10.1 Нахождение явных выражений для разложения функций вида $G(x,y)^{\alpha}$
+          </div>
+          <div>
+            Пусть
+            $$
+            G(x,y)^k=\sum_{n\geqslant 0}\sum_{m\geqslant 0} T(n,m,k)x^ny^m
+            $$
+            $G(0,0)\neq 0$.
+            Тогда коэффициенты разложения функции
+            $$
+            \frac{1}{G(x,y)^{\alpha}}
+            $$
+            будут иметь следующие выражения
+            \begin{equation}
+            \sum_{j=0}^{n+m}{\frac{(-1)^{j}}
+            {T(0,0,1)^{j+\alpha}}
+            {j+\alpha-1\choose{j}}{\it T}(n,m,j)
+            {n+m+\alpha
+            \choose{n+m-j}}}
+            \end{equation}
+            и
+            \begin{equation}
+            (n+m+1){n+m+\alpha\choose{n+m+1}}\sum_{j=0}^{n}
+            T(0,0,1)^{-j-\alpha}
+            (-1)^{j}
+            T(n,m,j)
+            {n+m\choose{j}}
+            \over{j+\alpha}
+            \end{equation}
+
+            Рассмотри пример
+
+            $$
+            \frac{x+y}{\log(1+x+y)}
+            $$
+
+
+            $$
+            (\log(1+x)^k=\sum_{n\geqslant k} \stirlingonem{n}{k}\frac{k!}{n!}\,x^n
+            $$
+            $$
+            \left(\frac{\log(1+x)}{x}\right)^k=\sum_{n\geqslant 0} (-1)^n\,\stirlingone{n+k}{k}\frac{k!}{(n+k)!}x^n
+            $$
+
+
+            Найдем композицию
+            $$
+            A(B(x,y))=\frac{\log(1+x+y)}{x+y}
+            $$
+            где $A(x)=\log(1+x)$, $B(x,y)=x+y$. Найдем в энциклопедии функцию $B(x,y)$.Эта функция запиасна по номером
+            0001.
+            Откуда
+            $$
+            B(x,y)^k=\sum_{n\geqslant 0}\sum_{m\geqslant 0}
+            \delta_{k, n+m} \,{n+m\choose{m}}\,x^n\,y^m
+            $$
+            Тогда используем формулу композиции (см. табл. )
+            Получим
+            $$
+            \sum_{j=0}^{n+m} B^{\Delta}(n,m,k)A^{\Delta}(j,k)=
+            $$
+            $$
+            \sum_{j=0}^{n+m} \delta_{j, n+m} \,{n+m\choose{m}}(-1)^j\,\stirlingone{j+k}{k}\frac{k!}{(j+k)!}=
+            $$
+            $$
+            {n+m\choose{m}}(-1)^{n+m}\stirlingone{n+m+k}{k}\frac{k!}{(n+m+k)!}
+            $$
+
+
+            <b> 8.5.2 Пример 2</b>
+            $$ G(x)=(\sqrt{\cos(x)})^{3} $$ Для функции $cos(x)$ известно
+            выражение коэффициенты разложения $cos(x)^k$. В энциклопедии под номер
+            Tp0115. $$ Tp0115(n,k)= \begin{array} 11, & n=0, \\ \frac{(-1)^{n
+            \over 2} {(-1)^{n}+1}} {2^{k} n!} \sum\limits_{i=0}^{k-1 \over 2}
+            (k-2i)^{n} {k\choose i} & n>0.\\ \end{array} $$ Воспользуемcя формулой
+            (\ref{gfrecipa1}) при $\alpha=-\frac{3}{2}$, $Tp0115(0,1)=1$ $$
+            \sum_{j=0}^{n}(-1)^{j} \binom{j-\frac{3}{2}-1}{j} Tp0115(n,j)
+            \binom{n-\frac{3}{2}}{n-j} $$
+          </div>
+          <div id="8_6" class="article">
+            8.6 Коэффициенты $k$-ой степени производящей функции решения
+            функционального уравнения $A(x)=G(x\,A(x)^m$, $m\in N$
+          </div>
+          <div>
+            Пусть дано функциональной уравнение $A(x)=G(x\,A(x)^m$, $m\in N$ и
+            извесно выражение $$ [x^n]G(x)^k=G(n,k) $$ $G(0)\ne 0$. Тогда для
+            коэффициентов степени $$ [x^n]A(x)^k=A(n,k) $$ выполняется следующее
+            соотношение \begin{equation}\label{gflagr1}
+            A(n,k)=\frac{k}{m\,n+k}G(n,m\,n+k) \end{equation} Пример Пусть дано
+            функциональной уравнение $$ A(x)=\frac{1+x\,A(x)}{1-x\,A(x)} $$ $m=1$.
+            Для решения этого уравления необходимо найти $G(n,k)$. Известно (см.
+            пример раздела \ref{prod1}), что $$
+            [x^n]\left(\frac{1+x}{1-x}\right)^k=\sum_{i=0}^n {i+k-1\choose
+            i}\,{k\choose n-i} $$ Подставляя найденной $G(n,k)$ в формулу
+            (\ref{gflagr1}) получим искомое решение $$
+            A(n,k)=\frac{k}{n+k}\sum_{i=0}^n {n+k+i-1\choose i}\,{n+k\choose n-i}
+            $$ Теперь перепишем наше уравнение в виде $$
+            x\,A(x)^2+1+(x-1)\,A(x)+1=0 $$ решаем его относительно $A(x)$ получим
+            $$ A(x)={1-x+\sqrt{1-6\,x+x^2}\over{2\,x}}$$ Откуда
+            $$[x^n]\left({1-x+\sqrt{1-6\,x+x^2}
+            \over{2\,x}}\right)^k=\frac{k}{n+k}\sum_{i=0}^n {n+k+i-1\choose
+            i}\,{n+k\choose n-i}.$$ таким образом, найдена формула коэффициентов
+            степени для производящей функции больших чисел Шредера (см.
+            энцикопедию ...)
+          </div>
+          <div id="8_7" class="article">
+            8.7 Коэффициенты $k$-ой степени обратной производящей функции
+          </div>
+          <div>
+            Рассмтрим функциональное уравнение $$ A(x)\cdot G(A(x))=x $$ $G(0)\ne
+            0.$ $$ G^{\Delta}(n,k)=[x^n]\left(x\,G(x)\right)^k. $$ Тогда
+            \begin{equation}\label{gfinver1}
+            A^{\Delta}(n,k)=\frac{k}{n}\sum_{j=0}^{n-k} G(1,1)^{-n-j}(-1)^{j}
+            {n+j-1\choose j}G^{\Delta}(n,j) {2\,n-k \choose n-k-j} \end{equation}
+            Пример Пусть дана производящая функция $$ G(x)=\frac{\exp(x)+x-1}{2}
+            $$ Получим коэффициенты k-степени обратной функции. Для этого
+            спользуем формулу (\ref{gfinver1}). Найдем композиту функции $G(x)$,
+            для этого воспользуемся формулой суммы: $B(x)=e^x-1$, ее композита
+            ${n\choose k}\frac{k!}{n!}$ Для $C(x)=x$, композита $\delta(n,k)$.
+            Тогда $$ G^{\Delta}(n,k)=\sum_{j=0}^k{k\choose j}\sum_{i=0}^n {i
+            \choose j}\frac{j!}{i!}\delta(n-i,k-j) $$ Теперь подставим $i=n-k+j$
+            $$ G^{\Delta}(n,k)=\sum_{j=0}^k{k\choose j}{n-k+j\choose
+            j}\frac{j!}{(n-k+j)!} $$ $$ $G^{\Delta}(1,1)=1,$$ $$ A^{\Delta}(n,k)=
+            \frac{k}{n}\sum_{j=0}^{n-k}(-1)^{j}\,{n+j-1\choose j}G{\Delta}(n,j)
+            {2\,n-k \choose n-k-j} $$ Откуда получим тождество
+            $$\sum_{j=k}^{n}{A^{\Delta}(j,k)\,G^{\Delta}(n,j)}=\delta(n,k)$$
+          </div>
+          <div id="8_8" class="article">
+            8.8 Коэффициенты k-ой степени производящей функции решения
+            функционального уравоения $A(x)=G\left(\frac{x}{A(x)}\right)$
+          </div>
+          <div>
+            \begin{equation}\label{gfleft1}
+            A(n,k)=k\,\sum_{j=1}^{n}\frac{1}{j}{G}\left(0 ,
+            1\right)^{-n+k-j}\left(-1 \right)^{j-1}{G}\left(n , j\right){n-k+j-1
+            \choose j-1}{2\,n-k \choose n-j} \end{equation} Пример <br />
+            Пусть $$ G(x)=\frac{\log(1+x)}{x} $$ и $$ G(n,k)=\frac{k!}{(n+k)!}{n+k
+            \choose k}(-1)^n. $$ Запишем уравнение $$
+            A(x)=G\left(\frac{x}{A(x)}\right)=\frac{\log(1+\frac{x}{A(x)}}{\frac{x}{A(x)}}
+            $$ Откуда, получим производящую функцию для чисел Бернулли $$
+            A(x)=\frac{x}{e^x-1} $$ Тогда $$ A(n,k)=k\,\sum_{j=1}^{n}\frac{1}{j}
+            {\left(-1\right)^(n+j-1)}\frac{j!}{(n+j)!} {n+j \choose
+            j}{n-k+j-1\choose j-1} {2,n-k \choose n-j} $$ $A(0,k)=1$
+          </div>
+          <div id="8_9" class="article">
+            8.9 Производящая функция для диагонали $G(n,n)$
+          </div>
+          <div>
+            Пусть задана производящая функция $G(x)=\sum_{n\geqslant 0} g(n)x^n$.
+            и коэффицтеньы разложения ее степени $$ G(n,k)=[x^n]G(x)^k $$ Тогда
+            производящая функция для диагонали $G(n,n)$ будет иметь выражение $$
+            \frac{x\,A'(x)}{A(x)}, $$ где $A(x)$ является решением функционпльного
+            уравнения $$ A(x)=G(x\,A(x)). $$ Если известна $A(n,k)$, то диагональ
+            $G(n,n)$ будет иметь следующее выражение
+            \begin{equation}\label{gfdiag1}
+            G(n,n)=n\,\sum_{j=1}^{n}\frac{(-1)^{j-1}\,A(n,j)}{j\,A(0,1)^{j}}\,{n\choose
+            j}. \end{equation} Пример Пусть дана производящая функция $$
+            G(x)=\frac{1+x-x^2}{1-x} $$ и задано выражение для коэффициентов
+            степени $$ [x^n]G(x)^k=G(n,k)=\sum_{j=0}^{\left \lfloor {n \over 2}
+            \right \rfloor}{k \choose j}\,{n-j-1\choose n-2\,j} $$ Необходимо
+            найти производящую функцию для диагонали $G(n,n)$. Для этого
+            необходимо решить уравнение $$
+            A(x)=G(x\,A(x)=\frac{1+x\,A(x)-x^2\,A(x)^2}{1-A(x)} $$
+            $$A(x)^2\,\left(x^2+x\right)+A(x),\left(-x-1\right)+1=0$$
+            $$A(x)=1+x-\sqrt {1-2x-3x^2}\over{2\,x+2\,x^2}$$ Находим
+            логарифмическую производную $$B(x)=\frac{(xA(x))'}{A(x)}\frac{1}{2}
+            ({1\over 1+x}+{1\over\sqrt{1-2x-3x^2}}) $$ откуда $$
+            [x^n]B(x)=G(n,n)=\sum_{j=0}^{\left \lfloor {n \over 2 } \right
+            \rfloor}{n \choose j}\,{n-j-1 \choose n-2\,j} $$
+          </div>
+          <div id="8_10" class="article">
+            8.10 Разложение композиции $F(x)=\log(A(x))$
+          </div>
+          <div>
+            Следствием утверждений пункта \ref{ldiago} является, что для
+            композиции функций $F(x)=\log(A(x))$ коэффициенты разложения будут
+            иметь выражение \begin{equation}\label{gflog1}
+            f(n)=\sum_{j=1}^{n}\frac{(-1)^{j-1}\,A(n,j)}{j\,A(0,1)^{j}}\,{n\choose
+            j}. \end{equation} рассмотрим примеры<br />
+            Пример 1 $$ \log\left(\frac{1}{1-x}\right) $$ $$
+            [x^n]\left(\frac{1}{1-x}\right)^k={n+k-1\choose n} $$
+            $$\sum_{j=1}^{n}\frac{(-1)^{j-1}}{j}{n+j-1\choose n}{n \choose
+            j}=\frac{1}{n}$$ Пример 2 $$\log(e^x)=x$$ $$\sum_{j=1}^{n}
+            (-1)^{j-1}\,{n\choose j}j^{n-1}=\left\{\begin{array}{ll} 1,& n=1,\\
+            0,& n>0. \end{array}\right.$$
+          </div>
+          <div id="9" class="article">9. Получение явных выражений композиции производящих функций двух переменных</div>
+          <div class="paragraph">
+            Рассмотрим решение задачи нахождения явной формулы для композиции производящих функций даух переменных. Для
+            этого запишем таблицу 1, полученныую в \cite{KruBivariate}. В первом столбце записаны варианты композици
+            производящих функций, во втором - явные выражения коэффициентов $k$-ой степени произвлдящей функции
+            выражение
+            через коэффициенты $k$-ой степени производящих функций образующих композицию. При $k=1$ получим коэффициенты
+            композиции производящих функций.
+          </div>
+          <div>
+            <table border="1" class="table">
+              <caption>Таблица формул для определения коэффциентов степеней композиции рядов
+              </caption>
+              <tr>
+                <th> N </th>
+                <th>Композиция $G(x,y)^k$ </th>
+                <th>Формула для $g(n,m,k)$</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>$G(x,y)^k=H(A(x),y)^k$</td>
+                <td>$g(n,m,k)=\sum\limits_{q=0}^n A^{\Delta}(n,q)h(q,m,k)$</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td> $G(x,y)^k=H(x,B(y))^k$</td>
+                <td>$g(n,m,k)=\sum\limits_{r=0}^m B^{\Delta}(m,r)h(n,r,k)$</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>$G(x,y)^k=H(A(x,y))^k$</td>
+                <td>$g(n,m,k)=\sum\limits_{q=0}^{n+m} A^{\Delta}(n,m,q)h(q,k)$</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>$G(x,y)^k=H(A(x,y),y)^k$</td>
+                <td>$g(n,m,k)=\sum\limits_{q=0}^{n+m}\sum\limits_{r=0}^{m}{A^{\Delta}\left(n
+                  ,m-r,q\right)h(q,r,k)}$</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>$G(x,y)^k=H(x,B(x,y))^k$</td>
+                <td>$g(n,m,k)=\sum\limits_{q=0}^{n}{\sum\limits_{r=0}^{n+m-q}{B^{\Delta}\left(n-q
+                  ,m,r\right)}\,h(q,r,k)}$
+                </td>
+              </tr>
+              <!--DELETED 6 -->
+              <tr>
+                <td>7</td>
+                <td> $G(x)^k=H(x,B(x))^k$</td>
+                <td>$g(n,k)=\sum\limits_{q=0}^{n}{\sum\limits_{r=0}^{n-q}{B^{\Delta}(n-q,r)\,
+                  h(q,r,k)}}$</td>
+              </tr>
+            </table>
+            <div class="paragraph">
+              Для выполнения композиции $G(x,y)=H(A(x,y),y)$ необходимо знать условие, что внутренняя функция
+              $A(0,0)=0$. В
+              разработанной базе знаний есть много функций, имеющие свободный член $A(0,0)\ne=0$. Для достижения
+              заданного
+              условия можно воспользоваться способами
+              : домножением производящей функции на переменную моном $x^ay^b$, где $a,b \in N$, $a\geqslant 0$,
+              $b\geqslant
+              0$
+              или вычитанием из производящей функции нулевого элемента разложения.
+            </div>
+            $$G(x,y)={x,y-1\over{x,y+x^2+x-1}}$$
+
+            ее можно представить как
+
+            $$
+            G(x,y)=\frac{1}{1-\frac{x+x^2}{1-x\,y}}=H(A(x,y)),
+            $$
+            где $H(x)=\frac{1}{1-x}$, $A(x,y)=\frac{x+x^2}{1-x\,y}$
+
+            В базе знаний делаем запрос на производящую функцию $U(x,y)=\frac{1+x}{1-y}$. Получим найденную пирамиду под
+            номером 17.
+            <div class="fragment">
+              Generating function:
+              <br>
+              $U_{17}(x,y)={1+x\over{1-y}}$
+              <br>
+              Formula:
+              $T_{17}(n,m,k)={k\choose{n}}\,{m+k-1\choose{m}}$
+              <br>
+              Data:
+              <br>
+              $\begin{array}{lllllll}1&1&1&1&1&1&1\\1&1&1&1&1&1&1\\0&0&0&0&0&0&0\\0&0&0&0&0&0&0
+              \\0&0&0&0&0&0&0\\0&0&0&0&0&0&0\\0&0&0&0&0&0&0\\
+              \end{array}
+              $
+            </div>
+
+            Тогда для композиты функции $x\frac{1+x}{1-y}$ будет верна формула
+            $$
+            T_{17}(n-k,m,k)={k\choose{n-k}}\,{m+k-1\choose{m}}
+            $$
+            Теперь выполним выполним произведение переменной $y$ на $x$ получим
+            $$
+            A^{\Delta}(n,m,k)=T_{17}(n-m-k,m,k)={k\choose{n-k}}\,{m+k-1\choose{m}}
+            $$
+            Откуда на основании формулы композиции двух переменных (см. таблица 1, строка 3, $k=1$)
+            $$
+            g(n,m)=\sum_{k=0}^{n+m} A^{\Delta}(n,m,k)=\sum_{k=0}^{n-m}{k\choose{n-m-k}}\,{m+k-1\choose{m}}.
+            $$
+
+            Таким образом, получили явную фомулу для треугольника последоваетльности A055830, описыващий класс путей на
+            решетке[12].
+          </div>
+          <div id="10" class="article">10. Нахождение взаимных производящих функций</div>
+          <div>
+            Пусть задана производящая функция вида:
+
+            $$G(x,y)={x-sqrt{x^2-2,x^2,y+2,sqrt{1-4,x},x^2,y}}\over{2,x^2,y}$$
+            Найдем явную формулу взаимной производящей функции:
+            $$
+            A(x,y)=\frac{1}{G(x,y)}
+            $$
+            Разложим функцию $G(x,y)$ в ряд Тейлора в точке $x=0$ и $y=0$
+            $$
+            \begin{array}{l}\\
+            1\\
+            +\left(1+y+\cdots \right)\,x\\
+            +\left(2+2\,y+2\,y^2+\cdots \right)\,x^2\\
+            +\left(5+5\,y+6\,y^2+5\,y^3+\cdots \right)\,x^3\\
+            +\left(14+14\,y+18\,y^2+20\,y^3+14\,y^4+\cdots \right)\,x^4+\cdots
+            \end{array}$$
+
+            Заметим, что эта функция описывает треугольник и $G(0,0)=1$. Тогда запишем функцию
+            $H\left(x,\frac{y}{x}\right)$. Ищем эту функцию в базе знаний, получим функцию и тензор под номером 69 (см.
+            \ref{Mris4})
+
+            <div class="fragment">
+              Generating function:
+              <br>
+              $U_{69}(x,y)=x-\sqrt{x^2-2*x*y+2,\sqrt{1-4*x}*x*y}\over{2*x*y}$
+              <br>
+              Formula:
+              $T_{69}(n,m,k)={k,{2*m+k-1
+              \choose{m}},
+              {2*n+m+k-1\choose{n}}}
+              \over{n+m+k}$
+              <br>
+              Data:
+              <br>
+              $\begin{array}{lllllll}1&1&2&5&14&42&132\\1&2&6&20&70&252&924
+              \\2&5&18&70&280&1134&4620\\5&14&56&240&1050&4620&20328
+              \\14&42&180&825&3850&18018&84084\\42&132&594&2860&14014&68796&336336
+              \\132&429&2002&10010&50960&259896&1319472\\\end{array}$
+            </div>
+            Тогда для исходной функции будет верно выражение:
+            $$
+            G(x,y)=\sum_{n}\sum_{m} T_{69}(n-m,m,k)x^n\,y^m.
+            $$
+            Для получения выражения коэффициентов взаимной производящей функции можно воспользоваться
+            выражением[10]:
+            $$T_r(n,m,k)=\sum_{j=0}^{m+n}{T(0 , 0 , 1)^{-j-k}(-1)^{j}{j+k-1\choose{j}}{\it T}\left(n , m , j\right)
+            {k+m+n\choose{m+n-j}}}$$
+            где $T(n,m,k)$ - тензор для исходной производящей функции, при условии, что $T(0,0,0)=1$ и $T(n,m,0)=0$.
+            Запишем
+            тензор для исходной функции
+            $$
+            T(n,m,k)=T_{69}(n-m,m,k)={\frac{k}{n+k}{2*m+k-1\choose{m}}{2*n+k-1\choose{n-m}}}.
+            $$
+            Тогда тензор взаимной производящнй функции будет иметь явное выражение
+            $$
+            T_r(n,m,k)=\sum_{j=0}^{m+n}(-1)^{j}
+            {j+k-1\choose{j}}
+            {\frac{j}{n+j}}
+            {2*m+j-1\choose{m}}
+            {2*n+j-1\choose{n-m}}
+            {k+m+n\choose{m+n-j}}.
+            $$
+
+          </div>
+          <div id="10_1" class="article">10.1 Нахождение явных выражений для разложения функций вида $G(x,y)^{\alpha}$
+          </div>
+          <div>
+            Пусть
+            $$
+            G(x,y)^k=\sum_{n\geqslant 0}\sum_{m\geqslant 0} T(n,m,k)x^ny^m
+            $$
+            $G(0,0)\neq 0$.
+            Тогда коэффициенты разложения функции
+            $$
+            \frac{1}{G(x,y)^{\alpha}}
+            $$
+            будут иметь следующие выражения
+            \begin{equation}
+            \sum_{j=0}^{n+m}{\frac{(-1)^{j}}
+            {T(0,0,1)^{j+\alpha}}
+            {j+\alpha-1\choose{j}}{\it T}(n,m,j)
+            {n+m+\alpha
+            \choose{n+m-j}}}
+            \end{equation}
+            и
+            \begin{equation}
+            (n+m+1){n+m+\alpha\choose{n+m+1}}\sum_{j=0}^{n}
+            T(0,0,1)^{-j-\alpha}
+            (-1)^{j}
+            T(n,m,j)
+            {n+m\choose{j}}
+            \over{j+\alpha}
+            \end{equation}
+
+            Рассмотри пример
+
+            $$
+            \frac{x+y}{\log(1+x+y)}
+            $$
+
+
+            $$
+            (\log(1+x)^k=\sum_{n\geqslant k} \stirlingonem{n}{k}\frac{k!}{n!}\,x^n
+            $$
+            $$
+            \left(\frac{\log(1+x)}{x}\right)^k=\sum_{n\geqslant 0} (-1)^n\,\stirlingone{n+k}{k}\frac{k!}{(n+k)!}x^n
+            $$
+
+
+            Найдем композицию
+            $$
+            A(B(x,y))=\frac{\log(1+x+y)}{x+y}
+            $$
+            где $A(x)=\log(1+x)$, $B(x,y)=x+y$. Найдем в энциклопедии функцию $B(x,y)$.Эта функция запиасна по номером
+            0001.
+            Откуда
+            $$
+            B(x,y)^k=\sum_{n\geqslant 0}\sum_{m\geqslant 0}
+            \delta_{k, n+m} \,{n+m\choose{m}}\,x^n\,y^m
+            $$
+            Тогда используем формулу композиции (см. табл. )
+            Получим
+            $$
+            \sum_{j=0}^{n+m} B^{\Delta}(n,m,k)A^{\Delta}(j,k)=
+            $$
+            $$
+            \sum_{j=0}^{n+m} \delta_{j, n+m} \,{n+m\choose{m}}(-1)^j\,\stirlingone{j+k}{k}\frac{k!}{(j+k)!}=
+            $$
+            $$
+            {n+m\choose{m}}(-1)^{n+m}\stirlingone{n+m+k}{k}\frac{k!}{(n+m+k)!}
+            $$
+
+
+            $$
+            \sum_{j=0}^{n+m}{(-1)**{j}}
+            {j+\alpha-1\choose{j}}\,{n+m\choose{m}}
+            (-1)^{n+m}\stirlingone{n+m+j}{j}\frac{j!}{(n+m+j)!}\,
+            {n+m+\alpha
+            \choose{n+m-j}}}
+            $$
+          </div>
+        </div>
+        <div id="14" class="article">14.Примеры</div>
+        <div id="14_1" class="article">14.1 Пример 1. Треугольник Фина</div>
+        <div>
+          Рассмотрим производящую функцию для треугольника Фина $$
+          G(x,y)={2\over{1+\sqrt{1-4\,x}+2\,x-2\,x\,y}} $$
+          $$G(x,y)=\frac{A(x)}{1-y\,A(x)}.$$
+          $$A(x)=\frac{2}{1+\sqrt{1-4\,x}+2\,x}$$ $$
+          G(x,y)=A(x)\,y+A(x)^2\,y^2+\ldots+A(x)^n\,y^n+\ldots $$ $A(x)$ -
+          является производящей функцией последовательности Фина (см.
+          $Up0157(x)$). Тогда $$ G(x,y)=\sum_{n\geqslant k}
+          Tp0157(n,k)\,x^n\,y^k $$
+        </div>
+        <div id="14_2" class="article">
+          14.2 Пример 2. Треугольник Эйлера (числа Эйлера первого рода)
+        </div>
+        <div>
+          Производящая функция для чисел Эйлера первого рода
+          $$E(x,y)={y-1\over{y-e^{x(y-1)}}}$$ Представим ее в виде
+          $$E(x,y)={1\over{1-\frac{e^{x,(y-1)}-1}{y-1}}}$$ Рассмотрим функцию $$
+          A(x,y)=\frac{e^{x(y-1)}-1}{y-1} $$ Тогда ее можно представить
+          композицией функций $$ A(x,y)=x\,B(C(x,y)), $$ где
+          $B(x)=\frac{e^x-1}{x}$ и $C(x,y)=x\,(y-1)$. Тогда $B(x)=Up0102(x)/x$
+          $$ B(x)^k=(\frac{e^x-1}{x})^k=\sum_{n\geqslant 0} Tp0102(n+k,k)x^n. $$
+          где $$Tp0102(n,k)=\frac{k!}{n!}\,{n \choose k}$$ Используя
+          энциклопедию найдем $C(x)^k$ $$ C(x)^k=\sum_{n\geqslant
+          k}\,Tuu0002(n,m,k)\,(-1)^{m+k}\,x^n\,y^m $$ $$
+          Tuu0002(n,m,k)=\delta_{k, n} \,{n\choose m} $$ Находим коэффициенты
+          $B(C(x))^k$ $$ \sum_{j=0}^{n+m} Tuu0002(n,m,j)(-1)^{m+j}Tp0102(j+k,k)=
+          $$ $$ \sum_{j=0}^{n+m}\delta_{j, n} \,{n\choose
+          m}(-1)^{m+j}\frac{k!}{(j+k)!}\,{j+k \choose k}= $$ $$ {n \choose m
+          }(-1)^{n+m}\frac{k!}{(n+k)!}\,{n+k \choose k}. $$ Находим коэффициенты
+          $x\,B(C(x))^k$ $$ {n-k\choose m }(-1)^{n+m-k}\frac{k!}{n!}\,{n \choose
+          k}= $$ Откуда находим явное выражение для коэффициентов разложения
+          искомой композиции $$ \sum_{k=0}^{n} {n-k\choose
+          m}(-1)^{n+m-k}\frac{k!}{n!}\,{n \choose k} $$ Тогда числа Эйлера
+          первого рода будут исметь следующее явное выражение $$ {n \choose
+          m}=\sum_{k=0}^{n-m} (-1)^{n+m-k}\,k!\,{n-k \choose m} {n \choose k} $$
+        </div>
+        <div id="14_3" class="article">
+          14.3 Пример 3. Производящая функция для чисел Эйлера второго порядка
+        </div>
+        <div>
+          Рассмотрим применение энциклопедии для получения производящей функции
+          для чисел Эйлера второго рода. Для этого докажем следующую теорему.
+          <br />
+          <b>Теорема 2</b> Экспоненциальная производящая функция для чисел
+          Эйлера второго порядка имеет вид: $$ \sum\limits_{n \geqslant 0}
+          \sum_{m\geqslant \geqslant0} {n \choose
+          m}\frac{x^n}{n!}t^m={1-t\over{W(-t e^{(1-t)^2,x-t})+1}}, $$ где $W(x)$
+          -- функция Ламберта, $x>0$.
+          <br />
+          <b>Доказательство </b>Запишем экспоненциальную производяюую функцию в
+          виде двойного ряда, при этом возьмем смещение на $(n-1)$ $$ E(x,t) =
+          \sum_{n>0}\sum_{m>0} {n-1 \choose m}\frac{x^n}{n!}t^m $$ Рассмотрим
+          формулу, полученную в |15| $$ {n \choose m}=\sum_{k=0}^m
+          (-1)^{m-k}\,{2\,n+1 \choose m-k} {n+k \choose k}, $$ Ее можно
+          представить как произведение двух рядов $$
+          E(x,t)=\sum_{n>0}P_n(t)\frac{x^n}{n!}\,(1-t)^{2n-1} $$ где $$
+          (1-t)^{2\,n-1}=\sum_{n\geqslant 0}(-1)^m\,{2\,n-1 \choose m}t^m $$ и
+          $$ P_n(t)=\sum_{m\geqslant 0}{n+m-1 \choose m}t^m $$ Запишем функцию
+          $$ u(x,t)=\sum_{n>0}\sum_{m\geqslant 0}{n+m-1 \choose
+          m}\frac{x^n}{n!}t^m $$ Покажем, что эта функция является обратной
+          функцией для функции $$ y(x,t)=(x-t(e^x-1)). $$ pапишем взаимную
+          функцию для $y(x,t)$ $$ \frac{x}{y(x,t)}=\frac{1}{1-t\frac{e^x-1}{x}}
+          $$ и найдем ее степень. Для этого запишем $$
+          (t(\frac{e^x-1}{x}))^k=\sum_{n>0} \sum_{m>0}T(n,m,k)x^nt^n $$
+          Известно, что для функции $(e^x-1)$ имеется тождество $$
+          (e^x-1)^k=\sum\limits_{n\geqslant 0} k!{n \choose k}\frac{x^n}{n!}, $$
+          получим $$ T(n,m,k)=\delta(m,k){n+k \choose k}\frac{k!}{(n+k)!}, $$
+          где $\delta(m,k)$ символ Кронекера. Для функции $\frac{1}{(1-x)}$
+          известно тождество $$ \frac{1}{(1-x)^k}=\sum_{n\geqslant 0} {n+k-1
+          \choose n}x^n. $$ Тогда для степени композиции двух производящих
+          функций $$ ({1}{1-t\frac{e^x-1}{x}})^k=\sum\limits_{n\geqslant 0}
+          \sum\limits_{m\geqslant 0} D(n,m,k)x^nt^m, $$ на основе композиционной
+          формулы \cite{kru}, можно записать $$ D(n,m,k)=\sum\limits_{i=0}^{n+m}
+          T(n,m,i){i+k-1 \choose i}=\sum\limits_{k=0}^{n+m} \delta(m,i) {n+i
+          \choose i}\frac{i!}{(n+i)!}{i+k-1 \choose i}= $$ $$ ={n+m \choose
+          m}\frac{m!}{(n+m)!}{m+k-1 \choose m}. $$ Теперь воспользуется теоремой
+          Лагранжа об обратной функции, согласно которой для степенного ряда
+          $u(x,t)$ удовлетворяющему функциональному уравнению $$ u=x\,F(g,t) $$
+          где $F(x,t)$ - степенной ряд, у которого $F(0,0)\neq 0$ выполняется
+          тождество $$ [x^n]u(x,t)=\frac{k}{n}[x^{n-k}]F(x,t)^n. $$ Запишем
+          функциональное уравнение для нашего случая
+          $F(x,t)=\frac{1}{1-t\frac{e^x-1}{x}}$ $$
+          u=\frac{x}{1-t\frac{e^{u}-1}{u}}. $$ Решением этого уравнения будет $$
+          u(x,t)^k=\sum\limits_{n>0} \sum\limits_{m\geqslant 0}
+          \frac{k}{n}D(n-k,m,n)x^n\,t^m $$ где $D(n,m,k)$ коэффициенты ряда
+          $F(x,t)^k$. Тогда $$ D(n-k,m,n)={n+m-k \choose
+          m}\frac{m!}{(n+m-k)!}{m+n-1 \choose m} $$ При $k=1$ получим $$
+          u(x,t)=\sum\limits_{n>0} \sum\limits_{m\geqslant 0} \frac{1}{n}{n+m-1
+          \choose m}\frac{m!}{(n+m-1)!}{m+n-1 \choose m}x^n\,t^m $$ или, после
+          упрощения биномиального коэффициента и факториалов получим $$
+          u(x,t)=\sum\limits_{n>0} \sum\limits_{m\geqslant 0} \frac{1}{n!}{n+m-1
+          \choose m}x^n\,t^m $$ Таким образом, функция $u(x,t)$ являтся обратной
+          к функции $y(x,t)=(x-t(e^x-1))$. Теперь воспользуемся функцией
+          Ламберта и ее свойствами. Функция Ламберта задается уравнением $$
+          x=W(x)e^{W(x)} $$ Известно, что решения уравнения вида $$
+          g(x)=f(x)e^{f(x)} $$ решением будет $$ f(x)=W(g(x)) $$ Используем это
+          свойство для нашего случая $$ y=x(y,t)-t\,e^{x(t,y)}+t $$ Произведем
+          замену $$ z(y,t)=x(y,t)+t-y $$ Тогда на уравнение будет иметь вид $$
+          z(y,t)=t\,e^{Z(y,t)-t+y} $$ Перепишим ее в виде $$
+          z(y,t)e^{-Z(y,t)}=t\,e^{y-t} $$ Тогда решение для $z(y,t)$ будет иметь
+          вид $$ z(y,t)=-W(-t\,e^{y-t}) $$ Откуда $$ x(y,t)=y-t-W(-t\,e^{y-t})
+          $$ Теперь рассмотрим произведение $$
+          E(x,t)=\sum_{n>0}P_n(t)\frac{x^n}{n!}\,(1-t)^{2n-1}=\frac{1}{1-t}\sum_{n>0}P_n(t)\frac{(x(1-t)^2)^n}{n!}
+          $$ Откуда $$
+          E(x,t)=\frac{E_2(x(1-t)^2,t)}{(1-t)}=\frac{x(1-t)^2-t-W(-t\,e^{x(1-t)^2-t})}{1-t}.
+          $$ Дифференциируя по $x$ выражение для $E(x,t)$ с учетом свойств
+          производной функции Ламберта $W(x)$ получим искомую производящую
+          функцию $$ Eu(x,t)=\sum\limits_{n>0} \sum_{m>0} {n \choose
+          m}\frac{x^n}{n!}t^m={1-t\over{W(-t\,e^{(1-t)^2\,x-t})+1}} $$
+        </div>
+        <div id="15" class="article">
+          15. Нахождение явных выражений для разоложениы композиции производящих
+          функций многих переменных
+        </div>
+        <div>
+          Рассмотрим композицию производящий функций $F(x)$ и $G(x,y,\ldots,z)$,
+          $G(0,0,\ldots,0)=0$ Тогда $A(x,y,\ldots,z)=F(G(x,y,\ldots,z))$ $$
+          \sum_{k=0}^{n+m+\ldots, i} G^{\Delta}(n,m,\ldots,i,k)f(k) $$ $$
+          [x^n\,y^m\,\ldots\,z^i](x+y+\ldots+z)^k={n+m+\ldots+i\choose
+          n,m,\ldots,i}\delta(n+m+\ldots+i,k) $$ $$
+          [x^n\,y^m\,\ldots\,z^i]F(x+y+\ldots+z)=\sum_{k=0}^{n+m+\ldots+i}{n+m+\ldots+i\choose
+          n,m,\ldots,i}\delta(n+m+\ldots+i,k)f(k)= $$ $$ {n+m+\ldots+i\choose
+          n,m,\ldots,i}f(n+m+\ldots+i) $$ Пример $$ e^{\frac{x}{1-x-y-z}} $$ $$
+          [x^n\,y^m\,z^i]\left(\frac{1}{1-x-y-z}\right)^k= $$ $$
+          \sum_{j=0}^{n+m+i} {n+m+i\choose n,m,i}\delta(n+m+i,j){j+k-1\choose
+          j}= $$ $$ {n+m+i\choose n,m,i}{n+m+i+k-1\choose n+m+i} $$ Откуда $$
+          [x^n\,y^m\,z^i]\left(\frac{x}{1-x-y-z}\right)^k={n-k+m+i\choose
+          n-k,m,i}{n+m+i-1\choose n-k+m+i} $$ $$
+          [x^n\,y^m\,z^i]e^{\left(\frac{x}{1-x-y-z}\right)}=\sum_{k=0}^{n+m+i}\frac{1}{k!}{n-k+m+i\choose
+          n-k,m,i}{n+m+i-1\choose n-k+m+i}= $$ $$
+          \sum_{k=0}^{n}\frac{1}{k!}{n-k+m+i\choose n-k,m,i}{n+m+i-1\choose
+          n-k+m+i} $$
+        </div>
+        <div id="16" class="article">
+          16. Нахождение явных выражений для разложения функций вида
+          $G(x,y,\ldots,z)^{\alpha}$
+        </div>
+        <div>
+          Пусть задана функция $G(x,y,\ldots,z)$, $G(0,0,\ldots,0)\neq 0$ и
+          заданы коэффициенты k-ой степени $$ G(x,y,\ldots,z)^k=\sum_{n\geqslant
+          0}\sum_{m\geqslant 0} T(n,m,\ldots,i,k)x^n\,y^m. $$ Тогда для
+          коэффициенты разложения $G(x,y,\ldots,z)^{-\alpha}$ будут иметь
+          выражения $$ \sum_{j=0}^{n+m+\ldots+i} \frac{(-1)^{j}}{T (0
+          ,0,\ldots,0,1)^{j+\alpha}} \binom{j+\alpha-1}{j} T(n,m,\ldots,i,j)
+          \binom {n+m+\ldots+i+\alpha}{n+m+\ldots+i-j} $$ и $$ (n+m+\ldots+i+1)
+          {n+m+\ldots+i+\alpha\choose n+m+\ldots+i+1} \sum_{j=0}^{n+m+\ldots+i}
+          \frac{(-1)^{j} {n+m+\ldots+i\choose j} }{(j+\alpha) T(0
+          ,0,\ldots,0,1)^{j+\alpha}} $$
+        </div>
+        <div id="17" class="article">17. Как создавалась энциклопедия</div>
+        <div>
+          Рассмотри методику получения пирамид. Для этого запишем множество
+          производящих функций одной переменной и соотвествующее множество явных
+          выражений коэффициентов $k$-степени. Пусть имеется множество
+          $G=\{g_i(x)\}$ производящих функций, коэффициенты $k$-степени
+          описываются биномиальными коэффициентами $\{T_i(n,k)\}$. $$
+          \begin{array}{|c|c|}\hline \hbox{Производящая функция }G(x) &
+          \hbox{Коэффициенты степени } g_x(n,k)\\ \hline (1+x) & \binom{k}{n}\\
+          \hline \frac{1}{1-x} & \binom{n+k-1}{n}\\ \hline
+          \frac{1-\sqrt{1-4x}}{2x} & \frac{k}{n+k}{2n+k-1\choose n}\\ \hline
+          \frac{1-2x-\sqrt{1-4x}}{2x^2} & \frac{k}{n+k}{2n+2k\choose n}\\ \hline
+          \frac{2}{\sqrt{3x}} \sin({ {\arcsin( {3^ {3\over{2}} \sqrt{x} \over
+          {2} } )} \over {3} }) & {k\,{3\,n+k-1 \choose n }}\over{2\,n+k}\\
+          \hline 1+\sqrt{1+4x}\over{2} & k(-1)^{n-1}{2n-k-1 \choose
+          n-1}\over{n}\\ \hline 1-\frac{4}{3} \sin ^2({ {\arcsin( {3^
+          {3\over{2}} \sqrt{-x} \over {2} } )} \over {3} }) & k(-1)^{n-1}{3n-k-1
+          \choose n-1}\over{n} \\ \hline \sqrt{1+4x} & \begin{array}
+          \binom{k\over 2} {n} 4^{n}, k-even // (-1)^{n-{k+1 \over 2}}
+          \end{array} \\ \hline \end{array} $$
+        </div>
+      </div>
+
+      $$
+      \sum_{j=0}^{n+m}{(-1)**{j}}
+      {j+\alpha-1\choose{j}}\,{n+m\choose{m}}
+      (-1)^{n+m}\stirlingone{n+m+j}{j}\frac{j!}{(n+m+j)!}\,
+      {n+m+\alpha
+      \choose{n+m-j}}}
+      $$
     </div>
   </div>
+
+</div>
 </div>

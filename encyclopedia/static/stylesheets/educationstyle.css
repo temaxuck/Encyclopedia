@@ -41,3 +41,16 @@ ul {
 .paragraph {
   text-indent: 40px;
 }
+
+.table {
+  margin: 20px auto;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.fragment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
