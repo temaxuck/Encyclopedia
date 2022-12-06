@@ -354,6 +354,18 @@
           энциклопедии эта композита запиасана под номером $Tp0117$
           $$Tp0117(n,k)=\frac{((-1)^{n}+1)}{(n+k)!}\,\sum_{j=k}^{n+k}{j-1
           \choose{k-1}},j!,2^{n-j-1},(-1)^[{n+k\over 2}+{j}] {n\choose j}$$
+          $$[x^n](\frac{\tan(x)}{x})^k=Tp0117(n+k,k)=\frac{((-1)^{n}+1)}{(n+k)!}
+          \sum_{j=k}^{n+k} {j-1 \choose k-1 } j! 2^{n+k-j-1}
+          (-1)^{\frac{n+2k}{2} +j} \binom{n+k}{j} $$
+          $$[x^n](\frac{\tan(x)}{x})^k=\frac{((-1)^{n}+1)}{(n+k)!}
+          \sum_{j=0}^{n} {j+k-1 \choose k-1 } (j+k)! 2^{n+j-1} (-1)^{\frac{n}{2}
+          +j} \binom{n+k}{j+k} $$
+          $$[x^n](\frac{\tan(x)}{x})^i=\frac{((-1)^{n}+1)}{(n+i)!}
+          \sum_{j=0}^{n} {j+i-1 \choose i-1 } (j+i)! 2^{n+j-1} (-1)^{\frac{n}{2}
+          +j} \binom{n+i}{j+i} $$ тогда искомая формула будет иметь выражение $$
+          \sum_{i=0}^{n}{k+i-1\choose i}\, \frac{((-1)^{n}+1)}{(n+i)!}
+          \sum_{j=0}^{n} {j+i-1 \choose i-1 } (j+i)! 2^{n+j-1}
+          (-1)^{\frac{n}{2}+j+i} \binom{n+i}{j+i} \binom{n+k}{n-i} $$
         </div>
         <div id="8_5" class="article">
           8.5 Нахождение явных выражений для разложения функций вида
@@ -361,7 +373,28 @@
         </div>
         <div>
           $$ \sum_{j=0}^{n} \frac{(-1)^j}{T(0,1)^{j+\alpha}} {j+\alpha-1 \choose
-          j} {T(n,j)} {n+\alpha \choose n-j} $$ и
+          j} {T(n,j)} {n+\alpha \choose n-j} $$ и $$ (n+1)\binom{n+\alpha}{n+i}
+          \sum_{i=0}^{n} \frac{T(0,1)^{-j-\alpha}(-1)^{j} T(n,j){n\choose j}}
+          {j+\alpha} $$ Рассмотрим примеры <br />
+          <b> 8.5.1 Пример 1</b>
+
+          $$ G(x)=(\frac{x}{e^x-1})^{\alpha} $$ $$ (e^x-1^k)=\sum_{n\geqslant k}
+          \binom{n}{k}\frac{k!}{n!} x^n $$ $$
+          (\frac{e^x-1}{x})^k=\sum_{n\geqslant 0}
+          \binom{n+k}{k}\frac{k!}{(n+k)!}x^n $$ $$ \sum_{j=0}^{n}(-1)^{j} \binom
+          {j+\alpha-1}{j} \binom{n+j}{j} \frac{j!}{(n+j)!} { n+\alpha \choose
+          n-j} $$ и $$ (n+1){n+\alpha \choose n+1}\sum_{j=0}^{n}
+          \frac{(-1)^{j}j! \binom{n+j}{j} {n \choose j}} {(j+\alpha)(n+j)!} $$
+
+          <b> 8.5.2 Пример 2</b>
+          $$ G(x)=(\sqrt{\cos(x)})^{3} $$ Для функции $cos(x)$ известно
+          выражение коэффициенты разложения $cos(x)^k$. В энциклопедии под номер
+          Tp0115. $$ Tp0115(n,k)= \begin{array} 11, & n=0, \\ \frac{(-1)^{n
+          \over 2} {(-1)^{n}+1}} {2^{k} n!} \sum\limits_{i=0}^{k-1 \over 2}
+          (k-2i)^{n} {k\choose i} & n>0.\\ \end{array} $$ Воспользуемcя формулой
+          (\ref{gfrecipa1}) при $\alpha=-\frac{3}{2}$, $Tp0115(0,1)=1$ $$
+          \sum_{j=0}^{n}(-1)^{j} \binom{j-\frac{3}{2}-1}{j} Tp0115(n,j)
+          \binom{n-\frac{3}{2}}{n-j} $$
         </div>
         <div id="8_6" class="article">
           8.6 Коэффициенты $k$-ой степени производящей функции решения
@@ -614,9 +647,12 @@
           заданы коэффициенты k-ой степени $$ G(x,y,\ldots,z)^k=\sum_{n\geqslant
           0}\sum_{m\geqslant 0} T(n,m,\ldots,i,k)x^n\,y^m. $$ Тогда для
           коэффициенты разложения $G(x,y,\ldots,z)^{-\alpha}$ будут иметь
-          выражения ДОБАВИТЬ!!!1111111111111 и $$(n+m+\ldots+i+1)
+          выражения $$ \sum_{j=0}^{n+m+\ldots+i} \frac{(-1)^{j}}{T (0
+          ,0,\ldots,0,1)^{j+\alpha}} \binom{j+\alpha-1}{j} T(n,m,\ldots,i,j)
+          \binom {n+m+\ldots+i+\alpha}{n+m+\ldots+i-j} $$ и $$ (n+m+\ldots+i+1)
           {n+m+\ldots+i+\alpha\choose n+m+\ldots+i+1} \sum_{j=0}^{n+m+\ldots+i}
-          $$ДОБАВИТЬ!!!1111111111111
+          \frac{(-1)^{j} {n+m+\ldots+i\choose j} }{(j+\alpha) T(0
+          ,0,\ldots,0,1)^{j+\alpha}} $$
         </div>
         <div id="17" class="article">17. Как создавалась энциклопедия</div>
         <div>
