@@ -1,110 +1,70 @@
-main {
-    display: flex;
-    flex-grow: 1;
-
-    flex-direction: column;
-    align-items: center;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.UploadPyr {
-    margin-left: auto;
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
 }
 
-.results {
-    display: flex;
-    margin-top: 40px;
-    min-width: 50%;
-    flex-direction: column;
-    gap: 20px;
-    flex-wrap: wrap;
+.home h2 {
+  margin: 5px;
+  color: #002A55;
 }
 
-.result_brief {
-    padding: 20px;
-    background-color: rgb(250, 250, 250);
-    box-shadow: rgba(60, 66, 87, 0.16) 0px 0px 0px 1px;
-
-    border-radius: 5px;
+.image {
+  padding-top: 5px;
 }
 
-.user_brief {
-    display: flex;
-    gap: 2.5%;
+.search {
+  width: 65vw;
+  margin: 30px 10px;
 }
 
-.result_brief > .result_title {
-    font-size: 2em;
-    display: flex;
-    justify-content: space-between;
+.search h3 {
+  color: #777;
+  margin-bottom: 3px;
 }
 
-.broken_info {
-    color: #002A55;
-    /* cursor: default; */
-    user-select: none;
-    font-size: 1em;
+.home_info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: white;
 }
 
-.result_brief > .data {
-    display: flex;
-    justify-items: center;
-    align-items: baseline;
-    gap: 20px;
+.container {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  border: 4px rgba(35, 144, 255, 0.1) solid;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 8px;
+  background-color: rgba(35, 144, 255, 0.7);
+  color: white;
 
-    text-decoration: none;
-    color: black;
 }
 
-.data > * {
-    color: black;
+.container h2 {
+  color: white;
+  text-shadow: 0.5px 0.5px 2px rgb(0, 0, 0);
+  margin: 0;
 }
 
-.author {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+.container a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  padding: 10px 5px;
+  text-decoration: none;
+  color: white;
 }
 
-.author-credits {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 10px;
-}
-
-
-.manual_page_input {
-    position: relative;
-    
-}
-
-.manual_page_input::after {
-    content: '\e5cf';
-    font: 1em 'Material Icons';
-    color: #333;
-    /*Adjust for position however you want*/
-    
-    top: calc(25px - 0.5em);
-    right: 0.25em;
-    /*left line */
-    
-    position: absolute;
-    pointer-events: none;
-  
-}
-
-.manual_page_input:hover::after {
-    color: #005fc0;
-}
-
-.MJX-TEX, .katex {
-    font-size: 1.2em;
-    font-family: MJXZERO, MJXTEX;
-}
-
-
-.katex-html > .base {
-    margin: 1em 0;
-    padding: 0;
-    font-size: 104.4%;
+.container a:hover {
+  color: blue;
 }

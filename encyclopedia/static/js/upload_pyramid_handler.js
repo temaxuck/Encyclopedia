@@ -1,4 +1,4 @@
-let gf_count = 1, ef_count = 1, rel_count = 0;
+let gf_count = 1, ef_count = 0, rel_count = 0;
 
 try {
     rels = document.querySelectorAll('.related_seq');
@@ -65,16 +65,18 @@ function remove_gf_input(remove_btn) {
 function add_ef_input(addbtn) {
     let parent = addbtn.parentNode;
     parent.parentNode.parentNode.querySelector('.brace-left').style.display = 'block'
+    ef_count = parseInt(parent.querySelector('.f_expr').id.match(/\d+/)[0]);
     ef_count++;            
-
+    
     let cloned = parent.cloneNode(true);
     cloned.querySelector('.f_expr').value = '';
-    cloned.querySelector('.f_expr').id = `explicitFormula-${ef_count-1}-f_expr`;
-    cloned.querySelector('.f_expr').name = `explicitFormula-${ef_count-1}-f_expr`;
-    if (ef_count > 1) {
+    cloned.querySelector('.f_expr').id = `explicitFormula-${ef_count}-f_expr`;
+    cloned.querySelector('.f_expr').name = `explicitFormula-${ef_count}-f_expr`;
+    if (ef_count > 0) {
         cloned.querySelector('.f_condition').value = '';
-        cloned.querySelector('.f_condition').id = `explicitFormula-${ef_count-1}-f_condition`;
-        cloned.querySelector('.f_condition').name = `explicitFormula-${ef_count-1}-f_condition`;
+        cloned.querySelector('.f_condition').id = `explicitFormula-${ef_count}-f_condition`;
+        cloned.querySelector('.f_condition').name = `explicitFormula-${ef_count}-f_condition`;
+        cloned.querySelector('.f_condition').style.display = 'block';
     } 
 
     parent.parentNode.appendChild(cloned);
@@ -90,18 +92,18 @@ function remove_ef_input(remove_btn) {
     let parent = remove_btn.parentNode;
     let currentNodeId = parent.querySelector('.f_expr').id.match(/\d+/).toString();
     currentNodeId = parseInt(currentNodeId);
-
-    if (ef_count < 2) {
+    let _content = parent.parentNode.children;
+    ef_count = parseInt(_content[_content.length - 1].querySelector('.f_expr').id.match(/\d+/)[0]);
+    if (ef_count < 1) {
         return;
     }
-    
-    ef_count--;
     
     for (let i = currentNodeId + 1; i < ef_count + 1; i++) {
         temp_el = parent.parentNode.children[i];
         // console.log(temp_el);
         temp_counter = temp_el.querySelector('.f_expr').id.match(/\d+/).toString();
         temp_counter = parseInt(temp_counter);
+        // console.log(temp_counter);
         temp_el.querySelector('.f_expr').id = `explicitFormula-${temp_counter-1}-f_expr`;
         temp_el.querySelector('.f_expr').name = `explicitFormula-${temp_counter-1}-f_expr`;
         temp_el.querySelector('.f_condition').id = `explicitFormula-${temp_counter-1}-f_condition`;
@@ -110,14 +112,15 @@ function remove_ef_input(remove_btn) {
     }
     
     let content = parent.parentNode;
-
     
     parent.remove()
     
-    if (ef_count < 2) {
+    ef_count--;
+    if (ef_count < 1) {
         content.parentNode.querySelector('.brace-left').style.display = 'none';
         content.children[0].querySelector('.f_condition').style.display = 'none';
     }
+
 }
 
 

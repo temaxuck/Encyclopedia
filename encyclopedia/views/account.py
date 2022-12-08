@@ -1,9 +1,7 @@
 from encyclopedia.views import *
 from encyclopedia.forms import LoginForm, SignupForm, UpdateProfileForm
 from flask_login import login_user, logout_user
-from encyclopedia import hasher, csrf
-from flask_cors import CORS
-from flask import session, current_app, g
+from encyclopedia import hasher
 
 import os
 import secrets
@@ -12,15 +10,22 @@ from werkzeug.utils import secure_filename
 
 accountbp = Blueprint('account', __name__)
 
+# @accountbp.after_request 
+# def after_request(response):
+#     header = response.headers
+#     header['Access-Control-Allow-Origin'] = '*'
+#     # Other headers can be added here if needed
+#     return response
+
 @accountbp.route('/login', methods=['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
         flash(f'You already have been logged in!', 'info')
         return redirect(url_for('general.home'))
 
-    form = LoginForm(request.form)
-    
-    if request.method == 'POST' and form.validate_on_submit():
+    form = LoginForm()
+
+    if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
         if not user:
             user = User.query.filter_by(username=form.email.data.lower()).first()        
@@ -32,8 +37,8 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('general.home'))
         else:
             flash(f'Login unsuccessful. Please check email/username and password', 'danger')
-    else:
-        return render_template('login.html', form=form)
+
+    return render_template('login.html', form=form)
 
 @accountbp.route('/signup', methods=['POST', 'GET'])
 def signup():

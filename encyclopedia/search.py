@@ -1,7 +1,7 @@
 class SearchBase(object):
     session = None
-    query : str = None
-    limit : int = None
+    query: str = None
+    limit: int = None
     
     results = []
     searchers = [] # class 
@@ -36,7 +36,7 @@ class SearchBase(object):
     def search(self):
         import json
 
-        self.results = []
+        results = {'exact': [], 'related': []}
 
         for searcher in self.searchers:
             searcher_results = searcher.get_results()
@@ -44,11 +44,25 @@ class SearchBase(object):
             if not searcher_results:
                 continue
 
-            self.results.extend(searcher_results)
+            results['exact'].extend(searcher_results.get('exact') or [])
+            results['related'].extend(searcher_results.get('related') or [])
+            
+            
+        results['exact'] = list(
+            map(lambda x: json.loads(x.toJSON()), results['exact'])
+        )
         
-        results = list(
-            map(lambda x: json.loads(x.toJSON()), self.results)
+        results['related'] = list(
+            map(lambda x: json.loads(x.toJSON()), results['related'])
             )
+        
+        for result in results['exact']:
+            try:
+                results['related'].remove(result)
+            except:
+                ...
+
+        self.results = results
 
         return results
 
@@ -111,37 +125,79 @@ if True:
 
         def get_results(self):
             from sqlalchemy.sql import text
-
             from encyclopedia import db
+            from encyclopedia.models import Pyramid
             
+            exact = []
+            try:
+                exact = Pyramid.query.filter_by(sequence_number=int(self.search_ref.query)).all()
+            except ValueError:
+                ...
+            
+            related = []
             sql_ex = text('''
                 SELECT id FROM pyramid 
                 WHERE (CAST (pyramid.sequence_number AS text) LIKE '%%' || :seq_num || '%%') 
                 ORDER BY pyramid.sequence_number ASC 
                 LIMIT :limit
                 ''')
-            results = []
             
             with db.engine.connect() as conn:
                 op = conn.execute(sql_ex, seq_num=self.search_ref.query, limit=self.search_ref.limit)
 
-            results = self.get_pyramids_by_list_of_id(op.scalars().all())
-
-            return results
+            related = self.get_pyramids_by_list_of_id(op.scalars().all())
+            result = {
+                'exact': exact,
+                'related': related, 
+            }
+            return result
 
     class PyramidSearcherByGeneratingFunction(Searcher):
+
+        # sympify to always get the same (sympy) formula format
+        def prepare_string(self, s) -> str:
+            from sympy import sympify
+            try:
+                return str(sympify(s))
+            except:
+                return s
 
         def get_results(self):
             from encyclopedia.models import GeneratingFunction
             
-            return [gf.pyramid for gf in GeneratingFunction.query.msearch(self.search_ref.query, fields=['expression'], limit=self.search_ref.limit).all()]
+            query =  self.prepare_string(self.search_ref.query)
+            exact = [gf.pyramid for gf in GeneratingFunction.query.filter_by(expression=query).all()]
+            related = [gf.pyramid for gf in GeneratingFunction.query.msearch(query, fields=['expression'], limit=self.search_ref.limit).all()]
+            result = {
+                'exact': exact,
+                'related': related, 
+            }
+            return result
 
     class PyramidSearcherByExplicitFormula(Searcher):
+        
+        # sympify to always get the same (sympy) formula format
+        def prepare_string(self, s) -> str:
+            from sympy import sympify
+            try:
+                return str(sympify(s))
+            except:
+                return s
             
         def get_results(self):
             from encyclopedia.models import ExplicitFormula
+            from sympy import sympify
+            
+            query =  self.prepare_string(self.search_ref.query)
+            
+            exact = [ef.pyramid for ef in ExplicitFormula.query.filter_by(expression=query).all()]
+            related = [ef.pyramid for ef in ExplicitFormula.query.msearch(query, fields=['expression'], limit=self.search_ref.limit).all()]
+            result = {
+                'exact': exact,
+                'related': related, 
+            }
 
-            return [ef.pyramid for ef in ExplicitFormula.query.msearch(self.search_ref.query, fields=['expression'], limit=self.search_ref.limit).all()]
+            return result
         
     class PyramidSearcherByData(Searcher):
         # get_results() expects query to be 'x, x, x, x, x, x, x' (actually amount of spaces doesn't matter)
@@ -174,7 +230,7 @@ if True:
             
             results = self.get_pyramids_by_list_of_id(op.scalars().all())
 
-            return results
+            return {'related': results}
 
 # 
 # User Searchers
@@ -190,5 +246,12 @@ if True:
             from encyclopedia.models import User
 
             query = self.prepare_string(self.search_ref.query)
+            
+            exact = User.query.filter_by(username=query).all()
+            related = User.query.msearch(query, fields=['username'], limit=self.search_ref.limit).all()
+            result = {
+                'exact': exact,
+                'related': related, 
+            }
 
-            return User.query.msearch(query, fields=['username'], limit=self.search_ref.limit).all()
+            return result

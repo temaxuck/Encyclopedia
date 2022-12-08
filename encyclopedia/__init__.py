@@ -1,4 +1,4 @@
-import jwt
+# import jwt
 import redis
 from celery import Celery
 from config import Config
@@ -8,16 +8,12 @@ from flask_cors import CORS
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_msearch import Search
-from flask_redis import FlaskRedis
-from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect
-# from flask_mail import Mail
-
-from config import Config
-
 csrf = CSRFProtect()
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
+
+# from flask_mail import Mail
 
 
 db = SQLAlchemy()
@@ -34,22 +30,22 @@ login_manager.login_view = 'account.login'
 login_manager.login_message = 'Please, log in to access this page'
 login_manager.login_message_category = 'info'
 
-@login_manager.request_loader
-def load_user_from_request(request):
-    auth_headers = request.headers.get('Authorization', '').split()
-    if len(auth_headers) != 2:
-        return None
-    try:
-        token = auth_headers[1]
-        data = jwt.decode(token, current_app.config['SECRET_KEY'])
-        user = User.by_email(data['sub'])
-        if user:
-            return user
-    except jwt.ExpiredSignatureError:
-        return None
-    except (jwt.InvalidTokenError, Exception) as e:
-        return None
-    return None
+# @login_manager.request_loader
+# def load_user_from_request(request):
+#     auth_headers = request.headers.get('Authorization', '').split()
+#     if len(auth_headers) != 2:
+#         return None
+#     try:
+#         token = auth_headers[1]
+#         data = jwt.decode(token, current_app.config['SECRET_KEY'])
+#         user = User.by_email(data['sub'])
+#         if user:
+#             return user
+#     except jwt.ExpiredSignatureError:
+#         return None
+#     except (jwt.InvalidTokenError, Exception) as e:
+#         return None
+#     return None
 
 def create_app():
     app = Flask(__name__)

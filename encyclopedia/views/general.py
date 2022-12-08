@@ -4,41 +4,18 @@ from encyclopedia.search import DefaultSearch, PyramidDataSearch
 
 generalbp = Blueprint('general', __name__)
 
-POSTS_PER_PAGE = 20
-
-# @generalbp.after_request 
-# def after_request(response):
-#     response.headers.add('Content-Type', 'text/html')
-#     response.headers.add('Access-Control-Allow-Origin', '*')
-#     response.headers.add('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
-#     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-#     response.headers.add('Access-Control-Expose-Headers', 'Content-Type,Content-Length,Authorization,X-Pagination')
-# #     header = response.headers
-# #     header['Access-Control-Allow-Origin'] = '*'
-# #     # Other headers can be added here if needed
-#     return response
-
 @generalbp.route('/', methods=['GET'])
 def home():
+    return render_template('home.html')
 
-    page = request.args.get('page')
-    try:
-        page = int(page)
-    except:
-        page = 1
-    if not page:
-        page = 1
-    pyramid_list = Pyramid.query.order_by(Pyramid.sequence_number)
-    pyramids = pyramid_list[(page-1)*POSTS_PER_PAGE:(page)*POSTS_PER_PAGE]
-    
-    if not pyramids:
-        return redirect(url_for('general.home', page=1))
-    
-    pages_in_total = len(pyramid_list.all()) // POSTS_PER_PAGE
-    if len(pyramid_list.all()) % POSTS_PER_PAGE:
-        pages_in_total += 1
-        
-    return render_template('home.html', pyramids=pyramids, page=page, pages_in_total=pages_in_total)
+@generalbp.route('/about', methods=['GET'])
+def about():
+    return render_template('about.html')
+
+@generalbp.route('/book', methods=['GET'])
+def book():
+    return render_template('education.html')
+
 
 @generalbp.route('/not_found',  methods=['GET'])
 def not_found():
@@ -72,12 +49,12 @@ def search():
             
             results = search.search()
 
-            if not results:
+            if not (results['exact'] or results['related']):
                 return redirect(url_for("general.not_found", q=user_input))
 
             redis_client.set(f'{user_input}:{search_type}', json.dumps(results))
             redis_client.expire(user_input, 3600)
-            return render_template('search.html', results=results, q=user_input)
+            return render_template('search.html', related=results['related'], exact=results['exact'], q=user_input)
             
     flash('Something went wrong', 'danger')
     return redirect(url_for("general.home"))

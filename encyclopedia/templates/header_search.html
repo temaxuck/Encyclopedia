@@ -1,15 +1,10 @@
-<link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/header_search.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/header_search.css') }}" />
 <div class="search-div">
-    {% if g.search_form %}
-    <form
-        method="get"
-        class="search-form"
-        action="{{ url_for('general.search') }}">
+  {% if g.search_form %}
+  <form method="get" class="search-form" action="{{ url_for('general.search') }}">
 
-        <div class="search-wrapper">
-            <div 
-                class="input-wrapper" 
-                data-tooltip="
+    <div class="search-wrapper">
+      <div class="input-wrapper" data-tooltip="
 Default: 
     by pyramid's 
         sequence number, 
@@ -20,24 +15,21 @@ Default:
 By data:
     by pyramid's
          data table (which you can see on pyramid's page specifically).
-                " 
-                data-tooltip-location="bottom"
-                data-tooltip-additional-location="left"
-                data-tooltip-textalign="left">
-                
-                {{ g.search_form.search_type(class="search_type") }}
-               
-                {{ g.search_form.q(
-                    type="text", 
-                    class="question",
-                    placeholder="Search...",
-                    autocomplete="off") }}
+                " data-tooltip-location="bottom" data-tooltip-additional-location="left" data-tooltip-textalign="left">
 
-                <!-- </label> -->
-                <button type="submit" class="questionbtn" id="questionbtn"> <span class="material-icons">search</span> </button>
-            </div>
+        {{ g.search_form.search_type(class="search_type") }}
 
-        </div>
-    </form>
-    {% endif %}
+        {{ g.search_form.q(
+        type="text",
+        class="question",
+        placeholder="Search...",
+        autocomplete="off") }}
+
+        <!-- </label> -->
+        <button type="submit" class="questionbtn" id="questionbtn"> <span class="material-icons">search</span> </button>
+      </div>
+
+    </div>
+  </form>
+  {% endif %}
 </div>

@@ -1,14 +1,15 @@
 from encyclopedia.views import *
-from encyclopedia.forms import UploadPyramidForm, ConfirmPyramidDeletionForm, ExplicitFormulaSubform, RelationSubform, GeneratingFunctionSubform
+from encyclopedia.forms import UploadPyramidForm, ConfirmPyramidDeletionForm, RelationSubform, ExplicitFormulaSubform, GeneratingFunctionSubform
 
 pyramidbp = Blueprint('pyramid', __name__)
+POSTS_PER_PAGE = 20
 
-# @pyramidbp.after_request 
-# def after_request(response):
-#     header = response.headers
-#     header['Access-Control-Allow-Origin'] = '*'
-#     # Other headers can be added here if needed
-#     return response
+@pyramidbp.after_request 
+def after_request(response):
+    header = response.headers
+    header['Access-Control-Allow-Origin'] = '*'
+    # Other headers can be added here if needed
+    return response
 
 @pyramidbp.route('/<snid>', methods=['GET', 'POST'])
 def pyramid(snid: int):
@@ -35,6 +36,27 @@ def pyramid(snid: int):
         return render_template('page_not_found.html'), 403
 
     return render_template('pyramid.html', pyramid=pyramid, PyramidModel=Pyramid, deleteform=deleteform)
+
+@pyramidbp.route('/list', methods=['GET'])
+def pyramid_list():
+    page = request.args.get('page')
+    try:
+        page = int(page)
+    except:
+        page = 1
+    if not page:
+        page = 1
+    pyramid_list = Pyramid.query.order_by(Pyramid.sequence_number)
+    pyramids = pyramid_list[(page-1)*POSTS_PER_PAGE:(page)*POSTS_PER_PAGE]
+    
+    if not pyramids:
+        return redirect(url_for('general.home', page=1))
+    
+    pages_in_total = len(pyramid_list.all()) // POSTS_PER_PAGE
+    if len(pyramid_list.all()) % POSTS_PER_PAGE:
+        pages_in_total += 1
+        
+    return render_template('pyramid_list.html', pyramids=pyramids, page=page, pages_in_total=pages_in_total)
 
 
 @pyramidbp.route('/upload', methods=['POST', 'GET'])

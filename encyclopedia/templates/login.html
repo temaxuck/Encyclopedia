@@ -9,8 +9,7 @@
     {% if error %}
     <p class=error><strong>Error:</strong> {{ error }}
         {% endif %}
-    <form action="" method="post" class="form login-form" name="loginform">
-        {{ form.csrf_token() }}
+    <form action="" method="post" class="form login-form">
         {{ form.hidden_tag() }}
 
         <fieldset class="groups">
