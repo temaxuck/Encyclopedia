@@ -1,9 +1,42 @@
 {% extends 'base.html' %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='stylesheets/homestyle.css') }}"
-/>
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/homestyle.css') }}" />
 <title>Home</title>
 {% endblock %} {% block body %}
-<!-- TODO -->
+<div class="home">
+  <img class='image' width="250" height="150" src="../static/src/logo.svg" alt="pyramid">
+  <div class="search">
+    <h3>Найти пирамиду</h3>
+    {% include 'header_search.html' %}
+  </div>
+  <h2>На нашем сайте вы можете:</h2>
+  <div class="home_info">
+    <div class="container">
+      <h2>Просмотреть пирамиды</h2>
+      <a href="/pyramid/list">
+        <div>Перейти к пирамидам</div>
+        <span class="material-symbols-outlined">
+          arrow_forward
+        </span>
+      </a>
+    </div>
+    <div class="container">
+      <h2>Не знаете, для чего нужна данная энциклопедия?</h2>
+      <a href="/book">
+        <div>Перейти к методике использования</div>
+        <span class="material-symbols-outlined">
+          arrow_forward
+        </span>
+      </a>
+    </div>
+    <div class="container">
+      <h2>Узнать подробнее о создателях</h2>
+      <a href="/about">
+        <div>Посмотреть информацию</div>
+        <span class="material-symbols-outlined">
+          arrow_forward
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
 {% endblock %}

@@ -1,0 +1,43 @@
+#menu li {
+  margin-top: 10px;
+}
+
+.side_bar ol {
+  list-style-type: none;
+  margin: 0;
+  padding-inline-start: 20px;
+  list-style: none;
+  counter-reset: li;
+}
+
+#menu li:before {
+  counter-increment: li;
+  content: counters(li, ".") ". ";
+}
+
+.side_bar {
+  width: 300px;
+  height: 100vh;
+  padding-top: 30px;
+  padding-right: 30px;
+  overflow: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.side_bar::-webkit-scrollbar {
+  display: none;
+}
+
+.education {
+  text-decoration: none;
+  color: black;
+}
+
+.education:hover {
+  color: blue;
+}
