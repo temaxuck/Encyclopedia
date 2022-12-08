@@ -1,5 +1,5 @@
 from encyclopedia.views import *
-from encyclopedia.forms import UploadPyramidForm, ConfirmPyramidDeletionForm, RelationSubform, ExplicitFormulaSubform
+from encyclopedia.forms import UploadPyramidForm, ConfirmPyramidDeletionForm, RelationSubform, ExplicitFormulaSubform, GeneratingFunctionSubform
 
 pyramidbp = Blueprint('pyramid', __name__)
 POSTS_PER_PAGE = 20
@@ -196,7 +196,7 @@ def edit_pyramid(snid: int):
 
         for i in range(len(pyramid.generating_function) - 1):
             gf = pyramid.generating_function[i+1]
-            gform = GeneratingFunctionForm()
+            gform = GeneratingFunctionSubform()
             gform.f_name = gf.function_name
             gform.f_vars = gf.get_variables_as_str()
             gform.f_expr = gf.expression
