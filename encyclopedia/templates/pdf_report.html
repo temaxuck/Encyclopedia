@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" style="width: 100%; height: 100%">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pyramid #{{pyramid.sequence_number}}</title>
+  </head>
+  <body>
+    <header style="border-bottom: #333 1px solid">
+      <h1 style="color: #002a55">Online Encyclopedia of Number Pyramids</h1>
+    </header>
+    <main>
+      <div class="report-details" style="text-align: center">
+        <h2>Pyramid report</h2>
+      </div>
+
+      <h3>Sequence number</h3>
+      <pre>{{pyramid.sequence_number}}</pre>
+
+      <h3>Generating function</h3>
+      <pre>{{pyramid.gf_string}}</pre>
+
+      <h3>Explicit formula</h3>
+      <pre>{{pyramid.ef_string}}</pre>
+
+      {% set relations = pyramid.relations.all() %}
+      <h3>Relations</h3>
+      {% if relations %} {% for related_pyramid in relations %}
+      <pre> Pyramid #{{ related_pyramid.sequence_number }}: {{ pyramid.get_relation(related_pyramid.id)['tag'] }}</pre>
+      {% endfor %} {% else %}
+      <pre>No relations exist</pre>
+      {% endif %} {% set n = 7 %} {% set m = 7 %} {% set k = 1 %} {% set data =
+      pyramid.get_data_by_ef(n, m, k) %}
+      <table>
+        <h3>Data table</h3>
+        <tbody>
+          {% for i in range(n) %}
+          <tr>
+            {% for j in range(m) %}
+            <td>
+              <pre>{{ data[(i*n) + j] }}</pre>
+            </td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <h3>LaTeX</h3>
+      <pre>
+{{ pyramid.gf_latex.replace("$","") }}&#13;&#10;{{ pyramid.ef_latex.replace("$","") }}</pre
+      >
+
+      <h3>Maxima</h3>
+      <pre>{{ pyramid.gf_maxima }}&#13;&#10;{{ pyramid.ef_maxima }}</pre>
+    </main>
+  </body>
+</html>

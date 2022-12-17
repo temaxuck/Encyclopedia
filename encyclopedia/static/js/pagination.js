@@ -53,7 +53,7 @@ function display_results() {
         __results[i]["sequence_number"]
       }">
                         ${katex.renderToString(
-                          __results[i]["generating_function"].slice(3, -3),
+                          __results[i]["generating_function"].slice(2, -3),
                           {
                             delimiters: [
                               { left: "$$", right: "$$", display: true },

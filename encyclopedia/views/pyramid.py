@@ -49,14 +49,32 @@ def pyramid_list():
     pyramid_list = Pyramid.query.order_by(Pyramid.sequence_number)
     pyramids = pyramid_list[(page-1)*POSTS_PER_PAGE:(page)*POSTS_PER_PAGE]
     
-    if not pyramids:
-        return redirect(url_for('general.home', page=1))
+    # if not pyramids:
+    #     return redirect(url_for('general.home', page=1))
     
     pages_in_total = len(pyramid_list.all()) // POSTS_PER_PAGE
     if len(pyramid_list.all()) % POSTS_PER_PAGE:
         pages_in_total += 1
         
     return render_template('pyramid_list.html', pyramids=pyramids, page=page, pages_in_total=pages_in_total)
+
+@pyramidbp.route('/<snid>/pdf', methods=['GET'])
+def generate_pdf(snid: int):
+    import pdfkit
+    from flask import make_response
+    pyramid = Pyramid.query.filter_by(sequence_number=snid).first()
+    
+    if not pyramid:
+        return render_template('page_not_found.html'), 404
+    
+    to_send = render_template('pdf_report.html', pyramid=pyramid)
+    pdf = pdfkit.from_string(to_send, False)
+    
+    response = make_response(pdf)
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Contnent-Disposition'] = f'inline; filename=pyramid{pyramid.sequence_number}.pdf'
+    
+    return response
 
 
 @pyramidbp.route('/upload', methods=['POST', 'GET'])
@@ -132,6 +150,12 @@ def edit_pyramid(snid: int):
         return render_template('page_not_found.html'), 404
 
     if form.validate_on_submit():
+        try:
+            pyramid.sequence_number = int(form.sequenceNumber.data)
+        except Exception as E:
+            print(E)
+            flash('Something went wrong')
+        
         try:
             for i, gf in enumerate(form.generatingFunction):
                 isMain = False

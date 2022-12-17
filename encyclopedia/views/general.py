@@ -6,7 +6,7 @@ generalbp = Blueprint('general', __name__)
 
 @generalbp.route('/', methods=['GET'])
 def home():
-    return render_template('home.html')
+    return redirect(url_for("pyramid.pyramid_list"))
 
 @generalbp.route('/about', methods=['GET'])
 def about():
@@ -32,10 +32,11 @@ def search():
     search_type = '0' if search_type == None else search_type
 
     if user_input:
-        # try:
-        #     results = json.loads(redis_client.get(f'{user_input}:{search_type}'))
-        #     return render_template('search.html', results=results, q=user_input)
-        # except TypeError:
+        try:
+            results = json.loads(redis_client.get(f'{user_input}:{search_type}'))
+            print(redis_client.get(f'{user_input}:{search_type}'))
+            return render_template('search.html', results=results, q=user_input)
+        except TypeError:
             
             if search_type == '0':
                 search = DefaultSearch(db.session, user_input)

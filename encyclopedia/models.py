@@ -267,6 +267,19 @@ class Pyramid(db.Model):
 
         return latexrepr
 
+    @property
+    def gf_string(self):
+        strrepr = ''
+
+        if not self.generating_function:
+            return 'None'
+
+        for (loop, formula) in enumerate(self.generating_function):
+            strrepr += f'{formula.function_name}({formula.get_variables_as_str()}) = {formula.expression}'
+            strrepr += '.' if loop == len(self.generating_function) - 1 else ';'
+
+        return strrepr
+    
     # Explicit formula methods
     def add_explicit_formula(self, variables: str, expression: str, limitation: str =''):
         formula = ExplicitFormula(variables, expression, limitation)
@@ -314,6 +327,22 @@ class Pyramid(db.Model):
             latexrepr = 'None'
         
         return latexrepr
+    
+    @property
+    def ef_string(self):
+        strrepr = ''
+
+        if not self.explicit_formula:
+            return 'None'
+
+        for (loop, formula) in enumerate(self.explicit_formula):
+            strrepr += f'{formula.function_name}({formula.get_variables_as_str()}) = {formula.expression}'
+            if lim := formula.limitation:
+                strrepr += f' {lim}'
+
+            strrepr += '.' if loop == len(self.explicit_formula) - 1 else ';'
+
+        return strrepr
     
     @property
     def gf_maxima(self):

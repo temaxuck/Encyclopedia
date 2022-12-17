@@ -57,7 +57,7 @@
     {% if right_b > pages_in_total %}
     {% set right_b = pages_in_total %}    
     {% endif %}
-    {% if pages_in_total != 1 %}
+    {% if pages_in_total > 0 %}
     <div class="nav_wrapper">
         <div class="page_nav textlinks">
             <span>Page:</span>

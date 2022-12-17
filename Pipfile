@@ -40,6 +40,7 @@ flask-cors = "*"
 celery = "*"
 flask-restful = "*"
 colorama = "*"
+pdfkit = "*"
 
 [dev-packages]
 
