@@ -134,7 +134,7 @@
       <div class="btns">
         {% if current_user.is_authenticated %} {% if current_user.moderator %}
         <a href="{{ url_for('pyramid.upload_pyramid') }}" class="link">
-          Upload pyramid
+          {{ _('Upload pyramid') }}
         </a>
         {% endif %}
 
@@ -151,10 +151,17 @@
             class="profile_img"
           />
         </a>
-        <a href="{{ url_for('account.logout')}}" class="link logout">Log out</a>
+
+        <a href="{{ url_for('account.logout')}}" class="link logout"
+          >{{ _('Log out') }}</a
+        >
         {% else %}
-        <a href="{{ url_for('account.login')}}" class="link login">Log in</a>
-        <a href="{{ url_for('account.signup')}}" class="link signup">Sign up</a>
+        <a href="{{ url_for('account.login')}}" class="link login"
+          >{{ _('Log in') }}</a
+        >
+        <a href="{{ url_for('account.signup')}}" class="link signup"
+          >{{ _('Sign up') }}</a
+        >
         {% endif %}
       </div>
     </header>
@@ -168,18 +175,39 @@
 
     <footer class="footer">
       <ul class="footer_menu">
-        <li><a href="/" title="Главная">Главная</a></li>
-        <li><a href="/pyramid/list" title="Пирамиды">Пирамиды</a></li>
+        <li><a href="/" title="{{ _('Home') }}"> {{ _('Home') }}</a></li>
         <li>
-          <a href="/book" title="Методика использования"
-            >Методика использования</a
+          <a href="/pyramid/list" title="{{ _('Pyramid list') }}"
+            >{{ _('Pyramid list') }}</a
           >
         </li>
-        <li><a href="/about" title="О проекте">О проекте</a></li>
+        <li>
+          <a href="/book" title="{{ _('Application') }}">
+            {{ _('Application') }}
+          </a>
+        </li>
+        <li><a href="/about" title="{{ _('About') }}">{{ _('About') }}</a></li>
+        <li id="choose-language-item">
+          {% if g.choose_language_form %}
+
+          <form method="GET" action="/choose_language">
+            <fieldset style="border: none">
+              <label for="choose-language">{{ _('Interface language') }}</label>
+              {{ g.choose_language_form.language(style=" background: #1f1f1f;
+              border: 1px solid rgba(60, 66, 87, 0.16); border-radius: 5px;
+              padding: 5px; margin-left: 10px; justify-content: center;
+              align-items: center; text-align: center; font-size: 16px;
+              font-family: Jura; color: #cacaca; ",
+              onchange="this.form.submit()") }}
+            </fieldset>
+          </form>
+
+          {% endif %}
+        </li>
       </ul>
       <div class="footer_info">
-        © 2021-2022 Томский Государственный Университет Систем Управления и
-        Радиоэлектроники
+        © 2021-{{ now.year }} {{ _('Tomsk State University of Control Systems
+        and Radioelectronics') }}
       </div>
     </footer>
   </body>

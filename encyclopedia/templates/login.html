@@ -1,44 +1,48 @@
-{% extends 'base.html' %}
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/forms__style.css') }}" />
+{% extends 'base.html' %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static',filename='stylesheets/forms__style.css') }}"
+/>
 <title>Log In</title>
-{% endblock %} {% block header %}
-{% include 'header_search.html' %}
-{% endblock %} {% block body %}
+{% endblock %} {% block header %} {% include 'header_search.html' %} {% endblock
+%} {% block body %}
 <main>
-    {% if error %}
-    <p class=error><strong>Error:</strong> {{ error }}
-        {% endif %}
-    <form action="" method="post" class="form login-form">
-        {{ form.hidden_tag() }}
+  {% if error %}
+  <p class="error">
+    <strong>{{ _('Error') }}:</strong> {{ error }} {% endif %}
+  </p>
 
-        <fieldset class="groups">
-            <div class="form-group title">Log In</div>
-            <div class="form-group">
-                {{ form.email.label(class="groupelement-label") }}
-                {{ form.email(class="groupelement-input") }}
-            </div>
-            <div class="form-group">
-                {{ form.password.label(class="groupelement-label") }}
-                {{ form.password(class="groupelement-input", autocomplete="off") }}
-            </div>
+  <form action="" method="post" class="form login-form">
+    {{ form.hidden_tag() }}
 
-            <div class="form-group remember">
-                {{ form.remember_me(class="remember_me-input") }}
-                {{ form.remember_me.label(class="remember_me-label") }}
-            </div>
+    <fieldset class="groups">
+      <div class="form-group title">{{ _('Log in') }}</div>
+      <div class="form-group">
+        {{ form.email.label(class="groupelement-label") }} {{
+        form.email(class="groupelement-input") }}
+      </div>
+      <div class="form-group">
+        {{ form.password.label(class="groupelement-label") }} {{
+        form.password(class="groupelement-input", autocomplete="off") }}
+      </div>
 
-            <div class="form-group form-submit">
-                {{ form.submit(class="sumbitbtn groupelement-input growable") }}
-            </div>
-        </fieldset>
+      <div class="form-group remember">
+        {{ form.remember_me(class="remember_me-input") }} {{
+        form.remember_me.label(class="remember_me-label") }}
+      </div>
 
-
-    </form>
-    <div class="already">
-        <small class="">
-            Don't have an account? <a href="{{ url_for('account.signup') }}" class="signlink">Sign up</a> 
-        </small>
-    </div>
+      <div class="form-group form-submit">
+        {{ form.submit(class="sumbitbtn groupelement-input growable") }}
+      </div>
+    </fieldset>
+  </form>
+  <div class="already">
+    <small class="">
+      {{ _('Don\'t have an account?') }}
+      <a href="{{ url_for('account.signup') }}" class="signlink"
+        >{{ _('Sign up') }}</a
+      >
+    </small>
+  </div>
 </main>
 {% endblock %}

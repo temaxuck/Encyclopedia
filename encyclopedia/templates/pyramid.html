@@ -17,10 +17,10 @@
       href="{{ url_for('pyramid.edit_pyramid', snid=pyramid.sequence_number) }}"
       class="link edit_pyramid"
     >
-      Edit pyramid
+      {{ _('Edit pyramid') }}
     </a>
     <a onclick="show_modal('#deletion_confirmation')" class="link danger-btn">
-      Delete pyramid
+      {{ _('Delete pyramid') }}
     </a>
   </div>
 
@@ -35,29 +35,31 @@
         > 0 %}
         <a
           href="{{ url_for('pyramid.pyramid', snid=pyramid.sequence_number-1) }}"
-          >Pyramid #{{ pyramid.sequence_number - 1 }}</a
+          >{{ _('Pyramid') }} #{{ pyramid.sequence_number - 1 }}</a
         >
         {% endif %}
       </div>
-      <span class="pnum"> Pyramid #{{ pyramid.sequence_number }} </span>
+      <span class="pnum">
+        {{ _('Pyramid') }} #{{ pyramid.sequence_number }}
+      </span>
       <div class="textlinks nav">
         {% if
         PyramidModel.query.filter_by(sequence_number=pyramid.sequence_number+1).count()
         > 0 %}
         <a
           href="{{ url_for('pyramid.pyramid', snid=pyramid.sequence_number+1) }}"
-          >Pyramid #{{ pyramid.sequence_number + 1 }}</a
+          >{{ _('Pyramid') }} #{{ pyramid.sequence_number + 1 }}</a
         >
         {% endif %}
       </div>
     </div>
-    <span class="title"> Generating function </span>
+    <span class="title"> {{ _('Generating function') }} </span>
     <div class="latex">{{ pyramid.gf_latex }}</div>
   </div>
 
   <div class="content-wrapper">
     <!-- Explicit Formula -->
-    <span class="title"> Explicit formula </span>
+    <span class="title"> {{ _('Explicit formula') }} </span>
     <div class="latex">{{ pyramid.ef_latex }}</div>
   </div>
 
@@ -66,7 +68,7 @@
     pyramid.get_data_by_ef(n, m, k) %}
     <table>
       <caption>
-        Data table
+        {{ _('Data table') }}
       </caption>
       <tbody>
         {% for i in range(n) %}
@@ -81,13 +83,13 @@
   </div>
 
   <div class="content-wrapper">
-    <div class="title">Related</div>
+    <div class="title">{{ _('Related') }}</div>
     <div class="textlinks">
       {% for related_pyramid in pyramid.relations.all() %}
       <a
         href="{{ url_for('pyramid.pyramid', snid=related_pyramid.sequence_number) }}"
       >
-        Pyramid #{{ related_pyramid.sequence_number }}: {{
+        {{ _('Pyramid') }} #{{ related_pyramid.sequence_number }}: {{
         pyramid.get_relation(related_pyramid.id)['tag'] }}
       </a>
       <br />
@@ -96,14 +98,14 @@
   </div>
 
   <div class="content-wrapper">
-    <div class="title">Export</div>
+    <div class="title">{{ _('Export') }}</div>
     <div class="exportbtn-wrapper">
       <button
         class="exportbtn"
         id="maximabtn"
         onclick="show_modal('#maximacode')"
       >
-        Export as Maxima
+        {{ _('Export as Maxima') }}
       </button>
       <!-- <button class="exportbtn" id="mathematicabtn" onclick="show_modal('#mathematicacode')">Export as Mathematica</button> -->
       <button
@@ -111,7 +113,7 @@
         id="latexbtn"
         onclick="show_modal('#latexcode')"
       >
-        Export as LaTeX
+        {{ _('Export as LaTeX') }}
       </button>
 
       <!-- Modals -->
@@ -120,7 +122,7 @@
         <!-- LaTeX -->
         <div class="modal-wrapper">
           <div class="modal-header">
-            <div class="title">Export as LaTeX</div>
+            <div class="title">{{ _('Export as LaTeX') }}</div>
             <div class="closebtn">
               <span class="material-icons">close</span>
             </div>
@@ -129,7 +131,7 @@
 {{ pyramid.gf_latex.replace("$","") }}&#13;&#10;{{ pyramid.ef_latex.replace("$","") }}</textarea
           >
           <div class="exportcopybtn-wrapper">
-            <button class="copybtn" onclick="copy()">Copy</button>
+            <button class="copybtn" onclick="copy()">{{ _('Copy') }}</button>
           </div>
         </div>
       </div>
@@ -138,7 +140,7 @@
         <!-- LaTeX -->
         <div class="modal-wrapper">
           <div class="modal-header">
-            <div class="title">Export as Maxima</div>
+            <div class="title">{{ _('Export as Maxima') }}</div>
             <div class="closebtn">
               <span class="material-icons">close</span>
             </div>
@@ -147,7 +149,7 @@
 {{ pyramid.gf_maxima }}&#13;&#10;{{ pyramid.ef_maxima }}</textarea
           >
           <div class="exportcopybtn-wrapper">
-            <button class="copybtn" onclick="copy()">Copy</button>
+            <button class="copybtn" onclick="copy()">{{ _('Copy') }}</button>
           </div>
         </div>
       </div>
@@ -160,14 +162,14 @@
         <!-- Confirm deletion -->
         <div class="modal-wrapper">
           <div class="modal-header">
-            <div class="title">Delete confirmation</div>
+            <div class="title">{{ _('Confirm deletion') }}</div>
             <div class="closebtn">
               <span class="material-icons">close</span>
             </div>
           </div>
           <div class="modal-body">
             <span
-              >Are you sure, you want to delete Pyramid #{{
+              >{{ _('Are you sure, you want to delete Pyramid') }} #{{
               pyramid.sequence_number }}?</span
             >
           </div>
@@ -176,7 +178,7 @@
             {{ deleteform.hidden_tag() }}
             <div class="btns align-flex-end">
               <!-- <button class="link danger-btn" type="submit">Delete</button> -->
-              <a class="link cancelbtn" id="cancel">Cancel</a>
+              <a class="link cancelbtn" id="cancel">{{ _('Cancel') }}</a>
               {{ deleteform.submit(class="sumbitbtn groupelement-input
               danger-btn") }}
             </div>

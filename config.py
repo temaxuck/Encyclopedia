@@ -38,6 +38,15 @@ class Config(object):
         'pool_timeout': 50
         }
     
+    BABEL_DEFAULT_LOCALE = 'en'
+    LANGUAGES = {
+        'en': 'English',
+        'ru': 'Русский'
+    }
+    
+    SESSION_COOKIE_SAMESITE='None'
+    SESSION_COOKIE_SECURE='True'
+    
     MAIL_SERVER ='smtp.gmail.com'
     MAIL_PORT = 465
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')

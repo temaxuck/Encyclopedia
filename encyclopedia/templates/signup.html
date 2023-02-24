@@ -1,82 +1,78 @@
-{% extends 'base.html' %}
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static',filename='stylesheets/forms__style.css') }}"/>
+{% extends 'base.html' %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static',filename='stylesheets/forms__style.css') }}"
+/>
 <title>Sign up</title>
-{% endblock %} {% block header %} 
-{% include 'header_search.html' %}
-{% endblock %} {% block body %}
+{% endblock %} {% block header %} {% include 'header_search.html' %} {% endblock
+%} {% block body %}
 <main>
-    <form action="" method="post" class="form signup-form">
-        {{ form.hidden_tag() }}
-        
-        <fieldset class="groups">
-            <div class="title">Sign up</div>
-            <div class="form-group">
-                {{ form.username.label(class="groupelement-label") }}
-                {% if form.username.errors %}
-                    {{ form.username(class="groupelement-input invalid") }}
+  <form action="" method="post" class="form signup-form">
+    {{ form.hidden_tag() }}
 
-                    <div class="invalid-feedback">
-                        {% for error in form.username.errors%}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
+    <fieldset class="groups">
+      <div class="title">{{ _('Sign up') }}</div>
+      <div class="form-group">
+        {{ form.username.label(class="groupelement-label") }} {% if
+        form.username.errors %} {{ form.username(class="groupelement-input
+        invalid") }}
 
-                {% else %}
-                    {{ form.username(class="groupelement-input") }}
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {{ form.email.label(class="groupelement-label") }}
-                {% if form.email.errors %}
-                    {{ form.email(class="groupelement-input invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.email.errors%}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.email(class="groupelement-input") }}
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {{ form.password.label(class="groupelement-label") }}
-                {% if form.password.errors %}
-                    {{ form.password(class="groupelement-input invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.password.errors%}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.password(class="groupelement-input") }}
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {{ form.confirm_password.label(class="groupelement-label") }}
-                {% if form.confirm_password.errors %}
-                    {{ form.confirm_password(class="groupelement-input invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.confirm_password.errors%}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.confirm_password(class="groupelement-input") }}
-                {% endif %}
-            </div>
-            
-            <div class="form-group form-submit">
-                {{ form.submit(class="sumbitbtn groupelement-input growable") }}
-            </div>
-        </fieldset>
-        
-    </form>
+        <div class="invalid-feedback">
+          {% for error in form.username.errors%}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
 
-    <div class="already">
-        <small class="">
-            Already have an account? <a href="{{ url_for('account.login') }}" class="signlink">Log in</a> 
-        </small>
-    </div>
+        {% else %} {{ form.username(class="groupelement-input") }} {% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.email.label(class="groupelement-label") }} {% if
+        form.email.errors %} {{ form.email(class="groupelement-input invalid")
+        }}
+        <div class="invalid-feedback">
+          {% for error in form.email.errors%}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{ form.email(class="groupelement-input") }} {% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.password.label(class="groupelement-label") }} {% if
+        form.password.errors %} {{ form.password(class="groupelement-input
+        invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.password.errors%}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{ form.password(class="groupelement-input") }} {% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.confirm_password.label(class="groupelement-label") }} {% if
+        form.confirm_password.errors %} {{
+        form.confirm_password(class="groupelement-input invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.confirm_password.errors%}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %} {{ form.confirm_password(class="groupelement-input") }} {%
+        endif %}
+      </div>
+
+      <div class="form-group form-submit">
+        {{ form.submit(class="sumbitbtn groupelement-input growable") }}
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="already">
+    <small class="">
+      {{ _('Already have an account') }}?
+      <a href="{{ url_for('account.login') }}" class="signlink"
+        >{{ _('Log in') }}</a
+      >
+    </small>
+  </div>
 </main>
 {% endblock %}

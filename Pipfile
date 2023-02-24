@@ -41,6 +41,7 @@ flask-cors = "*"
 flask-restful = "*"
 pyjwt = "*"
 celery = "*"
+flask-babel = "*"
 
 [dev-packages]
 

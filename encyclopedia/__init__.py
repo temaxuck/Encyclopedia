@@ -2,7 +2,7 @@
 import redis
 from celery import Celery
 from config import Config
-from flask import Flask, redirect, render_template, url_for
+from flask import Flask, redirect, render_template, url_for, session, request, flash
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_login import LoginManager
@@ -12,6 +12,7 @@ from flask_wtf.csrf import CSRFProtect
 csrf = CSRFProtect()
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
+from flask_babel import Babel
 
 # from flask_mail import Mail
 
@@ -24,6 +25,7 @@ migrations = Migrate()
 celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
 redis_client = redis.Redis(host='localhost', port=6379, db=0)
 redis_client_api = redis.Redis(host='localhost', port=6379, db=1)
+babel = Babel()
 
 login_manager = LoginManager()
 login_manager.login_view = 'account.login'
@@ -47,6 +49,14 @@ login_manager.login_message_category = 'info'
 #         return None
 #     return None
 
+
+def get_locale():
+    if locale := session.get('locale'):
+        return locale if locale in Config.LANGUAGES else request.accept_languages.best_match(['ru', 'en'])
+    
+    return request.accept_languages.best_match(['ru', 'en'])
+
+
 def create_app():
     app = Flask(__name__)
     app.app_context().push()
@@ -62,6 +72,7 @@ def create_app():
     # redis_client.init_app(app)
     # redis_client_api.init_app(app)
     
+    babel.init_app(app, locale_selector=get_locale)
     # See errors.py to figure out why we handle it at this level
     @app.errorhandler(404)
     def page_not_found(e):
