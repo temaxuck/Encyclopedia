@@ -2,7 +2,7 @@
 import redis
 from celery import Celery
 from config import Config
-from flask import Flask, redirect, render_template, url_for, session, request, flash
+from flask import Flask, redirect, url_for, session, request
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_login import LoginManager
@@ -10,7 +10,6 @@ from flask_migrate import Migrate
 from flask_msearch import Search
 from flask_wtf.csrf import CSRFProtect
 csrf = CSRFProtect()
-from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_babel import Babel
 

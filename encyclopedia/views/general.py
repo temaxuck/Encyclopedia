@@ -6,7 +6,6 @@ generalbp = Blueprint('general', __name__)
 
 @generalbp.route('/', methods=['GET'])
 def home():
-    flash(request.cookies.get('session'))
     return render_template('home.html')
 
 @generalbp.route('/about', methods=['GET'])
