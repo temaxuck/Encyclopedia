@@ -1,13 +1,19 @@
 {% extends 'base.html' %} {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/aboutstyle.css') }}" />
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='stylesheets/aboutstyle.css') }}"
+/>
 <title>About</title>
 {% endblock %} {% block body %}
 
 <body>
   <div class="lists">
-    В разработке данного сайта и его содержимого принимают участие:<br>
-    Сотрудники Лаборатории алгоритмов и технологий исследования дискретных структур<br>
-    Студенты ТУСУР - участники Группового проектного обучения
+    {{ _('Project team') }} :<br />
+    <!--  -->
+    {{ _('"Laboratoriya algoritmov i tekhnologij issledovaniya diskretnyh struktur" stuff') }}<br />
+    <!--  -->
+    {{ _('TUSUR students - group project training participants') }}
+    <!-- Студенты ТУСУР - участники Группового проектного обучения -->
   </div>
   <div class="content">
     <div class="image">
@@ -16,26 +22,62 @@
       </div>
     </div>
     <div class="textAboutUs">
-      <strong>Лаборатория алгоритмов и технологий исследования дискретных структур (ЛАТИДС) кафедры КСУП</strong><br>
-      Ведущий научный сотрудник<br>
-      <strong>Кручинин Дмитрий Владимирович</strong><br>
-      <i>Кандидат физико-математических наук<br>
-        Заведующий лабораторией</i><br>
+      <strong>
+        {{ _('"Laboratoriya algoritmov i tekhnologij issledovaniya diskretnyh struktur" (LATIDS) of the Faculty of "KSUP"') }}
+        <!-- Лаборатория алгоритмов и технологий исследования дискретных структур (ЛАТИДС) кафедры КСУП  --> </strong
+      ><br />
+      {{ _('Leading Researcher') }}
+      <!-- Ведущий научный сотрудник -->
+      <br />
+      <strong>
+        {{ _('Kruchinin Dmitry Vladimirovich') }}
+        <!-- Кручинин Дмитрий Владимирович --> </strong
+      ><br />
+      <i>
+        {{ _('Candidate of Physical and Mathematical Sciences') }}
+        <!-- Кандидат физико-математических наук -->
+        <br />
+        {{ _('Head of the Laboratory') }}
+        <!-- Заведующий лабораторией --> </i
+      ><br />
     </div>
   </div>
   <div class="lists">
     <div>
-      <strong>Сотрудники ЛАТИДС:</strong><br>
-      Кручинин Владимир Викторович - <i>доктор технических наук, доцент</i><br>
-      Перминова Мария Юрьевна - <i>кандидат технических наук, старший научный сотрудник</i><br>
-      Шабля Юрий Васильевич - <i>кандидат технических наук, старший научный сотрудник</i><br>
+      <strong>
+        {{ _('LATIDS stuff') }} :
+        <!-- Сотрудники ЛАТИДС: --> </strong
+      ><br />
+      {{ _('Kruchinin Vladimir Viktorovich') }}
+      <!-- Кручинин Владимир Викторович  -->
+      -
+      <i>
+        {{ _('Doctor of Technical Sciences, Associate Professor') }}
+        <!-- доктор технических наук, доцент --> </i
+      ><br />
+
+      {{ _('Perminova Maria Yurievna') }}
+      <!-- Перминова Мария Юрьевна -->
+      -
+      <i>
+        {{ _('Candidate of Technical Sciences, Senior Researcher') }}
+        <!-- кандидат технических наук, старший научный сотрудник --> </i
+      ><br />
+      {{ _('Shablya Yuri Vasilyevich') }} -
+      <i>
+        {{ _('Candidate of Technical Sciences, Senior Researcher') }}
+        <!-- кандидат технических наук, старший научный сотрудник --> </i
+      ><br />
     </div>
     <div>
-      <strong>Группа ГПО:</strong><br>
-      Алина Полина Сергеевна<br>
-      Дарижапов Артём Батоевич<br>
-      Концевая Кристина Анатольевна<br>
-      Корнеева Юлия Андреевна
+      <strong>
+        {{ _('Group Project Training participants') }} :
+        <!-- Группа ГПО: --> </strong
+      ><br />
+      {{ _('Alina Polina Sergeevna') }}<br />
+      {{ _('Darizhapov Artem Batoevich') }}<br />
+      {{ _('Kontsevaya Kristina Anatolyevna') }}<br />
+      {{ _('Korneeva Yulia Andreevna') }}
     </div>
   </div>
 </body>

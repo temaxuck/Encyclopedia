@@ -40,10 +40,9 @@ flask-cors = "*"
 celery = "*"
 flask-restful = "*"
 colorama = "*"
+flask-babel = "*"
 
 [dev-packages]
 
 [requires]
-
 python_version = "3.9"
-

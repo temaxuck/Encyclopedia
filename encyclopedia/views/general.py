@@ -58,3 +58,14 @@ def search():
             
     flash('Something went wrong', 'danger')
     return redirect(url_for("general.home"))
+
+@generalbp.route('/choose_language', methods=['GET'])
+def choose_language():
+    if not g.choose_language_form.validate():
+        return redirect(request.referrer)
+    
+    chosen_language = g.choose_language_form.language.data
+    session['locale'] = chosen_language
+    
+    return redirect(request.referrer)
+    

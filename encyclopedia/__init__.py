@@ -2,7 +2,7 @@
 import redis
 from celery import Celery
 from config import Config
-from flask import Flask, redirect, render_template, url_for
+from flask import Flask, redirect, render_template, url_for, session, request, g
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_login import LoginManager
@@ -10,9 +10,9 @@ from flask_migrate import Migrate
 from flask_msearch import Search
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
+from flask_babel import Babel
 
 # from flask_mail import Mail
-
 
 db = SQLAlchemy()
 hasher = Bcrypt()
@@ -22,6 +22,7 @@ migrations = Migrate()
 celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
 redis_client = redis.Redis(host='localhost', port=6379, db=0)
 redis_client_api = redis.Redis(host='localhost', port=6379, db=1)
+babel = Babel()
 
 login_manager = LoginManager()
 login_manager.login_view = 'account.login'
@@ -45,25 +46,32 @@ login_manager.login_message_category = 'info'
 #         return None
 #     return None
 
+
+def get_locale():
+    if locale := session.get('locale'):
+        return locale if locale in Config.LANGUAGES else request.accept_languages.best_match(['ru', 'en'])
+    
+    return request.accept_languages.best_match(['ru', 'en'])
+
+
 def create_app():
     app = Flask(__name__)
     app.app_context().push()
     app.config.from_object(Config)
     db.init_app(app)
-    # mail.init_app(app)
     hasher.init_app(app)
     migrations.init_app(app, db, render_as_batch=True)
     login_manager.init_app(app)
     search.init_app(app)
     celery.conf.update(app.config)
-    # redis_client.init_app(app)
-    # redis_client_api.init_app(app)
+    # mail.init_app(app)
     
     # See errors.py to figure out why we handle it at this level
     @app.errorhandler(404)
     def page_not_found(e):
         return redirect(url_for('errors.error404'))
 
+    babel.init_app(app, locale_selector=get_locale)
     # Register blueprints
     from encyclopedia.views.account import accountbp
     from encyclopedia.views.api import apibp
@@ -81,4 +89,5 @@ def create_app():
     CORS(accountbp)
     CORS(pyramidbp)
 
+    
     return app

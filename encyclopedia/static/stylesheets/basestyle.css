@@ -47,7 +47,7 @@ header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-header>span {
+header > span {
   color: rgb(140, 193, 193);
   padding: 0;
 }
@@ -63,7 +63,7 @@ header>span {
   font-size: 20px;
 }
 
-.header_name>a {
+.header_name > a {
   font-family: "Jura", sans-serif;
   text-decoration: none;
   color: #002a55;
@@ -148,7 +148,7 @@ footer {
   background-color: rgba(0, 118, 239, 0.15);
 }
 
-.alert>.closebtn {
+.alert > .closebtn {
   background: none;
   border: none;
   width: 20px;
@@ -210,18 +210,18 @@ footer {
   height: 40px;
 }
 
-.account>img {
+.account > img {
   border-radius: 3px;
 }
 
 /* textlinks */
 
-.textlinks>a {
+.textlinks > a {
   text-decoration: none;
   color: #2390ff;
 }
 
-.textlinks>a:hover {
+.textlinks > a:hover {
   color: #005fc0;
 }
 
@@ -253,7 +253,7 @@ footer {
   transition: opacity 0.2s ease-in;
 }
 
-.go-top>span {
+.go-top > span {
   color: #333;
   display: inline-block;
 }
@@ -403,6 +403,13 @@ section.loader_section {
 
 .footer_menu li:not(:first-child) {
   border-left: 1px #777 solid;
+}
+
+.footer_menu > li#choose-language-item {
+  position: absolute;
+  border-left: none;
+  right: 5vw;
+  margin-top: 10px;
 }
 
 .footer_menu a {

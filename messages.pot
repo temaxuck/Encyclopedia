@@ -1,0 +1,413 @@
+# Translations template for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-02-22 16:12+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.11.0\n"
+
+#: encyclopedia/forms.py:12
+msgid "Username or Email"
+msgstr ""
+
+#: encyclopedia/forms.py:13 encyclopedia/forms.py:21
+msgid "Password"
+msgstr ""
+
+#: encyclopedia/forms.py:14
+msgid "Remember me"
+msgstr ""
+
+#: encyclopedia/forms.py:15 encyclopedia/templates/base.html:160
+#: encyclopedia/templates/login.html:19 encyclopedia/templates/signup.html:73
+msgid "Log in"
+msgstr ""
+
+#: encyclopedia/forms.py:19 encyclopedia/forms.py:38
+msgid "Username"
+msgstr ""
+
+#: encyclopedia/forms.py:20 encyclopedia/forms.py:39
+msgid "E-mail"
+msgstr ""
+
+#: encyclopedia/forms.py:23
+msgid "Confirm password"
+msgstr ""
+
+#: encyclopedia/forms.py:23
+msgid "Doesn't match password"
+msgstr ""
+
+#: encyclopedia/forms.py:25 encyclopedia/templates/base.html:163
+#: encyclopedia/templates/login.html:43 encyclopedia/templates/signup.html:14
+msgid "Sign up"
+msgstr ""
+
+#: encyclopedia/forms.py:30 encyclopedia/forms.py:48
+msgid "User with such username already exists."
+msgstr ""
+
+#: encyclopedia/forms.py:35 encyclopedia/forms.py:54
+msgid "User with such email already exists."
+msgstr ""
+
+#: encyclopedia/forms.py:39
+msgid "Invalid Email"
+msgstr ""
+
+#: encyclopedia/forms.py:40
+msgid "Update profile picture"
+msgstr ""
+
+#: encyclopedia/forms.py:42
+msgid "Save profile"
+msgstr ""
+
+#: encyclopedia/forms.py:57
+msgid "Function name"
+msgstr ""
+
+#: encyclopedia/forms.py:58
+msgid "Function variables"
+msgstr ""
+
+#: encyclopedia/forms.py:59 encyclopedia/forms.py:62
+msgid "Expression"
+msgstr ""
+
+#: encyclopedia/forms.py:63
+msgid "Condition"
+msgstr ""
+
+#: encyclopedia/forms.py:99 encyclopedia/templates/pyramid.html:23
+msgid "Delete pyramid"
+msgstr ""
+
+#: encyclopedia/forms.py:103
+msgid "Default"
+msgstr ""
+
+#: encyclopedia/forms.py:104
+msgid "By data"
+msgstr ""
+
+#: encyclopedia/forms.py:107
+msgid "Search"
+msgstr ""
+
+#: encyclopedia/forms.py:108
+msgid "Search type"
+msgstr ""
+
+#: encyclopedia/templates/about.html:11
+msgid "Project team"
+msgstr ""
+
+#: encyclopedia/templates/about.html:13
+msgid ""
+"\"Laboratoriya algoritmov i tekhnologij issledovaniya diskretnyh "
+"struktur\" stuff"
+msgstr ""
+
+#: encyclopedia/templates/about.html:15
+msgid "TUSUR students - group project training participants"
+msgstr ""
+
+#: encyclopedia/templates/about.html:26
+msgid ""
+"\"Laboratoriya algoritmov i tekhnologij issledovaniya diskretnyh "
+"struktur\" (LATIDS) of the Faculty of \"KSUP\""
+msgstr ""
+
+#: encyclopedia/templates/about.html:29
+msgid "Leading Researcher"
+msgstr ""
+
+#: encyclopedia/templates/about.html:33
+msgid "Kruchinin Dmitry Vladimirovich"
+msgstr ""
+
+#: encyclopedia/templates/about.html:37
+msgid "Candidate of Physical and Mathematical Sciences"
+msgstr ""
+
+#: encyclopedia/templates/about.html:40
+msgid "Head of the Laboratory"
+msgstr ""
+
+#: encyclopedia/templates/about.html:48
+msgid "LATIDS stuff"
+msgstr ""
+
+#: encyclopedia/templates/about.html:51
+msgid "Kruchinin Vladimir Viktorovich"
+msgstr ""
+
+#: encyclopedia/templates/about.html:55
+msgid "Doctor of Technical Sciences, Associate Professor"
+msgstr ""
+
+#: encyclopedia/templates/about.html:59
+msgid "Perminova Maria Yurievna"
+msgstr ""
+
+#: encyclopedia/templates/about.html:63 encyclopedia/templates/about.html:68
+msgid "Candidate of Technical Sciences, Senior Researcher"
+msgstr ""
+
+#: encyclopedia/templates/about.html:66
+msgid "Shablya Yuri Vasilyevich"
+msgstr ""
+
+#: encyclopedia/templates/about.html:74
+msgid "Group Project Training participants"
+msgstr ""
+
+#: encyclopedia/templates/about.html:77
+msgid "Alina Polina Sergeevna"
+msgstr ""
+
+#: encyclopedia/templates/about.html:78
+msgid "Darizhapov Artem Batoevich"
+msgstr ""
+
+#: encyclopedia/templates/about.html:79
+msgid "Kontsevaya Kristina Anatolyevna"
+msgstr ""
+
+#: encyclopedia/templates/about.html:80
+msgid "Korneeva Yulia Andreevna"
+msgstr ""
+
+#: encyclopedia/templates/account.html:33
+msgid "Edit profile"
+msgstr ""
+
+#: encyclopedia/templates/base.html:137
+msgid "Upload pyramid"
+msgstr ""
+
+#: encyclopedia/templates/base.html:156
+msgid "Log out"
+msgstr ""
+
+#: encyclopedia/templates/base.html:178
+msgid "Home"
+msgstr ""
+
+#: encyclopedia/templates/base.html:180 encyclopedia/templates/base.html:181
+msgid "Pyramid list"
+msgstr ""
+
+#: encyclopedia/templates/base.html:185 encyclopedia/templates/base.html:186
+msgid "Application"
+msgstr ""
+
+#: encyclopedia/templates/base.html:189
+msgid "About"
+msgstr ""
+
+#: encyclopedia/templates/base.html:195
+msgid "Interface language"
+msgstr ""
+
+#: encyclopedia/templates/base.html:208
+msgid ""
+"Tomsk State University of Control Systems\n"
+"        and Radioelectronics"
+msgstr ""
+
+#: encyclopedia/templates/header_search.html:16
+msgid ""
+"Default: \n"
+"    by pyramid's \n"
+"        sequence number, \n"
+"        generating function, \n"
+"        explicit formula,\n"
+"    by user's \n"
+"        username;\n"
+"By data:\n"
+"    by pyramid's\n"
+"         data table (which you can see on pyramid's page specifically)."
+msgstr ""
+
+#: encyclopedia/templates/header_search.html:32
+msgid "Search..."
+msgstr ""
+
+#: encyclopedia/templates/home.html:18
+msgid "Search for pyramids"
+msgstr ""
+
+#: encyclopedia/templates/home.html:24
+msgid "On this site you can"
+msgstr ""
+
+#: encyclopedia/templates/home.html:30
+msgid "Browse through pyramid list"
+msgstr ""
+
+#: encyclopedia/templates/home.html:35
+msgid "Go to pyramid list"
+msgstr ""
+
+#: encyclopedia/templates/home.html:43
+msgid "Find out what this encyclopedia is for"
+msgstr ""
+
+#: encyclopedia/templates/home.html:48
+msgid "Go to encyclopedia application"
+msgstr ""
+
+#: encyclopedia/templates/home.html:56
+msgid "Learn more about the project team"
+msgstr ""
+
+#: encyclopedia/templates/home.html:61
+msgid "Go to project info"
+msgstr ""
+
+#: encyclopedia/templates/login.html:12
+msgid "Error"
+msgstr ""
+
+#: encyclopedia/templates/login.html:41
+msgid "Don't have an account?"
+msgstr ""
+
+#: encyclopedia/templates/not_found.html:12
+msgid "Your search"
+msgstr ""
+
+#: encyclopedia/templates/not_found.html:15
+msgid "did not match anything"
+msgstr ""
+
+#: encyclopedia/templates/not_found.html:18
+msgid "Try going back"
+msgstr ""
+
+#: encyclopedia/templates/not_found.html:18
+#: encyclopedia/templates/page_not_found.html:13
+msgid "home"
+msgstr ""
+
+#: encyclopedia/templates/not_found.html:18
+msgid "and perform another search"
+msgstr ""
+
+#: encyclopedia/templates/page_not_found.html:12
+msgid "Sorry, there's no such page. You can try going"
+msgstr ""
+
+#: encyclopedia/templates/page_not_found.html:13
+msgid "and explore pyramids."
+msgstr ""
+
+#: encyclopedia/templates/pyramid.html:20
+msgid "Edit pyramid"
+msgstr ""
+
+#: encyclopedia/templates/pyramid.html:38
+#: encyclopedia/templates/pyramid.html:43
+#: encyclopedia/templates/pyramid.html:51
+#: encyclopedia/templates/pyramid.html:92
+#: encyclopedia/templates/pyramid_list.html:17
+msgid "Pyramid"
+msgstr ""
+
+#: encyclopedia/templates/pyramid.html:56
+msgid "Generating function"
+msgstr ""
+
+#: encyclopedia/templates/pyramid.html:62
+msgid "Explicit formula"
+msgstr ""
+
+#: encyclopedia/templates/pyramid.html:71
+msgid "Data table"
+msgstr ""
+
+#: encyclopedia/templates/pyramid.html:86
+msgid "Related"
+msgstr ""
+
+#: encyclopedia/templates/pyramid.html:101
+msgid "Export"
+msgstr ""
+
+#: encyclopedia/templates/pyramid.html:108
+#: encyclopedia/templates/pyramid.html:143
+msgid "Export as Maxima"
+msgstr ""
+
+#: encyclopedia/templates/pyramid.html:116
+#: encyclopedia/templates/pyramid.html:125
+msgid "Export as LaTeX"
+msgstr ""
+
+#: encyclopedia/templates/pyramid.html:134
+#: encyclopedia/templates/pyramid.html:152
+msgid "Copy"
+msgstr ""
+
+#: encyclopedia/templates/pyramid.html:165
+msgid "Confirm deletion"
+msgstr ""
+
+#: encyclopedia/templates/pyramid.html:172
+msgid "Are you sure, you want to delete Pyramid"
+msgstr ""
+
+#: encyclopedia/templates/pyramid.html:181
+msgid "Cancel"
+msgstr ""
+
+#: encyclopedia/templates/pyramid_list.html:19
+msgid "This pyramid is not valid. It'll be fixed as soon as posible"
+msgstr ""
+
+#: encyclopedia/templates/pyramid_list.html:26
+msgid "Preview"
+msgstr ""
+
+#: encyclopedia/templates/pyramid_list.html:32
+msgid "Author"
+msgstr ""
+
+#: encyclopedia/templates/pyramid_list.html:63
+msgid "Page"
+msgstr ""
+
+#: encyclopedia/templates/pyramid_list.html:88
+msgid "or"
+msgstr ""
+
+#: encyclopedia/templates/search.html:2
+msgid "search results"
+msgstr ""
+
+#: encyclopedia/templates/signup.html:71
+msgid "Already have an account"
+msgstr ""
+
+#: encyclopedia/templates/update_profile.html:31
+msgid "Edit your profile"
+msgstr ""
+
+#: encyclopedia/templates/update_profile.html:69
+msgid "Uploaded file"
+msgstr ""
+
