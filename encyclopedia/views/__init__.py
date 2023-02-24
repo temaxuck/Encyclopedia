@@ -17,7 +17,7 @@ def before_request():
 @current_app.after_request
 def cookies(response):
     same_cookie = session_cookie.dumps(dict(session))
-    response.headers.add("Set-Cookie", f"my_cookie={same_cookie}; Secure; HttpOnly; SameSite=None; Path=/;")
+    response.headers.add("Set-Cookie", f"session={same_cookie}; Secure; HttpOnly; SameSite=None; Path=/;")
     return response
 
 @current_app.context_processor
