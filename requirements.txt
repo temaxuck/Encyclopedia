@@ -50,7 +50,7 @@ lxml==4.9.1
 Mako==1.2.3
 Markdown==3.4.1
 MarkupSafe==2.1.1
-mpmath==1.2.1
+mpmath==1.3.0
 packaging==21.3
 pipreqs==0.4.11
 pluggy==1.0.0
