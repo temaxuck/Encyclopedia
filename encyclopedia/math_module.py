@@ -51,11 +51,23 @@ def TA984(n, k):
         
     return binomial(n+j, n) * binomial(2*n + 2*j, n+j) / binomial(2*j, j)
 
-# def Tsqrt2(n,k):
-#     if evenp(k+n):
-#         return (Tsqrt_even(n,((k+n)/2))*k/(n+k))
-#     else:
-#         return (Tsqrt_odd(n,(n+k+1)/2)*k/(n+k));
+def Tsqrt2(n,k):
+    from sympy import binomial
+    
+    def Tsqrt2_even(n, k):
+        return binomial(k, n) * (4 ** n)
+    
+    def Tsqrt2_odd(n, k):
+        if n > k:
+            return (-1)**(n - k) * binomial(2 * n, n) * binomial(n, k) / binomial(2 * n, 2 * k)
+        else:
+            return binomial(2 * k, 2 * n) * binomial(2 * n, n) / binomial(k, n)
+    
+    if (k+n) % 2 == 0:
+        return (Tsqrt2_even(n, (k + n) / 2) * k) / (n + k)
+    else:
+        return (Tsqrt2_odd(n, (k + n + 1) / 2) * k) / (n + k)
+        
 
 
 # def TLeftA271825(n,k):
@@ -113,6 +125,7 @@ OPERATIONS = {
         'delta': kron_delta,
         'binomial': sympy.binomial,
         'Tsqrt': Tsqrt,
+        'Tsqrt2': Tsqrt2,
         'TA271825': TA271825,
         'TA984': TA984,
         'TLeftA271825': TLeftA271825
