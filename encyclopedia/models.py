@@ -282,7 +282,7 @@ class Pyramid(db.Model):
 
                 if not formula.limitation or eval(formula.limitation_to_eval, values):
                     answer = eval(formula.expression, values, OPERATIONS['combinatorics'])
-                    try: answer = int(answer)
+                    try: answer = int(round(answer))
                     except: answer = None
                     return answer
 
