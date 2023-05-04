@@ -16,7 +16,7 @@ def formula(cls):
 class kron_delta:
     @property
     def latex(self):
-        return r"$$\operatorname{kron_{\delta}}(a, b) = \begin{cases}1&\text{if a = b},\\ 0  \end{cases} $$"
+        return r"$$\delta{(a, b)} = \begin{cases}1&\text{if a = b},\\ 0  \end{cases} $$"
 
     def evaluate(self, a, b):
         return 1 if a == b else 0
@@ -205,6 +205,7 @@ OPERATIONS = {
         "arccot": arccotan,
     },
     "combinatorics": {
+        "delta": kron_delta,
         "kron_delta": kron_delta,
         "binomial": sympy.binomial,
         "Tsqrt": Tsqrt,
