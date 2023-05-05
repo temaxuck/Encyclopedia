@@ -1,0 +1,1066 @@
+{% extends 'base.html' %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='stylesheets/educationstyle.css') }}"
+/>
+{% include 'MathJax.html' %}
+
+<title>Book</title>
+{% endblock %} {% block body %}
+<div class="main">
+  {% include 'side_bar.html' %}
+
+  <div class="page">
+    <div id="1" class="article">
+      1. Why do we need another encyclopedia on mathematics
+    </div>
+    <div class="paragraph">
+      Mathematical knowledge bases are the development of mathematical reference
+      books and encyclopedias and are becoming an important tool in mathematical
+      research and in research in related fields.Examples of such databases
+      knowledge is an online encyclopedia of whole sequences, server
+      combinatorial objects, etc.
+    </div>
+    <div class="paragraph">
+      Let's consider one of the most famous such knowledge bases - the online
+      encyclopedia of whole sequences (www.oeis.org ), which has over three
+      hundred thousand sequences. Every day tens of thousands of mathematicians,
+      engineers and students use this encyclopedia in their work when conducting
+      research and training sessions. Each article of this encyclopedia
+      contains:
+    </div>
+    <ol id="education">
+      <li>Numerical sequence;</li>
+      <li>
+        Comments describing mathematical objects related to this sequence;
+      </li>
+      <li>
+        Formulas defining this sequence (generating function, explicit or
+        recurrent formula, equation;
+      </li>
+      <li>References related to this sequence;</li>
+      <li>
+        Implementation of formulas or algorithms for calculating this sequence
+        in various programming systems (Maxima, Mathematica, Maple, etc.;
+      </li>
+      <li>Environment of links to Internet resources;</li>
+      <li>Usage examples;</li>
+      <li>Relation to other sequences;</li>
+      <li>
+        The author of this sequence and the authors of the individual elements
+        of this sequence.
+      </li>
+    </ol>
+    <div class="paragraph">
+      The main function of this knowledge base is to search and edit numerical
+      sequences, which can be of two types: linear sequence and triangle. The
+      triangle is also represented by a linear sequence. This encyclopedia has a
+      number of significant drawbacks:
+    </div>
+    <ol id="education">
+      <li>It is impossible to imagine tensors having 3 or more indices;</li>
+      <li>Outdated interface, formulas are written in text mode;</li>
+      <li>
+        The search is implemented only by elements of the numerical sequence;
+      </li>
+    </ol>
+    <div class="paragraph">
+      The described disadvantages do not detract from the importance of this
+      knowledge base for mathematical research and the practice of using
+      numerical sequences and algorithms. However, the development of the
+      mathematical apparatus of the composition of generating functions of many
+      variables makes it possible to obtain explicit expressions of the
+      coefficients of generating functions of many variables and to find
+      approaches and algorithms for implementing this operation in computer
+      algebra systems, and the first step in this direction is to create an
+      appropriate knowledge base for tensors $T(n,m,k)$ described by products of
+      binomial coefficients, which are coefficients -degrees of the generating
+      function of two variables.
+    </div>
+    <div class="paragraph">
+      The proposed encyclopedia is an addition oeis.org in terms of the
+      representation of the generating functions of two variables and their
+      coefficients of the $k$th degree.
+    </div>
+    <div id="2_art" class="article">2. Why do we need generating functions</div>
+    <div class="paragraph">
+      Generating functions is a mathematical apparatus that provides the
+      solution of discrete problems using mathematical analysis. Generating
+      functions are widely used in combinatorics, in the analysis of
+      computational complexity of algorithms, in probability theory and
+      mathematical statistics, in solving classes of functional equations, in
+      solving differential equations, in calculating integrals, etc.
+    </div>
+    <div id="3" class="article">3. Features of this encyclopedia</div>
+    <div class="paragraph">
+      There can be a huge number of generating functions. So, in the online
+      encyclopedia of integers, more than 300 thousand generating functions are
+      recorded. In this encyclopedia there are 1500 generating functions of two
+      variables and their coefficients of the kth degree. Here we present only
+      generating functions whose coefficients of the kth degree are represented
+      by binomial coefficients. It can be hypothesized that the number of
+      generating functions of two variables whose expressions are explicitly
+      given and their coefficients of the kth degree are expressed by binomial
+      coefficients is limited. An example from the encyclopedia of a typical
+      generating function and its coefficients
+      <div class="latex">
+        $$U_{39}(x,y)= {1-\sqrt{1-4\,x-4\,x\,y}}\over{x\,\left(2+2\,y\right)}$$
+      </div>
+
+      Decomposition of the generating function
+      $$\begin{array}{llllll}1&0&0&0&0&0\\1&1&0&0&0&0\\2&4&2&0&0&0\\5&15&15&5&0&0\\14&56&84&56&14&0\\42&210&420&420&210&42\\\end{array}$$
+    </div>
+    <div id="4" class="article">
+      4. What tasks does this encyclopedia solve?
+    </div>
+    <div>
+      <div class="paragraph">
+        The development of the methodology for solving problems based on the use
+        of generating functions of many variables, presented in [3-12], has
+        significantly expanded the scope of their application. An important
+        element was the knowledge base for mathematical objects described by
+        coefficients $k$th degrees of the generating function of two variables.
+        It is possible to identify the following tasks, the solution of which
+        can be carried out with the help of this knowledge base:
+      </div>
+      <br />
+      <ol id="education">
+        <li>
+          finding an explicit formula for the coefficients of the composition of
+          generating functions and their degrees $$
+          F(x,y,\ldots,G(x,y,\ldots,z),\ldots,z)^k $$
+        </li>
+        <li>
+          finding explicit formulas for the mutual generating function and their
+          degrees $$ \frac{1}{G(x,y,\ldots,z)^k} $$
+        </li>
+        <li>
+          finding explicit formulas for a generating function of the form $$
+          G(x,y,\ldots,z)^{\alpha} , \alpha\in R $$
+        </li>
+        <li>
+          finding explicit formulas for the inverse generating function and
+          their degrees; $$ G(x,y,\ldots,z)=\frac{y}{F\left(x,y\cdot
+          G(x,y,\ldots,z),\ldots,z\right)} $$
+        </li>
+        <li>
+          finding explicit formulas for a reversible generating function and
+          their degrees; \\ $$ G(x,y,\ldots,z)=F(x,y\,G(x,y,\ldots,z),\ldots,z)
+          $$
+        </li>
+        <li>
+          finding explicit formulas for a reversible generating function and
+          their degrees;\\ $$ G(x,y,\ldots,z)=F(x,y\,G(x,y,\ldots,z),\ldots,z)
+          $$
+        </li>
+        <li>
+          finding explicit formulas for the inverse inverse generating function
+          of two variables and their degrees; $$
+          G(x,y,\ldots,z)=F\left(x,\frac{y}{G(x,y,\ldots,z)},\ldots,z\right) $$
+        </li>
+        <li>
+          finding explicit expressions of logarithmic derivatives $$
+          \log(G(x,y,\ldots,z)) $$
+        </li>
+      </ol>
+    </div>
+    <div id="5" class="article">5. Keywords</div>
+    <div>
+      <ul>
+        <li>generating function</li>
+        <li>ordinary generating function</li>
+        <li>exponential generating function</li>
+        <li>generating function of one variable</li>
+        <li>generating function of two variables</li>
+        <li>generating function of many variables</li>
+        <li>coefficient of the generating function</li>
+        <li>coefficient of the generating function of one variable</li>
+        <li>coefficient of the generating function of two variables</li>
+        <li>coefficient of the generating function of many variables</li>
+        <li>coefficient of the kth degree of the generating function</li>
+        <li>
+          coefficient of the kth degree of the generating function of one
+          variable
+        </li>
+        <li>
+          coefficient of the kth degree of the generating function functions of
+          two variables
+        </li>
+        <li>
+          coefficient of the kth degree of the generating function of many
+          variables
+        </li>
+        <li>of the composite</li>
+        <li>functional equation</li>
+        <li>composition of generating functions</li>
+        <li>composition of generating functions of one variable</li>
+        <li>composition of generating functions of two variables</li>
+        <li>composition of generating functions of many variables</li>
+        <li>mutual generating function</li>
+        <li>mutual generating function of one variable</li>
+        <li>mutual generating function of two variables</li>
+        <li>mutual generating function of many variables</li>
+        <li>inverse generating function</li>
+        <li>inverse generating function of one variable</li>
+        <li>inverse generating function of two variables variables</li>
+        <li>inverse generating function of many variables</li>
+        <li>pyramid</li>
+        <li>tensor</li>
+      </ul>
+    </div>
+    <div id="6" class="article">6. Designations</div>
+    <div class="designations">
+      $F(x)=\sum_{n\geqslant 0} f(n)x^n$ - an ordinary generating function
+      (generating function)
+      <br />
+      $F(x)=\sum_{n\geqslant 0} f(n)\frac{x^n}{n!}$ is an exponential generating
+      function.
+      <br />
+      $F(n,k)$ - coefficient of the kth degree of the generating function $F(x),
+      F(0)\neq 0$<br />
+      $F^{\Delta}(n,k)$ - composite of the generating function $F(x), F(0)=0$<br />
+      $N$ - the set of natural numbers, including zero.<br />
+      $Z$ - a set of integers<br />
+      $R$ - the set of real numbers.<br />
+      $[x^n]F(x)$ - the operation of extracting the coefficient of the
+      generating function $F(x)$ for a variable $x^n$.<br />
+      $F(x,y)=\sum_{n\geqslant 0}\sum_{m\geqslant 0} f(n,m)x^n\,x^m$ - an
+      ordinary generating function (generating function) of two variables<br />
+
+      $[x^n\,y^m]F(x,y)$ - the operation of extracting the coefficient of the
+      generating function $F(x,y)$ for variables $x^n$ and $y^m$.<br />
+
+      $F(n,m,k)$ - coefficient of the kth degree of the generating function
+      $F(x,y), F(0,0)\neq 0$<br />
+
+      $F(x,yб\ldots,z)=\sum_{n\geqslant 0}\sum_{m\geqslant 0}\ldots\sum_{i
+      \geqslant 0} f(n,m)x^n\,y^m\,\ldots z^i)$ - an ordinary generating
+      function of many variables of variables<br />
+
+      $F^{\Delta}(n,m,k)$ - composite of the generating function $F(x,y),
+      F(0,0)=0$<br />
+
+      ${n\choose k}$ - binomial coefficient $C_n^k$<br />
+
+      $fib(n)$ - Fibonacci numbers<br />
+    </div>
+    <div id="7" class="article">
+      7. Obtaining explicit expressions of the composition of generating
+      functions of one variable
+    </div>
+    <div>
+      Let the generating function $G(x)=\sum_{n>0} g(n)x^n$ be given and its
+      composite. $$ G^{\Delta}(n,k)=[x^n]G(x)^k. $$ $G^{\Delta}(0,0)=1$. Then
+      for coefficients of the composition of generating functions $A(x)=F(G(x))$
+      will be the formula is valid \begin{equation}\label{Lcompos1}
+      a(n)=\sum_{k=0}^n G^{\Delta}(n,k)\,f(k). \end{equation} Look at the
+      examples
+    </div>
+
+    <div id="7_1" class="article">7.1 Fibonacci Numbers</div>
+
+    <div>
+      Find an explicit expression for the Fibonacci numbers. $$
+      A(x)=\frac{x}{1-x-x^2} $$ Let 's imagine the generating function as a
+      composition $$ A(x)=F(G(x)). $$ where $F(x)=\frac{1}{1-x}$, $G(x)=x+x^2$,
+      $f(n)=1$, $G^{\Delta}(n,k)={k\choose n-k}$ $$ a(n)=\sum_{k=0}^n {k\choose
+      n-k} $$
+    </div>
+    <div id="7_2" class="article">
+      7.2 Decomposition coefficients $\sinh{\left(\frac{x}{1-x}\right)}$
+    </div>
+
+    <div>
+      Consider obtaining an explicit expression for the expansion coefficients
+      $A(x)=\sinh{\left(\frac{x}{1-x}\right)}$. It is known that $$
+      \sinh(x)=\sum_{n>0} \frac{1-(-1)^n}{2}\frac{x^n}{n!} $$ It is also known
+      that $$ \left(\frac{x}{1-x}\right)^k=\sum_{n\geqslant k} Tp0002(n-k,k)x^n.
+      $$ where (See encyclopedia) $$ Tp0002(n,k)={n+k-1 \choose n}. $$ Then $$
+      a(n)=\sum_{k=0}^n {n-1 \choose n-k} \frac{1-(-1)^k}{2\,(k!)} $$
+    </div>
+
+    <div id="7_3" class="article">
+      7.3 Decomposition coefficients $e^{\sin(x)}$
+    </div>
+
+    <div id="7_4" class="article">
+      7.4 Getting the coefficients of the function ${1-2x}\over{1-3\,x+x^2}$
+    </div>
+    <div>
+      %Up0002(x)/(1-x*Up0020(x)) Let the generating function be given
+      $${1-2,x}\over{1-3\,x+x^2}$$ Let 's rewrite it in the form $$
+      \frac{x}{1-x}\frac{1}{1-\frac{x}{(1-x)^2}}+1 $$ Consider the composition
+      of functions $A(x)=\frac{x}{(1-x)^2}$ и $\frac{1}{1-x}$ The composite of
+      the function $A(x)$ has the expression $$ A^{\Delta}(n,k)={n+k-1\choose
+      n-k} $$ Then $$ [x^n]\frac{1}{1-A(x)}=\sum_{k=0}^n {n+k-1\choose n-k} $$
+      $$
+      \frac{x}{1-x}\frac{1}{1-A(x)}=\frac{x}{1-x}\left(1+\frac{x}{(1-x)^2}x+\frac{x^2}{(1-x)^4}x^2+\ldots+\frac{x^n}{(1-x)^{2n}}x^n+\ldots\right)=
+      $$ $$
+      =x\,\left(\frac{1}{1-x}+\frac{x}{(1-x)^3}x+\frac{x^2}{(1-x)^5}x^2+\ldots+\frac{x^n}{(1-x)^{2n+1}}x^n+\ldots\right)=
+      $$ the series written in parentheses has odd degrees $2n+1$. From where
+      the summation formula will have the form.
+      $$\sum_{k=0}^{n}{n+k\choose{n-k}}$$ Taking into account shift by $x$ and
+      plus 1 (see the original formula, we get the desired expression).
+      $$[x^n]{1-2,x\over{1-3\,x+x^2}}=\sum_{k=0}^{n}{n+k-1\choose{2k}}$$
+    </div>
+    <div id="8" class="article">
+      8. Obtaining coefficients of degrees of generating functions of one
+      variable
+    </div>
+    <div class="paragraph">
+      There are simple rules for calculating the coefficients of the powers of
+      generating functions
+    </div>
+    <div id="8_1" class="article">
+      8.1 Coefficients of the $k$th degree of the sum of generating functions
+    </div>
+    <div class="paragraph">
+      Coefficients of the $k$th degree of the sum of generating functions $$
+      [x^n](F(x)+G(x))^k=[x^n]\sum_{j=0}^k {k\choose j}F(x)^j\,G(x)^{k-j}= $$
+      \begin{equation}\label{gfsum1} \sum_{j=0}^k{k\choose j}\sum_{i=0}^n
+      F(i,j)G(n-i,k-j) \end{equation} Example $$
+      \frac{1+x-x^3}{1-x}=\frac{1}{1-x}+x+x^2 $$ $$
+      [x^n]\frac{1}{(1-x)^k}={n+k-1 \choose n} $$ $$ [x^n](x+x^2)^k={k \choose
+      n-k} $$ $$ [x^n]\left(\frac{1+x-x^3}{1-x}\right)^k=\sum_{j=0}^k
+      \sum_{i=0}^n {i+j-1\choose i}{k-j\choose n-i-k+j} $$
+    </div>
+    <div id="8_2" class="article">
+      8.2 Coefficients of the $k$th degree of the product of generating
+      functions
+    </div>
+    <div class="paragraph">
+      Coefficients $k$-th degree of the product of generating functions
+      \begin{equation}\label{gfprod1} [x^n](F(x)\cdot G(x))^k=\sum_{j=0}^n
+      F(i,k)G(n-i,k) \end{equation} Example<br />
+      Let the generating function $$
+      \frac{1+x}{1-x}=1+2\,x+2\,x^2+2\,x^3+2\,x^4+2\,x^5+\cdots $$ be given.
+      Let's find the coefficients of the kth degree of this function using the
+      formula $$ [x^n]\left(\frac{1+x}{1-x}\right)^k=\sum_{i=0}^n {i+k-1\choose
+      i}\,{k\choose n-i} $$
+    </div>
+    <div id="8_3" class="article">
+      8.3 Coefficients of the $k$th degree of the composition of generating
+      functions
+    </div>
+    <div class="paragraph">
+      \begin{equation}\label{gfcomp1} [x^n](F(G(x))^k=\sum_{j=0}^n
+      G^{\Delta}(n,j)F(j,k) \end{equation} $ G^{\Delta}(n,k)$ - - composite
+      function of $G(x)$ <br />
+      Example<br />
+      Let the generating function $$
+      \frac{1}{1-sin(x)}=1+x+x^2+\frac{5x^3}{6}+\frac{2x^4}{3}+\frac{61x^5}{120}+\dots
+      $$ be given, let's find the coefficients of the kth degree of this
+      function using the formula. To do this , you need to know the composite
+      $\sin(x)$ of the function. Her composite is recorded in the encyclopedia
+      under the number Tp0114 $$
+      [x^n]\left(\frac{1}{1-\sin(x)}\right)^k=\sum_{m=0}^n
+      Tp0114(n,m){m+k-1\choose m} $$ здесь $F(x)=\frac{1}{1-x}$, $G(x)=\sin(x)$.
+    </div>
+    <div id="8_4" class="article">
+      8.4 Coefficients of the $k$th degree of the mutual generating function
+    </div>
+    <div class="paragraph">
+      \begin{equation}\label{gfrecip1} [x^n][x^n]\frac{1}
+      {F(x)^k}=\sum_{i=0}^{n}F(0)^{-k-i}\,\left(-1\right)^{i}\,{k
+      +i-1\choose{i}}\,F\left(n , i\right)\,{n+k\choose{n-i}} \end{equation}
+      Example<br />
+      $$x\cot(x)=1-{\frac{x^2}{3}}-{\frac{x^4}{45}}-{\frac{2\,x^6}{945}}+\cdots
+      $$ Let the generating function be given. Let's find the coefficients of
+      the kth degree of this function using the formula. To do this , we write
+      $$ x\cot(x)=\frac{x}{\tan(x)} $$ Let's find the composite $\tan(x)$. In
+      the encyclopedia, this composite is written under the number $Tp0117$
+      $$Tp0117(n,k)=\frac{((-1)^{n}+1)}{(n+k)!}\,\sum_{j=k}^{n+k}{j-1
+      \choose{k-1}},j!,2^{n-j-1},(-1)^[{n+k\over 2}+{j}] {n\choose j}$$
+      $$[x^n](\frac{\tan(x)}{x})^k=Tp0117(n+k,k)=\frac{((-1)^{n}+1)}{(n+k)!}
+      \sum_{j=k}^{n+k} {j-1 \choose k-1 } j! 2^{n+k-j-1} (-1)^{\frac{n+2k}{2}
+      +j} \binom{n+k}{j} $$
+      $$[x^n](\frac{\tan(x)}{x})^k=\frac{((-1)^{n}+1)}{(n+k)!} \sum_{j=0}^{n}
+      {j+k-1 \choose k-1 } (j+k)! 2^{n+j-1} (-1)^{\frac{n}{2} +j}
+      \binom{n+k}{j+k} $$
+      $$[x^n](\frac{\tan(x)}{x})^i=\frac{((-1)^{n}+1)}{(n+i)!} \sum_{j=0}^{n}
+      {j+i-1 \choose i-1 } (j+i)! 2^{n+j-1} (-1)^{\frac{n}{2} +j}
+      \binom{n+i}{j+i} $$ then the desired formula will have the expression $$
+      \sum_{i=0}^{n}{k+i-1\choose i}\, \frac{((-1)^{n}+1)}{(n+i)!}
+      \sum_{j=0}^{n} {j+i-1 \choose i-1 } (j+i)! 2^{n+j-1}
+      (-1)^{\frac{n}{2}+j+i} \binom{n+i}{j+i} \binom{n+k}{n-i} $$
+    </div>
+    <div id="8_5" class="article">
+      8.5 Finding explicit expressions for decomposing functions of the form
+      $G(x)^{-\alpha}$, $\alpha\in R$
+    </div>
+    <div class="paragraph">
+      $$ \sum_{j=0}^{n} \frac{(-1)^j}{T(0,1)^{j+\alpha}} {j+\alpha-1 \choose j}
+      {T(n,j)} {n+\alpha \choose n-j} $$ and $$ (n+1)\binom{n+\alpha}{n+i}
+      \sum_{i=0}^{n} \frac{T(0,1)^{-j-\alpha}(-1)^{j} T(n,j){n\choose j}}
+      {j+\alpha} $$ Let's look at the examples <br />
+      <b class="paragraph"> 8.5.1 Example 1</b>
+
+      $$ G(x)=(\frac{x}{e^x-1})^{\alpha} $$ $$ (e^x-1^k)=\sum_{n\geqslant k}
+      \binom{n}{k}\frac{k!}{n!} x^n $$ $$ (\frac{e^x-1}{x})^k=\sum_{n\geqslant
+      0} \binom{n+k}{k}\frac{k!}{(n+k)!}x^n $$ $$ \sum_{j=0}^{n}(-1)^{j} \binom
+      {j+\alpha-1}{j} \binom{n+j}{j} \frac{j!}{(n+j)!} { n+\alpha \choose n-j}
+      $$ and $$ (n+1){n+\alpha \choose n+1}\sum_{j=0}^{n} \frac{(-1)^{j}j!
+      \binom{n+j}{j} {n \choose j}} {(j+\alpha)(n+j)!} $$
+
+      <b class="paragraph"> 8.5.2 Example 2</b>
+      $$ G(x)=(\sqrt{\cos(x)})^{3} $$ For the function $cos(x)$, the expression
+      $cos(x)^k$ expansion coefficient is known. In the encyclopedia under the
+      number Tp0115. $$ Tp0115(n,k)= \begin{array} 11, & n=0, \\ \frac{(-1)^{n
+      \over 2} {(-1)^{n}+1}} {2^{k} n!} \sum\limits_{i=0}^{k-1 \over 2}
+      (k-2i)^{n} {k\choose i} & n>0.\\ \end{array} $$ Let 's use the formula for
+      $\alpha=-\frac{3}{2}$, $Tp0115(0,1)=1$ $$ \sum_{j=0}^{n}(-1)^{j}
+      \binom{j-\frac{3}{2}-1}{j} Tp0115(n,j) \binom{n-\frac{3}{2}}{n-j} $$
+    </div>
+    <div id="8_6" class="article">
+      8.6 Coefficients of the $k$th degree of the generating function of the
+      solution of the functional equation $A(x)=G(x\,A(x)^m$, $m\in N$
+    </div>
+    <div class="paragraph">
+      Let the functional equation $A(x)=G(x\,A(x)^m$, $m\in N$ be given and the
+      expression $$ [x^n]G(x)^k=G(n,k) $$ $G(0)\ne 0$ is known. Then for the
+      coefficients of the degree: $$ [x^n]A(x)^k=A(n,k) $$ the following
+      relation holds \begin{equation}\label{gflagr1}
+      A(n,k)=\frac{k}{m\,n+k}G(n,m\,n+k) \end{equation} Example Let the
+      functional equation $$ A(x)=\frac{1+x\,A(x)}{1-x\,A(x)} $$ $m=1$ be given.
+      . To solve this equation, it is necessary to find $G(n,k)$. It is known
+      (see the example section) that $$
+      [x^n]\left(\frac{1+x}{1-x}\right)^k=\sum_{i=0}^n {i+k-1\choose
+      i}\,{k\choose n-i} $$ Substituting the found $G(n,k)$ into the formula
+      (\ref{gflagr1}) we will get the desired solution $$
+      A(n,k)=\frac{k}{n+k}\sum_{i=0}^n {n+k+i-1\choose i}\,{n+k\choose n-i} $$
+      Now let 's rewrite our equation in the form $$ x\,A(x)^2+1+(x-1)\,A(x)+1=0
+      $$ we solve it with respect to $A(x)$, we get $$
+      A(x)={1-x+\sqrt{1-6\,x+x^2}\over{2\,x}}$$ Then
+      $$[x^n]\left({1-x+\sqrt{1-6\,x+x^2}
+      \over{2\,x}}\right)^k=\frac{k}{n+k}\sum_{i=0}^n {n+k+i-1\choose
+      i}\,{n+k\choose n-i}.$$ thus, the formula of the coefficients of the
+      degree for the generating function of large Schroeder numbers is found
+      (see encyclopedia)
+    </div>
+    <div id="8_7" class="article">
+      8.7 Coefficients of the $k$th degree of the inverse generating function
+    </div>
+    <div class="paragraph">
+      Consider the functional equation $$ A(x)\cdot G(A(x))=x $$ $G(0)\ne 0.$ $$
+      G^{\Delta}(n,k)=[x^n]\left(x\,G(x)\right)^k. $$ Then
+      \begin{equation}\label{gfinver1}
+      A^{\Delta}(n,k)=\frac{k}{n}\sum_{j=0}^{n-k} G(1,1)^{-n-j}(-1)^{j}
+      {n+j-1\choose j}G^{\Delta}(n,j) {2\,n-k \choose n-k-j} \end{equation}
+      Example Let the generating function be given: $$
+      G(x)=\frac{\exp(x)+x-1}{2} $$ We obtain the coefficients of the k-degree
+      of the inverse function. To do this, use the formula. Find the composite
+      of the function $G(x)$,to do this, use the sum formula: $B(x)=e^x-1$, its
+      composite ${n\choose k}\frac{k!}{n!}$. For $C(x)=x$, composite
+      $\delta(n,k)$. Then $$ G^{\Delta}(n,k)=\sum_{j=0}^k{k\choose
+      j}\sum_{i=0}^n {i \choose j}\frac{j!}{i!}\delta(n-i,k-j) $$ Now substitute
+      $i=n-k+j$ $$ G^{\Delta}(n,k)=\sum_{j=0}^k{k\choose j}{n-k+j\choose
+      j}\frac{j!}{(n-k+j)!} $$ $$ $G^{\Delta}(1,1)=1,$$ $$ A^{\Delta}(n,k)=
+      \frac{k}{n}\sum_{j=0}^{n-k}(-1)^{j}\,{n+j-1\choose j}G{\Delta}(n,j)
+      {2\,n-k \choose n-k-j} $$ From where we get the identity
+      $$\sum_{j=k}^{n}{A^{\Delta}(j,k)\,G^{\Delta}(n,j)}=\delta(n,k)$$
+    </div>
+    <div id="8_8" class="article">
+      8.8 Coefficients of the kth degree of the generating function of the
+      solution of the functional equation $A(x)=G\left(\frac{x}{A(x)}\right)$
+    </div>
+    <div>
+      \begin{equation}\label{gfleft1}
+      A(n,k)=k\,\sum_{j=1}^{n}\frac{1}{j}{G}\left(0 , 1\right)^{-n+k-j}\left(-1
+      \right)^{j-1}{G}\left(n , j\right){n-k+j-1 \choose j-1}{2\,n-k \choose
+      n-j} \end{equation} Example <br />
+      Let $$ G(x)=\frac{\log(1+x)}{x} $$ and $$ G(n,k)=\frac{k!}{(n+k)!}{n+k
+      \choose k}(-1)^n. $$ Let 's write down the equation $$
+      A(x)=G\left(\frac{x}{A(x)}\right)=\frac{\log(1+\frac{x}{A(x)}}{\frac{x}{A(x)}}
+      $$ From where, we get the generating function for the Bernoulli numbers $$
+      A(x)=\frac{x}{e^x-1} $$ Then $$ A(n,k)=k\,\sum_{j=1}^{n}\frac{1}{j}
+      {\left(-1\right)^(n+j-1)}\frac{j!}{(n+j)!} {n+j \choose j}{n-k+j-1\choose
+      j-1} {2,n-k \choose n-j} $$ $A(0,k)=1$
+    </div>
+    <div id="8_9" class="article">
+      8.9 Generating function for the diagonal $G(n,n)$
+    </div>
+    <div>
+      Let the generating function $G(x)=\sum_{n\geqslant 0} g(n)x^n$be given and
+      the coefficients of expansion of its degree $$ G(n,k)=[x^n]G(x)^k $$ Then
+      the generating function for the diagonal $G(n,n)$ will have an expression
+      $$ \frac{x\,A'(x)}{A(x)}, $$ where $A(x)$ is the solution of the
+      functional equation $$ A(x)=G(x\,A(x)). $$ If $A(n,k)$ is known, then the
+      diagonal $G(n,n)$ will have the following expression
+      \begin{equation}\label{gfdiag1}
+      G(n,n)=n\,\sum_{j=1}^{n}\frac{(-1)^{j-1}\,A(n,j)}{j\,A(0,1)^{j}}\,{n\choose
+      j}. \end{equation} Example. Let the generating function $$
+      G(x)=\frac{1+x-x^2}{1-x} $$ be given and the expression for the
+      coefficients of the degree is given $$
+      [x^n]G(x)^k=G(n,k)=\sum_{j=0}^{\left \lfloor {n \over 2} \right \rfloor}{k
+      \choose j}\,{n-j-1\choose n-2\,j} $$ It is necessary to find the
+      generating function for the diagonal $G(n,n)$. To do this , you need to
+      solve the equation $$ A(x)=G(x\,A(x)=\frac{1+x\,A(x)-x^2\,A(x)^2}{1-A(x)}
+      $$ $$A(x)^2\,\left(x^2+x\right)+A(x),\left(-x-1\right)+1=0$$
+      $$A(x)=1+x-\sqrt {1-2x-3x^2}\over{2\,x+2\,x^2}$$ We find the logarithmic
+      derivative $$B(x)=\frac{(xA(x))'}{A(x)}\frac{1}{2} ({1\over
+      1+x}+{1\over\sqrt{1-2x-3x^2}}) $$ from where $$
+      [x^n]B(x)=G(n,n)=\sum_{j=0}^{\left \lfloor {n \over 2 } \right \rfloor}{n
+      \choose j}\,{n-j-1 \choose n-2\,j} $$
+    </div>
+    <div id="8_10" class="article">
+      8.10 Decomposition of the composition $F(x)=\log(A(x))$
+    </div>
+    <div>
+      The consequence of the statements of the paragraph is that for the
+      composition of the functions of $F(x)=\log(A(x))$, the expansion
+      coefficients will have the expression \begin{equation}\label{gflog1}
+      f(n)=\sum_{j=1}^{n}\frac{(-1)^{j-1}\,A(n,j)}{j\,A(0,1)^{j}}\,{n\choose j}.
+      \end{equation} Let's look at the examples<br />
+      Example 1 $$ \log\left(\frac{1}{1-x}\right) $$ $$
+      [x^n]\left(\frac{1}{1-x}\right)^k={n+k-1\choose n} $$
+      $$\sum_{j=1}^{n}\frac{(-1)^{j-1}}{j}{n+j-1\choose n}{n \choose
+      j}=\frac{1}{n}$$ Example 2 $$\log(e^x)=x$$ $$\sum_{j=1}^{n}
+      (-1)^{j-1}\,{n\choose j}j^{n-1}=\left\{\begin{array}{ll} 1,& n=1,\\ 0,&
+      n>0. \end{array}\right.$$
+    </div>
+    <div id="9" class="article">
+      9. Obtaining explicit expressions of the composition of generating
+      functions of two variables
+    </div>
+    <div class="paragraph">
+      Consider the solution of the problem of finding an explicit formula for
+      the composition of generating functions of two variables. To do this,
+      write down Table 1 obtained in. ВIn the first column, the variants of the
+      composition of the generating functions are written, in the second -
+      explicit expressions of the coefficients of the $k$-th degree of the
+      generating function, the expression through the coefficients of the $k$-th
+      degree of the generating functions forming the composition. For $k=1$ we
+      obtain the coefficients of the composition of the generating functions.
+    </div>
+    <div>
+      <table border="1" class="table">
+        <caption>
+          Table of formulas for determining coefficients of degrees of series
+          composition
+        </caption>
+        <tr>
+          <th>N</th>
+          <th>Composition $G(x,y)^k$</th>
+          <th>The formula for $g(n,m,k)$</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>$G(x,y)^k=H(A(x),y)^k$</td>
+          <td>$g(n,m,k)=\sum\limits_{q=0}^n A^{\Delta}(n,q)h(q,m,k)$</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>$G(x,y)^k=H(x,B(y))^k$</td>
+          <td>$g(n,m,k)=\sum\limits_{r=0}^m B^{\Delta}(m,r)h(n,r,k)$</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>$G(x,y)^k=H(A(x,y))^k$</td>
+          <td>$g(n,m,k)=\sum\limits_{q=0}^{n+m} A^{\Delta}(n,m,q)h(q,k)$</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>$G(x,y)^k=H(A(x,y),y)^k$</td>
+          <td>
+            $g(n,m,k)=\sum\limits_{q=0}^{n+m}\sum\limits_{r=0}^{m}{A^{\Delta}\left(n
+            ,m-r,q\right)h(q,r,k)}$
+          </td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>$G(x,y)^k=H(x,B(x,y))^k$</td>
+          <td>
+            $g(n,m,k)=\sum\limits_{q=0}^{n}{\sum\limits_{r=0}^{n+m-q}{B^{\Delta}\left(n-q
+            ,m,r\right)}\,h(q,r,k)}$
+          </td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>$G(x)^k=H(x,B(x))^k$</td>
+          <td>
+            $g(n,k)=\sum\limits_{q=0}^{n}{\sum\limits_{r=0}^{n-q}{B^{\Delta}(n-q,r)\,
+            h(q,r,k)}}$
+          </td>
+        </tr>
+      </table>
+      <div class="paragraph">
+        To perform a composition $G(x,y)=H(A(x,y),y)$ it is necessary to know
+        the condition that the internal function $A(0,0)=0$. In the developed
+        knowledge base there are many functions having a free member
+        $A(0,0)\ne=0$. To achieve a given condition , you can use the following
+        methods : multiplying the generating function by a monomial variable
+        $x^ay^b$, где $a,b \in N$, $a\geqslant 0$, $b\geqslant 0$ or by
+        subtracting from the generating function of the zero element of the
+        decomposition.
+      </div>
+      $$G(x,y)={x,y-1\over{x,y+x^2+x-1}}$$ it can be represented as $$
+      G(x,y)=\frac{1}{1-\frac{x+x^2}{1-x\,y}}=H(A(x,y)), $$ where
+      $H(x)=\frac{1}{1-x}$, $A(x,y)=\frac{x+x^2}{1-x\,y}$ In the knowledge base
+      we do request for a generating function $U(x,y)=\frac{1+x}{1-y}$. We will
+      get the pyramid found at number 17.
+      <div class="fragment">
+        Generating function:
+        <br />
+        $U_{17}(x,y)={1+x\over{1-y}}$
+        <br />
+        Formula: $T_{17}(n,m,k)={k\choose{n}}\,{m+k-1\choose{m}}$
+        <br />
+        Data:
+        <br />
+        $\begin{array}{lllllll}1&1&1&1&1&1&1\\1&1&1&1&1&1&1\\0&0&0&0&0&0&0\\0&0&0&0&0&0&0
+        \\0&0&0&0&0&0&0\\0&0&0&0&0&0&0\\0&0&0&0&0&0&0\\ \end{array} $
+      </div>
+
+      Then the formula $x\frac{1+x}{1-y}$ will be true for the composites of the
+      function $$ T_{17}(n-k,m,k)={k\choose{n-k}}\,{m+k-1\choose{m}} $$ Now
+      let's do let's do the product of the variable $y$ by $x$ we get $$
+      A^{\Delta}(n,m,k)=T_{17}(n-m-k,m,k)={k\choose{n-k}}\,{m+k-1\choose{m}} $$
+      From where, based on the formula of the composition of two variables (see
+      Table 1, line 3, $k=1$) $$ g(n,m)=\sum_{k=0}^{n+m}
+      A^{\Delta}(n,m,k)=\sum_{k=0}^{n-m}{k\choose{n-m-k}}\,{m+k-1\choose{m}}. $$
+      Thus, we have obtained an explicit formula for the triangle sequence
+      A055830, describing the class of paths on the lattice[12].
+    </div>
+    <div id="10" class="article">10. Finding mutual generating functions</div>
+    <div>
+      Let be given a generating function of the form:
+      $$G(x,y)={x-sqrt{x^2-2,x^2,y+2,sqrt{1-4,x},x^2,y}}\over{2,x^2,y}$$ Let 's
+      find an explicit formula for the mutual generating function: $$
+      A(x,y)=\frac{1}{G(x,y)} $$ Decompose the function $G(x,y)$ nto a Taylor
+      series at the point $x=0$ and $y=0$ $$ \begin{array}{l}\\ 1\\
+      +\left(1+y+\cdots \right)\,x\\ +\left(2+2\,y+2\,y^2+\cdots \right)\,x^2\\
+      +\left(5+5\,y+6\,y^2+5\,y^3+\cdots \right)\,x^3\\
+      +\left(14+14\,y+18\,y^2+20\,y^3+14\,y^4+\cdots \right)\,x^4+\cdots
+      \end{array}$$ Note that this function describes a triangle and $G(0,0)=1$.
+      Then we write the function $H\left(x,\frac{y}{x}\right)$. Looking for this
+      function in the knowledge base, we get the function and tensor number 69
+      (see )
+
+      <div class="fragment">
+        Generating function:
+        <br />
+        $U_{69}(x,y)=x-\sqrt{x^2-2*x*y+2,\sqrt{1-4*x}*x*y}\over{2*x*y}$
+        <br />
+        Formula: $T_{69}(n,m,k)={k,{2*m+k-1 \choose{m}}, {2*n+m+k-1\choose{n}}}
+        \over{n+m+k}$
+        <br />
+        Data:
+        <br />
+        $\begin{array}{lllllll}1&1&2&5&14&42&132\\1&2&6&20&70&252&924
+        \\2&5&18&70&280&1134&4620\\5&14&56&240&1050&4620&20328
+        \\14&42&180&825&3850&18018&84084\\42&132&594&2860&14014&68796&336336
+        \\132&429&2002&10010&50960&259896&1319472\\\end{array}$
+      </div>
+      Then the expression will be true for the original function: $$
+      G(x,y)=\sum_{n}\sum_{m} T_{69}(n-m,m,k)x^n\,y^m. $$ To obtain an
+      expression of the coefficients of the mutual generating function, you can
+      use the expression[10]: $$T_r(n,m,k)=\sum_{j=0}^{m+n}{T(0 , 0 ,
+      1)^{-j-k}(-1)^{j}{j+k-1\choose{j}}{\it T}\left(n , m , j\right)
+      {k+m+n\choose{m+n-j}}}$$ Where $T(n,m,k)$ - is the tensor for the original
+      generating function, provided that $T(0,0,0)=1$ и $T(n,m,0)=0$. Write down
+      the tensor for the original function $$
+      T(n,m,k)=T_{69}(n-m,m,k)={\frac{k}{n+k}{2*m+k-1\choose{m}}{2*n+k-1\choose{n-m}}}.
+      $$ Then the tensor of the mutual generating function will have an explicit
+      expression $$ T_r(n,m,k)=\sum_{j=0}^{m+n}(-1)^{j} {j+k-1\choose{j}}
+      {\frac{j}{n+j}} {2*m+j-1\choose{m}} {2*n+j-1\choose{n-m}}
+      {k+m+n\choose{m+n-j}}. $$
+    </div>
+    <div id="10_1" class="article">
+      10.1 Finding explicit expressions for decomposing functions of the form
+      $G(x,y)^{\alpha}$
+    </div>
+    <div>
+      Let $$ G(x,y)^k=\sum_{n\geqslant 0}\sum_{m\geqslant 0} T(n,m,k)x^ny^m $$
+      $G(0,0)\neq 0$.Then the coefficients of the decomposition of the function
+      $$ \frac{1}{G(x,y)^{\alpha}} $$ will have the following expressions
+      \begin{equation} \sum_{j=0}^{n+m}{\frac{(-1)^{j}} {T(0,0,1)^{j+\alpha}}
+      {j+\alpha-1\choose{j}}{\it T}(n,m,j) {n+m+\alpha \choose{n+m-j}}}
+      \end{equation} and \begin{equation}
+      (n+m+1){n+m+\alpha\choose{n+m+1}}\sum_{j=0}^{n} T(0,0,1)^{-j-\alpha}
+      (-1)^{j} T(n,m,j) {n+m\choose{j}} \over{j+\alpha} \end{equation} ....
+    </div>
+    <div id="11" class="article">
+      11. Finding the coefficients of inverse generating functions
+    </div>
+    <div>
+      Let the generating function $$ F(x,y)=\frac{x}{1-x-x^2(1+y)} $$ be given.
+      Find the coefficients of the expansion of the inverse function satisfying
+      the equation $$ G(A(x,y),y)=x . $$ To do this , we write $$
+      G_x(x,y)=\frac{G_x(x,y)}{x}. $$ Then the equation will take the form: $$
+      A(x,y)=\frac{x}{G_x(A(x,y),y)} $$ Now let's perform the substitution
+      $A(x,y)=xA_x(x,y)$ $$ A_x(x,y)=\frac{x}{G_x(A_x(x,y),y)} $$ Then to find
+      the inverse of the functions, you can use the formula (.). However, in
+      this case (see diagram .) the mutual mutual function is easy to find $$
+      G_{r}(x,y)=1-x-x^2(1+y)=(1-x(1+x+xy). $$ Now we find the pyramid
+      $T(n,m,k)$ of the function $F(x,y)=(1+x+xy)$ at number 37 (see pic.)
+      <div class="fragment">
+        Generating function:<br />
+        $U_{37}(x,y)=1+x+x\,y$
+        <br />
+        Formula: $T_{37}(n,m,k)={k\choose{n}}\,{n\choose{m}}$ Data:
+        $\begin{array}{lllllll}1&0&0&0&0&0&0\\1&1&0&0&0&0&0\\0&0&0&0&0&0&0\\0&0&0&0&0&0&0\\0&0&0&0&0&0&0\\0&0&0&0&0&0&0\\0&0&0&0&0&0&0\\\end{array}$
+      </div>
+      $$ T_r(n,m,k)=\sum_{i=0}^{n+m} T_{37}(n-i,m,i){k\choose
+      i}(-1)^i=\sum_{i=0}^{n+m} {i\choose{n-i}}\,{n-i\choose{m}}{k\choose
+      i}(-1)^i= $$ $$ \sum_{i=0}^{n} {i\choose{n-i}}\,{n-i\choose{m}}{k\choose
+      i}(-1)^i $$ Then the coefficients for $A_x(x,y)^k$ $$
+      T_{A_x}(n,m,k)=\frac{k}{n+k}T_r(n,m,n+k)=\frac{k}{n+k}\sum_{i=0}^{n}
+      {i\choose{n-i}}\,{n-i\choose{m}}{k+n\choose i}(-1)^i $$
+      $${\sqrt{4*x^2*y+5*x^2+2*x+1}-x-1}\over{2*x^2*y+2*x^2}$$
+    </div>
+    <div id="12" class="article">
+      12. Finding the generating function for the explicit expression of
+      coefficients
+    </div>
+    <div>
+      Let the expression be given
+      $$\sum_{k=0}^{m}{n+m-k+2\choose{k}}{n+m-k\choose{n}}$$ We will perform a
+      number of transformations in order to obtain one of the compositional
+      formulas presented in []. $$\sum_{k=0}^{m}{n+m-k+2\choose{
+      k}}{m-k+n\choose{n}}$$ changing the summation order from $k$ to $m-k$
+      $$\sum_{k=0}^{m}{n+k+2\choose{ m-k}}{k+n\choose{n}}$$ now the index $k$
+      does not start from zero, but from $n$ $$\sum_{k=n}^{n+m}{k+2\choose{
+      n+m-k}}{k\choose{n}}$$ now the index k $k$ starts from zero.
+      $$\sum_{k=0}^{n+m}{k+2\choose{ n+m-k}}\,{k\choose{k-n}}$$ we introduce a
+      new variable and introduce summation by this variable, using the kronecker
+      symbol $$ j=n+m-k $$ we get $$\sum_{k=0}^{n+m}{\sum_{j=0}^{m}{\delta_{j,
+      n+m-k} \,{k+2\choose{ j}}\,{-j+n+m\choose{m-j}}}}$$ now we compare it with
+      the compositional formula
+      $$g(n,m)=\sum\limits_{k=0}^{n+m}\sum\limits_{j=0}^{m}{A^{\Delta}\left(n
+      ,m-j,k\right)h(k,j)}$$ Note that for our case $$ A^{\Delta}\left(n
+      ,m-j,k\right)={\delta_{j, n+m-k}{-j+n+m\choose{m-j}}} $$ Where from $$
+      A^{\Delta}(n ,m,k)={\delta_{k, n+m}{n+m\choose{m}}} $$ From where, using
+      the encyclopedia, we will find the pyramid at number 1, its generating
+      function is $(x+y)$. Now let's find the generating function for $$
+      h(n,m)={n+2\choose{ m}} $$ We make a request to the knowledge base:
+      $T=binomial(n+2,m)$ We get the pyramid number 42 (see pic)
+      <div class="fragment">
+        Generating function:
+        <br />
+        $U_{42}(x,y)={\left(1+y\right)^2}\over{1-x\,\left(1+y\right)}$ Formula:
+        <br />
+        $T_{42}(n,m,k)={n+k-1\choose{n}}\,{n+2k\choose{m}}$ Data:
+        $\begin{array}{lllllll}1&2&1&0&0&0&0\\1&3&3&1&0&0&0\\1&4&6&4&1&0&0\\1&5&10&10&5&1&0\\1&6&15&20&15&6&1\\1&7&21&35&35&21&7\\1&8&28&56&70&56&28\\\end{array}$
+      </div>
+      From where we get the desired generating function. $$
+      A(x,y)=UU0042(x+y,y)={\left(y+1\right)^2}\over{1-\left(y+1\right)\,\left(y+x\right)}$$
+    </div>
+
+    <div id="13" class="article">
+      13. Finding the composition of logarithmic functions and their derivatives
+    </div>
+    <div>
+      1. Let be given a functional equation of the form: $$
+      A(x,y)=G(x\,A(x,y),y) $$ And the expression of the coefficients of the
+      k-degree of the generating function $G(x,y)$. $$
+      T_G(n,m,k)=[x^n\,y^m]G(x,y)^k. $$ is known. Then the coefficients of the
+      logarithmic partial derivative of the generating function $A(x,y)$ in $x$
+      , will be expressed in terms of the coefficients $T_G(n,m,k)$ $$
+      T_{lx}(n,m)=[x^n\,y^m]\frac{1}{A(x,y)}\frac{\partial A(x,y)}{\partial x}
+      $$ $$ T_{lx}(n,m)=T_G(n,m,n) $$ 2.Let a functional equation of the form be
+      given: $$ A(x,y)=G(x,y\,A(x,y)) $$. And the expression of the coefficients
+      of the k-degree of the generating function is known $G(x,y)$. $$
+      T_G(n,m,k)=[x^n\,y^m]G(x,y)^k. $$ then the coefficients of the logarithmic
+      partial derivative of the generating function $A(x,y)$ in $y$ , will be
+      expressed in terms of the coefficients $T_G(n,m,k)$ $$
+      T_{ly}(n,m)=[x^n\,y^m]\frac{1}{A(x,y)}\frac{\partial A(x,y)}{\partial y}
+      $$ $$ T_{ly}(n,m)=T_G(n,m,m) $$ Let's find the coefficients of the
+      logarithmic derivative of the generating function $A_{139}(x,y)$ of the
+      corresponding frame in the knowledge base shown in pic:
+      <div class="fragment">
+        Generating function:<br />
+        $U_{139}(x,y)={1-2\,x-y-\sqrt{1-4\,x-\left(2-4\,x\right)\,y+y^2}}\over{2\,x^2}$
+        Formula:<br />
+        $T_{139}(n,m,k)={k*{n+m+k\choose{m}}{2n+2k\choose{n}}\over{n+m+k}}$
+        Data:
+        $\begin{array}{lllllll}1&1&1&1&1&1&1\\2&4&6&8&10&12&14\\5&15&30&50&75&105&140\\14&56&140&280&490&784&1176\\42&210&630&1470&2940&5292&8820\\132&792&2772&7392&16632&33264&60984\\429&3003&12012&36036&90090&198198&396396\\\end{array}$
+        <br />
+        Right on y: UU0138(x,y)<br />
+        Left on x: UU0059(x,y)<br />
+        Left on y: UU0060(x,y)<br />
+        Change x y: UU0359(x,y)<br />
+      </div>
+      Next, follow the link to the frame 59 and copy the explicit formula for
+      the tensor of the generating function UU0059(x,y). $$
+      T_{59}(n,m,k)=\frac{k {\binom{2 k}{n}} {\binom{k + m}{m}}}{k + m} $$ For
+      the desired logarithmic derivative $$
+      G(x,y)=\frac{1}{A(x,y)}\frac{\partial A(x,y)}{\partial x}=
+      1-2*x^2-{2*x^2\over{U(x*y)}}+{x^2*(4-4*y)\over{2{\it U}\left(x ,
+      y\right)\,\sqrt{1-4\,x-\left(2-4\,x\right)\,y+y^2}}}, $$ where $$
+      U(x,y)=1-2\,x-y-\sqrt{1-4\,x-\left(2-4\,x\right)\,y+y^2}. $$ the
+      coefficients will have an explicit expression $$
+      g(n,m)=T_{59}(n,m,n)={n*{2*n\choose{n}}*{m+n\choose{m}}\over{m+n}}=\binom{2n}{n}\binom{n+m-1}{m}.
+      $$ 3. Consider the case when the left tensor for this generating function
+      is unknown, but there is a tensor of this function. Then you can use the
+      following formulas. The formula for the partial logarithmic derivative of
+      $x$ variable is as follows: $$ T_{logx}(n,m)=\left\{\begin{array}{ll}\\
+      T(0,0,1)^n & n=0\;, m=0,\\
+      n\,\sum_{j=1}^{n+m}{(-1)^{j-1}*T(n,m,j)*{n+m\choose{j}} \over{T^{j}(0 , 0
+      , 1)j}}, & n>0\;or\; m>0.\\ \end{array} \right. $$ The formula for the
+      partial logarithmic derivative of $x$ variable is as follows: $$
+      T_{logy}(n,m)=\left\{\begin{array}{ll}\\ T(0,0,1)^m & n=0\;, m=0,\\ m\,
+      \sum_{j=1}^{n+m}{(-1)^{j-1}* T(n , m , j){n+m\choose{j}}} \over{T^{j}(0 ,
+      0 , 1)*j}, & n>0\;or\; m>0.\\ \end{array} \right. $$ Comparing the above
+      formulas for partial logarithmic derivatives, you can see that they differ
+      by multipliers $m$ and $n$. The terms $T_{logx}(n,m)$ and $T_{logy}(n,m)$
+      describe the decomposition of the logarithmic derivative if the terms
+      $T_{logx}(n,m)$ by $n$, and $T_{logy}(n,m)$ by $m$, we obtain the terms of
+      the decomposition of the composition of generating functions $$
+      log(U(x,y)), $$ where $U(x,y)$- is the generating function having the
+      tensor $T(n,m,k)$.Let 's write down an explicit formula for the members of
+      the composition $$ Lo(n,m)=\sum_{j=1}^{n+m}{(-1)^{j-1} T(n , m ,
+      j){n+m\choose{j}} \over{T^{j}(0 , 0 , 1)j}} $$ Consider an example. Let
+      the generating function number 130 be given.
+      <div class="fragment">
+        Generating function: $$U_{130}(x,y)=1\over{-4*y+(1-x+y)^2}$$ Formula:
+        $$T_{130}(n,m,k)={m+k\choose{k-1}}{n+k-1\choose{k-1}}{n+m+2*k-1\choose{
+        k-1}}{2*(n+m)+2*k\choose{2*m+1}}\over{2*{2*k-2
+        \choose{k-1}}{2m+2*k\choose{2*k-2}}}$$ Data:
+        $$\begin{array}{lllllll}1&2&3&4&5&6&7\\2&10&28&60&110&182&280\\3&28&126&396&1001&2184&4284\\4&60&396&1716&5720&15912&38760\\5&110&1001&5720&24310&83980&248710\\6&182&2184&15912&83980&352716&1248072\\7&280&4284&38760&248710&1248072&5200300\\\end{array}$$
+      </div>
+      Then the coefficients of the decomposition of the composition of functions
+      $$ \log(UU_{130}(x,y)=\log({1\over{-4*y+(1-x+y)^2}}) $$ $$
+      Lo(n,m)=\sum_{k=1}^{n+m} (-1)^{k-1} { {m+k\choose{k-1}}
+      {n+k-1\choose{k-1}} {n+m+2*k-1\choose{k-1}} {2*(n+m)+2*k\choose{2*m+1}}
+      \over 2*k*{2*k-2\choose{k-1}}*{2*m+2*k\choose{2*k-2}} } {n+m\choose{k}} $$
+    </div>
+    <div id="14" class="article">14.Examples</div>
+    <div id="14_1" class="article">14.1 Example 1. Fina Triangle</div>
+    <div>
+      Consider the generating function for the Fin triangle $$
+      G(x,y)={2\over{1+\sqrt{1-4\,x}+2\,x-2\,x\,y}} $$
+      $$G(x,y)=\frac{A(x)}{1-y\,A(x)}.$$ $$A(x)=\frac{2}{1+\sqrt{1-4\,x}+2\,x}$$
+      $$ G(x,y)=A(x)\,y+A(x)^2\,y^2+\ldots+A(x)^n\,y^n+\ldots $$ $A(x)$ - s the
+      generating function of the Fin sequence (see. $Up0157(x)$). Then $$
+      G(x,y)=\sum_{n\geqslant k} Tp0157(n,k)\,x^n\,y^k $$
+    </div>
+    <div id="14_2" class="article">
+      14.2 Example 2. Euler triangle (Euler numbers of the first genus)
+    </div>
+    <div>
+      ПGenerating function for Euler numbers of the first genus
+      $$E(x,y)={y-1\over{y-e^{x(y-1)}}}$$ Let 's imagine it in the form
+      $$E(x,y)={1\over{1-\frac{e^{x,(y-1)}-1}{y-1}}}$$ Consider the function $$
+      A(x,y)=\frac{e^{x(y-1)}-1}{y-1} $$ Then it can be represented by a
+      composition of functions $$ A(x,y)=x\,B(C(x,y)), $$ where
+      $B(x)=\frac{e^x-1}{x}$ и $C(x,y)=x\,(y-1)$. Then $B(x)=Up0102(x)/x$ $$
+      B(x)^k=(\frac{e^x-1}{x})^k=\sum_{n\geqslant 0} Tp0102(n+k,k)x^n. $$ where
+      $$Tp0102(n,k)=\frac{k!}{n!}\,{n \choose k}$$ Using the encyclopedia we
+      will find $C(x)^k$ $$ C(x)^k=\sum_{n\geqslant
+      k}\,Tuu0002(n,m,k)\,(-1)^{m+k}\,x^n\,y^m $$ $$ Tuu0002(n,m,k)=\delta_{k,
+      n} \,{n\choose m} $$ We find the coefficients $B(C(x))^k$ $$
+      \sum_{j=0}^{n+m} Tuu0002(n,m,j)(-1)^{m+j}Tp0102(j+k,k)= $$ $$
+      \sum_{j=0}^{n+m}\delta_{j, n} \,{n\choose
+      m}(-1)^{m+j}\frac{k!}{(j+k)!}\,{j+k \choose k}= $$ $$ {n \choose m
+      }(-1)^{n+m}\frac{k!}{(n+k)!}\,{n+k \choose k}. $$ We find the coefficients
+      $x\,B(C(x))^k$ $$ {n-k\choose m }(-1)^{n+m-k}\frac{k!}{n!}\,{n \choose k}=
+      $$ From where we find an explicit expression for the decomposition
+      coefficients of the desired composition $$ \sum_{k=0}^{n} {n-k\choose
+      m}(-1)^{n+m-k}\frac{k!}{n!}\,{n \choose k} $$ Then Euler numbers of the
+      first kind will have the following explicit expression $$ {n \choose
+      m}=\sum_{k=0}^{n-m} (-1)^{n+m-k}\,k!\,{n-k \choose m} {n \choose k} $$
+    </div>
+    <div id="14_3" class="article">
+      14.3 Example 3. Generating function for second-order Euler numbers
+    </div>
+    <div>
+      Consider the use of an encyclopedia to obtain a generating function for
+      Euler numbers of the second genus. To do this, we prove the following
+      theorem.
+      <br />
+      <b>Theorem 2</b> The exponential generating function for second-order
+      Euler numbers has the form: $$ \sum\limits_{n \geqslant 0}
+      \sum_{m\geqslant \geqslant0} {n \choose m}\frac{x^n}{n!}t^m={1-t\over{W(-t
+      e^{(1-t)^2,x-t})+1}}, $$ where $W(x)$ -is the Lambert function, $x>0$.
+      <br />
+      <b> Proof </b>We write down the exponential generating function in the
+      form of a double series, while taking the offset by $(n-1)$ $$ E(x,t) =
+      \sum_{n>0}\sum_{m>0} {n-1 \choose m}\frac{x^n}{n!}t^m $$ Consider the
+      formula obtained in |15| $$ {n \choose m}=\sum_{k=0}^m (-1)^{m-k}\,{2\,n+1
+      \choose m-k} {n+k \choose k}, $$ It can be represented as the product of
+      two rows $$ E(x,t)=\sum_{n>0}P_n(t)\frac{x^n}{n!}\,(1-t)^{2n-1} $$ where
+      $$ (1-t)^{2\,n-1}=\sum_{n\geqslant 0}(-1)^m\,{2\,n-1 \choose m}t^m $$ and
+      $$ P_n(t)=\sum_{m\geqslant 0}{n+m-1 \choose m}t^m $$ Let 's write the
+      function $$ u(x,t)=\sum_{n>0}\sum_{m\geqslant 0}{n+m-1 \choose
+      m}\frac{x^n}{n!}t^m $$ We show that this function is the inverse function
+      for the function $$ y(x,t)=(x-t(e^x-1)). $$ let 's write a mutual function
+      for $y(x,t)$ $$ \frac{x}{y(x,t)}=\frac{1}{1-t\frac{e^x-1}{x}} $$ and find
+      her degree. To do this , we write $$ (t(\frac{e^x-1}{x}))^k=\sum_{n>0}
+      \sum_{m>0}T(n,m,k)x^nt^n $$ It is known that for the function $(e^x-1)$ is
+      available identity $$ (e^x-1)^k=\sum\limits_{n\geqslant 0} k!{n \choose
+      k}\frac{x^n}{n!}, $$ we get $$ T(n,m,k)=\delta(m,k){n+k \choose
+      k}\frac{k!}{(n+k)!}, $$ where $\delta(m,k)$ is the Kronecker symbol. For
+      the function $\frac{1}{(1-x)}$ the identity is known $$
+      \frac{1}{(1-x)^k}=\sum_{n\geqslant 0} {n+k-1 \choose n}x^n. $$ Then for
+      the degree of composition of two generating functions $$
+      ({1}{1-t\frac{e^x-1}{x}})^k=\sum\limits_{n\geqslant 0}
+      \sum\limits_{m\geqslant 0} D(n,m,k)x^nt^m, $$ based on the compositional
+      formula \cite{kru}, we can write $$ D(n,m,k)=\sum\limits_{i=0}^{n+m}
+      T(n,m,i){i+k-1 \choose i}=\sum\limits_{k=0}^{n+m} \delta(m,i) {n+i \choose
+      i}\frac{i!}{(n+i)!}{i+k-1 \choose i}= $$ $$ ={n+m \choose
+      m}\frac{m!}{(n+m)!}{m+k-1 \choose m}. $$ Now let 's use the theorem
+      Lagrange on the inverse function, according to which for a power series
+      $u(x,t)$ satisfying the functional equation $$ u=x\,F(g,t) $$ where
+      $F(x,t)$ - s a power series for which $F(0,0)\neq 0$ holds the identity.
+      $$ [x^n]u(x,t)=\frac{k}{n}[x^{n-k}]F(x,t)^n. $$ Let 's write down the
+      functional equation for our case $F(x,t)=\frac{1}{1-t\frac{e^x-1}{x}}$ $$
+      u=\frac{x}{1-t\frac{e^{u}-1}{u}}. $$ The solution to this equation will be
+      $$ u(x,t)^k=\sum\limits_{n>0} \sum\limits_{m\geqslant 0}
+      \frac{k}{n}D(n-k,m,n)x^n\,t^m $$ где $D(n,m,k)$ where are the coefficients
+      of the series $F(x,t)^k$. Then $$ D(n-k,m,n)={n+m-k \choose
+      m}\frac{m!}{(n+m-k)!}{m+n-1 \choose m} $$ For $k=1$ we get $$
+      u(x,t)=\sum\limits_{n>0} \sum\limits_{m\geqslant 0} \frac{1}{n}{n+m-1
+      \choose m}\frac{m!}{(n+m-1)!}{m+n-1 \choose m}x^n\,t^m $$ or, after
+      simplifying the binomial coefficient and factorials, we get $$
+      u(x,t)=\sum\limits_{n>0} \sum\limits_{m\geqslant 0} \frac{1}{n!}{n+m-1
+      \choose m}x^n\,t^m $$ Thus, the function $u(x,t)$ is the inverse of the
+      function $y(x,t)=(x-t(e^x-1))$. Now let's use the Lambert function and its
+      properties. The Lambert function is given by the equation $$
+      x=W(x)e^{W(x)} $$ It is known that solutions of the equation of the form
+      $$ g(x)=f(x)e^{f(x)} $$ the solution will be $$ f(x)=W(g(x)) $$ We use
+      this property for our case $$ y=x(y,t)-t\,e^{x(t,y)}+t $$ We will make a
+      replacement $$ z(y,t)=x(y,t)+t-y $$ Then the equation will have the form
+      $$ z(y,t)=t\,e^{Z(y,t)-t+y} $$ Let 's rewrite it in the form $$
+      z(y,t)e^{-Z(y,t)}=t\,e^{y-t} $$ Then the solution for $z(y,t)$ will have
+      the form $$ z(y,t)=-W(-t\,e^{y-t}) $$ Where from $$
+      x(y,t)=y-t-W(-t\,e^{y-t}) $$ Now consider the product $$
+      E(x,t)=\sum_{n>0}P_n(t)\frac{x^n}{n!}\,(1-t)^{2n-1}=\frac{1}{1-t}\sum_{n>0}P_n(t)\frac{(x(1-t)^2)^n}{n!}
+      $$ Where from $$
+      E(x,t)=\frac{E_2(x(1-t)^2,t)}{(1-t)}=\frac{x(1-t)^2-t-W(-t\,e^{x(1-t)^2-t})}{1-t}.
+      $$ Differentiating by $x$ the expression for $E(x,t)$ taking into account
+      the properties of the derivative of the Lambert function $W(x)$ we obtain
+      the desired generating function $$ Eu(x,t)=\sum\limits_{n>0} \sum_{m>0} {n
+      \choose m}\frac{x^n}{n!}t^m={1-t\over{W(-t\,e^{(1-t)^2\,x-t})+1}} $$
+    </div>
+    <div id="15" class="article">
+      15. Finding explicit expressions for decomposing the composition of
+      generating functions of many variables
+    </div>
+    <div>
+      Consider the composition of generating functions $F(x)$ and
+      $G(x,y,\ldots,z)$, $G(0,0,\ldots,0)=0$ Then
+      $A(x,y,\ldots,z)=F(G(x,y,\ldots,z))$ $$ \sum_{k=0}^{n+m+\ldots, i}
+      G^{\Delta}(n,m,\ldots,i,k)f(k) $$ $$
+      [x^n\,y^m\,\ldots\,z^i](x+y+\ldots+z)^k={n+m+\ldots+i\choose
+      n,m,\ldots,i}\delta(n+m+\ldots+i,k) $$ $$
+      [x^n\,y^m\,\ldots\,z^i]F(x+y+\ldots+z)=\sum_{k=0}^{n+m+\ldots+i}{n+m+\ldots+i\choose
+      n,m,\ldots,i}\delta(n+m+\ldots+i,k)f(k)= $$ $$ {n+m+\ldots+i\choose
+      n,m,\ldots,i}f(n+m+\ldots+i) $$ Example $$ e^{\frac{x}{1-x-y-z}} $$ $$
+      [x^n\,y^m\,z^i]\left(\frac{1}{1-x-y-z}\right)^k= $$ $$ \sum_{j=0}^{n+m+i}
+      {n+m+i\choose n,m,i}\delta(n+m+i,j){j+k-1\choose j}= $$ $$ {n+m+i\choose
+      n,m,i}{n+m+i+k-1\choose n+m+i} $$ Where from $$
+      [x^n\,y^m\,z^i]\left(\frac{x}{1-x-y-z}\right)^k={n-k+m+i\choose
+      n-k,m,i}{n+m+i-1\choose n-k+m+i} $$ $$
+      [x^n\,y^m\,z^i]e^{\left(\frac{x}{1-x-y-z}\right)}=\sum_{k=0}^{n+m+i}\frac{1}{k!}{n-k+m+i\choose
+      n-k,m,i}{n+m+i-1\choose n-k+m+i}= $$ $$
+      \sum_{k=0}^{n}\frac{1}{k!}{n-k+m+i\choose n-k,m,i}{n+m+i-1\choose n-k+m+i}
+      $$
+    </div>
+    <div id="16" class="article">
+      16. Finding explicit expressions for decomposing functions of the form
+      $G(x,y,\ldots,z)^{\alpha}$
+    </div>
+    <div>
+      Let the function $G(x,y,\ldots,z)$, $G(0,0,\ldots,0)\neq 0$ and be given
+      and the coefficients of the k-th degree are given $$
+      G(x,y,\ldots,z)^k=\sum_{n\geqslant 0}\sum_{m\geqslant 0}
+      T(n,m,\ldots,i,k)x^n\,y^m. $$ Then for the coefficients of the expansion
+      $G(x,y,\ldots,z)^{-\alpha}$ will have the expressions $$
+      \sum_{j=0}^{n+m+\ldots+i} \frac{(-1)^{j}}{T (0 ,0,\ldots,0,1)^{j+\alpha}}
+      \binom{j+\alpha-1}{j} T(n,m,\ldots,i,j) \binom
+      {n+m+\ldots+i+\alpha}{n+m+\ldots+i-j} $$ and $$ (n+m+\ldots+i+1)
+      {n+m+\ldots+i+\alpha\choose n+m+\ldots+i+1} \sum_{j=0}^{n+m+\ldots+i}
+      \frac{(-1)^{j} {n+m+\ldots+i\choose j} }{(j+\alpha) T(0
+      ,0,\ldots,0,1)^{j+\alpha}} $$
+    </div>
+    <div id="17" class="article">17. How the encyclopedia was created</div>
+    <div>
+      Consider the method of obtaining pyramids. o do this, we write down the
+      set of generating functions of one variable and the corresponding set of
+      explicit expressions of coefficients $k$-degrees. . Let there be a set of
+      $G=\{g_i(x)\}$ generating functions, the coefficients of $k$-degree are
+      described by binomial coefficients of $\{T_i(n,k)\}$. $$
+      \begin{array}{|c|c|}\hline \hbox{Generating function }G(x) & \hbox{Degree
+      coefficients } g_x(n,k)\\ \hline (1+x) & \binom{k}{n}\\ \hline
+      \frac{1}{1-x} & \binom{n+k-1}{n}\\ \hline \frac{1-\sqrt{1-4x}}{2x} &
+      \frac{k}{n+k}{2n+k-1\choose n}\\ \hline \frac{1-2x-\sqrt{1-4x}}{2x^2} &
+      \frac{k}{n+k}{2n+2k\choose n}\\ \hline \frac{2}{\sqrt{3x}} \sin({
+      {\arcsin( {3^ {3\over{2}} \sqrt{x} \over {2} } )} \over {3} }) &
+      {k\,{3\,n+k-1 \choose n }}\over{2\,n+k}\\ \hline 1+\sqrt{1+4x}\over{2} &
+      k(-1)^{n-1}{2n-k-1 \choose n-1}\over{n}\\ \hline 1-\frac{4}{3} \sin ^2({
+      {\arcsin( {3^ {3\over{2}} \sqrt{-x} \over {2} } )} \over {3} }) &
+      k(-1)^{n-1}{3n-k-1 \choose n-1}\over{n} \\ \hline \sqrt{1+4x} &
+      \begin{array} \binom {\binom{k \over 2}n} 4^{n} & k-even \\
+      \frac{(-1)^{n-{k+1 \over 2}} \binom {n} {k+1\over 2} \binom {2n} {n}}
+      {\binom {2n}{k+1}}& k-odd, 2n>(k+1),\\ \frac{\binom{k+1}{2n}\binom
+      {2n}{n}} {\binom{k+1\over 2} {n}} & k-odd,2n \le(k+1), \\ \end{array} \\
+      \hline \sqrt{1+4x^2}+2x & \begin{array}\\ \frac{k4^n}{n+k} \binom {n+k
+      \over 2}{n},& n+k-even\\ \frac{k(-1)^{n-k-1\over2}\binom {n}{n+k+1 \over
+      2} \binom{2n}{n}}{(n+k) \binom{2n}{n+k+1}} &k-odd,n>(k+1),\\ \frac
+      {k\binom{n+k+1}{2n} \binom{2n}{n}}{(n+k) \binom{n+k+1 \over 2}{n}}&
+      n+k-odd,n\le(k+1),\\ \end{array} \\ \hline {1\over \sqrt{1-4x}} &
+      \begin{array}\\ 4^n \binom {\frac{k}{2} + n-1}{n} & k-even, \\ \frac
+      {\binom {2n+k-1}{\frac{k-1}{2}+n} \binom{\frac{k-1}{2}+n}{n}}
+      {\binom{k-1}{k-1 \over 2}} ,& k-odd,\\ \end{array} \\\hline {1\over 12x} +
+      \frac{\sin (\frac{\arcsin(-1+216\,x^2)}{3})} {6x} & \begin{array}\\
+      \frac{k4^n \binom {\frac{3n+k}{2}-1}{n}}{n+k}, & k - even,\\ \frac{k
+      \binom{\frac{3n+k-1}{2}}{n} \binom{3n+k-1}{\frac{3n+k-1}{2}}} {(n+k)
+      \binom{n+k-1}{\frac{n+k-1}{2}}}& k -odd \\\end{array} \\ \hline
+      \sqrt{\frac{1-\sqrt{1-16x}}{8x}} & \begin{array}\\ \frac{k4^n
+      \binom{\frac{4n+k}{2}-1}{n}}{2n+k} & k - even,\\ \frac{k
+      \binom{\frac{4n+k-1}{2}}{n} \binom {4n+k-1} {\frac {4n+k-1} {2} }}
+      {(2n+k)\binom{2n+k-1}{\frac{2n+k-1}{2}}} ,& k- odd.\\ \\ \end{array} \\
+      \hline \sqrt{\frac{\sin (\frac{\arcsin(\sqrt {27x})}{3})} {\sqrt {3x}}} &
+      \begin{array}\\ \frac{k4^n \binom{\frac{6n+k}{2}-1}{n}}{4n+k} & k -
+      even,\\ \frac{k \binom{\frac{6n+k-1}{2}}{n} \binom {6n+k-1} {\frac
+      {6n+k-1} {2} }} {(4n+k)\binom{4n+k-1}{\frac{4n+k-1}{2}}} ,& k- odd.\\ \\
+      \end{array} \\ \hline \end{array} $$ It should be noted that this table is
+      significantly limited and is used as an example. Choose $g_1(x)\in G$ and
+      $g_2(x)\in G$ and construct a new function of two variables. Two ways of
+      obtaining pyramids of the generating function of two variables can be
+      proposed:<br /><br />
+      1. Based on the product and composition of functions $g_1(x)\in G$ and
+      $g_2(x)\in G$. Let $g_1(x)=(1+x)$, $g_2(x)=\frac{1}{1-x}$ and the
+      coefficients of k-degree $g_1(x)$ have the form: $$ T_1(n,k)={k \choose
+      n}, $$ for $g_2(x)$ $$ T_2(n,k)={n+k-1 \choose n}, $$ Let's write a new
+      function of two variables $$ U(x,y)=g_1(x)\cdot g_2(y) $$ Then the pyramid
+      of the function $U(x,y)$ will have the expression $$
+      T_U(n,m,k)=T_1(n,k)\cdot T_2(m,k) $$ Then $$ U(x,y)=\frac{1+x}{1-y} $$
+      From where, we get the following pyramid $$ T_U(n,m,k)={k\choose
+      n}{m+k-1\choose m}. $$ This pyramid is listed in the encyclopedia as
+      number 17. We will expand this method by composing generating functions
+      for obtaining pyramids. Let's choose $g_1(x)\in G$ and $g_2(x)\in G$ and
+      build a new function of two variables $$ U(x,y)=g_1(x\cdot g_2(y))\,g_2(y)
+      $$ Then the pyramid of the function $U(x,y)$ will have the expression $$
+      T_U(n,m,k)=T_1(n,k)\cdot T_2(m,n+k) $$ In general, you can write a
+      function of the form $$ U(x,y)=g_1(x\cdot g_2(y)^a)^b\,g_2(y)^c $$ where
+      $a,b,c\in N$ Then the pyramid of the function $U(x,y)$ will have the
+      expression $$ T_U(n,m,k)=p_1(n,bk)\cdot p_2(m,an+ck) $$ For example, for
+      $g_1(x)=(1+x)$, $g_2(x)=\frac{1}{1-x}$ (see the previous example), we will
+      set the values $a=2$, $b=2$, $c=1$. Then the function will take the form
+      $$ U(x,y):=\frac{1}{1-y}\left(1+\frac{x}{(1-y)^2}\right)^2 $$ From where
+      the pyramid will have the expression: $$
+      T_U(n,m,k)=T_1(n,2k)T_2(m,2n+k)=\binom{2k}{n}\binom{m+2n+k-1}{m} $$ This
+      pyramid is recorded in the encyclopedia under the number 1423.<br /><br />
+      2. Consider a method for obtaining pyramids based on Lagrange's theorem.
+      Let 's choose $g_1(x)\in G$ and $g_2(x)\in G$ and write a functional
+      equation of the form: $$ U(x,y)=g_1(x\cdot g_2(y)^a\cdot
+      U(x,y))^b\,g_2(y)^c $$ To do this, you need to find the coefficients of
+      the degree $$ T(n,m,k)=[x^n\,y^m]\left(g_1(x\cdot
+      g_2(y)^a)^b\,g_2(y)^c\right)^k=T_1(n,b\,k)T_2(m,a\,n+c\,k) $$ To do this,
+      use the previous method. Where from $$
+      T_U(n,m,k)=\frac{k}{n+k}T_1(n,b(n+k))\cdot T_2(m,an+c(n+k)) $$ Let's take
+      the initial data from the previous example. Then the functional equation
+      will take the form: $$
+      U(x,y)=\left(1+\frac{x\,U(x,y)}{1-y)^2}\right)^2\frac{1}{1-y}. $$ As a
+      result of the solution , we obtain the following generating function of
+      two variables: $$ U(x,y)=\frac{(1-\sqrt{1-4x(1-y)^3}-2x) (1-y)^2}{2x^2} $$
+      Then $$ T_F(n,m,k)= \frac{k}{n+k} \binom{2n+2k}{n} \binom{3n+m+k-1}{m} $$
+      This pyramid is recorded in the encyclopedia under the number 1458.
+      <br />
+      Using this technique, you can get a large number of pyramids. Currently,
+      based on the use of this technique, 1502 pyramids have been obtained.
+    </div>
+  </div>
+</div>
+{% endblock %}
