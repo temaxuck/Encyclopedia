@@ -436,12 +436,16 @@
       Рассмотрим примеры <br />
       <b class="paragraph"> 8.5.1 Пример 1</b>
 
-      $$ G(x)=(\frac{x}{e^x-1})^{\alpha} $$ $$ (e^x-1^k)=\sum_{n\geqslant k}
-      \binom{n}{k}\frac{k!}{n!} x^n $$ $$ (\frac{e^x-1}{x})^k=\sum_{n\geqslant
-      0} \binom{n+k}{k}\frac{k!}{(n+k)!}x^n $$ $$ \sum_{j=0}^{n}(-1)^{j} \binom
-      {j+\alpha-1}{j} \binom{n+j}{j} \frac{j!}{(n+j)!} { n+\alpha \choose n-j}
-      $$ и $$ (n+1){n+\alpha \choose n+1}\sum_{j=0}^{n} \frac{(-1)^{j}j!
-      \binom{n+j}{j} {n \choose j}} {(j+\alpha)(n+j)!} $$
+      $$ G(x)=(\frac{x}{e^x-1})^{\alpha} $$
+      $$ (e^x-1^k)=\sum_{n\geqslant k}  {n \brace k} \frac{k!}{n!} x^n $$
+      $$ (\frac{e^x-1}{x})^k=\sum_{n\geqslant 0} {n+k \brace k} \frac{k!}{(n+k)!}x^n $$
+
+      $$ \sum_{j=0}^{n}(-1)^{j} \binom
+      {j+\alpha-1}{j} {n+j \brace j} \frac{j!}{(n+j)!} { n+\alpha \choose n-j}
+      $$
+      и
+      $$ (n+1){n+\alpha \choose n+1}\sum_{j=0}^{n} \frac{(-1)^{j}j!
+      {n+j\brace j} {n \choose j}} {(j+\alpha)(n+j)!} $$
 
       <b class="paragraph"> 8.5.2 Пример 2</b>
       $$ G(x)=(\sqrt{\cos(x)})^{3} $$ Для функции $cos(x)$ известно выражение
@@ -500,10 +504,10 @@
       формулу (9). Найдем композиту функции $G(x)$, для этого воспользуемся
       формулой суммы: $B(x)=e^x-1$, ее композита ${n\choose k}\frac{k!}{n!}$ Для
       $C(x)=x$, композита $\delta(n,k)$. Тогда $$
-      G^{\Delta}(n,k)=\sum_{j=0}^k{k\choose j}\sum_{i=0}^n {i \choose
+      G^{\Delta}(n,k)=\sum_{j=0}^k{k\choose j}\sum_{i=0}^n {i \brace
       j}\frac{j!}{i!}\delta(n-i,k-j) $$ Теперь подставим $i=n-k+j$ $$
-      G^{\Delta}(n,k)=\sum_{j=0}^k{k\choose j}{n-k+j\choose
-      j}\frac{j!}{(n-k+j)!} $$ $$ $G^{\Delta}(1,1)=1,$$ $$ A^{\Delta}(n,k)=
+      G^{\Delta}(n,k)=\sum_{j=0}^k{k\choose j} {n-k+j\brace
+      j} \frac{j!}{(n-k+j)!} $$ $$ $G^{\Delta}(1,1)=1,$$ $$ A^{\Delta}(n,k)=
       \frac{k}{n}\sum_{j=0}^{n-k}(-1)^{j}\,{n+j-1\choose j}G{\Delta}(n,j)
       {2\,n-k \choose n-k-j} $$ Откуда получим тождество
       $$\sum_{j=k}^{n}{A^{\Delta}(j,k)\,G^{\Delta}(n,j)}=\delta(n,k)$$
@@ -520,7 +524,7 @@
         \choose j-1}{2\,n-k \choose n-j} \end{equation}
         <span class="formula_number">(10)</span>
       </div>
-      Пример <br />
+      ${\bf Пример}$
       Пусть $$ G(x)=\frac{\log(1+x)}{x} $$ и $$ G(n,k)=\frac{k!}{(n+k)!}{n+k
       \choose k}(-1)^n. $$ Запишем уравнение $$
       A(x)=G\left(\frac{x}{A(x)}\right)=\frac{\log(1+\frac{x}{A(x)}}{\frac{x}{A(x)}}
@@ -571,7 +575,7 @@
         j}. \end{equation}
         <span class="formula_number">(12)</span>
       </div>
-      рассмотрим примеры<br />
+      Рассмотрим примеры<br />
       Пример 1 $$ \log\left(\frac{1}{1-x}\right) $$ $$
       [x^n]\left(\frac{1}{1-x}\right)^k={n+k-1\choose n} $$
       $$\sum_{j=1}^{n}\frac{(-1)^{j-1}}{j}{n+j-1\choose n}{n \choose
@@ -744,7 +748,49 @@
         \end{equation}
         <span class="formula_number">(14)</span>
       </div>
-      ....
+
+      Рассмотрим пример
+      $$
+      \frac{x+y}{\log(1+x+y)}
+      $$
+
+      $$
+      (\log(1+x)^k=\sum_{n\geqslant k} {n \brack k} \frac{k!}{n!}\,x^n
+      $$
+
+      $$
+      \left(\frac{\log(1+x)}{x}\right)^k=\sum_{n\geqslant 0} (-1)^n\, {n+k \brack k} \frac{k!}{(n+k)!}x^n
+      $$
+      Найдем композицию
+      $$
+      A(B(x,y))=\frac{\log(1+x+y)}{x+y}
+      $$
+      где $A(x)=\log(1+x)$, $B(x,y)=x+y$.
+      Найдем в энциклопедии функцию $B(x,y)$.Эта функция записана по номером 0001. Откуда
+      $$
+      B(x,y)^k= \sum_{n\geqslant 0} \sum_{m \geqslant 0} \delta_{k, n+m}\, {n+m \choose m }\,x^n\,y^m
+      $$
+      Тогда используем формулу композиции (см. табл. )
+      Получим
+      $$
+      \sum_{j=0}^{n+m} B^{\Delta}(n,m,k)A^{\Delta}(j,k)=
+      $$
+      $$
+      \sum_{j=0}^{n+m} \delta_{j, n+m} \,{n+m \choose m }(-1)^j\,{j+k \brack k}\frac{k!}{(j+k)!}=
+      $$
+
+      $$
+      {n+m \choose m}(-1)^{n+m} {n+m+k \brack k} \frac{k!}{(n+m+k)!}
+      $$
+
+      $$
+      \sum_{j=0}^{n+m} {\left(-1\right)^{j}\,}\
+      { j+\alpha-1 \choose j} {n+m \choose m}
+      (-1)^{n+m} {n+m+j \brack j}
+      \frac{j!}{(n+m+j)!}\,
+      {n+m+\alpha \choose n+m-j}
+      $$
+
     </div>
     <div id="11" class="article">
       11. Нахождение коэффициентов обратных производящих функций
