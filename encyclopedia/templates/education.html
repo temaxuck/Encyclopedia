@@ -854,10 +854,8 @@
         $T_{42}(n,m,k)={n+k-1\choose{n}}\,{n+2k\choose{m}}$ Data:
         $\begin{array}{lllllll}1&2&1&0&0&0&0\\1&3&3&1&0&0&0\\1&4&6&4&1&0&0\\1&5&10&10&5&1&0\\1&6&15&20&15&6&1\\1&7&21&35&35&21&7\\1&8&28&56&70&56&28\\\end{array}$
       </div>
-      Откуда получим искомую производящую функцию.
-      $$ A(x,y)=UU0042(x+y,y)=  {\left(y+1\right)^2 \over 1-\left(y+1\right)\,\left(y+x\right)} $$
-
-
+      Откуда получим искомую производящую функцию. $$
+      A(x,y)=UU0042(x+y,y)={\left(y+1\right)^2}\over{1-\left(y+1\right)\,\left(y+x\right)}$$
     </div>
     <div id="13" class="article">
       13. Нахождение композиции логарифмических функций и их производных
@@ -921,8 +919,7 @@
       m , j){n+m\choose{j}} \over{T^{j}(0 , 0 , 1)j}} $$ Рассмотрим пример.
       Пусть дана производящая функция под номер 130.
       <div class="fragment">
-        Generating function: $$U_{130}(x,y)= {1\over -4*y+(1-x+y)^2}$$
-        Formula:
+        Generating function: $$U_{130}(x,y)=1\over{-4*y+(1-x+y)^2}$$ Formula:
         $$T_{130}(n,m,k)={m+k\choose{k-1}}{n+k-1\choose{k-1}}{n+m+2*k-1\choose{
         k-1}}{2*(n+m)+2*k\choose{2*m+1}}\over{2*{2*k-2
         \choose{k-1}}{2m+2*k\choose{2*k-2}}}$$ Data:
@@ -952,39 +949,23 @@
       $$E(x,y)={y-1\over{y-e^{x(y-1)}}}$$ Представим ее в виде
       $$E(x,y)={1\over{1-\frac{e^{x,(y-1)}-1}{y-1}}}$$ Рассмотрим функцию $$
       A(x,y)=\frac{e^{x(y-1)}-1}{y-1} $$ Тогда ее можно представить композицией
-      функций $$ A(x,y)=x\,B(C(x,y)), $$ где
-      $B(x)=\frac{e^x-1}{x}$
-      и
+      функций $$ A(x,y)=x\,B(C(x,y)), $$ где $B(x)=\frac{e^x-1}{x}$ и
       $C(x,y)=x\,(y-1)$. Тогда $B(x)=Up0102(x)/x$ $$
-      B(x)^k=(\frac{e^x-1}{x})^k=\sum_{n\geqslant 0} Tp0102(n+k,k)x^n. $$
-      где
-      $$Tp0102(n,k)=\frac{k!}{n!}\,{n \brace  k}$$
-
-      Используя энциклопедию найдем
+      B(x)^k=(\frac{e^x-1}{x})^k=\sum_{n\geqslant 0} Tp0102(n+k,k)x^n. $$ где
+      $$Tp0102(n,k)=\frac{k!}{n!}\,{n \choose k}$$ Используя энциклопедию найдем
       $C(x)^k$ $$ C(x)^k=\sum_{n\geqslant
-      k}\,Tuu0002(n,m,k)\,(-1)^{m+k}\,x^n\,y^m $$
-      $$ Tuu0002(n,m,k)=\delta_{k,
-      n} \,{n\choose m} $$
-      Находим коэффициенты
-
-      $B(C(x))^k$
-
-      $$ \sum_{j=0}^{n+m}
-      Tuu0002(n,m,j)(-1)^{m+j}Tp0102(j+k,k)= $$
-      $$ \sum_{j=0}^{n+m}\delta_{j, n}
-      \,{n\choose m}(-1)^{m+j}\frac{k!}{(j+k)!}\,{j+k \brace  k}= $$
-
-      $$ {n
-      \choose m }(-1)^{n+m}\frac{k!}{(n+k)!}\,{n+k \brace  k}. $$ Находим
+      k}\,Tuu0002(n,m,k)\,(-1)^{m+k}\,x^n\,y^m $$ $$ Tuu0002(n,m,k)=\delta_{k,
+      n} \,{n\choose m} $$ Находим коэффициенты $B(C(x))^k$ $$ \sum_{j=0}^{n+m}
+      Tuu0002(n,m,j)(-1)^{m+j}Tp0102(j+k,k)= $$ $$ \sum_{j=0}^{n+m}\delta_{j, n}
+      \,{n\choose m}(-1)^{m+j}\frac{k!}{(j+k)!}\,{j+k \choose k}= $$ $$ {n
+      \choose m }(-1)^{n+m}\frac{k!}{(n+k)!}\,{n+k \choose k}. $$ Находим
       коэффициенты $x\,B(C(x))^k$ $$ {n-k\choose m
-      }(-1)^{n+m-k}\frac{k!}{n!}\,{n \brace  k}= $$ Откуда находим явное
+      }(-1)^{n+m-k}\frac{k!}{n!}\,{n \choose k}= $$ Откуда находим явное
       выражение для коэффициентов разложения искомой композиции $$
-      \sum_{k=0}^{n} {n-k\choose m}(-1)^{n+m-k}\frac{k!}{n!}\,{n \brace  k} $$
+      \sum_{k=0}^{n} {n-k\choose m}(-1)^{n+m-k}\frac{k!}{n!}\,{n \choose k} $$
       Тогда числа Эйлера первого рода будут иметь следующее явное выражение $$
-      {\left\langle
-      \matrix{n\cr m}
-      \right\rangle}=\sum_{k=0}^{n-m} (-1)^{n+m-k}\,k!\,{n-k \choose m} {n
-      \brace k} $$
+      {n \choose m}=\sum_{k=0}^{n-m} (-1)^{n+m-k}\,k!\,{n-k \choose m} {n
+      \choose k} $$
     </div>
     <div id="14_3" class="article">
       14.3 Пример 3. Производящая функция для чисел Эйлера второго порядка
@@ -995,57 +976,34 @@
       <br />
       <b>Теорема 2</b> Экспоненциальная производящая функция для чисел Эйлера
       второго порядка имеет вид: $$ \sum\limits_{n \geqslant 0} \sum_{m\geqslant
-      \geqslant0}
-
-      {\left\langle \left\langle
-      \matrix{n\cr m}
-      \right\rangle  \right\rangle}
-
-      \frac{x^n}{n!}t^m={1-t\over{W(-t
+      \geqslant0} {n \choose m}\frac{x^n}{n!}t^m={1-t\over{W(-t
       e^{(1-t)^2,x-t})+1}}, $$ где $W(x)$ -- функция Ламберта, $x>0$.
       <br />
       <b>Доказательство </b>Запишем экспоненциальную производящую функцию в виде
       двойного ряда, при этом возьмем смещение на $(n-1)$ $$ E(x,t) =
-      \sum_{n>0}\sum_{m>0}
-      {\left\langle \left\langle
-      \matrix{n-1\cr m}
-      \right\rangle  \right\rangle}
-      \frac{x^n}{n!}t^m $$ Рассмотрим
-      формулу, полученную в |15| $$
-      {\left\langle \left\langle
-      \matrix{n\cr m}
-      \right\rangle  \right\rangle}
-      =\sum_{k=0}^m
+      \sum_{n>0}\sum_{m>0} {n-1 \choose m}\frac{x^n}{n!}t^m $$ Рассмотрим
+      формулу, полученную в |15| $$ {n \choose m}=\sum_{k=0}^m
       (-1)^{m-k}\,{2\,n+1 \choose m-k} {n+k \choose k}, $$ Ее можно представить
       как произведение двух рядов $$
-      E(x,t)=\sum_{n>0}P_n(t)\frac{x^n}{n!}\,(1-t)^{2n-1} $$ где
-      $$
+      E(x,t)=\sum_{n>0}P_n(t)\frac{x^n}{n!}\,(1-t)^{2n-1} $$ где $$
       (1-t)^{2\,n-1}=\sum_{n\geqslant 0}(-1)^m\,{2\,n-1 \choose m}t^m $$ и $$
-      P_n(t)=\sum_{m\geqslant 0}{n+m-1 \brace  m}t^m $$
-
-      Запишем функцию $$
-      u(x,t)=\sum_{n>0}\sum_{m\geqslant 0}{n+m-1 \brace  m}\frac{x^n}{n!}t^m $$
+      P_n(t)=\sum_{m\geqslant 0}{n+m-1 \choose m}t^m $$ Запишем функцию $$
+      u(x,t)=\sum_{n>0}\sum_{m\geqslant 0}{n+m-1 \choose m}\frac{x^n}{n!}t^m $$
       Покажем, что эта функция является обратной функцией для функции $$
       y(x,t)=(x-t(e^x-1)). $$ Запишем взаимную функцию для $y(x,t)$ $$
       \frac{x}{y(x,t)}=\frac{1}{1-t\frac{e^x-1}{x}} $$ и найдем ее степень. Для
       этого запишем $$ (t(\frac{e^x-1}{x}))^k=\sum_{n>0}
       \sum_{m>0}T(n,m,k)x^nt^n $$ Известно, что для функции $(e^x-1)$ имеется
-      тождество
-      $$ (e^x-1)^k=\sum\limits_{n\geqslant 0} k!{n \brace
-      k}\frac{x^n}{n!}, $$ получим $$ T(n,m,k)=\delta(m,k){n+k \brace
+      тождество $$ (e^x-1)^k=\sum\limits_{n\geqslant 0} k!{n \choose
+      k}\frac{x^n}{n!}, $$ получим $$ T(n,m,k)=\delta(m,k){n+k \choose
       k}\frac{k!}{(n+k)!}, $$ где $\delta(m,k)$ символ Кронекера. Для функции
       $\frac{1}{(1-x)}$ известно тождество $$ \frac{1}{(1-x)^k}=\sum_{n\geqslant
-      0} {n+k-1 \choose n}x^n.
-      $$ Тогда для степени композиции двух производящих
-      функций
-
-      $$ ({1 \over 1-t\frac{e^x-1}{x}})^k =\sum\limits_{n\geqslant 0}
-      \sum\limits_{m\geqslant 0} D(n,m,k)x^nt^m, $$
-
-      на основе композиционной
+      0} {n+k-1 \choose n}x^n. $$ Тогда для степени композиции двух производящих
+      функций $$ ({1}{1-t\frac{e^x-1}{x}})^k=\sum\limits_{n\geqslant 0}
+      \sum\limits_{m\geqslant 0} D(n,m,k)x^nt^m, $$ на основе композиционной
       формулы \cite{kru}, можно записать $$ D(n,m,k)=\sum\limits_{i=0}^{n+m}
-      T(n,m,i){i+k-1 \choose i}=\sum\limits_{k=0}^{n+m} \delta(m,i) {n+i \brace
-      i}\frac{i!}{(n+i)!}{i+k-1 \choose i}= $$ $$ ={n+m \brace
+      T(n,m,i){i+k-1 \choose i}=\sum\limits_{k=0}^{n+m} \delta(m,i) {n+i \choose
+      i}\frac{i!}{(n+i)!}{i+k-1 \choose i}= $$ $$ ={n+m \choose
       m}\frac{m!}{(n+m)!}{m+k-1 \choose m}. $$ Теперь воспользуется теоремой
       Лагранжа об обратной функции, согласно которой для степенного ряда
       $u(x,t)$ удовлетворяющему функциональному уравнению $$ u=x\,F(g,t) $$ где
@@ -1055,11 +1013,9 @@
       u=\frac{x}{1-t\frac{e^{u}-1}{u}}. $$ Решением этого уравнения будет $$
       u(x,t)^k=\sum\limits_{n>0} \sum\limits_{m\geqslant 0}
       \frac{k}{n}D(n-k,m,n)x^n\,t^m $$ где $D(n,m,k)$ коэффициенты ряда
-      $F(x,t)^k$.
-      Тогда $$ D(n-k,m,n)={n+m-k \brace  m}\frac{m!}{(n+m-k)!}{m+n-1
-      \choose m}
-      $$ При $k=1$ получим $$ u(x,t)=\sum\limits_{n>0}
-      \sum\limits_{m\geqslant 0} \frac{1}{n}{n+m-1 \brace
+      $F(x,t)^k$. Тогда $$ D(n-k,m,n)={n+m-k \choose m}\frac{m!}{(n+m-k)!}{m+n-1
+      \choose m} $$ При $k=1$ получим $$ u(x,t)=\sum\limits_{n>0}
+      \sum\limits_{m\geqslant 0} \frac{1}{n}{n+m-1 \choose
       m}\frac{m!}{(n+m-1)!}{m+n-1 \choose m}x^n\,t^m $$ или, после упрощения
       биномиального коэффициента и факториалов получим $$
       u(x,t)=\sum\limits_{n>0} \sum\limits_{m\geqslant 0} \frac{1}{n!}{n+m-1
@@ -1078,12 +1034,8 @@
       E(x,t)=\frac{E_2(x(1-t)^2,t)}{(1-t)}=\frac{x(1-t)^2-t-W(-t\,e^{x(1-t)^2-t})}{1-t}.
       $$ Дифференцируя по $x$ выражение для $E(x,t)$ с учетом свойств
       производной функции Ламберта $W(x)$ получим искомую производящую функцию
-      $$ Eu(x,t)=\sum\limits_{n>0} \sum_{m>0}
-      {\left\langle  \left\langle
-      \matrix{n\cr m}
-      \right\rangle  \right\rangle}
-
-      \frac{x^n}{n!}t^m={1-t\over{W(-t\,e^{(1-t)^2\,x-t})+1}} $$
+      $$ Eu(x,t)=\sum\limits_{n>0} \sum_{m>0} {n \choose
+      m}\frac{x^n}{n!}t^m={1-t\over{W(-t\,e^{(1-t)^2\,x-t})+1}} $$
     </div>
     <div id="15" class="article">
       15. Нахождение явных выражений для разложения композиции производящих
@@ -1137,8 +1089,7 @@
       производящих функций одной переменной и соответствующее множество явных
       выражений коэффициентов $k$-степени. Пусть имеется множество
       $G=\{g_i(x)\}$ производящих функций, коэффициенты $k$-степени описываются
-      биномиальными коэффициентами $\{T_i(n,k)\}$.
-      $$ \begin{array}{|c|c|}\hline
+      биномиальными коэффициентами $\{T_i(n,k)\}$. $$ \begin{array}{|c|c|}\hline
       \hbox{Производящая функция }G(x) & \hbox{Коэффициенты степени } g_x(n,k)\\
       \hline (1+x) & \binom{k}{n}\\ \hline \frac{1}{1-x} & \binom{n+k-1}{n}\\
       \hline \frac{1-\sqrt{1-4x}}{2x} & \frac{k}{n+k}{2n+k-1\choose n}\\ \hline
