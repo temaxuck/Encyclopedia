@@ -54,3 +54,14 @@ ul {
   align-items: center;
   margin: 20px auto;
 }
+
+.formula {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formula_number {
+  padding-left: 90px;
+  font-weight: bold;
+}

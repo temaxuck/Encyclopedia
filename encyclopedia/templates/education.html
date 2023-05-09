@@ -7,7 +7,7 @@
 <title>Book</title>
 {% endblock %} {% block body %}
 <div class="main">
-  {% include 'side_bar_eng.html' %}
+  {% include 'side_bar.html' %}
 
   <div class="page">
     <div id="1" class="article">
@@ -235,16 +235,13 @@
 
       $n \brace k $ - числа Стирлинга второго рода <br />
 
-      $\left\langle
-      \matrix{n \cr k }
-      \right\rangle $ - числа Эйлера первого рода <br />
+      $\left\langle \matrix{n \cr k } \right\rangle $ - числа Эйлера первого
+      рода <br />
 
-      $\left\langle \left\langle
-      \matrix{n \cr k }
-      \right\rangle \right\rangle $  - числа Эйлера второго рода <br />
+      $\left\langle \left\langle \matrix{n \cr k } \right\rangle \right\rangle $
+      - числа Эйлера второго рода <br />
 
       $fib(n)$ - числа Фибоначчи<br />
-
     </div>
     <div id="7" class="article">
       7. Получение явных выражений композиции производящих функций одной
@@ -254,8 +251,13 @@
       Пусть дана производящая функция $G(x)=\sum_{n>0} g(n)x^n$ и ее композита.
       $$ G^{\Delta}(n,k)=[x^n]G(x)^k. $$ $G^{\Delta}(0,0)=1$. Тогда для
       коэффициентов композиции производящих функций $A(x)=F(G(x))$ будет
-      справедлива формула \begin{equation}\label{Lcompos1} a(n)=\sum_{k=0}^n
-      G^{\Delta}(n,k)\,f(k). \end{equation} Рассмотрим примеры
+      справедлива формула
+      <div class="formula">
+        \begin{equation}\label{Lcompos1} a(n)=\sum_{k=0}^n
+        G^{\Delta}(n,k)\,f(k). \end{equation}
+        <span class="formula_number">(1)</span>
+      </div>
+      Рассмотрим примеры
     </div>
 
     <div id="7_1" class="article">7.1 Числа Фибоначчи</div>
@@ -282,7 +284,15 @@
     <div id="7_3" class="article">
       7.3 Коэффициенты разложения $e^{\sin(x)}$
     </div>
-
+    <div>
+      Для нахождения разложения композиции $A(x)=e^{\sin(x)}$ необходимо знать
+      композиту $\sin(x)$ (в энциклопедии записано под номером Tp0114)
+      $$G^{\Delta}(n,k)={\frac{(1+(-1)^{n-k})}{2^{k}*n!} \sum_{i=0}^{\lfloor
+      {k\over{2}}\rfloor}{(2\,i-k)^{n}{k\choose{i}}\left(-1\right)^{-i+{k+n\over(2)}}}}$$
+      Тогда $$ a(n)=\sum_{k=0}^n {\frac{(1+(-1)^{n-k})}{2^k n! k!} \sum_{i=0}^{
+      \lfloor {k\over{2}}\rfloor}{(2\,i-k)^{n}{k\choose{i
+      }}(-1)^{-i+{k+n\over{2}}}}} $$
+    </div>
     <div id="7_4" class="article">
       7.4 Получение коэффициентов функции ${1-2x}\over{1-3\,x+x^2}$
     </div>
@@ -301,41 +311,20 @@
       $$[x^n]{1-2,x\over{1-3\,x+x^2}}=\sum_{k=0}^{n}{n+k-1\choose{2k}}$$
     </div>
 
-    <div id="7_5" class="article">
-      7.5 Тождество для гармнических чисел
-    </div>
+    <div id="7_5" class="article">7.5 Тождество для гармнических чисел</div>
     <div>
       Пусть дана производящая функция для гармонических чисел
-      $$H(x)=\frac{1}{1-x}\log\left(\frac{1}{1-x}\right)$$
-      Рассмотрим композицию функций $H(1-e^x)$. После подстановки и преобразований получим
-      $$ H(1-e^x)=-x\,e^x. $$
-      Зная, что композита функции $A(x)=e^x-1$ имеет выражение
-      $$
-      A^{\Delta}(n,k)= {n\brace k} \frac{k!}{n!}
-      $$
-      то
-      $$
-      [x^n](1-e^x)^k=(-1)^k\ {n \brace k} \frac{k!}{n!}
-      $$
-      Окуда используя формулу композиции получим
-      $$
-      [x^n]H(1-e^x)=\sum_{k=0}^n (-1)^k\ {n \brace k} \frac{k!}{n!}H_k,
-      $$
-      где
-      $H_k$ - гармонические числа.
-      С другой стороны
-      $$
-      [x^n]e^{-x}(-x)=\frac{(-1)^n}{(n-1)!}.
-      $$
-      Теперь приравняем левую и правую части
-      $$
-      \sum_{k=0}^n (-1)^k\ {n \brace k} \frac{k!}{n!}H_k=\frac{(-1)^n}{(n-1)!}
-      $$
-      Произведем преобразования  и получим тождество
-      $$
-      \sum_{k=0}^n (-1)^{n-k}\,k!\, {n \brace k} \,H_k=n
-      $$
-
+      $$H(x)=\frac{1}{1-x}\log\left(\frac{1}{1-x}\right)$$ Рассмотрим композицию
+      функций $H(1-e^x)$. После подстановки и преобразований получим $$
+      H(1-e^x)=-x\,e^x. $$ Зная, что композита функции $A(x)=e^x-1$ имеет
+      выражение $$ A^{\Delta}(n,k)= {n\brace k} \frac{k!}{n!} $$ то $$
+      [x^n](1-e^x)^k=(-1)^k\ {n \brace k} \frac{k!}{n!} $$ Окуда используя
+      формулу композиции получим $$ [x^n]H(1-e^x)=\sum_{k=0}^n (-1)^k\ {n \brace
+      k} \frac{k!}{n!}H_k, $$ где $H_k$ - гармонические числа. С другой стороны
+      $$ [x^n]e^{-x}(-x)=\frac{(-1)^n}{(n-1)!}. $$ Теперь приравняем левую и
+      правую части $$ \sum_{k=0}^n (-1)^k\ {n \brace k}
+      \frac{k!}{n!}H_k=\frac{(-1)^n}{(n-1)!} $$ Произведем преобразования и
+      получим тождество $$ \sum_{k=0}^n (-1)^{n-k}\,k!\, {n \brace k} \,H_k=n $$
     </div>
 
     <div id="8" class="article">
@@ -351,9 +340,12 @@
     <div class="paragraph">
       Коэффициенты $k$-ой степени суммы производящих функций $$
       [x^n](F(x)+G(x))^k=[x^n]\sum_{j=0}^k {k\choose j}F(x)^j\,G(x)^{k-j}= $$
-      \begin{equation}\label{gfsum1} \sum_{j=0}^k{k\choose j}\sum_{i=0}^n
-      F(i,j)G(n-i,k-j) \end{equation} Пример $$
-      \frac{1+x-x^3}{1-x}=\frac{1}{1-x}+x+x^2 $$ $$
+      <div class="formula">
+        \begin{equation}\label{gfsum1} \sum_{j=0}^k{k\choose j}\sum_{i=0}^n
+        F(i,j)G(n-i,k-j) \end{equation}
+        <span class="formula_number">(2)</span>
+      </div>
+      Пример $$ \frac{1+x-x^3}{1-x}=\frac{1}{1-x}+x+x^2 $$ $$
       [x^n]\frac{1}{(1-x)^k}={n+k-1 \choose n} $$ $$ [x^n](x+x^2)^k={k \choose
       n-k} $$ $$ [x^n]\left(\frac{1+x-x^3}{1-x}\right)^k=\sum_{j=0}^k
       \sum_{i=0}^n {i+j-1\choose i}{k-j\choose n-i-k+j} $$
@@ -363,11 +355,15 @@
     </div>
     <div class="paragraph">
       Коэффициенты $k$-ой степени произведения производящих функций
-      \begin{equation}\label{gfprod1} [x^n](F(x)\cdot G(x))^k=\sum_{j=0}^n
-      F(i,k)G(n-i,k) \end{equation} Пример<br />
+      <div class="formula">
+        \begin{equation}\label{gfprod1} [x^n](F(x)\cdot G(x))^k=\sum_{j=0}^n
+        F(i,k)G(n-i,k) \end{equation}
+        <span class="formula_number">(3)</span>
+      </div>
+      Пример<br />
       Пусть дана производящая функция $$
       \frac{1+x}{1-x}=1+2\,x+2\,x^2+2\,x^3+2\,x^4+2\,x^5+\cdots $$ Найдем
-      коэффициенты k-ой степени этой функции используя формулу . $$
+      коэффициенты k-ой степени этой функции используя формулу (3). $$
       [x^n]\left(\frac{1+x}{1-x}\right)^k=\sum_{i=0}^n {i+k-1\choose
       i}\,{k\choose n-i} $$
     </div>
@@ -375,15 +371,18 @@
       8.3 Коэффициенты $k$-ой степени композиции производящих функций
     </div>
     <div class="paragraph">
-      \begin{equation}\label{gfcomp1} [x^n](F(G(x))^k=\sum_{j=0}^n
-      G^{\Delta}(n,j)F(j,k) \end{equation} $ G^{\Delta}(n,k)$ - композита
-      функции $G(x)$ <br />
+      <div class="formula">
+        \begin{equation}\label{gfcomp1} [x^n](F(G(x))^k=\sum_{j=0}^n
+        G^{\Delta}(n,j)F(j,k) \end{equation}
+        <span class="formula_number">(4)</span>
+      </div>
+      $ G^{\Delta}(n,k)$ - композита функции $G(x)$ <br />
       Пример<br />
       Пусть дана производящая функция $$
       \frac{1}{1-sin(x)}=1+x+x^2+\frac{5x^3}{6}+\frac{2x^4}{3}+\frac{61x^5}{120}+\dots
-      $$ Найдем коэффициенты k-ой степени этой функции используя формулу. Для
-      этого необходимо знать композиту функции $\sin(x)$. Ее композита записана
-      в энциклопедии под номером Tp0114 $$
+      $$ Найдем коэффициенты k-ой степени этой функции используя формулу (4).
+      Для этого необходимо знать композиту функции $\sin(x)$. Ее композита
+      записана в энциклопедии под номером Tp0114 (см. раздел 7.3) $$
       [x^n]\left(\frac{1}{1-\sin(x)}\right)^k=\sum_{m=0}^n
       Tp0114(n,m){m+k-1\choose m} $$ здесь $F(x)=\frac{1}{1-x}$, $G(x)=\sin(x)$.
     </div>
@@ -391,43 +390,50 @@
       8.4 Коэффициенты $k$-ой степени взаимной производящей функции
     </div>
     <div class="paragraph">
-      \begin{equation}\label{gfrecip1} [x^n][x^n]\frac{1}
-      {F(x)^k}=\sum_{i=0}^{n}F(0)^{-k-i}\,\left(-1\right)^{i}\,{k
-      +i-1\choose{i}}\,F\left(n , i\right)\,{n+k\choose{n-i}} \end{equation}
+      <div class="formula">
+        \begin{equation}\label{gfrecip1} [x^n][x^n]\frac{1}
+        {F(x)^k}=\sum_{i=0}^{n}F(0)^{-k-i}\,\left(-1\right)^{i}\,{k
+        +i-1\choose{i}}\,F\left(n , i\right)\,{n+k\choose{n-i}} \end{equation}
+        <span class="formula_number">(5)</span>
+      </div>
+
       Пример<br />
       $$x\cot(x)=1-{\frac{x^2}{3}}-{\frac{x^4}{45}}-{\frac{2\,x^6}{945}}+\cdots
       $$ Пусть дана производящая функция. Найдем коэффициенты k-ой степени этой
-      функции используя формулу. Для этого запишем $$ x\cot(x)=\frac{x}{\tan(x)}
-      $$ найдем композиту $\tan(x)$. В энциклопедии эта композита записана под
-      номером $Tp0117$
+      функции используя формулу (5). Для этого запишем $$
+      x\cot(x)=\frac{x}{\tan(x)} $$ найдем композиту $\tan(x)$. В энциклопедии
+      эта композита записана под номером $Tp0117$
       $$Tp0117(n,k)=\frac{((-1)^{n}+1)}{(n+k)!}\,\sum_{j=k}^{n+k}{j-1
-      \choose{k-1}},j!,2^{n-j-1},(-1)^ {\frac {n+k}{2} + j}  {n\brace j} $$
-
+      \choose{k-1}},j!,2^{n-j-1},(-1)^ {\frac {n+k}{2} + j} {n\brace j} $$
       $$[x^n](\frac{\tan(x)}{x})^k=Tp0117(n+k,k)=\frac{((-1)^{n}+1)}{(n+k)!}
       \sum_{j=k}^{n+k} {j-1 \choose k-1 } j! 2^{n+k-j-1} (-1)^{\frac{n+2k}{2}
       +j} {n+k \brace j} $$
-
       $$[x^n](\frac{\tan(x)}{x})^k=\frac{((-1)^{n}+1)}{(n+k)!} \sum_{j=0}^{n}
-      {j+k-1 \choose k-1 } (j+k)! 2^{n+j-1} (-1)^{\frac{n}{2} +j}
-       {n+k \brace j+k} $$
-
-      $$[x^n](\frac{\tan(x)}{x})^i=\frac{((-1)^{n}+1)}{(n+i)!} \sum_{j=0}^{n}
-      {j+i-1 \choose i-1 } (j+i)! 2^{n+j-1} (-1)^{\frac{n}{2} +j}
-      {n+i \brace j+i}  $$ тогда искомая формула будет иметь выражение $$
-
+      {j+k-1 \choose k-1 } (j+k)! 2^{n+j-1} (-1)^{\frac{n}{2} +j} {n+k \brace
+      j+k} $$ $$[x^n](\frac{\tan(x)}{x})^i=\frac{((-1)^{n}+1)}{(n+i)!}
+      \sum_{j=0}^{n} {j+i-1 \choose i-1 } (j+i)! 2^{n+j-1} (-1)^{\frac{n}{2} +j}
+      {n+i \brace j+i} $$ тогда искомая формула будет иметь выражение $$
       \sum_{i=0}^{n}{k+i-1\choose i}\, \frac{((-1)^{n}+1)}{(n+i)!}
       \sum_{j=0}^{n} {j+i-1 \choose i-1 } (j+i)! 2^{n+j-1}
-      (-1)^{\frac{n}{2}+j+i}   {n+i \brace j+i}  \binom{n+k}{n-i} $$
+      (-1)^{\frac{n}{2}+j+i} {n+i \brace j+i} \binom{n+k}{n-i} $$
     </div>
     <div id="8_5" class="article">
       8.5 Нахождение явных выражений для разложения функций вида
       $G(x)^{-\alpha}$, $\alpha\in R$
     </div>
     <div class="paragraph">
-      $$ \sum_{j=0}^{n} \frac{(-1)^j}{T(0,1)^{j+\alpha}} {j+\alpha-1 \choose j}
-      {T(n,j)} {n+\alpha \choose n-j} $$ и $$ (n+1)\binom{n+\alpha}{n+i}
-      \sum_{i=0}^{n} \frac{T(0,1)^{-j-\alpha}(-1)^{j} T(n,j){n\choose j}}
-      {j+\alpha} $$ Рассмотрим примеры <br />
+      <div class="formula">
+        $$ \sum_{j=0}^{n} \frac{(-1)^j}{T(0,1)^{j+\alpha}} {j+\alpha-1 \choose
+        j} {T(n,j)} {n+\alpha \choose n-j} $$
+        <span class="formula_number">(6)</span>
+      </div>
+      и
+      <div class="formula">
+        $$ (n+1)\binom{n+\alpha}{n+i} \sum_{i=0}^{n}
+        \frac{T(0,1)^{-j-\alpha}(-1)^{j} T(n,j){n\choose j}} {j+\alpha} $$
+        <span class="formula_number">(7)</span>
+      </div>
+      Рассмотрим примеры <br />
       <b class="paragraph"> 8.5.1 Пример 1</b>
 
       $$ G(x)=(\frac{x}{e^x-1})^{\alpha} $$ $$ (e^x-1^k)=\sum_{n\geqslant k}
@@ -442,7 +448,7 @@
       коэффициенты разложения $cos(x)^k$. В энциклопедии под номер Tp0115. $$
       Tp0115(n,k)= \begin{array} 11, & n=0, \\ \frac{(-1)^{n \over 2}
       {(-1)^{n}+1}} {2^{k} n!} \sum\limits_{i=0}^{k-1 \over 2} (k-2i)^{n}
-      {k\choose i} & n>0.\\ \end{array} $$ Воспользуемся формулой при
+      {k\choose i} & n>0.\\ \end{array} $$ Воспользуемся формулой (6) при
       $\alpha=-\frac{3}{2}$, $Tp0115(0,1)=1$ $$ \sum_{j=0}^{n}(-1)^{j}
       \binom{j-\frac{3}{2}-1}{j} Tp0115(n,j) \binom{n-\frac{3}{2}}{n-j} $$
     </div>
@@ -454,16 +460,21 @@
       Пусть дано функциональной уравнение $A(x)=G(x\,A(x)^m$, $m\in N$ и
       известно выражение $$ [x^n]G(x)^k=G(n,k) $$ $G(0)\ne 0$. Тогда для
       коэффициентов степени $$ [x^n]A(x)^k=A(n,k) $$ выполняется следующее
-      соотношение \begin{equation}\label{gflagr1}
-      A(n,k)=\frac{k}{m\,n+k}G(n,m\,n+k) \end{equation} Пример Пусть дано
-      функциональной уравнение $$ A(x)=\frac{1+x\,A(x)}{1-x\,A(x)} $$ $m=1$. Для
-      решения этого уравнения необходимо найти $G(n,k)$. Известно (см. пример
-      раздела), что $$ [x^n]\left(\frac{1+x}{1-x}\right)^k=\sum_{i=0}^n
-      {i+k-1\choose i}\,{k\choose n-i} $$ Подставляя найденной $G(n,k)$ в
-      формулу (\ref{gflagr1}) получим искомое решение $$
-      A(n,k)=\frac{k}{n+k}\sum_{i=0}^n {n+k+i-1\choose i}\,{n+k\choose n-i} $$
-      Теперь перепишем наше уравнение в виде $$ x\,A(x)^2+1+(x-1)\,A(x)+1=0 $$
-      решаем его относительно $A(x)$ получим $$
+      соотношение
+      <div class="formula">
+        \begin{equation}\label{gflagr1} A(n,k)=\frac{k}{m\,n+k}G(n,m\,n+k)
+        \end{equation}
+        <span class="formula_number">(8)</span>
+      </div>
+
+      Пример Пусть дано функциональной уравнение $$
+      A(x)=\frac{1+x\,A(x)}{1-x\,A(x)} $$ $m=1$. Для решения этого уравнения
+      необходимо найти $G(n,k)$. Известно (см. пример раздела 8.2), что $$
+      [x^n]\left(\frac{1+x}{1-x}\right)^k=\sum_{i=0}^n {i+k-1\choose
+      i}\,{k\choose n-i} $$ Подставляя найденной $G(n,k)$ в формулу (8) получим
+      искомое решение $$ A(n,k)=\frac{k}{n+k}\sum_{i=0}^n {n+k+i-1\choose
+      i}\,{n+k\choose n-i} $$ Теперь перепишем наше уравнение в виде $$
+      x\,A(x)^2+1+(x-1)\,A(x)+1=0 $$ решаем его относительно $A(x)$ получим $$
       A(x)={1-x+\sqrt{1-6\,x+x^2}\over{2\,x}}$$ Откуда
       $$[x^n]\left({1-x+\sqrt{1-6\,x+x^2}
       \over{2\,x}}\right)^k=\frac{k}{n+k}\sum_{i=0}^n {n+k+i-1\choose
@@ -477,13 +488,17 @@
     <div class="paragraph">
       Рассмотрим функциональное уравнение $$ A(x)\cdot G(A(x))=x $$ $G(0)\ne 0.$
       $$ G^{\Delta}(n,k)=[x^n]\left(x\,G(x)\right)^k. $$ Тогда
-      \begin{equation}\label{gfinver1}
-      A^{\Delta}(n,k)=\frac{k}{n}\sum_{j=0}^{n-k} G(1,1)^{-n-j}(-1)^{j}
-      {n+j-1\choose j}G^{\Delta}(n,j) {2\,n-k \choose n-k-j} \end{equation}
+      <div class="formula">
+        \begin{equation}\label{gfinver1}
+        A^{\Delta}(n,k)=\frac{k}{n}\sum_{j=0}^{n-k} G(1,1)^{-n-j}(-1)^{j}
+        {n+j-1\choose j}G^{\Delta}(n,j) {2\,n-k \choose n-k-j} \end{equation}
+        <span class="formula_number">(9)</span>
+      </div>
+
       Пример Пусть дана производящая функция $$ G(x)=\frac{\exp(x)+x-1}{2} $$
       Получим коэффициенты k-степени обратной функции. Для этого используем
-      формулу. Найдем композиту функции $G(x)$, для этого воспользуемся формулой
-      суммы: $B(x)=e^x-1$, ее композита ${n\choose k}\frac{k!}{n!}$ Для
+      формулу (9). Найдем композиту функции $G(x)$, для этого воспользуемся
+      формулой суммы: $B(x)=e^x-1$, ее композита ${n\choose k}\frac{k!}{n!}$ Для
       $C(x)=x$, композита $\delta(n,k)$. Тогда $$
       G^{\Delta}(n,k)=\sum_{j=0}^k{k\choose j}\sum_{i=0}^n {i \choose
       j}\frac{j!}{i!}\delta(n-i,k-j) $$ Теперь подставим $i=n-k+j$ $$
@@ -498,10 +513,14 @@
       уравнения $A(x)=G\left(\frac{x}{A(x)}\right)$
     </div>
     <div>
-      \begin{equation}\label{gfleft1}
-      A(n,k)=k\,\sum_{j=1}^{n}\frac{1}{j}{G}\left(0 , 1\right)^{-n+k-j}\left(-1
-      \right)^{j-1}{G}\left(n , j\right){n-k+j-1 \choose j-1}{2\,n-k \choose
-      n-j} \end{equation} Пример <br />
+      <div class="formula">
+        \begin{equation}\label{gfleft1}
+        A(n,k)=k\,\sum_{j=1}^{n}\frac{1}{j}{G}\left(0 ,
+        1\right)^{-n+k-j}\left(-1 \right)^{j-1}{G}\left(n , j\right){n-k+j-1
+        \choose j-1}{2\,n-k \choose n-j} \end{equation}
+        <span class="formula_number">(10)</span>
+      </div>
+      Пример <br />
       Пусть $$ G(x)=\frac{\log(1+x)}{x} $$ и $$ G(n,k)=\frac{k!}{(n+k)!}{n+k
       \choose k}(-1)^n. $$ Запишем уравнение $$
       A(x)=G\left(\frac{x}{A(x)}\right)=\frac{\log(1+\frac{x}{A(x)}}{\frac{x}{A(x)}}
@@ -519,14 +538,20 @@
       производящая функция для диагонали $G(n,n)$ будет иметь выражение $$
       \frac{x\,A'(x)}{A(x)}, $$ где $A(x)$ является решением функционального
       уравнения $$ A(x)=G(x\,A(x)). $$ Если известна $A(n,k)$, то диагональ
-      $G(n,n)$ будет иметь следующее выражение \begin{equation}\label{gfdiag1}
-      G(n,n)=n\,\sum_{j=1}^{n}\frac{(-1)^{j-1}\,A(n,j)}{j\,A(0,1)^{j}}\,{n\choose
-      j}. \end{equation} Пример Пусть дана производящая функция $$
-      G(x)=\frac{1+x-x^2}{1-x} $$ и задано выражение для коэффициентов степени
-      $$ [x^n]G(x)^k=G(n,k)=\sum_{j=0}^{\left \lfloor {n \over 2} \right
-      \rfloor}{k \choose j}\,{n-j-1\choose n-2\,j} $$ Необходимо найти
-      производящую функцию для диагонали $G(n,n)$. Для этого необходимо решить
-      уравнение $$ A(x)=G(x\,A(x)=\frac{1+x\,A(x)-x^2\,A(x)^2}{1-A(x)} $$
+      $G(n,n)$ будет иметь следующее выражение
+
+      <div class="formula">
+        G(n,n)=n\,\sum_{j=1}^{n}\frac{(-1)^{j-1}\,A(n,j)}{j\,A(0,1)^{j}}\,{n\choose
+        j}. \end{equation}
+        <span class="formula_number">(11)</span>
+      </div>
+
+      Пример Пусть дана производящая функция $$ G(x)=\frac{1+x-x^2}{1-x} $$ и
+      задано выражение для коэффициентов степени $$
+      [x^n]G(x)^k=G(n,k)=\sum_{j=0}^{\left \lfloor {n \over 2} \right \rfloor}{k
+      \choose j}\,{n-j-1\choose n-2\,j} $$ Необходимо найти производящую функцию
+      для диагонали $G(n,n)$. Для этого необходимо решить уравнение $$
+      A(x)=G(x\,A(x)=\frac{1+x\,A(x)-x^2\,A(x)^2}{1-A(x)} $$
       $$A(x)^2\,\left(x^2+x\right)+A(x),\left(-x-1\right)+1=0$$ $$A(x)=1+x-\sqrt
       {1-2x-3x^2}\over{2\,x+2\,x^2}$$ Находим логарифмическую производную
       $$B(x)=\frac{(xA(x))'}{A(x)}\frac{1}{2} ({1\over
@@ -538,11 +563,15 @@
       8.10 Разложение композиции $F(x)=\log(A(x))$
     </div>
     <div>
-      Следствием утверждений пункта является, что для композиции функций
+      Следствием утверждений пункта 8.9 является, что для композиции функций
       $F(x)=\log(A(x))$ коэффициенты разложения будут иметь выражение
-      \begin{equation}\label{gflog1}
-      f(n)=\sum_{j=1}^{n}\frac{(-1)^{j-1}\,A(n,j)}{j\,A(0,1)^{j}}\,{n\choose j}.
-      \end{equation} рассмотрим примеры<br />
+      <div class="formula">
+        \begin{equation}\label{gflog1}
+        f(n)=\sum_{j=1}^{n}\frac{(-1)^{j-1}\,A(n,j)}{j\,A(0,1)^{j}}\,{n\choose
+        j}. \end{equation}
+        <span class="formula_number">(12)</span>
+      </div>
+      рассмотрим примеры<br />
       Пример 1 $$ \log\left(\frac{1}{1-x}\right) $$ $$
       [x^n]\left(\frac{1}{1-x}\right)^k={n+k-1\choose n} $$
       $$\sum_{j=1}^{n}\frac{(-1)^{j-1}}{j}{n+j-1\choose n}{n \choose
@@ -664,7 +693,7 @@
       +\left(14+14\,y+18\,y^2+20\,y^3+14\,y^4+\cdots \right)\,x^4+\cdots
       \end{array}$$ Заметим, что эта функция описывает треугольник и $G(0,0)=1$.
       Тогда запишем функцию $H\left(x,\frac{y}{x}\right)$. Ищем эту функцию в
-      базе знаний, получим функцию и тензор под номером 69 (см. )
+      базе знаний, получим функцию и тензор под номером 69 (см. раздел 10)
 
       <div class="fragment">
         Generating function:
@@ -702,11 +731,20 @@
       Пусть $$ G(x,y)^k=\sum_{n\geqslant 0}\sum_{m\geqslant 0} T(n,m,k)x^ny^m $$
       $G(0,0)\neq 0$. Тогда коэффициенты разложения функции $$
       \frac{1}{G(x,y)^{\alpha}} $$ будут иметь следующие выражения
-      \begin{equation} \sum_{j=0}^{n+m}{\frac{(-1)^{j}} {T(0,0,1)^{j+\alpha}}
-      {j+\alpha-1\choose{j}}{\it T}(n,m,j) {n+m+\alpha \choose{n+m-j}}}
-      \end{equation} и \begin{equation}
-      (n+m+1){n+m+\alpha\choose{n+m+1}}\sum_{j=0}^{n} T(0,0,1)^{-j-\alpha}
-      (-1)^{j} T(n,m,j) {n+m\choose{j}} \over{j+\alpha} \end{equation} ....
+      <div class="formula">
+        \begin{equation} \sum_{j=0}^{n+m}{\frac{(-1)^{j}} {T(0,0,1)^{j+\alpha}}
+        {j+\alpha-1\choose{j}}{\it T}(n,m,j) {n+m+\alpha \choose{n+m-j}}}
+        \end{equation}
+        <span class="formula_number">(13)</span>
+      </div>
+      и
+      <div class="formula">
+        \begin{equation} (n+m+1){n+m+\alpha\choose{n+m+1}}\sum_{j=0}^{n}
+        T(0,0,1)^{-j-\alpha} (-1)^{j} T(n,m,j) {n+m\choose{j}} \over{j+\alpha}
+        \end{equation}
+        <span class="formula_number">(14)</span>
+      </div>
+      ....
     </div>
     <div id="11" class="article">
       11. Нахождение коэффициентов обратных производящих функций
@@ -718,10 +756,10 @@
       Тогда уравнение примет вид: $$ A(x,y)=\frac{x}{G_x(A(x,y),y)} $$ Теперь
       выполним подстановку $A(x,y)=xA_x(x,y)$ $$
       A_x(x,y)=\frac{x}{G_x(A_x(x,y),y)} $$ Тогда для нахождения обратной
-      функций можно воспользоваться формулой (.). Однако в данном случае (см.
-      схему .) взаимную взаимную функцию легко найти. $$
-      G_{r}(x,y)=1-x-x^2(1+y)=(1-x(1+x+xy). $$ Теперь находим пирамиду
-      $T(n,m,k)$ функции $F(x,y)=(1+x+xy)$ под номером 37 (см. рис)
+      функций можно воспользоваться формулой. Однако в данном случае взаимную
+      взаимную функцию легко найти. $$ G_{r}(x,y)=1-x-x^2(1+y)=(1-x(1+x+xy). $$
+      Теперь находим пирамиду $T(n,m,k)$ функции $F(x,y)=(1+x+xy)$ под номером
+      37 (см. фрагмент ниже)
       <div class="fragment">
         Generating function:<br />
         $U_{37}(x,y)=1+x+x\,y$
@@ -761,7 +799,7 @@
       энциклопедию найдем пирамиду под номером 1, производящая функция ее
       является $(x+y)$. Теперь найдем производящую функцию для $$
       h(n,m)={n+2\choose{ m}} $$ Делаем запрос к базу знаний:
-      $T=binomial(n+2,m)$ Получим пирамиду под номером 42 (см. рис)
+      $T=binomial(n+2,m)$ Получим пирамиду под номером 42 (см. фрагмент ниже)
       <div class="fragment">
         Generating function:
         <br />
@@ -791,7 +829,7 @@
       $T_G(n,m,k)$ $$ T_{ly}(n,m)=[x^n\,y^m]\frac{1}{A(x,y)}\frac{\partial
       A(x,y)}{\partial y} $$ $$ T_{ly}(n,m)=T_G(n,m,m) $$ Найдем коэффициенты
       логарифмической производной производящей функции $A_{139}(x,y)$
-      Соответствующей ей фрейм в базе знаний показан на рис.}
+      Соответствующей ей фрейм в базе знаний показан на фрагменте ниже.
       <div class="fragment">
         Generating function:<br />
         $U_{139}(x,y)={1-2\,x-y-\sqrt{1-4\,x-\left(2-4\,x\right)\,y+y^2}}\over{2\,x^2}$
@@ -984,13 +1022,20 @@
       Пусть задана функция $G(x,y,\ldots,z)$, $G(0,0,\ldots,0)\neq 0$ и заданы
       коэффициенты k-ой степени $$ G(x,y,\ldots,z)^k=\sum_{n\geqslant
       0}\sum_{m\geqslant 0} T(n,m,\ldots,i,k)x^n\,y^m. $$ Тогда для коэффициенты
-      разложения $G(x,y,\ldots,z)^{-\alpha}$ будут иметь выражения $$
-      \sum_{j=0}^{n+m+\ldots+i} \frac{(-1)^{j}}{T (0 ,0,\ldots,0,1)^{j+\alpha}}
-      \binom{j+\alpha-1}{j} T(n,m,\ldots,i,j) \binom
-      {n+m+\ldots+i+\alpha}{n+m+\ldots+i-j} $$ и $$ (n+m+\ldots+i+1)
-      {n+m+\ldots+i+\alpha\choose n+m+\ldots+i+1} \sum_{j=0}^{n+m+\ldots+i}
-      \frac{(-1)^{j} {n+m+\ldots+i\choose j} }{(j+\alpha) T(0
-      ,0,\ldots,0,1)^{j+\alpha}} $$
+      разложения $G(x,y,\ldots,z)^{-\alpha}$ будут иметь выражения
+      <div class="formula">
+        $$ \sum_{j=0}^{n+m+\ldots+i} \frac{(-1)^{j}}{T (0
+        ,0,\ldots,0,1)^{j+\alpha}} \binom{j+\alpha-1}{j} T(n,m,\ldots,i,j)
+        \binom {n+m+\ldots+i+\alpha}{n+m+\ldots+i-j} $$
+        <span class="formula_number">(17)</span>
+      </div>
+      и
+      <div class="formula">
+        $$ (n+m+\ldots+i+1) {n+m+\ldots+i+\alpha\choose n+m+\ldots+i+1}
+        \sum_{j=0}^{n+m+\ldots+i} \frac{(-1)^{j} {n+m+\ldots+i\choose j}
+        }{(j+\alpha) T(0 ,0,\ldots,0,1)^{j+\alpha}} $$
+        <span class="formula_number">(18)</span>
+      </div>
     </div>
     <div id="17" class="article">17. Как создавалась энциклопедия</div>
     <div>
