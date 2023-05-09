@@ -69,3 +69,14 @@ ul {
 .reference {
   margin: 50px 50px;
 }
+
+.ref_link:active,
+.ref_link {
+  margin: 0 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.ref_link:hover {
+  color: blue;
+}
