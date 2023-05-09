@@ -13,3 +13,4 @@ database/
 tree
 test*.*
 gunicorn.conf.py
+.idea
