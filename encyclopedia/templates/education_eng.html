@@ -267,9 +267,13 @@
       Let the generating function $G(x)=\sum_{n>0} g(n)x^n$ be given and its
       composite. $$ G^{\Delta}(n,k)=[x^n]G(x)^k. $$ $G^{\Delta}(0,0)=1$. Then
       for coefficients of the composition of generating functions $A(x)=F(G(x))$
-      will be the formula is valid \begin{equation}\label{Lcompos1}
-      a(n)=\sum_{k=0}^n G^{\Delta}(n,k)\,f(k). \end{equation} Look at the
-      examples
+      will be the formula is valid
+      <div class="formula">
+        \begin{equation}\label{Lcompos1} a(n)=\sum_{k=0}^n
+        G^{\Delta}(n,k)\,f(k). \end{equation}
+        <span class="formula_number">(1)</span>
+      </div>
+      Look at the examples
     </div>
 
     <div id="7_1" class="article">7.1 Fibonacci Numbers</div>
@@ -298,6 +302,16 @@
       7.3 Decomposition coefficients $e^{\sin(x)}$
     </div>
 
+    <div>
+      To find the decomposition of the composition $A(x)=e^{\sin(x)}$ it is
+      necessary to know composite $\sin(x)$ (in the encyclopedia it is written
+      under the number Tp0114)
+      $$G^{\Delta}(n,k)={\frac{(1+(-1)^{n-k})}{2^{k}*n!} \sum_{i=0}^{\lfloor
+      {k\over{2}}\rfloor}{(2\,i-k)^{n}{k\choose{i}}\left(-1\right)^{-i+{k+n\over(2)}}}}$$
+      Тогда $$ a(n)=\sum_{k=0}^n {\frac{(1+(-1)^{n-k})}{2^k n! k!} \sum_{i=0}^{
+      \lfloor {k\over{2}}\rfloor}{(2\,i-k)^{n}{k\choose{i
+      }}(-1)^{-i+{k+n\over{2}}}}} $$
+    </div>
     <div id="7_4" class="article">
       7.4 Getting the coefficients of the function ${1-2x}\over{1-3\,x+x^2}$
     </div>
@@ -317,6 +331,23 @@
       $$\sum_{k=0}^{n}{n+k\choose{n-k}}$$ Taking into account shift by $x$ and
       plus 1 (see the original formula, we get the desired expression).
       $$[x^n]{1-2,x\over{1-3\,x+x^2}}=\sum_{k=0}^{n}{n+k-1\choose{2k}}$$
+    </div>
+    <div id="7_5" class="article">7.5 Identity for harmonic numbers</div>
+    <div>
+      Let be given a generating function for harmonic numbers
+      $$H(x)=\frac{1}{1-x}\log\left(\frac{1}{1-x}\right)$$ Consider the
+      composition functions $H(1-e^x)$. After substitution and transformations
+      we get $$ H(1-e^x)=-x\,e^x. $$ Knowing that the composite of the function
+      $A(x)=e^x-1$ has the expression $$ A^{\Delta}(n,k)= {n\brace k}
+      \frac{k!}{n!} $$ then $$ [x^n](1-e^x)^k=(-1)^k\ {n \brace k} \frac{k!}{n!}
+      $$ From where using the formula of the composition will get $$
+      [x^n]H(1-e^x)=\sum_{k=0}^n (-1)^k\ {n \brace k} \frac{k!}{n!}H_k, $$ где
+      $H_k$ - harmonic numbers. On the other hand $$
+      [x^n]e^{-x}(-x)=\frac{(-1)^n}{(n-1)!}. $$ Now equate the left and the
+      right part $$ \sum_{k=0}^n (-1)^k\ {n \brace k}
+      \frac{k!}{n!}H_k=\frac{(-1)^n}{(n-1)!} $$ Let 's make transformations and
+      we get the identity $$ \sum_{k=0}^n (-1)^{n-k}\,k!\, {n \brace k} \,H_k=n
+      $$
     </div>
     <div id="8" class="article">
       8. Obtaining coefficients of degrees of generating functions of one
