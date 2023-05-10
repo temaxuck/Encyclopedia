@@ -3,7 +3,6 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='stylesheets/educationstyle.css') }}"
 />
-{% include 'MathJax.html' %}
 
 <title>Book</title>
 {% endblock %} {% block body %}
@@ -363,9 +362,13 @@
     <div class="paragraph">
       Coefficients of the $k$th degree of the sum of generating functions $$
       [x^n](F(x)+G(x))^k=[x^n]\sum_{j=0}^k {k\choose j}F(x)^j\,G(x)^{k-j}= $$
-      \begin{equation}\label{gfsum1} \sum_{j=0}^k{k\choose j}\sum_{i=0}^n
-      F(i,j)G(n-i,k-j) \end{equation} Example $$
-      \frac{1+x-x^3}{1-x}=\frac{1}{1-x}+x+x^2 $$ $$
+
+      <div class="formula">
+        \begin{equation}\label{gfsum1} \sum_{j=0}^k{k\choose j}\sum_{i=0}^n
+        F(i,j)G(n-i,k-j) \end{equation}
+        <span class="formula_number">(2)</span>
+      </div>
+      Example $$ \frac{1+x-x^3}{1-x}=\frac{1}{1-x}+x+x^2 $$ $$
       [x^n]\frac{1}{(1-x)^k}={n+k-1 \choose n} $$ $$ [x^n](x+x^2)^k={k \choose
       n-k} $$ $$ [x^n]\left(\frac{1+x-x^3}{1-x}\right)^k=\sum_{j=0}^k
       \sum_{i=0}^n {i+j-1\choose i}{k-j\choose n-i-k+j} $$
@@ -376,29 +379,37 @@
     </div>
     <div class="paragraph">
       Coefficients $k$-th degree of the product of generating functions
-      \begin{equation}\label{gfprod1} [x^n](F(x)\cdot G(x))^k=\sum_{j=0}^n
-      F(i,k)G(n-i,k) \end{equation} Example<br />
+
+      <div class="formula">
+        \begin{equation}\label{gfprod1} [x^n](F(x)\cdot G(x))^k=\sum_{j=0}^n
+        F(i,k)G(n-i,k) \end{equation}
+        <span class="formula_number">(3)</span>
+      </div>
+      Example<br />
       Let the generating function $$
       \frac{1+x}{1-x}=1+2\,x+2\,x^2+2\,x^3+2\,x^4+2\,x^5+\cdots $$ be given.
       Let's find the coefficients of the kth degree of this function using the
-      formula $$ [x^n]\left(\frac{1+x}{1-x}\right)^k=\sum_{i=0}^n {i+k-1\choose
-      i}\,{k\choose n-i} $$
+      formula (3). $$ [x^n]\left(\frac{1+x}{1-x}\right)^k=\sum_{i=0}^n
+      {i+k-1\choose i}\,{k\choose n-i} $$
     </div>
     <div id="8_3" class="article">
       8.3 Coefficients of the $k$th degree of the composition of generating
       functions
     </div>
     <div class="paragraph">
-      \begin{equation}\label{gfcomp1} [x^n](F(G(x))^k=\sum_{j=0}^n
-      G^{\Delta}(n,j)F(j,k) \end{equation} $ G^{\Delta}(n,k)$ - - composite
-      function of $G(x)$ <br />
+      <div class="formula">
+        \begin{equation}\label{gfcomp1} [x^n](F(G(x))^k=\sum_{j=0}^n
+        G^{\Delta}(n,j)F(j,k) \end{equation}
+        <span class="formula_number">(4)</span>
+      </div>
+      $ G^{\Delta}(n,k)$ - - composite function of $G(x)$ <br />
       Example<br />
       Let the generating function $$
       \frac{1}{1-sin(x)}=1+x+x^2+\frac{5x^3}{6}+\frac{2x^4}{3}+\frac{61x^5}{120}+\dots
       $$ be given, let's find the coefficients of the kth degree of this
-      function using the formula. To do this , you need to know the composite
-      $\sin(x)$ of the function. Her composite is recorded in the encyclopedia
-      under the number Tp0114 $$
+      function using the formula (4). To do this , you need to know the
+      composite $\sin(x)$ of the function. Her composite is recorded in the
+      encyclopedia under the number Tp0114 (see section 7.3) $$
       [x^n]\left(\frac{1}{1-\sin(x)}\right)^k=\sum_{m=0}^n
       Tp0114(n,m){m+k-1\choose m} $$ здесь $F(x)=\frac{1}{1-x}$, $G(x)=\sin(x)$.
     </div>
@@ -406,55 +417,66 @@
       8.4 Coefficients of the $k$th degree of the mutual generating function
     </div>
     <div class="paragraph">
-      \begin{equation}\label{gfrecip1} [x^n][x^n]\frac{1}
-      {F(x)^k}=\sum_{i=0}^{n}F(0)^{-k-i}\,\left(-1\right)^{i}\,{k
-      +i-1\choose{i}}\,F\left(n , i\right)\,{n+k\choose{n-i}} \end{equation}
+      <div class="formula">
+        \begin{equation}\label{gfrecip1} [x^n][x^n]\frac{1}
+        {F(x)^k}=\sum_{i=0}^{n}F(0)^{-k-i}\,\left(-1\right)^{i}\,{k
+        +i-1\choose{i}}\,F\left(n , i\right)\,{n+k\choose{n-i}} \end{equation}
+        <span class="formula_number">(5)</span>
+      </div>
+
       Example<br />
       $$x\cot(x)=1-{\frac{x^2}{3}}-{\frac{x^4}{45}}-{\frac{2\,x^6}{945}}+\cdots
       $$ Let the generating function be given. Let's find the coefficients of
-      the kth degree of this function using the formula. To do this , we write
-      $$ x\cot(x)=\frac{x}{\tan(x)} $$ Let's find the composite $\tan(x)$. In
-      the encyclopedia, this composite is written under the number $Tp0117$
+      the kth degree of this function using the formula (5). To do this , we
+      write $$ x\cot(x)=\frac{x}{\tan(x)} $$ Let's find the composite $\tan(x)$.
+      In the encyclopedia, this composite is written under the number $Tp0117$
       $$Tp0117(n,k)=\frac{((-1)^{n}+1)}{(n+k)!}\,\sum_{j=k}^{n+k}{j-1
-      \choose{k-1}},j!,2^{n-j-1},(-1)^[{n+k\over 2}+{j}] {n\choose j}$$
+      \choose{k-1}},j!,2^{n-j-1},(-1)^ {\frac {n+k}{2} + j} {n\brace j} $$
       $$[x^n](\frac{\tan(x)}{x})^k=Tp0117(n+k,k)=\frac{((-1)^{n}+1)}{(n+k)!}
       \sum_{j=k}^{n+k} {j-1 \choose k-1 } j! 2^{n+k-j-1} (-1)^{\frac{n+2k}{2}
-      +j} \binom{n+k}{j} $$
+      +j} {n+k \brace j} $$
       $$[x^n](\frac{\tan(x)}{x})^k=\frac{((-1)^{n}+1)}{(n+k)!} \sum_{j=0}^{n}
-      {j+k-1 \choose k-1 } (j+k)! 2^{n+j-1} (-1)^{\frac{n}{2} +j}
-      \binom{n+k}{j+k} $$
-      $$[x^n](\frac{\tan(x)}{x})^i=\frac{((-1)^{n}+1)}{(n+i)!} \sum_{j=0}^{n}
-      {j+i-1 \choose i-1 } (j+i)! 2^{n+j-1} (-1)^{\frac{n}{2} +j}
-      \binom{n+i}{j+i} $$ then the desired formula will have the expression $$
+      {j+k-1 \choose k-1 } (j+k)! 2^{n+j-1} (-1)^{\frac{n}{2} +j} {n+k \brace
+      j+k} $$ $$[x^n](\frac{\tan(x)}{x})^i=\frac{((-1)^{n}+1)}{(n+i)!}
+      \sum_{j=0}^{n} {j+i-1 \choose i-1 } (j+i)! 2^{n+j-1} (-1)^{\frac{n}{2} +j}
+      {n+i \brace j+i} $$ then the desired formula will have the expression $$
       \sum_{i=0}^{n}{k+i-1\choose i}\, \frac{((-1)^{n}+1)}{(n+i)!}
       \sum_{j=0}^{n} {j+i-1 \choose i-1 } (j+i)! 2^{n+j-1}
-      (-1)^{\frac{n}{2}+j+i} \binom{n+i}{j+i} \binom{n+k}{n-i} $$
+      (-1)^{\frac{n}{2}+j+i} {n+i \brace j+i} \binom{n+k}{n-i} $$
     </div>
     <div id="8_5" class="article">
       8.5 Finding explicit expressions for decomposing functions of the form
       $G(x)^{-\alpha}$, $\alpha\in R$
     </div>
     <div class="paragraph">
-      $$ \sum_{j=0}^{n} \frac{(-1)^j}{T(0,1)^{j+\alpha}} {j+\alpha-1 \choose j}
-      {T(n,j)} {n+\alpha \choose n-j} $$ and $$ (n+1)\binom{n+\alpha}{n+i}
-      \sum_{i=0}^{n} \frac{T(0,1)^{-j-\alpha}(-1)^{j} T(n,j){n\choose j}}
-      {j+\alpha} $$ Let's look at the examples <br />
+      <div class="formula">
+        $$ \sum_{j=0}^{n} \frac{(-1)^j}{T(0,1)^{j+\alpha}} {j+\alpha-1 \choose
+        j} {T(n,j)} {n+\alpha \choose n-j} $$
+        <span class="formula_number">(6)</span>
+      </div>
+      and
+      <div class="formula">
+        $$ (n+1)\binom{n+\alpha}{n+i} \sum_{i=0}^{n}
+        \frac{T(0,1)^{-j-\alpha}(-1)^{j} T(n,j){n\choose j}} {j+\alpha} $$
+        <span class="formula_number">(7)</span>
+      </div>
+      Let's look at the examples <br />
       <b class="paragraph"> 8.5.1 Example 1</b>
 
-      $$ G(x)=(\frac{x}{e^x-1})^{\alpha} $$ $$ (e^x-1^k)=\sum_{n\geqslant k}
-      \binom{n}{k}\frac{k!}{n!} x^n $$ $$ (\frac{e^x-1}{x})^k=\sum_{n\geqslant
-      0} \binom{n+k}{k}\frac{k!}{(n+k)!}x^n $$ $$ \sum_{j=0}^{n}(-1)^{j} \binom
-      {j+\alpha-1}{j} \binom{n+j}{j} \frac{j!}{(n+j)!} { n+\alpha \choose n-j}
-      $$ and $$ (n+1){n+\alpha \choose n+1}\sum_{j=0}^{n} \frac{(-1)^{j}j!
-      \binom{n+j}{j} {n \choose j}} {(j+\alpha)(n+j)!} $$
+      $$ G(x)=(\frac{x}{e^x-1})^{\alpha} $$ $$ (e^x-1^k)=\sum_{n\geqslant k} {n
+      \brace k} \frac{k!}{n!} x^n $$ $$ (\frac{e^x-1}{x})^k=\sum_{n\geqslant 0}
+      {n+k \brace k} \frac{k!}{(n+k)!}x^n $$ $$ \sum_{j=0}^{n}(-1)^{j} \binom
+      {j+\alpha-1}{j} {n+j \brace j} \frac{j!}{(n+j)!} { n+\alpha \choose n-j}
+      $$ и $$ (n+1){n+\alpha \choose n+1}\sum_{j=0}^{n} \frac{(-1)^{j}j!
+      {n+j\brace j} {n \choose j}} {(j+\alpha)(n+j)!} $$
 
       <b class="paragraph"> 8.5.2 Example 2</b>
       $$ G(x)=(\sqrt{\cos(x)})^{3} $$ For the function $cos(x)$, the expression
       $cos(x)^k$ expansion coefficient is known. In the encyclopedia under the
       number Tp0115. $$ Tp0115(n,k)= \begin{array} 11, & n=0, \\ \frac{(-1)^{n
       \over 2} {(-1)^{n}+1}} {2^{k} n!} \sum\limits_{i=0}^{k-1 \over 2}
-      (k-2i)^{n} {k\choose i} & n>0.\\ \end{array} $$ Let 's use the formula for
-      $\alpha=-\frac{3}{2}$, $Tp0115(0,1)=1$ $$ \sum_{j=0}^{n}(-1)^{j}
+      (k-2i)^{n} {k\choose i} & n>0.\\ \end{array} $$ Let 's use the formula (6)
+      for $\alpha=-\frac{3}{2}$, $Tp0115(0,1)=1$ $$ \sum_{j=0}^{n}(-1)^{j}
       \binom{j-\frac{3}{2}-1}{j} Tp0115(n,j) \binom{n-\frac{3}{2}}{n-j} $$
     </div>
     <div id="8_6" class="article">
@@ -465,18 +487,21 @@
       Let the functional equation $A(x)=G(x\,A(x)^m$, $m\in N$ be given and the
       expression $$ [x^n]G(x)^k=G(n,k) $$ $G(0)\ne 0$ is known. Then for the
       coefficients of the degree: $$ [x^n]A(x)^k=A(n,k) $$ the following
-      relation holds \begin{equation}\label{gflagr1}
-      A(n,k)=\frac{k}{m\,n+k}G(n,m\,n+k) \end{equation} Example Let the
-      functional equation $$ A(x)=\frac{1+x\,A(x)}{1-x\,A(x)} $$ $m=1$ be given.
-      . To solve this equation, it is necessary to find $G(n,k)$. It is known
-      (see the example section) that $$
+      relation holds
+      <div class="formula">
+        \begin{equation}\label{gflagr1} A(n,k)=\frac{k}{m\,n+k}G(n,m\,n+k)
+        \end{equation}
+        <span class="formula_number">(8)</span>
+      </div>
+      Example Let the functional equation $$ A(x)=\frac{1+x\,A(x)}{1-x\,A(x)} $$
+      $m=1$ be given. To solve this equation, it is necessary to find $G(n,k)$.
+      It is known (see the example section 8.2) that $$
       [x^n]\left(\frac{1+x}{1-x}\right)^k=\sum_{i=0}^n {i+k-1\choose
-      i}\,{k\choose n-i} $$ Substituting the found $G(n,k)$ into the formula
-      (\ref{gflagr1}) we will get the desired solution $$
-      A(n,k)=\frac{k}{n+k}\sum_{i=0}^n {n+k+i-1\choose i}\,{n+k\choose n-i} $$
-      Now let 's rewrite our equation in the form $$ x\,A(x)^2+1+(x-1)\,A(x)+1=0
-      $$ we solve it with respect to $A(x)$, we get $$
-      A(x)={1-x+\sqrt{1-6\,x+x^2}\over{2\,x}}$$ Then
+      i}\,{k\choose n-i} $$ Substituting the found $G(n,k)$ into the formula (8)
+      we will get the desired solution $$ A(n,k)=\frac{k}{n+k}\sum_{i=0}^n
+      {n+k+i-1\choose i}\,{n+k\choose n-i} $$ Now let 's rewrite our equation in
+      the form $$ x\,A(x)^2+1+(x-1)\,A(x)+1=0 $$ we solve it with respect to
+      $A(x)$, we get $$ A(x)={1-x+\sqrt{1-6\,x+x^2}\over{2\,x}}$$ Then
       $$[x^n]\left({1-x+\sqrt{1-6\,x+x^2}
       \over{2\,x}}\right)^k=\frac{k}{n+k}\sum_{i=0}^n {n+k+i-1\choose
       i}\,{n+k\choose n-i}.$$ thus, the formula of the coefficients of the
@@ -489,18 +514,21 @@
     <div class="paragraph">
       Consider the functional equation $$ A(x)\cdot G(A(x))=x $$ $G(0)\ne 0.$ $$
       G^{\Delta}(n,k)=[x^n]\left(x\,G(x)\right)^k. $$ Then
-      \begin{equation}\label{gfinver1}
-      A^{\Delta}(n,k)=\frac{k}{n}\sum_{j=0}^{n-k} G(1,1)^{-n-j}(-1)^{j}
-      {n+j-1\choose j}G^{\Delta}(n,j) {2\,n-k \choose n-k-j} \end{equation}
+      <div class="formula">
+        \begin{equation}\label{gfinver1}
+        A^{\Delta}(n,k)=\frac{k}{n}\sum_{j=0}^{n-k} G(1,1)^{-n-j}(-1)^{j}
+        {n+j-1\choose j}G^{\Delta}(n,j) {2\,n-k \choose n-k-j} \end{equation}
+        <span class="formula_number">(9)</span>
+      </div>
       Example Let the generating function be given: $$
       G(x)=\frac{\exp(x)+x-1}{2} $$ We obtain the coefficients of the k-degree
-      of the inverse function. To do this, use the formula. Find the composite
-      of the function $G(x)$,to do this, use the sum formula: $B(x)=e^x-1$, its
-      composite ${n\choose k}\frac{k!}{n!}$. For $C(x)=x$, composite
-      $\delta(n,k)$. Then $$ G^{\Delta}(n,k)=\sum_{j=0}^k{k\choose
-      j}\sum_{i=0}^n {i \choose j}\frac{j!}{i!}\delta(n-i,k-j) $$ Now substitute
-      $i=n-k+j$ $$ G^{\Delta}(n,k)=\sum_{j=0}^k{k\choose j}{n-k+j\choose
-      j}\frac{j!}{(n-k+j)!} $$ $$ $G^{\Delta}(1,1)=1,$$ $$ A^{\Delta}(n,k)=
+      of the inverse function. To do this, use the formula (9). Find the
+      composite of the function $G(x)$,to do this, use the sum formula:
+      $B(x)=e^x-1$, its composite ${n\choose k}\frac{k!}{n!}$. For $C(x)=x$,
+      composite $\delta(n,k)$. Then $$ G^{\Delta}(n,k)=\sum_{j=0}^k{k\choose
+      j}\sum_{i=0}^n {i \brace j}\frac{j!}{i!}\delta(n-i,k-j) $$ Now substitute
+      $i=n-k+j$ $$ G^{\Delta}(n,k)=\sum_{j=0}^k{k\choose j} {n-k+j\brace j}
+      \frac{j!}{(n-k+j)!} $$ $$ $G^{\Delta}(1,1)=1,$$ $$ A^{\Delta}(n,k)=
       \frac{k}{n}\sum_{j=0}^{n-k}(-1)^{j}\,{n+j-1\choose j}G{\Delta}(n,j)
       {2\,n-k \choose n-k-j} $$ From where we get the identity
       $$\sum_{j=k}^{n}{A^{\Delta}(j,k)\,G^{\Delta}(n,j)}=\delta(n,k)$$
