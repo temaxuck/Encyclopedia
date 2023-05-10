@@ -1070,39 +1070,51 @@
       $G=\{g_i(x)\}$ производящих функций, коэффициенты $k$-степени описываются
       биномиальными коэффициентами $\{T_i(n,k)\}$. $$ \begin{array}{|c|c|}\hline
       \hbox{Производящая функция }G(x) & \hbox{Коэффициенты степени } g_x(n,k)\\
-      \hline (1+x) & \binom{k}{n}\\ \hline \frac{1}{1-x} & \binom{n+k-1}{n}\\
-      \hline \frac{1-\sqrt{1-4x}}{2x} & \frac{k}{n+k}{2n+k-1\choose n}\\ \hline
-      \frac{1-2x-\sqrt{1-4x}}{2x^2} & \frac{k}{n+k}{2n+2k\choose n}\\ \hline
+      \hline (1+x) & \binom{k}{n}\\
+      \hline \frac{1}{1-x} & \binom{n+k-1}{n}\\
+      \hline \frac{1-\sqrt{1-4x}}{2x} & \frac{k}{n+k}{2n+k-1\choose n}\\
+      \hline
+      \frac{1-2x-\sqrt{1-4x}}{2x^2} & \frac{k}{n+k}{2n+2k\choose n}\\
+      \hline
       \frac{2}{\sqrt{3x}} \sin({ {\arcsin( {3^ {3\over{2}} \sqrt{x} \over {2} }
-      )} \over {3} }) & {k\,{3\,n+k-1 \choose n }}\over{2\,n+k}\\ \hline
-      1+\sqrt{1+4x}\over{2} & k(-1)^{n-1}{2n-k-1 \choose n-1}\over{n}\\ \hline
+      )} \over {3} }) & {k\,{3\,n+k-1 \choose n }}\over{2\,n+k}\\
+      \hline
+      1+\sqrt{1+4x}\over{2} & k(-1)^{n-1}{2n-k-1 \choose n-1}\over{n}\\
+      \hline
       1-\frac{4}{3} \sin ^2({ {\arcsin( {3^ {3\over{2}} \sqrt{-x} \over {2} } )}
-      \over {3} }) & k(-1)^{n-1}{3n-k-1 \choose n-1}\over{n} \\ \hline
-      \sqrt{1+4x} & \begin{array} \binom {\binom{k \over 2}n} 4^{n} & k-even \\
-      \frac{(-1)^{n-{k+1 \over 2}} \binom {n} {k+1\over 2} \binom {2n} {n}}
-      {\binom {2n}{k+1}}& k-odd, 2n>(k+1),\\ \frac{\binom{k+1}{2n}\binom
-      {2n}{n}} {\binom{k+1\over 2} {n}} & k-odd,2n \le(k+1), \\ \end{array} \\
-      \hline \sqrt{1+4x^2}+2x & \begin{array}\\ \frac{k4^n}{n+k} \binom {n+k
+      \over {3} }) & k(-1)^{n-1}{3n-k-1 \choose n-1}\over{n} \\
+      \hline
+      \sqrt{1+4x} & \cases{ \begin{array}
+
+      \binom {\binom{k \over 2}n} 4^{n} & k-even \\
+      \frac{(-1)^{n-{k+1 \over 2}} \binom {n} {k+1\over 2} \binom {2n} {n}} {\binom {2n}{k+1}}& k-odd, 2n>(k+1),\\
+      \frac{\binom{k+1}{2n}\binom {2n}{n}} {\binom{k+1\over 2} {n}} & k-odd,2n \le(k+1), \\
+
+      \end{array} }\\
+      \hline \sqrt{1+4x^2}+2x &
+      \cases{
+      \begin{array}\\ \frac{k4^n}{n+k} \binom {n+k
       \over 2}{n},& n+k-even\\ \frac{k(-1)^{n-k-1\over2}\binom {n}{n+k+1 \over
       2} \binom{2n}{n}}{(n+k) \binom{2n}{n+k+1}} &k-odd,n>(k+1),\\ \frac
       {k\binom{n+k+1}{2n} \binom{2n}{n}}{(n+k) \binom{n+k+1 \over 2}{n}}&
-      n+k-odd,n\le(k+1),\\ \end{array} \\ \hline {1\over \sqrt{1-4x}} &
-      \begin{array}\\ 4^n \binom {\frac{k}{2} + n-1}{n} & k-even, \\ \frac
+      n+k-odd,n\le(k+1),\\ \end{array} }\\
+      \hline {1\over \sqrt{1-4x}} &
+      \cases{ \begin{array}\\ 4^n \binom {\frac{k}{2} + n-1}{n} & k-even, \\ \frac
       {\binom {2n+k-1}{\frac{k-1}{2}+n} \binom{\frac{k-1}{2}+n}{n}}
-      {\binom{k-1}{k-1 \over 2}} ,& k-odd,\\ \end{array} \\\hline {1\over 12x} +
-      \frac{\sin (\frac{\arcsin(-1+216\,x^2)}{3})} {6x} & \begin{array}\\
+      {\binom{k-1}{k-1 \over 2}} ,& k-odd,\\ \end{array}} \\\hline {1\over 12x} +
+      \frac{\sin (\frac{\arcsin(-1+216\,x^2)}{3})} {6x} &  \cases{ \begin{array}\\
       \frac{k4^n \binom {\frac{3n+k}{2}-1}{n}}{n+k}, & k - even,\\ \frac{k
       \binom{\frac{3n+k-1}{2}}{n} \binom{3n+k-1}{\frac{3n+k-1}{2}}} {(n+k)
-      \binom{n+k-1}{\frac{n+k-1}{2}}}& k -odd \\\end{array} \\ \hline
-      \sqrt{\frac{1-\sqrt{1-16x}}{8x}} & \begin{array}\\ \frac{k4^n
+      \binom{n+k-1}{\frac{n+k-1}{2}}}& k -odd \\\end{array} }\\ \hline
+      \sqrt{\frac{1-\sqrt{1-16x}}{8x}} &  \cases{ \begin{array}\\ \frac{k4^n
       \binom{\frac{4n+k}{2}-1}{n}}{2n+k} & k - even,\\ \frac{k
       \binom{\frac{4n+k-1}{2}}{n} \binom {4n+k-1} {\frac {4n+k-1} {2} }}
-      {(2n+k)\binom{2n+k-1}{\frac{2n+k-1}{2}}} ,& k- odd.\\ \\ \end{array} \\
+      {(2n+k)\binom{2n+k-1}{\frac{2n+k-1}{2}}} ,& k- odd.\\ \\ \end{array}} \\
       \hline \sqrt{\frac{\sin (\frac{\arcsin(\sqrt {27x})}{3})} {\sqrt {3x}}} &
-      \begin{array}\\ \frac{k4^n \binom{\frac{6n+k}{2}-1}{n}}{4n+k} & k -
+      \cases{ \begin{array}\\ \frac{k4^n \binom{\frac{6n+k}{2}-1}{n}}{4n+k} & k -
       even,\\ \frac{k \binom{\frac{6n+k-1}{2}}{n} \binom {6n+k-1} {\frac
       {6n+k-1} {2} }} {(4n+k)\binom{4n+k-1}{\frac{4n+k-1}{2}}} ,& k- odd.\\ \\
-      \end{array} \\ \hline \end{array} $$ Необходимо отметить, что данная
+      \end{array} }\\ \hline \end{array} $$ Необходимо отметить, что данная
       таблица существенно ограничена и используется в качестве примера. Выберем
       $g_1(x)\in G$ и $g_2(x)\in G$ и строим новую функцию двух переменных.
       Можно предложить два способа получения пирамид производящей функции двух
