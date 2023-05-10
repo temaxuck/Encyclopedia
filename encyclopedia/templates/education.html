@@ -950,19 +950,29 @@
       чисел Эйлера второго рода. Для этого докажем следующую теорему.
       <br />
       <b>Теорема 2</b> Экспоненциальная производящая функция для чисел Эйлера
-      второго порядка имеет вид: $$ \sum\limits_{n \geqslant 0} \sum_{m\geqslant
-      \geqslant0} {\left\langle \left\langle \matrix{n\cr m} \right\rangle
-      \right\rangle} \frac{x^n}{n!}t^m={1-t\over{W(-t e^{(1-t)^2,x-t})+1}}, $$
+      второго порядка имеет вид:
+      <div class="formula">
+        $$ \sum\limits_{n \geqslant 0} \sum_{m\geqslant \geqslant0}
+        {\left\langle \left\langle \matrix{n\cr m} \right\rangle \right\rangle}
+        \frac{x^n}{n!}t^m={1-t\over{W(-t e^{(1-t)^2,x-t})+1}}, $$
+        <span class="formula_number">(15)</span>
+      </div>
+
       где $W(x)$ - функция Ламберта, $x>0$.
       <br />
       <b>Доказательство </b>Запишем экспоненциальную производящую функцию в виде
       двойного ряда, при этом возьмем смещение на $(n-1)$ $$ E(x,t) =
       \sum_{n>0}\sum_{m>0} {\left\langle \left\langle \matrix{n-1\cr m}
       \right\rangle \right\rangle} \frac{x^n}{n!}t^m $$ Рассмотрим формулу,
-      полученную в <a href="#18" class="ref_link">[15]</a> $$ {\left\langle
-      \left\langle \matrix{n\cr m} \right\rangle \right\rangle} =\sum_{k=0}^m
-      (-1)^{m-k}\,{2\,n+1 \choose m-k} {n+k \choose k}, $$ Ее можно представить
-      как произведение двух рядов $$
+      полученную в <a href="#18" class="ref_link">[15]</a>
+      <div class="formula">
+        $$ {\left\langle \left\langle \matrix{n\cr m} \right\rangle
+        \right\rangle} =\sum_{k=0}^m (-1)^{m-k}\,{2\,n+1 \choose m-k} {n+k
+        \choose k}, $$
+        <span class="formula_number">(16)</span>
+      </div>
+
+      Ее можно представить как произведение двух рядов $$
       E(x,t)=\sum_{n>0}P_n(t)\frac{x^n}{n!}\,(1-t)^{2n-1} $$ где $$
       (1-t)^{2\,n-1}=\sum_{n\geqslant 0}(-1)^m\,{2\,n-1 \choose m}t^m $$ и $$
       P_n(t)=\sum_{m\geqslant 0}{n+m-1 \brace m}t^m $$ Запишем функцию $$
@@ -1070,55 +1080,43 @@
       $G=\{g_i(x)\}$ производящих функций, коэффициенты $k$-степени описываются
       биномиальными коэффициентами $\{T_i(n,k)\}$. $$ \begin{array}{|c|c|}\hline
       \hbox{Производящая функция }G(x) & \hbox{Коэффициенты степени } g_x(n,k)\\
-      \hline (1+x) & \binom{k}{n}\\
-      \hline \frac{1}{1-x} & \binom{n+k-1}{n}\\
-      \hline \frac{1-\sqrt{1-4x}}{2x} & \frac{k}{n+k}{2n+k-1\choose n}\\
-      \hline
-      \frac{1-2x-\sqrt{1-4x}}{2x^2} & \frac{k}{n+k}{2n+2k\choose n}\\
-      \hline
+      \hline (1+x) & \binom{k}{n}\\ \hline \frac{1}{1-x} & \binom{n+k-1}{n}\\
+      \hline \frac{1-\sqrt{1-4x}}{2x} & \frac{k}{n+k}{2n+k-1\choose n}\\ \hline
+      \frac{1-2x-\sqrt{1-4x}}{2x^2} & \frac{k}{n+k}{2n+2k\choose n}\\ \hline
       \frac{2}{\sqrt{3x}} \sin({ {\arcsin( {3^ {3\over{2}} \sqrt{x} \over {2} }
-      )} \over {3} }) & {k\,{3\,n+k-1 \choose n }}\over{2\,n+k}\\
-      \hline
-      1+\sqrt{1+4x}\over{2} & k(-1)^{n-1}{2n-k-1 \choose n-1}\over{n}\\
-      \hline
+      )} \over {3} }) & {k\,{3\,n+k-1 \choose n }}\over{2\,n+k}\\ \hline
+      1+\sqrt{1+4x}\over{2} & k(-1)^{n-1}{2n-k-1 \choose n-1}\over{n}\\ \hline
       1-\frac{4}{3} \sin ^2({ {\arcsin( {3^ {3\over{2}} \sqrt{-x} \over {2} } )}
-      \over {3} }) & k(-1)^{n-1}{3n-k-1 \choose n-1}\over{n} \\
-      \hline
-      \sqrt{1+4x} & \cases{ \begin{array}
-
-      \binom {\binom{k \over 2}n} 4^{n} & k-even \\
-      \frac{(-1)^{n-{k+1 \over 2}} \binom {n} {k+1\over 2} \binom {2n} {n}} {\binom {2n}{k+1}}& k-odd, 2n>(k+1),\\
-      \frac{\binom{k+1}{2n}\binom {2n}{n}} {\binom{k+1\over 2} {n}} & k-odd,2n \le(k+1), \\
-
-      \end{array} }\\
-      \hline \sqrt{1+4x^2}+2x &
-      \cases{
-      \begin{array}\\ \frac{k4^n}{n+k} \binom {n+k
-      \over 2}{n},& n+k-even\\ \frac{k(-1)^{n-k-1\over2}\binom {n}{n+k+1 \over
-      2} \binom{2n}{n}}{(n+k) \binom{2n}{n+k+1}} &k-odd,n>(k+1),\\ \frac
+      \over {3} }) & k(-1)^{n-1}{3n-k-1 \choose n-1}\over{n} \\ \hline
+      \sqrt{1+4x} & \cases{ \begin{array} \binom {\binom{k \over 2}n} 4^{n} &
+      k-even \\ \frac{(-1)^{n-{k+1 \over 2}} \binom {n} {k+1\over 2} \binom {2n}
+      {n}} {\binom {2n}{k+1}}& k-odd, 2n>(k+1),\\ \frac{\binom{k+1}{2n}\binom
+      {2n}{n}} {\binom{k+1\over 2} {n}} & k-odd,2n \le(k+1), \\ \end{array} }\\
+      \hline \sqrt{1+4x^2}+2x & \cases{ \begin{array}\\ \frac{k4^n}{n+k} \binom
+      {n+k \over 2}{n},& n+k-even\\ \frac{k(-1)^{n-k-1\over2}\binom {n}{n+k+1
+      \over 2} \binom{2n}{n}}{(n+k) \binom{2n}{n+k+1}} &k-odd,n>(k+1),\\ \frac
       {k\binom{n+k+1}{2n} \binom{2n}{n}}{(n+k) \binom{n+k+1 \over 2}{n}}&
-      n+k-odd,n\le(k+1),\\ \end{array} }\\
-      \hline {1\over \sqrt{1-4x}} &
-      \cases{ \begin{array}\\ 4^n \binom {\frac{k}{2} + n-1}{n} & k-even, \\ \frac
+      n+k-odd,n\le(k+1),\\ \end{array} }\\ \hline {1\over \sqrt{1-4x}} & \cases{
+      \begin{array}\\ 4^n \binom {\frac{k}{2} + n-1}{n} & k-even, \\ \frac
       {\binom {2n+k-1}{\frac{k-1}{2}+n} \binom{\frac{k-1}{2}+n}{n}}
-      {\binom{k-1}{k-1 \over 2}} ,& k-odd,\\ \end{array}} \\\hline {1\over 12x} +
-      \frac{\sin (\frac{\arcsin(-1+216\,x^2)}{3})} {6x} &  \cases{ \begin{array}\\
-      \frac{k4^n \binom {\frac{3n+k}{2}-1}{n}}{n+k}, & k - even,\\ \frac{k
-      \binom{\frac{3n+k-1}{2}}{n} \binom{3n+k-1}{\frac{3n+k-1}{2}}} {(n+k)
-      \binom{n+k-1}{\frac{n+k-1}{2}}}& k -odd \\\end{array} }\\ \hline
-      \sqrt{\frac{1-\sqrt{1-16x}}{8x}} &  \cases{ \begin{array}\\ \frac{k4^n
-      \binom{\frac{4n+k}{2}-1}{n}}{2n+k} & k - even,\\ \frac{k
-      \binom{\frac{4n+k-1}{2}}{n} \binom {4n+k-1} {\frac {4n+k-1} {2} }}
-      {(2n+k)\binom{2n+k-1}{\frac{2n+k-1}{2}}} ,& k- odd.\\ \\ \end{array}} \\
-      \hline \sqrt{\frac{\sin (\frac{\arcsin(\sqrt {27x})}{3})} {\sqrt {3x}}} &
-      \cases{ \begin{array}\\ \frac{k4^n \binom{\frac{6n+k}{2}-1}{n}}{4n+k} & k -
-      even,\\ \frac{k \binom{\frac{6n+k-1}{2}}{n} \binom {6n+k-1} {\frac
-      {6n+k-1} {2} }} {(4n+k)\binom{4n+k-1}{\frac{4n+k-1}{2}}} ,& k- odd.\\ \\
-      \end{array} }\\ \hline \end{array} $$ Необходимо отметить, что данная
-      таблица существенно ограничена и используется в качестве примера. Выберем
-      $g_1(x)\in G$ и $g_2(x)\in G$ и строим новую функцию двух переменных.
-      Можно предложить два способа получения пирамид производящей функции двух
-      переменных:<br /><br />
+      {\binom{k-1}{k-1 \over 2}} ,& k-odd,\\ \end{array}} \\\hline {1\over 12x}
+      + \frac{\sin (\frac{\arcsin(-1+216\,x^2)}{3})} {6x} & \cases{
+      \begin{array}\\ \frac{k4^n \binom {\frac{3n+k}{2}-1}{n}}{n+k}, & k -
+      even,\\ \frac{k \binom{\frac{3n+k-1}{2}}{n}
+      \binom{3n+k-1}{\frac{3n+k-1}{2}}} {(n+k) \binom{n+k-1}{\frac{n+k-1}{2}}}&
+      k -odd \\\end{array} }\\ \hline \sqrt{\frac{1-\sqrt{1-16x}}{8x}} & \cases{
+      \begin{array}\\ \frac{k4^n \binom{\frac{4n+k}{2}-1}{n}}{2n+k} & k -
+      even,\\ \frac{k \binom{\frac{4n+k-1}{2}}{n} \binom {4n+k-1} {\frac
+      {4n+k-1} {2} }} {(2n+k)\binom{2n+k-1}{\frac{2n+k-1}{2}}} ,& k- odd.\\ \\
+      \end{array}} \\ \hline \sqrt{\frac{\sin (\frac{\arcsin(\sqrt {27x})}{3})}
+      {\sqrt {3x}}} & \cases{ \begin{array}\\ \frac{k4^n
+      \binom{\frac{6n+k}{2}-1}{n}}{4n+k} & k - even,\\ \frac{k
+      \binom{\frac{6n+k-1}{2}}{n} \binom {6n+k-1} {\frac {6n+k-1} {2} }}
+      {(4n+k)\binom{4n+k-1}{\frac{4n+k-1}{2}}} ,& k- odd.\\ \\ \end{array} }\\
+      \hline \end{array} $$ Необходимо отметить, что данная таблица существенно
+      ограничена и используется в качестве примера. Выберем $g_1(x)\in G$ и
+      $g_2(x)\in G$ и строим новую функцию двух переменных. Можно предложить два
+      способа получения пирамид производящей функции двух переменных:<br /><br />
       1. На основе произведения и композиции функций $g_1(x)\in G$ и $g_2(x)\in
       G$. Пусть $g_1(x)=(1+x)$, $g_2(x)=\frac{1}{1-x}$ и коэффициенты k-степени
       $g_1(x)$ будут иметь вид: $$ T_1(n,k)={k \choose n}, $$ для $g_2(x)$ $$
