@@ -538,16 +538,20 @@
       solution of the functional equation $A(x)=G\left(\frac{x}{A(x)}\right)$
     </div>
     <div>
-      \begin{equation}\label{gfleft1}
-      A(n,k)=k\,\sum_{j=1}^{n}\frac{1}{j}{G}\left(0 , 1\right)^{-n+k-j}\left(-1
-      \right)^{j-1}{G}\left(n , j\right){n-k+j-1 \choose j-1}{2\,n-k \choose
-      n-j} \end{equation} Example <br />
-      Let $$ G(x)=\frac{\log(1+x)}{x} $$ and $$ G(n,k)=\frac{k!}{(n+k)!}{n+k
-      \choose k}(-1)^n. $$ Let 's write down the equation $$
+      <div class="formula">
+        \begin{equation}\label{gfleft1}
+        A(n,k)=k\,\sum_{j=1}^{n}\frac{1}{j}{G}\left(0 ,
+        1\right)^{-n+k-j}\left(-1 \right)^{j-1}{G}\left(n , j\right){n-k+j-1
+        \choose j-1}{2\,n-k \choose n-j} \end{equation}
+        <span class="formula_number">(10)</span>
+      </div>
+      ${\bf Example}$ Let $$ G(x)=\frac{\log(1+x)}{x} $$ and $$$
+      G(n,k)=\frac{k!}{(n+k)!}{n+k \brack k}(-1)^n. $$ Let 's write down the
+      equation $$
       A(x)=G\left(\frac{x}{A(x)}\right)=\frac{\log(1+\frac{x}{A(x)}}{\frac{x}{A(x)}}
       $$ From where, we get the generating function for the Bernoulli numbers $$
       A(x)=\frac{x}{e^x-1} $$ Then $$ A(n,k)=k\,\sum_{j=1}^{n}\frac{1}{j}
-      {\left(-1\right)^(n+j-1)}\frac{j!}{(n+j)!} {n+j \choose j}{n-k+j-1\choose
+      {\left(-1\right)^(n+j-1)}\frac{j!}{(n+j)!} {n+j \brack j}{n-k+j-1\choose
       j-1} {2,n-k \choose n-j} $$ $A(0,k)=1$
     </div>
     <div id="8_9" class="article">
@@ -560,11 +564,13 @@
       $$ \frac{x\,A'(x)}{A(x)}, $$ where $A(x)$ is the solution of the
       functional equation $$ A(x)=G(x\,A(x)). $$ If $A(n,k)$ is known, then the
       diagonal $G(n,n)$ will have the following expression
-      \begin{equation}\label{gfdiag1}
-      G(n,n)=n\,\sum_{j=1}^{n}\frac{(-1)^{j-1}\,A(n,j)}{j\,A(0,1)^{j}}\,{n\choose
-      j}. \end{equation} Example. Let the generating function $$
-      G(x)=\frac{1+x-x^2}{1-x} $$ be given and the expression for the
-      coefficients of the degree is given $$
+      <div class="formula">
+        G(n,n)=n\,\sum_{j=1}^{n}\frac{(-1)^{j-1}\,A(n,j)}{j\,A(0,1)^{j}}\,{n\choose
+        j}. \end{equation}
+        <span class="formula_number">(11)</span>
+      </div>
+      Example. Let the generating function $$ G(x)=\frac{1+x-x^2}{1-x} $$ be
+      given and the expression for the coefficients of the degree is given $$
       [x^n]G(x)^k=G(n,k)=\sum_{j=0}^{\left \lfloor {n \over 2} \right \rfloor}{k
       \choose j}\,{n-j-1\choose n-2\,j} $$ It is necessary to find the
       generating function for the diagonal $G(n,n)$. To do this , you need to
@@ -580,11 +586,16 @@
       8.10 Decomposition of the composition $F(x)=\log(A(x))$
     </div>
     <div>
-      The consequence of the statements of the paragraph is that for the
+      The consequence of the statements of the paragraph 8.9 is that for the
       composition of the functions of $F(x)=\log(A(x))$, the expansion
-      coefficients will have the expression \begin{equation}\label{gflog1}
-      f(n)=\sum_{j=1}^{n}\frac{(-1)^{j-1}\,A(n,j)}{j\,A(0,1)^{j}}\,{n\choose j}.
-      \end{equation} Let's look at the examples<br />
+      coefficients will have the expression
+      <div class="formula">
+        \begin{equation}\label{gflog1}
+        f(n)=\sum_{j=1}^{n}\frac{(-1)^{j-1}\,A(n,j)}{j\,A(0,1)^{j}}\,{n\choose
+        j}. \end{equation}
+        <span class="formula_number">(12)</span>
+      </div>
+      Let's look at the examples<br />
       Example 1 $$ \log\left(\frac{1}{1-x}\right) $$ $$
       [x^n]\left(\frac{1}{1-x}\right)^k={n+k-1\choose n} $$
       $$\sum_{j=1}^{n}\frac{(-1)^{j-1}}{j}{n+j-1\choose n}{n \choose
@@ -599,12 +610,13 @@
     <div class="paragraph">
       Consider the solution of the problem of finding an explicit formula for
       the composition of generating functions of two variables. To do this,
-      write down Table 1 obtained in. ВIn the first column, the variants of the
-      composition of the generating functions are written, in the second -
-      explicit expressions of the coefficients of the $k$-th degree of the
-      generating function, the expression through the coefficients of the $k$-th
-      degree of the generating functions forming the composition. For $k=1$ we
-      obtain the coefficients of the composition of the generating functions.
+      write down Table 1 obtained in <a href="#18" class="ref_link">[3]</a>. In
+      the first column, the variants of the composition of the generating
+      functions are written, in the second - explicit expressions of the
+      coefficients of the $k$-th degree of the generating function, the
+      expression through the coefficients of the $k$-th degree of the generating
+      functions forming the composition. For $k=1$ we obtain the coefficients of
+      the composition of the generating functions.
     </div>
     <div>
       <table border="1" class="table">
@@ -693,7 +705,8 @@
       Table 1, line 3, $k=1$) $$ g(n,m)=\sum_{k=0}^{n+m}
       A^{\Delta}(n,m,k)=\sum_{k=0}^{n-m}{k\choose{n-m-k}}\,{m+k-1\choose{m}}. $$
       Thus, we have obtained an explicit formula for the triangle sequence
-      A055830, describing the class of paths on the lattice[12].
+      A055830, describing the class of paths on the lattice
+      <a href="#18" class="ref_link">[12]</a>.
     </div>
     <div id="10" class="article">10. Finding mutual generating functions</div>
     <div>
@@ -708,7 +721,7 @@
       \end{array}$$ Note that this function describes a triangle and $G(0,0)=1$.
       Then we write the function $H\left(x,\frac{y}{x}\right)$. Looking for this
       function in the knowledge base, we get the function and tensor number 69
-      (see )
+      (see paragraph 10)
 
       <div class="fragment">
         Generating function:
@@ -747,11 +760,35 @@
       Let $$ G(x,y)^k=\sum_{n\geqslant 0}\sum_{m\geqslant 0} T(n,m,k)x^ny^m $$
       $G(0,0)\neq 0$.Then the coefficients of the decomposition of the function
       $$ \frac{1}{G(x,y)^{\alpha}} $$ will have the following expressions
-      \begin{equation} \sum_{j=0}^{n+m}{\frac{(-1)^{j}} {T(0,0,1)^{j+\alpha}}
-      {j+\alpha-1\choose{j}}{\it T}(n,m,j) {n+m+\alpha \choose{n+m-j}}}
-      \end{equation} and \begin{equation}
-      (n+m+1){n+m+\alpha\choose{n+m+1}}\sum_{j=0}^{n} T(0,0,1)^{-j-\alpha}
-      (-1)^{j} T(n,m,j) {n+m\choose{j}} \over{j+\alpha} \end{equation} ....
+      <div class="formula">
+        \begin{equation} \sum_{j=0}^{n+m}{\frac{(-1)^{j}} {T(0,0,1)^{j+\alpha}}
+        {j+\alpha-1\choose{j}}{\it T}(n,m,j) {n+m+\alpha \choose{n+m-j}}}
+        \end{equation}
+        <span class="formula_number">(13)</span>
+      </div>
+      and
+      <div class="formula">
+        \begin{equation} (n+m+1){n+m+\alpha\choose{n+m+1}}\sum_{j=0}^{n}
+        T(0,0,1)^{-j-\alpha} (-1)^{j} T(n,m,j) {n+m\choose{j}} \over{j+\alpha}
+        \end{equation}
+        <span class="formula_number">(14)</span>
+      </div>
+
+      Let's look at the example $$ \frac{x+y}{\log(1+x+y)} $$ $$
+      (\log(1+x)^k=\sum_{n\geqslant k} (-1)^{n-k}{n \brack k} \frac{k!}{n!}\,x^n
+      $$ $$ \left(\frac{\log(1+x)}{x}\right)^k=\sum_{n\geqslant 0} (-1)^n\, {n+k
+      \brack k} \frac{k!}{(n+k)!}x^n $$ Let's find the composition $$
+      A(B(x,y))=\frac{\log(1+x+y)}{x+y} $$ где $A(x)=\log(1+x)$, $B(x,y)=x+y$.
+      Let's find the function $B(x,y)$ in the encyclopedia.This function is
+      written by number 0001. Where from $$ B(x,y)^k= \sum_{n\geqslant 0}
+      \sum_{m \geqslant 0} \delta_{k, n+m}\, {n+m \choose m }\,x^n\,y^m $$ Then
+      we use the formula compositions (see table). We get $$ \sum_{j=0}^{n+m}
+      B^{\Delta}(n,m,k)A^{\Delta}(j,k)= $$ $$ \sum_{j=0}^{n+m} \delta_{j, n+m}
+      \,{n+m \choose m }(-1)^j\,{j+k \brack k}\frac{k!}{(j+k)!}= $$ $$ {n+m
+      \choose m}(-1)^{n+m} {n+m+k \brack k} \frac{k!}{(n+m+k)!} $$ $$
+      \sum_{j=0}^{n+m} {\left(-1\right)^{j}\,}\ { j+\alpha-1 \choose j} {n+m
+      \choose m} (-1)^{n+m} {n+m+j \brack j} \frac{j!}{(n+m+j)!}\, {n+m+\alpha
+      \choose n+m-j} $$
     </div>
     <div id="11" class="article">
       11. Finding the coefficients of inverse generating functions
@@ -763,10 +800,11 @@
       G_x(x,y)=\frac{G_x(x,y)}{x}. $$ Then the equation will take the form: $$
       A(x,y)=\frac{x}{G_x(A(x,y),y)} $$ Now let's perform the substitution
       $A(x,y)=xA_x(x,y)$ $$ A_x(x,y)=\frac{x}{G_x(A_x(x,y),y)} $$ Then to find
-      the inverse of the functions, you can use the formula (.). However, in
-      this case (see diagram .) the mutual mutual function is easy to find $$
+      the inverse of the functions, you can use the formula. However, in this
+      case the mutual mutual function is easy to find $$
       G_{r}(x,y)=1-x-x^2(1+y)=(1-x(1+x+xy). $$ Now we find the pyramid
-      $T(n,m,k)$ of the function $F(x,y)=(1+x+xy)$ at number 37 (see pic.)
+      $T(n,m,k)$ of the function $F(x,y)=(1+x+xy)$ at number 37 (see the
+      fragment below).
       <div class="fragment">
         Generating function:<br />
         $U_{37}(x,y)=1+x+x\,y$
@@ -790,16 +828,17 @@
       Let the expression be given
       $$\sum_{k=0}^{m}{n+m-k+2\choose{k}}{n+m-k\choose{n}}$$ We will perform a
       number of transformations in order to obtain one of the compositional
-      formulas presented in []. $$\sum_{k=0}^{m}{n+m-k+2\choose{
-      k}}{m-k+n\choose{n}}$$ changing the summation order from $k$ to $m-k$
-      $$\sum_{k=0}^{m}{n+k+2\choose{ m-k}}{k+n\choose{n}}$$ now the index $k$
-      does not start from zero, but from $n$ $$\sum_{k=n}^{n+m}{k+2\choose{
-      n+m-k}}{k\choose{n}}$$ now the index k $k$ starts from zero.
-      $$\sum_{k=0}^{n+m}{k+2\choose{ n+m-k}}\,{k\choose{k-n}}$$ we introduce a
-      new variable and introduce summation by this variable, using the kronecker
-      symbol $$ j=n+m-k $$ we get $$\sum_{k=0}^{n+m}{\sum_{j=0}^{m}{\delta_{j,
-      n+m-k} \,{k+2\choose{ j}}\,{-j+n+m\choose{m-j}}}}$$ now we compare it with
-      the compositional formula
+      formulas presented in <a href="#18" class="ref_link">[3]</a>.
+      $$\sum_{k=0}^{m}{n+m-k+2\choose{ k}}{m-k+n\choose{n}}$$ changing the
+      summation order from $k$ to $m-k$ $$\sum_{k=0}^{m}{n+k+2\choose{
+      m-k}}{k+n\choose{n}}$$ now the index $k$ does not start from zero, but
+      from $n$ $$\sum_{k=n}^{n+m}{k+2\choose{ n+m-k}}{k\choose{n}}$$ now the
+      index k $k$ starts from zero. $$\sum_{k=0}^{n+m}{k+2\choose{
+      n+m-k}}\,{k\choose{k-n}}$$ we introduce a new variable and introduce
+      summation by this variable, using the kronecker symbol $$ j=n+m-k $$ we
+      get $$\sum_{k=0}^{n+m}{\sum_{j=0}^{m}{\delta_{j, n+m-k} \,{k+2\choose{
+      j}}\,{-j+n+m\choose{m-j}}}}$$ now we compare it with the compositional
+      formula
       $$g(n,m)=\sum\limits_{k=0}^{n+m}\sum\limits_{j=0}^{m}{A^{\Delta}\left(n
       ,m-j,k\right)h(k,j)}$$ Note that for our case $$ A^{\Delta}\left(n
       ,m-j,k\right)={\delta_{j, n+m-k}{-j+n+m\choose{m-j}}} $$ Where from $$
@@ -807,7 +846,7 @@
       the encyclopedia, we will find the pyramid at number 1, its generating
       function is $(x+y)$. Now let's find the generating function for $$
       h(n,m)={n+2\choose{ m}} $$ We make a request to the knowledge base:
-      $T=binomial(n+2,m)$ We get the pyramid number 42 (see pic)
+      $T=binomial(n+2,m)$ We get the pyramid number 42 (see the fragment below).
       <div class="fragment">
         Generating function:
         <br />
@@ -817,7 +856,8 @@
         $\begin{array}{lllllll}1&2&1&0&0&0&0\\1&3&3&1&0&0&0\\1&4&6&4&1&0&0\\1&5&10&10&5&1&0\\1&6&15&20&15&6&1\\1&7&21&35&35&21&7\\1&8&28&56&70&56&28\\\end{array}$
       </div>
       From where we get the desired generating function. $$
-      A(x,y)=UU0042(x+y,y)={\left(y+1\right)^2}\over{1-\left(y+1\right)\,\left(y+x\right)}$$
+      A(x,y)=UU0042(x+y,y)= {\left(y+1\right)^2 \over
+      1-\left(y+1\right)\,\left(y+x\right)} $$
     </div>
 
     <div id="13" class="article">
@@ -840,7 +880,7 @@
       T_{ly}(n,m)=[x^n\,y^m]\frac{1}{A(x,y)}\frac{\partial A(x,y)}{\partial y}
       $$ $$ T_{ly}(n,m)=T_G(n,m,m) $$ Let's find the coefficients of the
       logarithmic derivative of the generating function $A_{139}(x,y)$ of the
-      corresponding frame in the knowledge base shown in pic:
+      corresponding frame in the knowledge base shown in the fragment below:
       <div class="fragment">
         Generating function:<br />
         $U_{139}(x,y)={1-2\,x-y-\sqrt{1-4\,x-\left(2-4\,x\right)\,y+y^2}}\over{2\,x^2}$
@@ -886,7 +926,7 @@
       j){n+m\choose{j}} \over{T^{j}(0 , 0 , 1)j}} $$ Consider an example. Let
       the generating function number 130 be given.
       <div class="fragment">
-        Generating function: $$U_{130}(x,y)=1\over{-4*y+(1-x+y)^2}$$ Formula:
+        Generating function: $$U_{130}(x,y)={1\over-4*y+(1-x+y)^2}$$ Formula:
         $$T_{130}(n,m,k)={m+k\choose{k-1}}{n+k-1\choose{k-1}}{n+m+2*k-1\choose{
         k-1}}{2*(n+m)+2*k\choose{2*m+1}}\over{2*{2*k-2
         \choose{k-1}}{2m+2*k\choose{2*k-2}}}$$ Data:
