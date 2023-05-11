@@ -959,20 +959,21 @@
       composition of functions $$ A(x,y)=x\,B(C(x,y)), $$ where
       $B(x)=\frac{e^x-1}{x}$ и $C(x,y)=x\,(y-1)$. Then $B(x)=Up0102(x)/x$ $$
       B(x)^k=(\frac{e^x-1}{x})^k=\sum_{n\geqslant 0} Tp0102(n+k,k)x^n. $$ where
-      $$Tp0102(n,k)=\frac{k!}{n!}\,{n \choose k}$$ Using the encyclopedia we
-      will find $C(x)^k$ $$ C(x)^k=\sum_{n\geqslant
+      $$Tp0102(n,k)=\frac{k!}{n!}\,{n \brace k}$$ Using the encyclopedia we will
+      find $C(x)^k$ $$ C(x)^k=\sum_{n\geqslant
       k}\,Tuu0002(n,m,k)\,(-1)^{m+k}\,x^n\,y^m $$ $$ Tuu0002(n,m,k)=\delta_{k,
       n} \,{n\choose m} $$ We find the coefficients $B(C(x))^k$ $$
       \sum_{j=0}^{n+m} Tuu0002(n,m,j)(-1)^{m+j}Tp0102(j+k,k)= $$ $$
       \sum_{j=0}^{n+m}\delta_{j, n} \,{n\choose
-      m}(-1)^{m+j}\frac{k!}{(j+k)!}\,{j+k \choose k}= $$ $$ {n \choose m
-      }(-1)^{n+m}\frac{k!}{(n+k)!}\,{n+k \choose k}. $$ We find the coefficients
-      $x\,B(C(x))^k$ $$ {n-k\choose m }(-1)^{n+m-k}\frac{k!}{n!}\,{n \choose k}=
+      m}(-1)^{m+j}\frac{k!}{(j+k)!}\,{j+k \brace k}= $$ $$ {n \choose m
+      }(-1)^{n+m}\frac{k!}{(n+k)!}\,{n+k \brace k}. $$ We find the coefficients
+      $x\,B(C(x))^k$ $$ {n-k\choose m }(-1)^{n+m-k}\frac{k!}{n!}\,{n \brace k}=
       $$ From where we find an explicit expression for the decomposition
       coefficients of the desired composition $$ \sum_{k=0}^{n} {n-k\choose
-      m}(-1)^{n+m-k}\frac{k!}{n!}\,{n \choose k} $$ Then Euler numbers of the
-      first kind will have the following explicit expression $$ {n \choose
-      m}=\sum_{k=0}^{n-m} (-1)^{n+m-k}\,k!\,{n-k \choose m} {n \choose k} $$
+      m}(-1)^{n+m-k}\frac{k!}{n!}\,{n \brace k} $$ Then Euler numbers of the
+      first kind will have the following explicit expression $$ {\left\langle
+      \matrix{n\cr m} \right\rangle}=\sum_{k=0}^{n-m} (-1)^{n+m-k}\,k!\,{n-k
+      \choose m} {n \brace k} $$
     </div>
     <div id="14_3" class="article">
       14.3 Example 3. Generating function for second-order Euler numbers
@@ -983,35 +984,48 @@
       theorem.
       <br />
       <b>Theorem 2</b> The exponential generating function for second-order
-      Euler numbers has the form: $$ \sum\limits_{n \geqslant 0}
-      \sum_{m\geqslant \geqslant0} {n \choose m}\frac{x^n}{n!}t^m={1-t\over{W(-t
-      e^{(1-t)^2,x-t})+1}}, $$ where $W(x)$ -is the Lambert function, $x>0$.
+      Euler numbers has the form:
+      <div class="formula">
+        $$ \sum\limits_{n \geqslant 0} \sum_{m\geqslant \geqslant0}
+        {\left\langle \left\langle \matrix{n\cr m} \right\rangle \right\rangle}
+        \frac{x^n}{n!}t^m={1-t\over{W(-t e^{(1-t)^2,x-t})+1}}, $$
+        <span class="formula_number">(15)</span>
+      </div>
+      where $W(x)$ -is the Lambert function, $x>0$.
       <br />
       <b> Proof </b>We write down the exponential generating function in the
       form of a double series, while taking the offset by $(n-1)$ $$ E(x,t) =
-      \sum_{n>0}\sum_{m>0} {n-1 \choose m}\frac{x^n}{n!}t^m $$ Consider the
-      formula obtained in |15| $$ {n \choose m}=\sum_{k=0}^m (-1)^{m-k}\,{2\,n+1
-      \choose m-k} {n+k \choose k}, $$ It can be represented as the product of
-      two rows $$ E(x,t)=\sum_{n>0}P_n(t)\frac{x^n}{n!}\,(1-t)^{2n-1} $$ where
-      $$ (1-t)^{2\,n-1}=\sum_{n\geqslant 0}(-1)^m\,{2\,n-1 \choose m}t^m $$ and
-      $$ P_n(t)=\sum_{m\geqslant 0}{n+m-1 \choose m}t^m $$ Let 's write the
-      function $$ u(x,t)=\sum_{n>0}\sum_{m\geqslant 0}{n+m-1 \choose
-      m}\frac{x^n}{n!}t^m $$ We show that this function is the inverse function
-      for the function $$ y(x,t)=(x-t(e^x-1)). $$ let 's write a mutual function
-      for $y(x,t)$ $$ \frac{x}{y(x,t)}=\frac{1}{1-t\frac{e^x-1}{x}} $$ and find
-      her degree. To do this , we write $$ (t(\frac{e^x-1}{x}))^k=\sum_{n>0}
+      \sum_{n>0}\sum_{m>0} {\left\langle \left\langle \matrix{n-1\cr m}
+      \right\rangle \right\rangle} \frac{x^n}{n!}t^m $$ Consider the formula
+      obtained in
+      <a href="#18" class="ref_link">[15]</a>
+      <div class="formula">
+        $$ {\left\langle \left\langle \matrix{n\cr m} \right\rangle
+        \right\rangle} =\sum_{k=0}^m (-1)^{m-k}\,{2\,n+1 \choose m-k} {n+k
+        \choose k}, $$
+        <span class="formula_number">(16)</span>
+      </div>
+      It can be represented as the product of two rows $$
+      E(x,t)=\sum_{n>0}P_n(t)\frac{x^n}{n!}\,(1-t)^{2n-1} $$ where $$
+      (1-t)^{2\,n-1}=\sum_{n\geqslant 0}(-1)^m\,{2\,n-1 \choose m}t^m $$ and $$
+      P_n(t)=\sum_{m\geqslant 0}{n+m-1 \brace m}t^m $$ Let 's write the function
+      $$ u(x,t)=\sum_{n>0}\sum_{m\geqslant 0}{n+m-1 \brace m}\frac{x^n}{n!}t^m
+      $$ We show that this function is the inverse function for the function $$
+      y(x,t)=(x-t(e^x-1)). $$ let 's write a mutual function for $y(x,t)$ $$
+      \frac{x}{y(x,t)}=\frac{1}{1-t\frac{e^x-1}{x}} $$ and find her degree. To
+      do this , we write $$ (t(\frac{e^x-1}{x}))^k=\sum_{n>0}
       \sum_{m>0}T(n,m,k)x^nt^n $$ It is known that for the function $(e^x-1)$ is
-      available identity $$ (e^x-1)^k=\sum\limits_{n\geqslant 0} k!{n \choose
-      k}\frac{x^n}{n!}, $$ we get $$ T(n,m,k)=\delta(m,k){n+k \choose
+      available identity $$ (e^x-1)^k=\sum\limits_{n\geqslant 0} k!{n \brace
+      k}\frac{x^n}{n!}, $$ we get $$ T(n,m,k)=\delta(m,k){n+k \brace
       k}\frac{k!}{(n+k)!}, $$ where $\delta(m,k)$ is the Kronecker symbol. For
       the function $\frac{1}{(1-x)}$ the identity is known $$
       \frac{1}{(1-x)^k}=\sum_{n\geqslant 0} {n+k-1 \choose n}x^n. $$ Then for
-      the degree of composition of two generating functions $$
-      ({1}{1-t\frac{e^x-1}{x}})^k=\sum\limits_{n\geqslant 0}
-      \sum\limits_{m\geqslant 0} D(n,m,k)x^nt^m, $$ based on the compositional
-      formula \cite{kru}, we can write $$ D(n,m,k)=\sum\limits_{i=0}^{n+m}
-      T(n,m,i){i+k-1 \choose i}=\sum\limits_{k=0}^{n+m} \delta(m,i) {n+i \choose
-      i}\frac{i!}{(n+i)!}{i+k-1 \choose i}= $$ $$ ={n+m \choose
+      the degree of composition of two generating functions $$ ({1 \over
+      1-t\frac{e^x-1}{x}})^k =\sum\limits_{n\geqslant 0} \sum\limits_{m\geqslant
+      0} D(n,m,k)x^nt^m, $$ based on the compositional formula \cite{kru}, we
+      can write $$ D(n,m,k)=\sum\limits_{i=0}^{n+m} T(n,m,i){i+k-1 \choose
+      i}=\sum\limits_{k=0}^{n+m} \delta(m,i) {n+i \brace
+      i}\frac{i!}{(n+i)!}{i+k-1 \choose i}= $$ $$ ={n+m \brace
       m}\frac{m!}{(n+m)!}{m+k-1 \choose m}. $$ Now let 's use the theorem
       Lagrange on the inverse function, according to which for a power series
       $u(x,t)$ satisfying the functional equation $$ u=x\,F(g,t) $$ where
@@ -1021,10 +1035,10 @@
       u=\frac{x}{1-t\frac{e^{u}-1}{u}}. $$ The solution to this equation will be
       $$ u(x,t)^k=\sum\limits_{n>0} \sum\limits_{m\geqslant 0}
       \frac{k}{n}D(n-k,m,n)x^n\,t^m $$ где $D(n,m,k)$ where are the coefficients
-      of the series $F(x,t)^k$. Then $$ D(n-k,m,n)={n+m-k \choose
+      of the series $F(x,t)^k$. Then $$ D(n-k,m,n)={n+m-k \brace
       m}\frac{m!}{(n+m-k)!}{m+n-1 \choose m} $$ For $k=1$ we get $$
       u(x,t)=\sum\limits_{n>0} \sum\limits_{m\geqslant 0} \frac{1}{n}{n+m-1
-      \choose m}\frac{m!}{(n+m-1)!}{m+n-1 \choose m}x^n\,t^m $$ or, after
+      \brace m}\frac{m!}{(n+m-1)!}{m+n-1 \choose m}x^n\,t^m $$ or, after
       simplifying the binomial coefficient and factorials, we get $$
       u(x,t)=\sum\limits_{n>0} \sum\limits_{m\geqslant 0} \frac{1}{n!}{n+m-1
       \choose m}x^n\,t^m $$ Thus, the function $u(x,t)$ is the inverse of the
@@ -1043,8 +1057,9 @@
       E(x,t)=\frac{E_2(x(1-t)^2,t)}{(1-t)}=\frac{x(1-t)^2-t-W(-t\,e^{x(1-t)^2-t})}{1-t}.
       $$ Differentiating by $x$ the expression for $E(x,t)$ taking into account
       the properties of the derivative of the Lambert function $W(x)$ we obtain
-      the desired generating function $$ Eu(x,t)=\sum\limits_{n>0} \sum_{m>0} {n
-      \choose m}\frac{x^n}{n!}t^m={1-t\over{W(-t\,e^{(1-t)^2\,x-t})+1}} $$
+      the desired generating function $$ Eu(x,t)=\sum\limits_{n>0} \sum_{m>0}
+      {\left\langle \left\langle \matrix{n\cr m} \right\rangle \right\rangle}
+      \frac{x^n}{n!}t^m={1-t\over{W(-t\,e^{(1-t)^2\,x-t})+1}} $$
     </div>
     <div id="15" class="article">
       15. Finding explicit expressions for decomposing the composition of
@@ -1079,13 +1094,20 @@
       and the coefficients of the k-th degree are given $$
       G(x,y,\ldots,z)^k=\sum_{n\geqslant 0}\sum_{m\geqslant 0}
       T(n,m,\ldots,i,k)x^n\,y^m. $$ Then for the coefficients of the expansion
-      $G(x,y,\ldots,z)^{-\alpha}$ will have the expressions $$
-      \sum_{j=0}^{n+m+\ldots+i} \frac{(-1)^{j}}{T (0 ,0,\ldots,0,1)^{j+\alpha}}
-      \binom{j+\alpha-1}{j} T(n,m,\ldots,i,j) \binom
-      {n+m+\ldots+i+\alpha}{n+m+\ldots+i-j} $$ and $$ (n+m+\ldots+i+1)
-      {n+m+\ldots+i+\alpha\choose n+m+\ldots+i+1} \sum_{j=0}^{n+m+\ldots+i}
-      \frac{(-1)^{j} {n+m+\ldots+i\choose j} }{(j+\alpha) T(0
-      ,0,\ldots,0,1)^{j+\alpha}} $$
+      $G(x,y,\ldots,z)^{-\alpha}$ will have the expressions
+      <div class="formula">
+        $$ \sum_{j=0}^{n+m+\ldots+i} \frac{(-1)^{j}}{T (0
+        ,0,\ldots,0,1)^{j+\alpha}} \binom{j+\alpha-1}{j} T(n,m,\ldots,i,j)
+        \binom {n+m+\ldots+i+\alpha}{n+m+\ldots+i-j} $$
+        <span class="formula_number">(17)</span>
+      </div>
+      and
+      <div class="formula">
+        $$ (n+m+\ldots+i+1) {n+m+\ldots+i+\alpha\choose n+m+\ldots+i+1}
+        \sum_{j=0}^{n+m+\ldots+i} \frac{(-1)^{j} {n+m+\ldots+i\choose j}
+        }{(j+\alpha) T(0 ,0,\ldots,0,1)^{j+\alpha}} $$
+        <span class="formula_number">(18)</span>
+      </div>
     </div>
     <div id="17" class="article">17. How the encyclopedia was created</div>
     <div>
@@ -1094,45 +1116,45 @@
       explicit expressions of coefficients $k$-degrees. . Let there be a set of
       $G=\{g_i(x)\}$ generating functions, the coefficients of $k$-degree are
       described by binomial coefficients of $\{T_i(n,k)\}$. $$
-      \begin{array}{|c|c|}\hline \hbox{Generating function }G(x) & \hbox{Degree
-      coefficients } g_x(n,k)\\ \hline (1+x) & \binom{k}{n}\\ \hline
-      \frac{1}{1-x} & \binom{n+k-1}{n}\\ \hline \frac{1-\sqrt{1-4x}}{2x} &
-      \frac{k}{n+k}{2n+k-1\choose n}\\ \hline \frac{1-2x-\sqrt{1-4x}}{2x^2} &
+      \begin{array}{|c|c|}\hline \hbox{Производящая функция }G(x) &
+      \hbox{Коэффициенты степени } g_x(n,k)\\ \hline (1+x) & \binom{k}{n}\\
+      \hline \frac{1}{1-x} & \binom{n+k-1}{n}\\ \hline \frac{1-\sqrt{1-4x}}{2x}
+      & \frac{k}{n+k}{2n+k-1\choose n}\\ \hline \frac{1-2x-\sqrt{1-4x}}{2x^2} &
       \frac{k}{n+k}{2n+2k\choose n}\\ \hline \frac{2}{\sqrt{3x}} \sin({
       {\arcsin( {3^ {3\over{2}} \sqrt{x} \over {2} } )} \over {3} }) &
       {k\,{3\,n+k-1 \choose n }}\over{2\,n+k}\\ \hline 1+\sqrt{1+4x}\over{2} &
       k(-1)^{n-1}{2n-k-1 \choose n-1}\over{n}\\ \hline 1-\frac{4}{3} \sin ^2({
       {\arcsin( {3^ {3\over{2}} \sqrt{-x} \over {2} } )} \over {3} }) &
-      k(-1)^{n-1}{3n-k-1 \choose n-1}\over{n} \\ \hline \sqrt{1+4x} &
+      k(-1)^{n-1}{3n-k-1 \choose n-1}\over{n} \\ \hline \sqrt{1+4x} & \cases{
       \begin{array} \binom {\binom{k \over 2}n} 4^{n} & k-even \\
       \frac{(-1)^{n-{k+1 \over 2}} \binom {n} {k+1\over 2} \binom {2n} {n}}
       {\binom {2n}{k+1}}& k-odd, 2n>(k+1),\\ \frac{\binom{k+1}{2n}\binom
-      {2n}{n}} {\binom{k+1\over 2} {n}} & k-odd,2n \le(k+1), \\ \end{array} \\
-      \hline \sqrt{1+4x^2}+2x & \begin{array}\\ \frac{k4^n}{n+k} \binom {n+k
-      \over 2}{n},& n+k-even\\ \frac{k(-1)^{n-k-1\over2}\binom {n}{n+k+1 \over
-      2} \binom{2n}{n}}{(n+k) \binom{2n}{n+k+1}} &k-odd,n>(k+1),\\ \frac
+      {2n}{n}} {\binom{k+1\over 2} {n}} & k-odd,2n \le(k+1), \\ \end{array} }\\
+      \hline \sqrt{1+4x^2}+2x & \cases{ \begin{array}\\ \frac{k4^n}{n+k} \binom
+      {n+k \over 2}{n},& n+k-even\\ \frac{k(-1)^{n-k-1\over2}\binom {n}{n+k+1
+      \over 2} \binom{2n}{n}}{(n+k) \binom{2n}{n+k+1}} &k-odd,n>(k+1),\\ \frac
       {k\binom{n+k+1}{2n} \binom{2n}{n}}{(n+k) \binom{n+k+1 \over 2}{n}}&
-      n+k-odd,n\le(k+1),\\ \end{array} \\ \hline {1\over \sqrt{1-4x}} &
+      n+k-odd,n\le(k+1),\\ \end{array} }\\ \hline {1\over \sqrt{1-4x}} & \cases{
       \begin{array}\\ 4^n \binom {\frac{k}{2} + n-1}{n} & k-even, \\ \frac
       {\binom {2n+k-1}{\frac{k-1}{2}+n} \binom{\frac{k-1}{2}+n}{n}}
-      {\binom{k-1}{k-1 \over 2}} ,& k-odd,\\ \end{array} \\\hline {1\over 12x} +
-      \frac{\sin (\frac{\arcsin(-1+216\,x^2)}{3})} {6x} & \begin{array}\\
-      \frac{k4^n \binom {\frac{3n+k}{2}-1}{n}}{n+k}, & k - even,\\ \frac{k
-      \binom{\frac{3n+k-1}{2}}{n} \binom{3n+k-1}{\frac{3n+k-1}{2}}} {(n+k)
-      \binom{n+k-1}{\frac{n+k-1}{2}}}& k -odd \\\end{array} \\ \hline
-      \sqrt{\frac{1-\sqrt{1-16x}}{8x}} & \begin{array}\\ \frac{k4^n
-      \binom{\frac{4n+k}{2}-1}{n}}{2n+k} & k - even,\\ \frac{k
-      \binom{\frac{4n+k-1}{2}}{n} \binom {4n+k-1} {\frac {4n+k-1} {2} }}
-      {(2n+k)\binom{2n+k-1}{\frac{2n+k-1}{2}}} ,& k- odd.\\ \\ \end{array} \\
-      \hline \sqrt{\frac{\sin (\frac{\arcsin(\sqrt {27x})}{3})} {\sqrt {3x}}} &
-      \begin{array}\\ \frac{k4^n \binom{\frac{6n+k}{2}-1}{n}}{4n+k} & k -
-      even,\\ \frac{k \binom{\frac{6n+k-1}{2}}{n} \binom {6n+k-1} {\frac
-      {6n+k-1} {2} }} {(4n+k)\binom{4n+k-1}{\frac{4n+k-1}{2}}} ,& k- odd.\\ \\
-      \end{array} \\ \hline \end{array} $$ It should be noted that this table is
-      significantly limited and is used as an example. Choose $g_1(x)\in G$ and
-      $g_2(x)\in G$ and construct a new function of two variables. Two ways of
-      obtaining pyramids of the generating function of two variables can be
-      proposed:<br /><br />
+      {\binom{k-1}{k-1 \over 2}} ,& k-odd,\\ \end{array}} \\\hline {1\over 12x}
+      + \frac{\sin (\frac{\arcsin(-1+216\,x^2)}{3})} {6x} & \cases{
+      \begin{array}\\ \frac{k4^n \binom {\frac{3n+k}{2}-1}{n}}{n+k}, & k -
+      even,\\ \frac{k \binom{\frac{3n+k-1}{2}}{n}
+      \binom{3n+k-1}{\frac{3n+k-1}{2}}} {(n+k) \binom{n+k-1}{\frac{n+k-1}{2}}}&
+      k -odd \\\end{array} }\\ \hline \sqrt{\frac{1-\sqrt{1-16x}}{8x}} & \cases{
+      \begin{array}\\ \frac{k4^n \binom{\frac{4n+k}{2}-1}{n}}{2n+k} & k -
+      even,\\ \frac{k \binom{\frac{4n+k-1}{2}}{n} \binom {4n+k-1} {\frac
+      {4n+k-1} {2} }} {(2n+k)\binom{2n+k-1}{\frac{2n+k-1}{2}}} ,& k- odd.\\ \\
+      \end{array}} \\ \hline \sqrt{\frac{\sin (\frac{\arcsin(\sqrt {27x})}{3})}
+      {\sqrt {3x}}} & \cases{ \begin{array}\\ \frac{k4^n
+      \binom{\frac{6n+k}{2}-1}{n}}{4n+k} & k - even,\\ \frac{k
+      \binom{\frac{6n+k-1}{2}}{n} \binom {6n+k-1} {\frac {6n+k-1} {2} }}
+      {(4n+k)\binom{4n+k-1}{\frac{4n+k-1}{2}}} ,& k- odd.\\ \\ \end{array} }\\
+      \hline \end{array} $$ It should be noted that this table is significantly
+      limited and is used as an example. Choose $g_1(x)\in G$ and $g_2(x)\in G$
+      and construct a new function of two variables. Two ways of obtaining
+      pyramids of the generating function of two variables can be proposed:<br /><br />
       1. Based on the product and composition of functions $g_1(x)\in G$ and
       $g_2(x)\in G$. Let $g_1(x)=(1+x)$, $g_2(x)=\frac{1}{1-x}$ and the
       coefficients of k-degree $g_1(x)$ have the form: $$ T_1(n,k)={k \choose
@@ -1174,6 +1196,79 @@
       <br />
       Using this technique, you can get a large number of pyramids. Currently,
       based on the use of this technique, 1502 pyramids have been obtained.
+    </div>
+    <div id="18" class="article">18. References</div>
+    <div class="reference">
+      [1] The On-Line Encyclopedia of Integer Sequences, N. J. A. Sloane,
+      Notices, Amer. Math. Soc., 65 (No. 9, Oct. 2018), 1062-1074. Reprinted in
+      "The Best Writing on Mathematics 2019", ed. M. Pitici, Princeton Univ.
+      Press, 2019, pp. 90-119 and colored illustrations following page 80.
+    </div>
+    <div class="reference">
+      [2] The Combinatorial Object Server (2021). http://combos.org.
+    </div>
+    <div class="reference">
+      [3] Kruchinin, D.; Kruchinin, V.; Shablya, Y. Method for Obtaining Coeff-
+      cients of Powers of Bivariate Generating Functions. Mathematics 2021, 9,
+      428. https://doi.org/10.3390/math9040428
+    </div>
+    <div class="reference">
+      [4] Kruchinin, D.V., Kruchinin, V.V. Application of a composition of
+      generating functions for obtaining explicit formulas of polynomials (2013)
+      Journal of Mathematical Analysis and Applications, 404 (1), pp. 161-171.
+    </div>
+    <div class="reference">
+      [5] Kruchinin, D.V., Kruchinin, V.V. Explicit formulas for some
+      generalized polynomials (2013) Applied Mathematics and Information
+      Sciences, 7 (5), pp. 2083-2088.
+    </div>
+    <div class="reference">
+      [6] V. V. Kruchinin and D. V. Kruchinin, Composita and its properties, J.
+      Analysis and Number Theory 2 (2014), 1-8.
+    </div>
+    <div class="reference">
+      [7] V. V. Kruchinin and D. V. Kruchinin, A Method for Obtaining Generating
+      Function for Central Coeffcients of Triangles Journal of Integer
+      Sequences, Vol. 15 (2012), Article 12.9.3
+    </div>
+    <div class="reference">
+      [8] V. V. Kruchinin and D. V. Kruchinin A Generating Function for the
+      Diagonal T2n,n in Triangles Journal of Integer Sequences, Vol. 18 (2015),
+      Article 15.4.6
+    </div>
+    <div class="reference">
+      [9] D. V. Kruchinin On solving some functional equations Advances in
+      Difference Equations, Vol. 1 (2015), 1687-1847.
+      doi:10.1186/s13662-014-0347-9
+    </div>
+    <div class="reference">
+      [10] DMITRY V. KRUCHININ and VLADIMIR V. KRUCHININ. (2019). Explicit
+      formula for reciprocal generating function and its application. Advanced
+      Studies in Contempo- rary Mathematics, 29(3), 365-372.
+    </div>
+    <div class="reference">
+      [11] (Ira M.). - A combinatorial proof of the multivariable Lagrange
+      inversion formula. Jour- nal of Combinatorial Theory. Series A, vol. 45,
+      n◦ 2, 1987, pp. 178-195.
+    </div>
+    <div class="reference">
+      [12] Clark Kimberling Path-counting and Fibonacci numbers, Fib. Quart. 40
+      (4) (2002) 328-338,
+    </div>
+    <div class="reference">
+      [13] Kruchinin, D., Kruchinin, V., Shablya, Y.On some properties of
+      generalized Narayana numbers (2021) Quaestiones Mathematicae. DOI:
+      10.2989/16073606.2021.1980448
+    </div>
+    <div class="reference">
+      [14] Stanley, Richard P. (2015), Catalan numbers. Cambridge University
+      Press, ISBN 978- 1-107-42774-7.
+    </div>
+    <div class="reference">
+      [15] Kruchinin, Dmitry Kruchinin, Vladimir Shablya, Yuriy Shelupanov,
+      Alexander. (2019). Explicit formulas for the Eulerian numbers of the
+      second kind. AIP Conference Pro- ceedings. 2116. 100008.
+      10.1063/1.5114084.
     </div>
   </div>
 </div>
