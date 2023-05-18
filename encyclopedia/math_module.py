@@ -44,28 +44,33 @@ class Tsqrt:
         return (
             r"$$Tsqrt(n, k) = \begin{cases}"
             r"\binom{m}{n} 4^{n}&\text{if k even, where m =} \frac{k} {2},\\"
-            r"\frac {{(-1)}^{n-m} \binom{n}{m} \binom{2n}{n}} {\binom{2n}{2m}} &\text{if k odd, n > k, where m =} \frac{k+1} {2},\\"
-            r"\frac {\binom{2m}{2n} \binom{2n}{n}} {\binom{m}{n}}&\text{if k odd, n < k, where m =} \frac{k+1} {2},\\"
+            r"\frac {{(-1)}^{n-m} \binom{n}{m} \binom{2n}{n}} {\binom{2n}{2m}} &\text{if k odd, n > m, where m =} \frac{k+1} {2},\\"
+            r"\frac {\binom{2m}{2n} \binom{2n}{n}} {\binom{m}{n}}&\text{if k odd, n} \le \text{m, where m =} \frac{k+1} {2},\\"
             r"\end{cases} $$"
         )
 
     def evaluate(self, n, k):
-        from sympy import binomial
+        def _():
+            from sympy import binomial
 
-        if k % 2 == 0:
-            m = k / 2
-            return binomial(m, n) * 4**n
-        else:
-            m = (k + 1) / 2
-            if n > k:
-                return (
-                    (-1) ** (n - m)
-                    * binomial(n, m)
-                    * binomial(2 * n, n)
-                    / binomial(2 * n, 2 * m)
-                )
+            if k % 2 == 0:
+                m = k / 2
+                return binomial(m, n) * 4**n
             else:
-                return binomial(2 * m, 2 * n) * binomial(2 * n, n) / binomial(m, n)
+                m = (k + 1) / 2
+                if n > m:
+                    return (
+                        (-1) ** (n - m)
+                        * binomial(n, m)
+                        * binomial(2 * n, n)
+                        / binomial(2 * n, 2 * m)
+                    )
+                else:
+                    return binomial(2 * m, 2 * n) * binomial(2 * n, n) / binomial(m, n)
+
+        result = _()
+        print(n, k, result)
+        return result
 
 
 @formula
