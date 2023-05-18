@@ -50,27 +50,23 @@ class Tsqrt:
         )
 
     def evaluate(self, n, k):
-        def _():
-            from sympy import binomial
+        from sympy import binomial
 
-            if k % 2 == 0:
-                m = k / 2
-                return binomial(m, n) * 4**n
+        if k % 2 == 0:
+            m = k / 2
+            return binomial(m, n) * 4**n
+        else:
+            m = (k + 1) / 2
+            if n > m:
+                return (
+                    (-1) ** (n - m)
+                    * binomial(n, m)
+                    * binomial(2 * n, n)
+                    / binomial(2 * n, 2 * m)
+                )
             else:
-                m = (k + 1) / 2
-                if n > m:
-                    return (
-                        (-1) ** (n - m)
-                        * binomial(n, m)
-                        * binomial(2 * n, n)
-                        / binomial(2 * n, 2 * m)
-                    )
-                else:
-                    return binomial(2 * m, 2 * n) * binomial(2 * n, n) / binomial(m, n)
+                return binomial(2 * m, 2 * n) * binomial(2 * n, n) / binomial(m, n)
 
-        result = _()
-        print(n, k, result)
-        return result
 
 
 @formula
