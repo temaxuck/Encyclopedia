@@ -44,8 +44,8 @@ class Tsqrt:
         return (
             r"$$Tsqrt(n, k) = \begin{cases}"
             r"\binom{m}{n} 4^{n}&\text{if k even, where m =} \frac{k} {2},\\"
-            r"\frac {{(-1)}^{n-m} \binom{n}{m} \binom{2n}{n}} {\binom{2n}{2m}} &\text{if k odd, n > k, where m =} \frac{k+1} {2},\\"
-            r"\frac {\binom{2m}{2n} \binom{2n}{n}} {\binom{m}{n}}&\text{if k odd, n < k, where m =} \frac{k+1} {2},\\"
+            r"\frac {{(-1)}^{n-m} \binom{n}{m} \binom{2n}{n}} {\binom{2n}{2m}} &\text{if k odd, n > m, where m =} \frac{k+1} {2},\\"
+            r"\frac {\binom{2m}{2n} \binom{2n}{n}} {\binom{m}{n}}&\text{if k odd, n} \le \text{m, where m =} \frac{k+1} {2},\\"
             r"\end{cases} $$"
         )
 
@@ -57,7 +57,7 @@ class Tsqrt:
             return binomial(m, n) * 4**n
         else:
             m = (k + 1) / 2
-            if n > k:
+            if n > m:
                 return (
                     (-1) ** (n - m)
                     * binomial(n, m)
@@ -66,6 +66,7 @@ class Tsqrt:
                 )
             else:
                 return binomial(2 * m, 2 * n) * binomial(2 * n, n) / binomial(m, n)
+
 
 
 @formula
