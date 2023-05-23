@@ -67,7 +67,7 @@ python-redis-cache==1.2.0
 pytz==2022.5
 PyYAML==6.0
 redis==4.3.4
-requests==2.28.1
+requests==2.31.0
 simplejson==3.17.6
 six==1.16.0
 SQLAlchemy==1.4.22
