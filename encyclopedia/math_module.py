@@ -166,6 +166,9 @@ class TA984:
                 2 * j, j
             )
 
+def binomial(a, b):
+    return sympy.binomial(int(a), int(b))
+
 
 # def Tsqrt3(n,k):
 #     if n==0:
@@ -208,7 +211,7 @@ OPERATIONS = {
     "combinatorics": {
         "delta": kron_delta,
         "kron_delta": kron_delta,
-        "binomial": sympy.binomial,
+        "binomial": binomial,
         "Tsqrt": Tsqrt,
         "Tsqrt2": Tsqrt2,
         "TA271825": TA271825,
