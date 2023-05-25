@@ -350,21 +350,17 @@ class Pyramid(db.Model):
     def evaluate_ef_at(self, *args):
         try:
             values = dict(zip(self.explicit_formula[0].__get_variables_str__(), args))
-            answer = None
+            result = None
             for formula in self.explicit_formula:
                 formula.init_f_evaluation()
 
                 if not formula.limitation or eval(formula.limitation_to_eval, values):
-                    answer = eval(
+                    result = eval(
                         formula.expression, values, OPERATIONS["combinatorics"]
                     )
-                    try:
-                        answer = int(round(answer))
-                    except Exception as e:
-                        answer = None
-                    return answer
+                    return result
 
-            return answer
+            return result
         except Exception as e:
             return None
 
@@ -430,7 +426,19 @@ class Pyramid(db.Model):
             for j in range(m):
                 data.append(self.evaluate_ef_at(i, j, k))
         return data
-
+    
+    def get_data_represenation_by_ef(self, n, m, k):     
+        data = []
+        for i in range(n):
+            for j in range(m):
+                result = self.evaluate_ef_at(i, j, k)
+                try:
+                    result = str(result).rstrip('0').rstrip('.') if result != 0 else '0'
+                except Exception as e:
+                    result = None
+                data.append(result)
+        return data
+    
     # Special hashed value methods
     def init_special_value(self):
         import hashlib
