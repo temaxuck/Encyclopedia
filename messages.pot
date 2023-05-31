@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-05-18 12:36+0700\n"
+"POT-Creation-Date: 2023-05-31 21:32+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1332,6 +1332,177 @@ msgstr ""
 
 #: encyclopedia/templates/search.html:2
 msgid "search results"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:6
+msgid "The methodology of use for the encyclopedia"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:10
+msgid "Why do we need another encyclopedia on mathematics"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:15
+msgid "Why do we need generating functions"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:19
+msgid "Features of this encyclopedia"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:23
+msgid "What tasks does this encyclopedia solve"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:26
+msgid "Keywords"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:27
+msgid "Designations"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:30
+msgid ""
+"Obtaining explicit expressions of the composition of generating\n"
+"        functions of one variable"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:34
+msgid "Fibonacci Numbers"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:37
+#: encyclopedia/templates/side_bar.html:43
+msgid "Decomposition coefficients"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:48
+msgid "Getting the coefficients of the function"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:54
+msgid "Identity for harmonic numbers"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:61
+msgid ""
+"Obtaining coefficients of degrees of generating functions of one\n"
+"        variable"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:67
+msgid ""
+"Coefficients of the kth degree of the sum of generating\n"
+"            functions"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:73
+msgid ""
+"Coefficients of the kth degree of the product of generating\n"
+"            functions"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:79
+msgid ""
+"Coefficients of the kth degree of the composition of\n"
+"            generating functions"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:85
+msgid ""
+"Coefficients of the kth degree of the mutual generating\n"
+"            function"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:91
+#: encyclopedia/templates/side_bar.html:140
+msgid ""
+"Finding explicit expressions for decomposing functions of the\n"
+"            form"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:97
+#: encyclopedia/templates/side_bar.html:110
+msgid ""
+"Coefficients of the kth degree of the generating function of\n"
+"            the solution of the functional equation"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:104
+msgid ""
+"Coefficients of the kth degree of the inverse generating\n"
+"            function"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:117
+msgid "Generating function for the diagonal"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:122
+msgid "Decomposition of the composition"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:129
+msgid ""
+"Obtaining explicit expressions of the composition of generating\n"
+"        functions of two variables"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:135
+msgid "Finding mutual generating functions"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:148
+msgid "Finding the coefficients of inverse generating functions"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:153
+msgid ""
+"Finding the generating function for the explicit expression of\n"
+"        coefficients"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:159
+msgid ""
+"Finding the composition of logarithmic functions and their\n"
+"        derivatives"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:164
+msgid "Examples"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:166
+msgid "Fina Triangle"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:169
+msgid "Euler triangle (Euler numbers of the first genus)"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:174
+msgid "Generating function for second-order Euler numbers"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:181
+msgid ""
+"Finding explicit expressions for decomposing the composition of\n"
+"        generating functions of many variables"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:187
+msgid ""
+"Finding explicit expressions for decomposing functions of the\n"
+"        form"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:193
+msgid "How the encyclopedia was created"
+msgstr ""
+
+#: encyclopedia/templates/side_bar.html:196
+msgid "References"
 msgstr ""
 
 #: encyclopedia/templates/signup.html:71

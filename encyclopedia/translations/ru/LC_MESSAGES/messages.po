@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-05-18 12:36+0700\n"
-"PO-Revision-Date: 2023-05-18 12:36+0700\n"
+"POT-Creation-Date: 2023-05-31 21:32+0700\n"
+"PO-Revision-Date: 2023-05-31 21:33+0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -2577,6 +2577,182 @@ msgstr "или"
 #: encyclopedia/templates/search.html:2
 msgid "search results"
 msgstr "Результаты по поиску"
+
+#: encyclopedia/templates/side_bar.html:6
+msgid "The methodology of use for the encyclopedia"
+msgstr "Методика использования для энциклопедии"
+
+#: encyclopedia/templates/side_bar.html:10
+msgid "Why do we need another encyclopedia on mathematics"
+msgstr "Зачем нужна еще одна энциклопедия по математике"
+
+#: encyclopedia/templates/side_bar.html:15
+msgid "Why do we need generating functions"
+msgstr "Зачем нужны производящие функции"
+
+#: encyclopedia/templates/side_bar.html:19
+msgid "Features of this encyclopedia"
+msgstr "Особенности данной энциклопедии"
+
+#: encyclopedia/templates/side_bar.html:23
+msgid "What tasks does this encyclopedia solve"
+msgstr "Какие задачи решает данная энциклопедия"
+
+#: encyclopedia/templates/side_bar.html:26
+msgid "Keywords"
+msgstr "Ключевые слова"
+
+#: encyclopedia/templates/side_bar.html:27
+msgid "Designations"
+msgstr "Обозначения"
+
+#: encyclopedia/templates/side_bar.html:30
+msgid ""
+"Obtaining explicit expressions of the composition of generating\n"
+"        functions of one variable"
+msgstr ""
+"Получение явны выражений композиции производящих функций одной\n"
+"          переменной"
+
+#: encyclopedia/templates/side_bar.html:34
+msgid "Fibonacci Numbers"
+msgstr "Числа Фибоначчи"
+
+#: encyclopedia/templates/side_bar.html:37
+#: encyclopedia/templates/side_bar.html:43
+msgid "Decomposition coefficients"
+msgstr "Коэффициенты разложения"
+
+#: encyclopedia/templates/side_bar.html:48
+msgid "Getting the coefficients of the function"
+msgstr "Получение коэффициентов функции"
+
+#: encyclopedia/templates/side_bar.html:54
+msgid "Identity for harmonic numbers"
+msgstr "Тождество для гармнических чисел"
+
+#: encyclopedia/templates/side_bar.html:61
+msgid ""
+"Obtaining coefficients of degrees of generating functions of one\n"
+"        variable"
+msgstr "Получение коэффициентов степеней производящих функций одной\n"
+"          переменной"
+
+#: encyclopedia/templates/side_bar.html:67
+msgid ""
+"Coefficients of the kth degree of the sum of generating\n"
+"            functions"
+msgstr "Коэффициенты $k$-ой степени суммы производящих функций"
+
+#: encyclopedia/templates/side_bar.html:73
+msgid ""
+"Coefficients of the kth degree of the product of generating\n"
+"            functions"
+msgstr "Коэффициенты $k$-ой степени произведения производящих функций"
+
+#: encyclopedia/templates/side_bar.html:79
+msgid ""
+"Coefficients of the kth degree of the composition of\n"
+"            generating functions"
+msgstr "Коэффициенты $k$-ой степени композиции производящих функций"
+
+#: encyclopedia/templates/side_bar.html:85
+msgid ""
+"Coefficients of the kth degree of the mutual generating\n"
+"            function"
+msgstr "Коэффициенты $k$-ой степени взаимной производящей функции"
+
+#: encyclopedia/templates/side_bar.html:91
+#: encyclopedia/templates/side_bar.html:140
+msgid ""
+"Finding explicit expressions for decomposing functions of the\n"
+"            form"
+msgstr "Нахождение явных выражений для разложения функций вида"
+
+#: encyclopedia/templates/side_bar.html:97
+#: encyclopedia/templates/side_bar.html:110
+msgid ""
+"Coefficients of the kth degree of the generating function of\n"
+"            the solution of the functional equation"
+msgstr "Коэффициенты $k$-ой степени производящей функции решения функционального\n"
+"              уравнения"
+
+#: encyclopedia/templates/side_bar.html:104
+msgid ""
+"Coefficients of the kth degree of the inverse generating\n"
+"            function"
+msgstr "Коэффициенты $k$-ой степени обратной производящей функции"
+
+#: encyclopedia/templates/side_bar.html:117
+msgid "Generating function for the diagonal"
+msgstr "Производящая функция для диагонали"
+
+#: encyclopedia/templates/side_bar.html:122
+msgid "Decomposition of the composition"
+msgstr "Разложение композиции"
+
+#: encyclopedia/templates/side_bar.html:129
+msgid ""
+"Obtaining explicit expressions of the composition of generating\n"
+"        functions of two variables"
+msgstr "Получение явных выражений композиции производящих функций двух переменных"
+
+#: encyclopedia/templates/side_bar.html:135
+msgid "Finding mutual generating functions"
+msgstr "Нахождение взаимных производящих функций"
+
+#: encyclopedia/templates/side_bar.html:148
+msgid "Finding the coefficients of inverse generating functions"
+msgstr "Нахождение коэффициентов обратных производящих функций"
+
+#: encyclopedia/templates/side_bar.html:153
+msgid ""
+"Finding the generating function for the explicit expression of\n"
+"        coefficients"
+msgstr "Нахождение производящей функции для явного выражения коэффициентов"
+
+#: encyclopedia/templates/side_bar.html:159
+msgid ""
+"Finding the composition of logarithmic functions and their\n"
+"        derivatives"
+msgstr "Нахождение композици логарифмических функций и их производных"
+
+#: encyclopedia/templates/side_bar.html:164
+msgid "Examples"
+msgstr "Примеры"
+
+#: encyclopedia/templates/side_bar.html:166
+msgid "Fina Triangle"
+msgstr "Треугольник Фина"
+
+#: encyclopedia/templates/side_bar.html:169
+msgid "Euler triangle (Euler numbers of the first genus)"
+msgstr "Треугольник Эйлера (числа Эйлера первого рода)"
+
+#: encyclopedia/templates/side_bar.html:174
+msgid "Generating function for second-order Euler numbers"
+msgstr "Производящая функция для чисел Эйлера второго порядка"
+
+#: encyclopedia/templates/side_bar.html:181
+msgid ""
+"Finding explicit expressions for decomposing the composition of\n"
+"        generating functions of many variables"
+msgstr "Нахождение явных выражений для разоложения композиции производящих функций\n"
+"          многих переменных"
+
+#: encyclopedia/templates/side_bar.html:187
+msgid ""
+"Finding explicit expressions for decomposing functions of the\n"
+"        form"
+msgstr "Нахождение явных выражений для разложения функций вида"
+
+#: encyclopedia/templates/side_bar.html:193
+msgid "How the encyclopedia was created"
+msgstr "Как создавалась энциклопедия"
+
+#: encyclopedia/templates/side_bar.html:196
+msgid "References"
+msgstr "Источники"
 
 #: encyclopedia/templates/signup.html:71
 msgid "Already have an account"
