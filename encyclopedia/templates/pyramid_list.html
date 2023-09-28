@@ -26,24 +26,6 @@
                     <span class="unit-description"><i>{{ _('Preview') }}</i></span>
                     <a href="{{ url_for('pyramid.pyramid', snid=pyramid.sequence_number) }}">{{ pyramid.gf_latex }}</a>
                 </div>   
-
-                <div class="author">
-                    {% if pyramid.author %}
-                        <span class="unit-description"><i>{{ _('Author') }}</i></span>
-                        <div class="author-credits textlinks">
-                            <a href="{{ url_for('account.account', username=pyramid.author.username) }}" class="authorlink">
-                                <img
-                                src="{{ url_for('static', filename='profile_pictures/' + pyramid.author.profile_imagefile|safe )}}"
-                                alt="{{ pyramid.author.username.capitalize() }}"
-                                title="{{ pyramid.author.username.capitalize() }}"
-                                width="40" height="40"
-                                class="profile_img">
-                            </a>
-                            
-                            <a href="{{ url_for('account.account', username=pyramid.author.username) }}">{{ pyramid.author.username.capitalize() }} </a>
-                        </div>
-                    {% endif %}
-                </div>
             </div>
             
         {% endfor %}
