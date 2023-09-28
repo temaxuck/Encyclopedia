@@ -84,7 +84,6 @@ def create_app():
 
     babel.init_app(app, locale_selector=get_locale)
     # Register blueprints
-    from encyclopedia.views.account import accountbp
     from encyclopedia.views.api import apibp
     from encyclopedia.views.errors import errorsbp
     from encyclopedia.views.general import generalbp
@@ -92,12 +91,15 @@ def create_app():
 
     app.register_blueprint(errorsbp)
     app.register_blueprint(generalbp, url_prefix="/")
-    app.register_blueprint(accountbp, url_prefix="/account")
     app.register_blueprint(pyramidbp, url_prefix="/pyramid")
     app.register_blueprint(apibp, url_prefix="/api")
+    
+    # from encyclopedia.views.account import accountbp
+    # Removing account management in prod version 
+    # app.register_blueprint(accountbp, url_prefix="/account") 
+    # CORS(accountbp)
 
     CORS(generalbp)
-    CORS(accountbp)
     CORS(pyramidbp)
 
     return app

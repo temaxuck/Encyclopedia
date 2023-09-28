@@ -130,40 +130,6 @@
         </span>
       </div>
       {% block header %} {% endblock %}
-
-      <div class="btns">
-        {% if current_user.is_authenticated %} {% if current_user.moderator %}
-        <a href="{{ url_for('pyramid.upload_pyramid') }}" class="link">
-          {{ _('Upload pyramid') }}
-        </a>
-        {% endif %}
-
-        <a
-          href="{{ url_for('account.account', username=current_user.username) }}"
-          class="account"
-        >
-          <img
-            src="{{ url_for('static', filename='profile_pictures/' + current_user.profile_imagefile|safe )}}"
-            alt="{{ current_user.username.capitalize() }}"
-            title="{{ current_user.username.capitalize() }}"
-            width="40"
-            height="40"
-            class="profile_img"
-          />
-        </a>
-
-        <a href="{{ url_for('account.logout')}}" class="link logout"
-          >{{ _('Log out') }}</a
-        >
-        {% else %}
-        <a href="{{ url_for('account.login')}}" class="link login"
-          >{{ _('Log in') }}</a
-        >
-        <a href="{{ url_for('account.signup')}}" class="link signup"
-          >{{ _('Sign up') }}</a
-        >
-        {% endif %}
-      </div>
     </header>
     <div class="site-wrapper">{% block body %} {% endblock %}</div>
 
