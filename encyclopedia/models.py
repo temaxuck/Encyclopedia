@@ -103,6 +103,7 @@ class Pyramid(db.Model):
         return f"Pyramid({self.id}, {self.sequence_number}, {self.generating_function}, {self.explicit_formula})"
 
     def json(self):
+        print(self.data)
         return json.dumps(
             {
                 "id": self.id,
@@ -115,6 +116,9 @@ class Pyramid(db.Model):
                 ],
                 "data": list(map(int, self.data)),
                 "statuscode": self.status[0],
+                # "latex_representation": self.latex,
+                "gf_latex": self.gf_latex.replace("$", ""),
+                "ef_latex": self.ef_latex.replace("$", ""),
                 "author": json.loads(self.author.toJSON()) if self.author else None,
             }
         )
@@ -327,6 +331,10 @@ class Pyramid(db.Model):
                 return formula
         return None
 
+    # @property
+    # def latex(self):
+    #     return self.gf_latex.replace("$", "") + r" \\ " + self.ef_latex.replace("$", "")
+
     @property
     def gf_latex(self):
         latexrepr = ""
@@ -335,7 +343,7 @@ class Pyramid(db.Model):
             return "None"
 
         for loop, formula in enumerate(self.generating_function):
-            latexrepr += r"$$" + formula.get_latex() + r"$$ "
+            latexrepr += r"$$" + formula.get_latex() + r"$$"
 
         return latexrepr
 
@@ -388,12 +396,15 @@ class Pyramid(db.Model):
             ef_repr += "$$"
 
             for implicit_formula in implicit_formulas:
-                latexrepr += implicit_formula.latex
+                latexrepr += implicit_formula.latex + r" \\ "
 
             latexrepr += ef_repr
 
         except IndexError:
             latexrepr = "None"
+
+        latexrepr = re.sub(r"(\S)\s*<\s*(\S)", r"\1 < \2", latexrepr)
+        latexrepr = re.sub(r"(\S)\s*>\s*(\S)", r"\1 > \2", latexrepr)
 
         return latexrepr
 
@@ -426,19 +437,19 @@ class Pyramid(db.Model):
             for j in range(m):
                 data.append(self.evaluate_ef_at(i, j, k))
         return data
-    
-    def get_data_represenation_by_ef(self, n, m, k):     
+
+    def get_data_represenation_by_ef(self, n, m, k):
         data = []
         for i in range(n):
             for j in range(m):
                 result = self.evaluate_ef_at(i, j, k)
                 try:
-                    result = str(result).rstrip('0').rstrip('.') if result != 0 else '0'
+                    result = str(result).rstrip("0").rstrip(".") if result != 0 else "0"
                 except Exception as e:
                     result = None
                 data.append(result)
         return data
-    
+
     # Special hashed value methods
     def init_special_value(self):
         import hashlib
