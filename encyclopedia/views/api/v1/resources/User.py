@@ -1,5 +1,6 @@
 from .. import *
 
+
 class User(Resource):
     def get(self):
-        return {'hello': 'world'}
+        return {"NotImplemented": "To be implemented"}

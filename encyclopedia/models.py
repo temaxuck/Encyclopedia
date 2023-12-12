@@ -103,7 +103,15 @@ class Pyramid(db.Model):
         return f"Pyramid({self.id}, {self.sequence_number}, {self.generating_function}, {self.explicit_formula})"
 
     def json(self):
-        print(self.data)
+        def convert_to_int(value):
+            try:
+                return int(float(value))
+            except:
+                return 0
+
+        def data_to_int():
+            return list(map(lambda x: convert_to_int(x), self.data))
+
         return json.dumps(
             {
                 "id": self.id,
@@ -114,7 +122,7 @@ class Pyramid(db.Model):
                 "explicit_formula": [
                     json.loads(ef.json()) for ef in self.explicit_formula
                 ],
-                "data": list(map(int, self.data)),
+                "data": data_to_int(),
                 "statuscode": self.status[0],
                 # "latex_representation": self.latex,
                 "gf_latex": self.gf_latex.replace("$", ""),
@@ -343,7 +351,7 @@ class Pyramid(db.Model):
             return "None"
 
         for loop, formula in enumerate(self.generating_function):
-            latexrepr += r"$$" + formula.get_latex() + r"$$"
+            latexrepr += r"$$" + formula.get_latex() + r"$$ "
 
         return latexrepr
 

@@ -20,14 +20,14 @@ search = Search()
 # mail = Mail()
 migrations = Migrate()
 celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
-redis_client = redis.Redis(host='localhost', port=6379, db=0)
-redis_client_api = redis.Redis(host='localhost', port=6379, db=1)
+redis_client = redis.Redis(host="localhost", port=6379, db=0)
+redis_client_api = redis.Redis(host="localhost", port=6379, db=1)
 babel = Babel()
 
 login_manager = LoginManager()
-login_manager.login_view = 'account.login'
-login_manager.login_message = 'Please, log in to access this page'
-login_manager.login_message_category = 'info'
+login_manager.login_view = "account.login"
+login_manager.login_message = "Please, log in to access this page"
+login_manager.login_message_category = "info"
 
 # @login_manager.request_loader
 # def load_user_from_request(request):
@@ -48,10 +48,14 @@ login_manager.login_message_category = 'info'
 
 
 def get_locale():
-    if locale := session.get('locale'):
-        return locale if locale in Config.LANGUAGES else request.accept_languages.best_match(['ru', 'en'])
-    
-    return request.accept_languages.best_match(['ru', 'en'])
+    if locale := session.get("locale"):
+        return (
+            locale
+            if locale in Config.LANGUAGES
+            else request.accept_languages.best_match(["ru", "en"])
+        )
+
+    return request.accept_languages.best_match(["ru", "en"])
 
 
 def create_app():
@@ -65,11 +69,11 @@ def create_app():
     search.init_app(app)
     celery.conf.update(app.config)
     # mail.init_app(app)
-    
+
     # See errors.py to figure out why we handle it at this level
     @app.errorhandler(404)
     def page_not_found(e):
-        return redirect(url_for('errors.error404'))
+        return redirect(url_for("errors.error404"))
 
     babel.init_app(app, locale_selector=get_locale)
     # Register blueprints
@@ -78,16 +82,15 @@ def create_app():
     from encyclopedia.views.errors import errorsbp
     from encyclopedia.views.general import generalbp
     from encyclopedia.views.pyramid import pyramidbp
-    
+
     app.register_blueprint(errorsbp)
     app.register_blueprint(generalbp, url_prefix="/")
     app.register_blueprint(accountbp, url_prefix="/account")
     app.register_blueprint(pyramidbp, url_prefix="/pyramid")
-    app.register_blueprint(apibp, url_prefix = '/api')
+    app.register_blueprint(apibp, url_prefix="/api")
 
     CORS(generalbp)
     CORS(accountbp)
     CORS(pyramidbp)
 
-    
     return app
