@@ -19,13 +19,14 @@ def delete_formulas_without_pyramid_id():
 
 def insert_data_into_pyramids():
     for pyramid in Pyramid.query.all():
-        print(f"Updating pyramid #{pyramid.sequence_number}")
-        _data = list(map(str, pyramid.get_data_by_ef(7, 7, 1)))
+        if pyramid.data is None:
+            print(f"Updating pyramid #{pyramid.sequence_number}")
+            _data = list(map(str, pyramid.get_data_by_ef(7, 7, 1)))
 
-        sql_ex = text("UPDATE pyramid SET data = :_data WHERE id = :_id")
+            sql_ex = text("UPDATE pyramid SET data = :_data WHERE id = :_id")
 
-        with db.engine.connect() as conn:
-            conn.execute(sql_ex, _data=_data, _id=pyramid.id)
+            with db.engine.connect() as conn:
+                conn.execute(sql_ex, _data=_data, _id=pyramid.id)
 
 
 def insert_data_into_pyramid(sequence_number):
