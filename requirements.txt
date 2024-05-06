@@ -78,7 +78,7 @@ urllib3==1.26.12
 validator-collection==1.5.0
 vine==5.0.0
 wcwidth==0.2.5
-Werkzeug==2.0.2
+Werkzeug==3.0.3
 Whoosh==2.7.4
 wrapt==1.14.1
 WTForms==3.0.1
