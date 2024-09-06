@@ -83,4 +83,4 @@ Whoosh==2.7.4
 wrapt==1.14.1
 WTForms==3.0.1
 yarg==0.1.9
-zipp==3.9.0
+zipp==3.19.1
